@@ -1,0 +1,35 @@
+---
+layout: base
+title: Blog
+order: 2
+tags: page
+pagination:
+    data: collections.posts
+    size: 4
+    alias: posts
+    reverse: true
+---
+
+{% for post in posts %}
+    <div class="flex flex-col sm:flex-row mb-6">
+        <div class="w-32 my-4 sm:my-7">
+            <small class="text-sm text-gray-500">{{ post.date | dateFormating }}</small>
+        </div>
+        <a class="flex-1 no-underline" aria-label="{{ post.data.title }}" href="{{ post.url }}">
+            <div class='py-6 px-8 flex-1 rounded-lg transition ease-in-out delay-50 background-hover lg:bg-white hover:background-hover
+                    active:bg-gray-50'>
+                <p class="text-2xl text-gray-800 block font-semibold">
+                    {{ post.data.title }}
+                </p>
+                <p class="text-gray-600 my-4">
+                    {{ post.data.description }}
+                </p>
+                <p class="flex text-sm text-slate-600 font-medium">
+                    Read more
+                    <svg class="pl-1 fill-slate-600 hover:fill-black" width="20px" height="20px">{% svg "chevron-forward" %}</svg>
+                </p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+{% include "partials/_pagination.njk" %}

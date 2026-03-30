@@ -1,0 +1,12 @@
+<div class="flex justify-between mt-8">
+    <div>
+        {% if pagination.href.previous %}
+            {% badge "Previous", "arrow-back", pagination.href.previous %}
+        {% endif %}
+    </div>
+    <div>
+        {% if pagination.href.next %}
+            {% badge "Next", "arrow-forward", pagination.href.next %}
+        {% endif %}
+    </div>
+</div>

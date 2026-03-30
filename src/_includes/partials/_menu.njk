@@ -1,0 +1,35 @@
+<header class="block sm:hidden" x-data="{show: false}" @click.away="show = false">
+    <div class="mt-8 mb-10">
+        <div class="flex justify-center">
+            <div @click="show = ! show" class="justify-content-center">
+                <div aria-label="menu" class="no-underline">
+                    {% badge "Menu", "menu" %}
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <nav x-show="show" class="flex flex-col sm:flex-row pt-6 sm:py-10 sm:py-14 space-x-0 sm:space-x-6">
+                {% for item in collections.page %}
+                    <div class="pb-4 md:pb-0">
+                        <a aria-label="{{ item.data.title }}" class="text-gray-500 no-underline {% if item.url == page.url %} text-gray-950 font-semibold {% endif %} hover:hover-link" href="{{ item.url }}">
+                            {{ item.data.title }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </nav>
+        </div>
+    </div>
+</header>
+<header class="hidden sm:block text-lg text-black bg-white py-6 sm:py-8 md:py-10">
+    <div class="main-container">
+        <nav class="flex flex-col sm:flex-row sm:py-10 sm:py-14 space-x-0 sm:space-x-6">
+            {% for item in collections.page %}
+                <div class="pb-4 md:pb-0">
+                    <a aria-label="{{ item.data.title }}" class="text-gray-500 no-underline {% if item.url == page.url %} text-gray-950 font-semibold {% endif %} hover:hover-link" href="{{ item.url }}">
+                        {{ item.data.title }}
+                    </a>
+                </div>
+            {% endfor %}
+        </nav>
+    </div>
+</header>

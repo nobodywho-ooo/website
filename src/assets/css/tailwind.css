@@ -1,0 +1,74 @@
+@import "tailwindcss";
+/* @source not "src/assets/css/tailwind-dist.css"; */
+
+@font-face {
+    font-family: "FOSSSerif";
+    src: url("/assets/fonts/FOSSSERIF-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("/assets/fonts/Satoshi-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("/assets/fonts/Satoshi-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("/assets/fonts/Satoshi-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --font-satoshi: "Satoshi", sans-serif;
+    --font-foss-serif: "FOSSSerif", serif;
+}
+
+@utility background-hover {
+    background-color: var(--color-gray-50);
+}
+
+@utility hover-link {
+    fill: var(--color-gray-800);
+    color: var(--color-gray-800);
+}
+
+@utility color-primary {
+    color: var(--color-sky-700);
+}
+
+@layer components {
+    .main-container {
+        @apply px-8 sm:px-0 max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto;
+    }
+
+    .badge {
+        @apply bg-white px-5 py-1 rounded-full border border-current/20 mr-3;
+    }
+
+    a {
+        @apply underline text-gray-500;
+    }
+
+    p {
+        @apply mb-2 sm:mb-4 md:mb-6 lg:mb-8;
+        font-family: "Satoshi", sans-serif;
+        font-weight: 400;
+    }
+}

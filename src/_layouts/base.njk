@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "partials/_head.njk" %}
+  <body>
+    {% include "partials/_menu.njk" %}
+    <main class="font-sans leading-normal tracking-normal pb-10 main-container">
+      {% block content %}
+        {{ content | safe }}
+      {% endblock %}
+      {% include "partials/_footer.njk" %}
+    </main>
+    <script defer src="/js/alpine.js?v=3.10.4"></script>
+  </body>
+</html>

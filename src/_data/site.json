@@ -1,0 +1,9 @@
+{
+  "name": "NobodyWho",
+  "author": "NobodyWho",
+  "description": "NobodyWho is an inference engine that lets you run LLMs locally on any device",
+  "keywords": "ai, llm, engine, inference, local, on-device, flutter, python, godot",
+  "github_url": "https://github.com/nobodywho-ooo/nobodywho",
+  "linkedin_url": "https://www.linkedin.com/company/nobodywho/",
+  "email_url": "mailto:info@nobodywho.ooo?subject=Hello"
+}
