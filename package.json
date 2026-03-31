@@ -20,12 +20,15 @@
     "@tailwindcss/cli": "^4.2.1",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "^0.5.19",
-    "alpinejs": "^3.15.8",
     "autoprefixer": "^10.4.27",
     "eleventy-plugin-lazyimages": "^2.1.2",
     "markdown-it": "^14.1.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.1"
+  },
+  "dependencies": {
+    "@tailwindplus/elements": "^1.0.22",
+    "alpinejs": "^3.15.8"
   }
 }

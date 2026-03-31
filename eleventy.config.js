@@ -25,6 +25,10 @@ export default async function (eleventyConfig) {
     "./node_modules/alpinejs/dist/cdn.js": "./js/alpine.js",
   });
 
+  eleventyConfig.addPassthroughCopy({
+    "./node_modules/@tailwindplus/elements/dist/index.js": "./js/elements.js",
+  });
+
   const md = new markdownIt({
     html: true,
     breaks: true,
