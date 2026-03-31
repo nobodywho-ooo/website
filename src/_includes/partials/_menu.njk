@@ -1,6 +1,6 @@
-<header>
+<header class="bg-white dark:bg-neutral-900">
     <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <a href="#" class="-m-1.5 p-1.5 text-lg font-bold text-gray-900 dark:text-white">NobodyWho</a>
+        <a href="/" class="-m-1.5 p-1.5 text-lg font-bold text-gray-900 dark:text-white">NobodyWho</a>
         <div class="flex lg:hidden">
             <button
                 type="button"
@@ -32,7 +32,7 @@
             class="backdrop:bg-transparent lg:hidden fixed inset-0 m-0 p-0 w-full max-w-full h-full max-h-full bg-transparent
                 border-none">
             <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
-                    dark:bg-gray-900 dark:sm:ring-gray-100/10">
+                    dark:bg-neutral-900 dark:sm:ring-gray-100/10">
                 <div class="flex items-center justify-between">
                     <a href="#" class="-m-1.5 p-1.5 text-lg font-bold text-gray-900 dark:text-white">NobodyWho</a>
                     <button
@@ -58,7 +58,7 @@
                         <div class="space-y-2 py-6">
                             {% for item in collections.page %}
                                 <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 {% if item.url == page.url %}font-semibold text-gray-900 dark:text-white{% else %}font-medium text-gray-500 dark:text-gray-400{% endif %} hover:bg-gray-50
-                                                                                                                                                                                dark:hover:bg-white/5">
+                                                                                                                                                                                                                                                                                                                                                dark:hover:bg-white/5">
                                     {{ item.data.title }}
                                 </a>
                             {% endfor %}

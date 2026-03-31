@@ -4,6 +4,7 @@
   "description": "NobodyWho is an inference engine that lets you run LLMs locally on any device",
   "keywords": "ai, llm, engine, inference, local, on-device, flutter, python, godot",
   "email_url": "mailto:info@nobodywho.ooo?subject=Hello",
+  "github_url": "https://github.com/nobodywho-ooo/nobodywho",
   "footer": [
     {
       "name": "Github",
