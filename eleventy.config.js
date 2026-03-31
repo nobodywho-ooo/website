@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
-import fs from "fs";
 import markdownIt from "markdown-it";
-import badge from "./src/_includes/shortcodes/badge.js";
+import svg from "./src/_includes/shortcodes/svg.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
@@ -39,18 +38,7 @@ export default async function (eleventyConfig) {
     return md.render(content);
   });
 
-  let getSvgContent = function (file) {
-    let relativeFilePath = `./src/assets/svg/${file}.svg`;
-    let data = fs.readFileSync(relativeFilePath, function (err, contents) {
-      if (err) return err;
-      return contents;
-    });
-
-    return data.toString("utf8");
-  };
-
-  eleventyConfig.addShortcode("svg", getSvgContent);
-  eleventyConfig.addShortcode("badge", badge);
+  eleventyConfig.addShortcode("svg", svg);
 
   eleventyConfig.addCollection("page", function (collections) {
     return collections.getFilteredByTag("page").sort(function (a, b) {

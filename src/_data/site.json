@@ -3,9 +3,47 @@
   "author": "NobodyWho",
   "description": "NobodyWho is an inference engine that lets you run LLMs locally on any device",
   "keywords": "ai, llm, engine, inference, local, on-device, flutter, python, godot",
-  "github_url": "https://github.com/nobodywho-ooo/nobodywho",
-  "linkedin_url": "https://www.linkedin.com/company/nobodywho/",
-  "x_url": "https://x.com/nobodywho_ai",
-  "mastodon_url": "https://mastodon.gamedev.place/@nobodywho",
-  "email_url": "mailto:info@nobodywho.ooo?subject=Hello"
+  "email_url": "mailto:info@nobodywho.ooo?subject=Hello",
+  "footer": [
+    {
+      "name": "Github",
+      "url": "https://github.com/nobodywho-ooo/nobodywho",
+      "icon": "github"
+    },
+    {
+      "name": "X",
+      "url": "https://x.com/nobodywho_ai",
+      "icon": "x"
+    },
+    {
+      "name": "Mastodon",
+      "url": "https://mastodon.gamedev.place/@nobodywho",
+      "icon": "mastodon"
+    },
+    {
+      "name": "Bluesky",
+      "url": "https://bsky.app/profile/nobodywhooo.bsky.social",
+      "icon": "bluesky"
+    },
+    {
+      "name": "Linkedin",
+      "url": "https://www.linkedin.com/company/nobodywho/",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/NobodyWho",
+      "icon": "huggingface"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.gg/qhaMc2qCYB",
+      "icon": "discord"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:info@nobodywho.ooo?subject=Hello",
+      "icon": "email"
+    }
+  ]
 }

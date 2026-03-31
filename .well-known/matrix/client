@@ -1,0 +1,41 @@
+{
+    "cc.etke.synapse-admin": {
+        "asManagedUsers": [
+            "^@discordbot:nobodywho\\.ooo$",
+            "^@discord_[0-9]+:nobodywho\\.ooo$"
+        ],
+        "corsCredentials": "same-origin",
+        "etkeccAdmin": "https://scheduler.ctrl.etke.cc/admin/121b4ee44f70b1a11add817dce5d1a3ae28a1c319bfb68a24d760d0b969cb4fd",
+        "externalAuthProvider": false,
+        "menu": [
+            {
+                "i18n": {
+                    "de": "Hilfe",
+                    "fa": "\u0631\u0627\u0647\u0646\u0645\u0627",
+                    "fr": "Aide",
+                    "it": "Aiuto",
+                    "ja": "\u30d8\u30eb\u30d7",
+                    "ru": "\u0421\u043f\u0440\u0430\u0432\u043a\u0430",
+                    "uk": "\u0414\u043e\u0432\u0456\u0434\u043a\u0430",
+                    "zh": "\u5e2e\u52a9"
+                },
+                "icon": "HelpCenter",
+                "label": "Help",
+                "url": "https://etke.cc/help/?utm_source=synapse-admin&utm_medium=menu&utm_campaign=synapse-admin"
+            }
+        ],
+        "restrictBaseUrl": "https://matrix.nobodywho.ooo"
+    },
+    "m.homeserver": {
+        "base_url": "https://matrix.nobodywho.ooo"
+    },
+    "m.identity_server": {
+        "base_url": "https://vector.im"
+    },
+    "org.matrix.msc4143.rtc_foci": [
+        {
+            "livekit_service_url": "https://matrix.nobodywho.ooo/livekit-jwt-service",
+            "type": "livekit"
+        }
+    ]
+}
