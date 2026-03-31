@@ -5,9 +5,9 @@
                 <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="{% if item.url == page.url %}text-gray-900 dark:text-white{% else %}text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white{% endif %}">{{ item.data.title }}</a>
             {% endfor %}
         </nav>
-        <div class="mt-16 flex justify-center gap-x-10">
+        <div class="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-4">
             {% for item in site.footer %}
-                <a href="{{ item.url }}" class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
+                <a href="{{ item.url }}" target="_blank" class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
                     <span class="sr-only">{{ item.name }}</span>
                     {% svg item.icon, "size-6" %}
                 </a>
