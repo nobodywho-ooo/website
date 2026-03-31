@@ -1,25 +1,22 @@
-<div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-    <h2 class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Deploy faster</h2>
+<div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
     <p class="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl dark:text-white">
-    Everything you need to deploy your app</p>
+        Fast & secure inference
+    </p>
     <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
         <div class="relative lg:col-span-3">
             <div class="absolute inset-0 rounded-lg bg-white max-lg:rounded-t-4xl lg:rounded-tl-4xl dark:bg-gray-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]
                     max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-performance.png"
-                    alt=""
-                    class="h-80 object-cover object-left dark:hidden"/>
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-performance.png"
-                    alt=""
-                    class="h-80 object-cover object-left not-dark:hidden"/>
+                <div class="h-60 flex items-center justify-center text-gray-600 dark:text-white">
+                    {% svg "bolt", "size-38" %}
+                </div>
                 <div class="p-10 pt-4">
                     <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Performance</h3>
-                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Lightning-fast builds</p>
-                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. In gravida justo et nulla efficitur, maximus egestas sem pellentesque.</p>
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Fast on any hardware</p>
+                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
+                        Optimized kernels for Metal, CUDA, and Vulkan. Get high-performance inference even on integrated graphics and mobile
+                        chips.
+                    </p>
                 </div>
             </div>
             <div class="pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 max-lg:rounded-t-4xl
@@ -28,19 +25,14 @@
         <div class="relative lg:col-span-3">
             <div class="absolute inset-0 rounded-lg bg-white lg:rounded-tr-4xl dark:bg-gray-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-releases.png"
-                    alt=""
-                    class="h-80 object-cover object-left lg:object-right dark:hidden"/>
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-releases.png"
-                    alt=""
-                    class="h-80 object-cover object-left not-dark:hidden lg:object-right"/>
+                <div class="h-60 flex items-center justify-center text-gray-600 dark:text-white">
+                    {% svg "lock", "size-38" %}
+                </div>
                 <div class="p-10 pt-4">
-                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Releases</h3>
-                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Push to deploy</p>
-                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Curabitur auctor, ex quis auctor venenatis, eros
-                        arcu rhoncus massa, laoreet dapibus ex elit vitae odio.</p>
+                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Privacy</h3>
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Keep it private</p>
+                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Everything stays on your machine, no cloud logging,
+                        no exceptions. Your prompts never leave the memory of your local GPU.</p>
                 </div>
             </div>
             <div class="pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 lg:rounded-tr-4xl
@@ -49,19 +41,13 @@
         <div class="relative lg:col-span-2">
             <div class="absolute inset-0 rounded-lg bg-white lg:rounded-bl-4xl dark:bg-gray-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-speed.png"
-                    alt=""
-                    class="h-80 object-cover object-left dark:hidden"/>
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-speed.png"
-                    alt=""
-                    class="h-80 object-cover object-left not-dark:hidden"/>
+                <div class="h-60 flex items-center justify-center text-gray-600 dark:text-white">
+                    {% svg "offline", "size-38" %}
+                </div>
                 <div class="p-10 pt-4">
-                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Speed</h3>
-                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Built for power users</p>
-                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Sed congue eros non finibus molestie. Vestibulum
-                        euismod augue.</p>
+                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Offline</h3>
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">No internet needed</p>
+                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Run models in flight or in secure environments.</p>
                 </div>
             </div>
             <div class="pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 lg:rounded-bl-4xl
@@ -70,19 +56,13 @@
         <div class="relative lg:col-span-2">
             <div class="absolute inset-0 rounded-lg bg-white dark:bg-gray-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-integrations.png"
-                    alt=""
-                    class="h-80 object-cover dark:hidden"/>
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-integrations.png"
-                    alt=""
-                    class="h-80 object-cover not-dark:hidden"/>
+                <div class="h-60 flex items-center justify-center text-gray-600 dark:text-white">
+                    {% svg "huggingface", "size-38" %}
+                </div>
                 <div class="p-10 pt-4">
-                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Integrations</h3>
-                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Connect your favorite tools</p>
-                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Maecenas at augue sed elit dictum vulputate, in nisi
-                        aliquam maximus arcu.</p>
+                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Any model</h3>
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Thousands of LLMs</p>
+                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Direct support for GGUF format.</p>
                 </div>
             </div>
             <div class="pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 dark:outline-white/15"></div>
@@ -91,19 +71,13 @@
             <div class="absolute inset-0 rounded-lg bg-white max-lg:rounded-b-4xl lg:rounded-br-4xl dark:bg-gray-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]
                     max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-network.png"
-                    alt=""
-                    class="h-80 object-cover dark:hidden"/>
-                <img
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-network.png"
-                    alt=""
-                    class="h-80 object-cover not-dark:hidden"/>
+                <div class="h-60 flex items-center justify-center text-gray-600 dark:text-white">
+                    {% svg "banknotes", "size-38" %}
+                </div>
                 <div class="p-10 pt-4">
-                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Network</h3>
-                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">Globally distributed CDN</p>
-                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Aenean vulputate justo commodo auctor vehicula in
-                        malesuada semper.</p>
+                    <h3 class="text-sm/4 font-semibold text-indigo-600 dark:text-indigo-400">Free</h3>
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 dark:text-white">$0</p>
+                    <p class="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">Completely free, no API keys, or usage fees.</p>
                 </div>
             </div>
             <div class="pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 max-lg:rounded-b-4xl
