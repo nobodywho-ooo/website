@@ -1,35 +1,71 @@
-<header class="block sm:hidden" x-data="{show: false}" @click.away="show = false">
-    <div class="mt-8 mb-10">
-        <div class="flex justify-center">
-            <div @click="show = ! show" class="justify-content-center">
-                <div aria-label="menu" class="no-underline">
-                    {% badge "Menu", "menu" %}
-                </div>
-            </div>
+<header>
+    <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+        <a href="#" class="-m-1.5 p-1.5 text-lg font-bold text-gray-900 dark:text-white">NobodyWho</a>
+        <div class="flex lg:hidden">
+            <button
+                type="button"
+                command="show-modal"
+                commandfor="mobile-menu"
+                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-400">
+                <span class="sr-only">Open main menu</span>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    data-slot="icon"
+                    aria-hidden="true"
+                    class="size-6">
+                    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
-        <div class="main-container">
-            <nav x-show="show" class="flex flex-col sm:flex-row pt-6 sm:py-10 sm:py-14 space-x-0 sm:space-x-6">
-                {% for item in collections.page %}
-                    <div class="pb-4 md:pb-0">
-                        <a aria-label="{{ item.data.title }}" class="text-gray-500 no-underline {% if item.url == page.url %} text-gray-950 font-semibold {% endif %} hover:hover-link" href="{{ item.url }}">
-                            {{ item.data.title }}
-                        </a>
-                    </div>
-                {% endfor %}
-            </nav>
-        </div>
-    </div>
-</header>
-<header class="hidden sm:block text-lg text-black bg-white py-6 sm:py-8 md:py-10">
-    <div class="main-container">
-        <nav class="flex flex-col sm:flex-row sm:py-10 sm:py-14 space-x-0 sm:space-x-6">
+        <div class="hidden lg:flex lg:gap-x-12">
             {% for item in collections.page %}
-                <div class="pb-4 md:pb-0">
-                    <a aria-label="{{ item.data.title }}" class="text-gray-500 no-underline {% if item.url == page.url %} text-gray-950 font-semibold {% endif %} hover:hover-link" href="{{ item.url }}">
-                        {{ item.data.title }}
-                    </a>
-                </div>
+                <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="text-sm/6 {% if item.url == page.url %}font-semibold text-gray-900 dark:text-white{% else %}font-medium text-gray-500 dark:text-gray-400{% endif %}">{{ item.data.title }}</a>
             {% endfor %}
-        </nav>
-    </div>
+        </div>
+    </nav>
+    <el-dialog>
+        <dialog
+            id="mobile-menu"
+            class="backdrop:bg-transparent lg:hidden fixed inset-0 m-0 p-0 w-full max-w-full h-full max-h-full bg-transparent
+                border-none">
+            <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
+                    dark:bg-gray-900 dark:sm:ring-gray-100/10">
+                <div class="flex items-center justify-between">
+                    <a href="#" class="-m-1.5 p-1.5 text-lg font-bold text-gray-900 dark:text-white">NobodyWho</a>
+                    <button
+                        type="button"
+                        command="close"
+                        commandfor="mobile-menu"
+                        class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400">
+                        <span class="sr-only">Close menu</span>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            data-slot="icon"
+                            aria-hidden="true"
+                            class="size-6">
+                            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-6 flow-root">
+                    <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
+                        <div class="space-y-2 py-6">
+                            {% for item in collections.page %}
+                                <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 {% if item.url == page.url %}font-semibold text-gray-900 dark:text-white{% else %}font-medium text-gray-500 dark:text-gray-400{% endif %} hover:bg-gray-50
+                                                                                                                                                                                dark:hover:bg-white/5">
+                                    {{ item.data.title }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </el-dialog-panel>
+        </dialog>
+    </el-dialog>
 </header>

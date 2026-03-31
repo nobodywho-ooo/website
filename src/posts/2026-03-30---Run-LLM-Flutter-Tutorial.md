@@ -8,8 +8,6 @@ slug: "run-llm-flutter-guide"
 
 ![Flutter](/assets/images/blog/2026/run-llm-flutter-guide/ai-llm-on-device-flutter.png)
 
-# Run LLMs locally in Flutter apps
-
 In this tutorial, you'll learn how to run a large language model (LLM) directly on a user's device — no cloud, no server, no cost. We'll start from scratch, build a working chat interface, and progressively introduce more advanced features: tool calling, sampling, and RAG.
 
 Each concept is explained before the code, so you can follow along whether you're new to on-device AI or just new to NobodyWho.

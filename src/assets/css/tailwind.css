@@ -62,10 +62,6 @@
         @apply bg-white px-5 py-1 rounded-full border border-current/20 mr-3;
     }
 
-    a {
-        @apply underline text-gray-500;
-    }
-
     p {
         @apply mb-2 sm:mb-4 md:mb-6 lg:mb-8;
         font-family: "Satoshi", sans-serif;

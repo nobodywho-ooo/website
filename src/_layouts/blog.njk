@@ -3,7 +3,7 @@
     {% include "partials/_head.njk" %}
     <body>
         {% include "partials/_menu.njk" %}
-        <main class="font-sans leading-normal tracking-normal pb-10 main-container">
+        <main class="font-sans leading-normal tracking-normal bg-white dark:bg-gray-900">
             {% block content %}
                 <div class="flex justify-center pt-0 lg:pt-8">
                     <article class="prose lg:prose-xl divide-y">
@@ -21,20 +21,13 @@
                                 </div>
                             </div>
                         </div>
-                        {% if site.ko_fi_url %}
-                            <div div="flex">
-                                <p class="mt-14 mb-0 sm:mb-5">Writing good articles takes a lot of time and energy ⚡️</p>
-                                <a aria-label="donate" target="_blank" href="{{ site.ko_fi_url }}">
-                                    <p class="mt-3">Feel free to support me</p>
-                                </a>
-                            </div>
-                        {% endif %}
                     </article>
                 </div>
                 {# {% include "partials/_nextPreviousPost.njk" %} #}
             {% endblock %}
             {% include "partials/_footer.njk" %}
         </main>
+        <script src="/js/elements.js" type="module"></script>
         <script defer src="/js/alpine.js?v=3.10.4"></script>
     </body>
 </html>
