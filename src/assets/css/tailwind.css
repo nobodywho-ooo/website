@@ -129,3 +129,23 @@
         font-weight: 500;
     }
 }
+
+/* Make sure that in articles, `some code e.g` render well */
+@layer utilities {
+    .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+    .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+        content: none;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+        font-weight: 400;
+        background-color: var(--color-gray-200);
+        padding: 0.15em 0.2em;
+        border-radius: 0.25rem;
+    }
+
+    .prose.dark\:prose-invert :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+        background-color: var(--color-neutral-200);
+        color: var(--color-gray-800);
+    }
+}
