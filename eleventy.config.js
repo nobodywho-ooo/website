@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import { execSync } from "child_process";
 import markdownIt from "markdown-it";
 import svg from "./src/_includes/shortcodes/svg.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
@@ -15,6 +16,13 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "/robots.txt" });
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/prism-dark.css");
+  
+  // Reload the website if changes are made to tailwind.css
+  eleventyConfig.addWatchTarget("./src/assets/css/tailwind.css");
+  eleventyConfig.on("eleventy.before", () => {
+    execSync("npx @tailwindcss/cli -i src/assets/css/tailwind.css -o src/assets/css/tailwind-dist.css");
+  });
+  
   eleventyConfig.setServerOptions({
     watch: ["./src/assets/css/tailwind-dist.css"],
   });
