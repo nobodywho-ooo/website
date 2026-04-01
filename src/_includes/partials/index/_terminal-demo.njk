@@ -1,16 +1,15 @@
-<div class="py-24 sm:py-32">
+<div class="py-24 sm:py-32" x-data="{ tab: 'flutter' }">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 flex justify-center">
-        <div
-            class="grid grid-cols-1 sm:hidden">
-            <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+        <div class="grid grid-cols-1 sm:hidden">
             <select
                 aria-label="Select a tab"
+                x-model="tab"
                 class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-neutral-900
                     outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600
                     dark:bg-gray-800/50 dark:text-neutral-100 dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-primary-500">
-                <option selected="selected">Flutter</option>
-                <option>Python</option>
-                <option>Godot</option>
+                <option value="flutter">Flutter</option>
+                <option value="python">Python</option>
+                <option value="godot">Godot</option>
             </select>
             <svg
                 viewbox="0 0 16 16"
@@ -30,23 +29,26 @@
             <nav aria-label="Tabs" class="flex space-x-4 bg-neutral-100 p-1 rounded-xl">
                 <a
                     href="#"
-                    class="rounded-xl px-7 py-1.5 text-lg font-semibold bg-white dark:bg-primary-600 text-neutral-900 dark:text-primary-100">
+                    @click.prevent="tab = 'flutter'"
+                    :class="tab === 'flutter' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    class="px-7 py-1.5 text-lg">
                     Flutter</a>
                 <a
                     href="#"
-                    class="rounded-full px-7 py-1.5 text-lg font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400
-                        dark:hover:text-neutral-200">
+                    @click.prevent="tab = 'python'"
+                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    class="px-7 py-1.5 text-lg">
                     Python</a>
                 <a
                     href="#"
-                    aria-current="page"
-                    class="rounded-full px-7 py-1.5 text-lg font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400
-                        dark:hover:text-neutral-200">
+                    @click.prevent="tab = 'godot'"
+                    :class="tab === 'godot' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    class="px-7 py-1.5 text-lg">
                     Godot</a>
             </nav>
         </div>
     </div>
-    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-12 sm:py-18 flex justify-center">
-        <img src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png" alt=""/>
+    <div class="mx-auto max-w-5xl lg:px-8 py-6 sm:py-8 flex justify-center">
+        <img :src="`/assets/images/index/terminal-${tab}.png`" :alt="tab"/>
     </div>
 </div>
