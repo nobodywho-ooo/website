@@ -10,6 +10,12 @@
   max-width: 100%;
 }
 
+@media (max-width: 640px) {
+  .terminal {
+    font-size: 0.75rem;
+  }
+}
+
 /* Terminal Header */
 .terminal__header {
   height: 2.25rem;
@@ -47,12 +53,13 @@
   border: none;
   box-shadow: none;
   border-radius: 0;
-  overflow: visible;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 .terminal .terminal__body code,
 .terminal .terminal__body code[class*="language-"] {
   background: transparent !important;
   text-shadow: none;
-  font-size: 0.95rem;
+  font-size: inherit;
 }
