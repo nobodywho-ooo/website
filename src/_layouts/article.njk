@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-white dark:bg-neutral-900">
     {% include "partials/_head.njk" %}
     <body>
         {% include "partials/_menu.njk" %}
-        <main class="font-sans leading-normal tracking-normal bg-white dark:bg-neutral-900">
+        <main class="font-sans leading-normal tracking-normal">
             {% block content %}
                 <div class="flex justify-center pt-0 lg:pt-8">
-                    <article class="prose lg:prose-xl divide-y">
+                    <article class="prose lg:prose-xl dark:prose-invert divide-y overflow-x-hidden mx-auto max-w-2xl px-6 lg:max-w-4xl">
                         <div>
-                            <h1 class="font-bold mt-12 mb-10">
+                            <h1 class="mt-12 mb-10 font-bold dark:text-white">
                                 {{ title }}
                             </h1>
                             {{ content | safe }}
                             <div class="mb-10 mt-20">
-                                <p class="font-light mb-5 italic text-gray-800">Published {{ date|dateFormating }}</p>
+                                <p class="font-light mb-5 italic text-gray-800 dark:text-white">Published {{ date|dateFormating }}</p>
                                 <div class="flex flex-wrap">
                                     {% for category in categories %}
                                         <p class="badge mb-3 font-light select-none">{{ category }}</p>
@@ -23,7 +23,6 @@
                         </div>
                     </article>
                 </div>
-                {# {% include "partials/_nextPreviousPost.njk" %} #}
             {% endblock %}
             {% include "partials/_footer.njk" %}
         </main>
