@@ -1,13 +1,25 @@
 <div class="py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 class="ai-logos-fade text-center text-lg/8 text-neutral-900 font-semibold dark:text-white">Pick any model from Hugging Face.
+        <h2 class="ai-logos-fade text-center text-lg/8 text-neutral-900 font-semibold dark:text-white"
+            x-data="{ shown: false }"
+            x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { shown = true; $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">Pick any model from Hugging Face.
         </h2>
         <div class="mt-10 flex flex-wrap justify-center items-center gap-x-10 gap-y-8 sm:gap-x-24 dark:text-white">
-            <div class="ai-logos-fade" style="animation-delay: 100ms">{% svg "mistral", "size-14" %}</div>
-            <div class="ai-logos-fade" style="animation-delay: 200ms">{% svg "qwen", "size-14" %}</div>
-            <div class="ai-logos-fade" style="animation-delay: 300ms">{% svg "openai", "size-14" %}</div>
-            <div class="ai-logos-fade" style="animation-delay: 400ms">{% svg "gemini", "size-14" %}</div>
-            <div class="ai-logos-fade" style="animation-delay: 500ms">{% svg "deepseek", "size-14" %}</div>
+            <div class="ai-logos-fade" style="animation-delay: 100ms"
+                x-data
+                x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">{% svg "mistral", "size-14" %}</div>
+            <div class="ai-logos-fade" style="animation-delay: 200ms"
+                x-data
+                x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">{% svg "qwen", "size-14" %}</div>
+            <div class="ai-logos-fade" style="animation-delay: 300ms"
+                x-data
+                x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">{% svg "openai", "size-14" %}</div>
+            <div class="ai-logos-fade" style="animation-delay: 400ms"
+                x-data
+                x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">{% svg "gemini", "size-14" %}</div>
+            <div class="ai-logos-fade" style="animation-delay: 500ms"
+                x-data
+                x-init="new IntersectionObserver(([e]) => { if (e.isIntersecting) { $el.classList.add('is-visible') } }, { threshold: 0.1 }).observe($el)">{% svg "deepseek", "size-14" %}</div>
         </div>
     </div>
 </div>
