@@ -2,17 +2,22 @@
     <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
         <nav aria-label="Footer" class="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6">
             {% for item in collections.page %}
-                <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="{% if item.url == page.url %}text-gray-900 dark:text-white{% else %}text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white{% endif %}">{{ item.data.title }}</a>
+                <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="{% if item.url == page.url %}text-neutral-900 dark:text-white{% else %}text-neutral-400 hover:text-primary dark:text-neutral-500 dark:hover:text-white{% endif %}">{{ item.data.title }}</a>
             {% endfor %}
+            <a
+                href="https://docs.nobodywho.ooo/"
+                aria-label="Documentation"
+                class="text-neutral-400 hover:text-primary dark:text-neutral-500 dark:hover:text-white">Docs</a>
         </nav>
         <div class="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-4">
             {% for item in site.footer %}
-                <a href="{{ item.url }}" target="_blank" class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
+                <a href="{{ item.url }}" target="_blank" class="text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white">
                     <span class="sr-only">{{ item.name }}</span>
                     {% svg item.icon, "size-6" %}
                 </a>
             {% endfor %}
         </div>
-        <p class="mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">&copy; 2026 NobodyWho. All rights reserved.</p>
+        <p class="mt-10 text-center text-sm/6 text-neutral-600 dark:text-neutral-400">&copy; 2026 NobodyWho. All rights
+            reserved.</p>
     </div>
 </footer>
