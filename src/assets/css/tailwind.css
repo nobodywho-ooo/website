@@ -2,14 +2,6 @@
 /* @source not "src/assets/css/tailwind-dist.css"; */
 
 @font-face {
-    font-family: "FOSSSerif";
-    src: url("/assets/fonts/FOSSSERIF-Regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
     font-family: "Satoshi";
     src: url("/assets/fonts/Satoshi-Regular.woff2") format("woff2");
     font-weight: 400;
@@ -37,7 +29,19 @@
 
 @theme {
     --font-satoshi: "Satoshi", sans-serif;
-    --font-foss-serif: "FOSSSerif", serif;
+    --color-primary: #628395;
+    /* https://uicolors.app/generate/2f464f */
+    --color-primary-50: #f3f7f8;
+    --color-primary-100: #e1e9ec;
+    --color-primary-200: #c6d4db;
+    --color-primary-300: #9eb6c2;
+    --color-primary-400: #628395;
+    --color-primary-500: #547486;
+    --color-primary-600: #496071;
+    --color-primary-700: #3f515f;
+    --color-primary-800: #394651;
+    --color-primary-900: #333d46;
+    --color-primary-950: #1f262d;
 }
 
 @utility background-hover {
@@ -47,10 +51,6 @@
 @utility hover-link {
     fill: var(--color-gray-800);
     color: var(--color-gray-800);
-}
-
-@utility color-primary {
-    color: var(--color-sky-700);
 }
 
 @layer components {
@@ -66,5 +66,10 @@
         @apply mb-2 sm:mb-4 md:mb-6 lg:mb-8;
         font-family: "Satoshi", sans-serif;
         font-weight: 400;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Satoshi", sans-serif;
+        font-weight: 500;
     }
 }
