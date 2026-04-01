@@ -37,7 +37,7 @@ We'll use the [NobodyWho](https://github.com/nobodywho-ooo/nobodywho) library th
 
 Install it with:
 
-```
+```bash
 flutter pub add nobodywho
 ```
 
@@ -89,7 +89,7 @@ flutter:
 
 NobodyWho reads the model from the filesystem, so we copy it from Flutter's asset bundle to the app's documents directory on first launch. Add `path_provider` to handle this:
 
-```
+```bash
 flutter pub add path_provider
 ```
 

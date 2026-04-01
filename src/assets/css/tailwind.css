@@ -25,10 +25,59 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-400-italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-500-normal.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-500-italic.woff2") format("woff2");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-600-normal.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/dm-sans-600-italic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
 @plugin "@tailwindcss/typography";
 
 @theme {
     --font-satoshi: "Satoshi", sans-serif;
+    --font-dm-sans: "DM Sans", sans-serif;
     --color-primary: #628395;
     /* https://uicolors.app/generate/2f464f */
     --color-primary-50: #f3f7f8;
@@ -62,10 +111,17 @@
         @apply bg-white px-5 py-1 rounded-full border border-current/20 mr-3;
     }
 
+    p, span, li, td, th, label, blockquote, figcaption, a {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+    }
+
+    code, pre, code *, pre * {
+        font-family: inherit;
+    }
+
     p {
         @apply mb-2 sm:mb-4 md:mb-6 lg:mb-8;
-        font-family: "Satoshi", sans-serif;
-        font-weight: 400;
     }
 
     h1, h2, h3, h4, h5, h6 {
