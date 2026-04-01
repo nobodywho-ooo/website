@@ -36,19 +36,56 @@
                 <a
                     href="#"
                     @click.prevent="tab = 'python'"
-                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
+                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
                     class="px-7 py-1.5 text-lg">
                     Python</a>
                 <a
                     href="#"
                     @click.prevent="tab = 'godot'"
-                    :class="tab === 'godot' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    :class="tab === 'godot' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
+                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
                     class="px-7 py-1.5 text-lg">
                     Godot</a>
             </nav>
         </div>
     </div>
-    <div class="mx-auto max-w-5xl lg:px-8 py-6 sm:py-8 flex justify-center">
-        <img :src="`/assets/images/index/terminal-${tab}.png`" :alt="tab"/>
+    <div class="mx-auto max-w-5xl px-6 lg:px-8 py-10 sm:py-12">
+        <div class="terminal" x-show="tab === 'flutter'">
+            <div class="terminal__header">
+                <div class="terminal__dots">
+                    <span class="terminal__dot terminal__dot--red"></span>
+                    <span class="terminal__dot terminal__dot--yellow"></span>
+                    <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+            </div>
+            <div class="terminal__body">
+                {% include "partials/index/snippets/_flutter.njk" %}
+            </div>
+        </div>
+        <div class="terminal" x-show="tab === 'python'">
+            <div class="terminal__header">
+                <div class="terminal__dots">
+                    <span class="terminal__dot terminal__dot--red"></span>
+                    <span class="terminal__dot terminal__dot--yellow"></span>
+                    <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+            </div>
+            <div class="terminal__body">
+                {% include "partials/index/snippets/_python.njk" %}
+            </div>
+        </div>
+        <div class="terminal" x-show="tab === 'godot'">
+            <div class="terminal__header">
+                <div class="terminal__dots">
+                    <span class="terminal__dot terminal__dot--red"></span>
+                    <span class="terminal__dot terminal__dot--yellow"></span>
+                    <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+            </div>
+            <div class="terminal__body">
+                {% include "partials/index/snippets/_godot.njk" %}
+            </div>
+        </div>
     </div>
 </div>

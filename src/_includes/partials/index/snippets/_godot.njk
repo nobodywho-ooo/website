@@ -1,0 +1,18 @@
+{% highlight "python" %}
+extends NobodyWhoChat
+
+func _ready():
+    self.model_node = get_node("../ChatModel")
+
+    self.response_updated.connect(_on_response_updated)
+    self.response_finished.connect(_on_response_finished)
+
+    self.start_worker()
+
+    self.ask("What is the capital of denmark?")
+
+func _on_response_finished(response):
+    print(response)
+
+# The capital of Denmark is Copenhagen.
+{% endhighlight %}

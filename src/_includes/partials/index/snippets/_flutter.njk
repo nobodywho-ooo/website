@@ -1,0 +1,8 @@
+{% highlight "dart" %}
+import "dart:io"
+
+final chat = await nobodywho.Chat.fromPath(modelPath: "./model.gguf");
+final response = await chat.ask("What is the capital of denmark?").completed();
+
+// The capital of Denmark is Copenhagen.
+{% endhighlight %}

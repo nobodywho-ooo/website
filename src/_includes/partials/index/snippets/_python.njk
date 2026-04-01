@@ -1,0 +1,8 @@
+{% highlight "python" %}
+from nobodywho import Chat
+
+chat = Chat("./model.gguf")
+response: str = chat.ask("What is the capital of denmark?").completed()
+
+# The capital of Denmark is Copenhagen.
+{% endhighlight %}

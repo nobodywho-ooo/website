@@ -1,0 +1,58 @@
+/* Terminal Window */
+.terminal {
+  background-color: #111b27;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+/* Terminal Header */
+.terminal__header {
+  height: 2.25rem;
+  background-color: #1b2b3a;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+
+.terminal__dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.terminal__dot--red { background-color: #ff5f56; }
+.terminal__dot--yellow { background-color: #ffbd2e; }
+.terminal__dot--green { background-color: #27c93f; }
+
+/* Terminal Content */
+.terminal__body {
+  padding: 1.25rem 1.5rem;
+}
+
+.terminal .terminal__body pre,
+.terminal .terminal__body pre[class*="language-"] {
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.terminal .terminal__body code,
+.terminal .terminal__body code[class*="language-"] {
+  background: transparent !important;
+  text-shadow: none;
+  font-size: 0.95rem;
+}
