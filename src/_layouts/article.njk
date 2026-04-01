@@ -7,16 +7,19 @@
             {% block content %}
                 <div class="flex justify-center pt-0 lg:pt-8">
                     <article class="prose lg:prose-xl dark:prose-invert divide-y overflow-x-hidden mx-auto max-w-2xl px-6 lg:max-w-4xl">
-                        <div>
+                        <div class="pt-12 sm:pt-32">
                             <h1 class="mt-12 mb-10 font-bold dark:text-white">
                                 {{ title }}
                             </h1>
                             {{ content | safe }}
                             <div class="mb-10 mt-20">
                                 <p class="font-light mb-5 italic text-gray-800 dark:text-white">Published {{ date|dateFormating }}</p>
-                                <div class="flex flex-wrap">
+                                <div class="flex flex-wrap gap-x-4">
                                     {% for category in categories %}
-                                        <p class="badge mb-3 select-none">{{ category }}</p>
+                                        <span class="inline-flex items-center rounded-full bg-gray-50 px-4 py-1.5 text-base font-medium text-gray-600 inset-ring
+                                                inset-ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:inset-ring-gray-400/20">
+                                            {{ category }}
+                                        </span>
                                     {% endfor %}
                                 </div>
                             </div>

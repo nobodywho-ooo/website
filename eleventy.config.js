@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import { execSync } from "child_process";
 import markdownIt from "markdown-it";
 import svg from "./src/_includes/shortcodes/svg.js";
+import button from "./src/_includes/shortcodes/button.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
@@ -48,6 +49,7 @@ export default async function (eleventyConfig) {
   });
 
   eleventyConfig.addShortcode("svg", svg);
+  eleventyConfig.addShortcode("button", button);
 
   eleventyConfig.addCollection("page", function (collections) {
     return collections.getFilteredByTag("page").sort(function (a, b) {

@@ -1,7 +1,7 @@
 ---
 title: Run LLMs locally in Flutter apps
 date: 2026-03-30
-categories: ["Flutter", "Guide"]
+categories: ["Flutter", "Tutorial"]
 description: "Tutorial to integrate LLMs locally in your Flutter project"
 slug: "run-llm-flutter-guide"
 ---

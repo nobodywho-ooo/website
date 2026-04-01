@@ -110,7 +110,7 @@
         @apply bg-white px-5 py-1 rounded-full border border-current/20 mr-3;
     }
 
-    p, span, li, td, th, label, blockquote, figcaption, a {
+    p, span, li, td, th, label, blockquote, figcaption, a, time {
         font-family: "DM Sans", sans-serif;
         font-weight: 400;
     }
