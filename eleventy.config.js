@@ -14,6 +14,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "/robots.txt" });
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
+  eleventyConfig.addPassthroughCopy("src/assets/css/prism-dark.css");
   eleventyConfig.setServerOptions({
     watch: ["./src/assets/css/tailwind-dist.css"],
   });
