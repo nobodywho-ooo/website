@@ -16,6 +16,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "/robots.txt" });
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
+  eleventyConfig.addPassthroughCopy("_headers");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/prism-dark.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/terminal.css");
