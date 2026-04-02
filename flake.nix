@@ -10,7 +10,7 @@
         "x86_64-linux"
       ];
       perSystem =
-        { pkgs, ... }:
+        { pkgs, self', ... }:
         {
           packages.default = pkgs.buildNpmPackage {
             pname = "nobodywho-website";
@@ -27,7 +27,7 @@
             '';
           };
           devShells.default = pkgs.mkShell {
-            packages = [ pkgs.nodejs ];
+            inputsFrom = [ self'.packages.default ];
           };
         };
     };
