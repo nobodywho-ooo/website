@@ -16,6 +16,7 @@
             pname = "nobodywho-website";
             version = "1.0.0";
             src = ./.;
+            nodejs = pkgs.nodejs_22;
             npmDepsHash = "sha256-NNXNz3ISAZEkjvXyQL7+t4n16TN3Pt51D1OPWqulER4=";
             nativeBuildInputs = [ pkgs.pkg-config ];
             buildInputs = [ pkgs.vips ];
@@ -25,6 +26,21 @@
             installPhase = ''
               cp -r _site $out
             '';
+          };
+          apps = {
+            default = {
+              type = "app";
+              program = "${pkgs.writeShellScript "serve" ''
+                echo "Serving on http://localhost:8080"
+                ${pkgs.python3}/bin/python3 -m http.server -d ${self'.packages.default} 8080
+              ''}";
+            };
+            dev = {
+              type = "app";
+              program = "${pkgs.writeShellScript "dev" ''
+                nix develop --command sh -c 'npm install && npm start'
+              ''}";
+            };
           };
           devShells.default = pkgs.mkShell {
             inputsFrom = [ self'.packages.default ];
