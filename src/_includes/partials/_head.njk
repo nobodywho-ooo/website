@@ -14,7 +14,7 @@
         <title>{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
         <meta
           name="description"
-          content=" {% if description %} {{ description }} {% else %} {{ site.description }} {% endif %} "/>
+          content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}"/>
 
         {% set pageTitle %}{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}{% endset %}
         {% set pageDescription %}{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}{% endset %}
