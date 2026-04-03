@@ -20,10 +20,9 @@ pagination:
                     <div class="flex items-center gap-x-4 text-xs">
                         <time datetime="2020-03-16" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
                         {% for category in post.data.categories %}
-                            <a
-                                href="#"
-                                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600 hover:bg-gray-100
-                                    dark:bg-gray-800/60 dark:text-neutral-300 dark:hover:bg-gray-800">{{ category }}</a>
+                            <span
+                                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600
+                                    dark:bg-gray-800/60 dark:text-neutral-300">{{ category }}</span>
                         {% endfor %}
                     </div>
                     <div class="group relative">
