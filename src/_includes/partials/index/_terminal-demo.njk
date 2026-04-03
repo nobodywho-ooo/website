@@ -27,26 +27,26 @@
         </div>
         <div class="hidden sm:block">
             <nav aria-label="Tabs" class="flex space-x-4 bg-neutral-100 p-1 rounded-xl">
-                <a
-                    href="#"
-                    @click.prevent="tab = 'flutter'"
+                <button
+                    type="button"
+                    @click="tab = 'flutter'"
                     :class="tab === 'flutter' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg">
-                    Flutter</a>
-                <a
-                    href="#"
-                    @click.prevent="tab = 'python'"
+                    class="px-7 py-1.5 text-lg cursor-pointer">
+                    Flutter</button>
+                <button
+                    type="button"
+                    @click="tab = 'python'"
                     :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
                         : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg">
-                    Python</a>
-                <a
-                    href="#"
-                    @click.prevent="tab = 'godot'"
+                    class="px-7 py-1.5 text-lg cursor-pointer">
+                    Python</button>
+                <button
+                    type="button"
+                    @click="tab = 'godot'"
                     :class="tab === 'godot' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
                         : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg">
-                    Godot</a>
+                    class="px-7 py-1.5 text-lg cursor-pointer">
+                    Godot</button>
             </nav>
         </div>
     </div>
