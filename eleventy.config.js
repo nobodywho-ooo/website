@@ -9,7 +9,6 @@ import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 const isPostPublished = (post) => !post.data.draft;
 
 export default async function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
   eleventyConfig.addPassthroughCopy("src/assets/images");
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
