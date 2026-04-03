@@ -24,6 +24,8 @@
         {% set pageUrl %}{{ site.url }}{{ page.url }}{% endset %}
         {% set pageImage %}{% if image %}{{ site.url }}{{ image }}{% else %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
 
+        <link rel="canonical" href="{{ pageUrl }}"/>
+
         <!-- Open Graph -->
         <meta property="og:type" content="{% if layout == 'article' %}article{% else %}website{% endif %}"/>
         <meta property="og:title" content="{{ pageTitle }}"/>
