@@ -71,6 +71,10 @@ export default async function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
+  eleventyConfig.addFilter("dateISO", (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toISODate();
+  });
+
   return {
     dir: {
       input: "src",

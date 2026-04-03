@@ -18,7 +18,7 @@ pagination:
             {% for post in posts %}
                 <article class=" flex flex-col items-start justify-between">
                     <div class="flex items-center gap-x-4 text-xs">
-                        <time datetime="2020-03-16" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
+                        <time datetime="{{ post.date | dateISO }}" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
                         {% for category in post.data.categories %}
                             <span
                                 class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600
