@@ -21,8 +21,8 @@
 
         {% set pageTitle %}{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}{% endset %}
         {% set pageDescription %}{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}{% endset %}
-        {% set pageUrl %}https://nobodywho.ooo{{ page.url }}{% endset %}
-        {% set pageImage %}{% if image %}https://nobodywho.ooo{{ image }}{% else %}https://nobodywho.ooo/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
+        {% set pageUrl %}{{ site.url }}{{ page.url }}{% endset %}
+        {% set pageImage %}{% if image %}{{ site.url }}{{ image }}{% else %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
 
         <!-- Open Graph -->
         <meta property="og:type" content="{% if layout == 'article' %}article{% else %}website{% endif %}"/>
