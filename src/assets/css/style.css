@@ -1,4 +1,4 @@
-@import url("terminal.css");
+@import "./terminal.css";
 
 /* https://stackoverflow.com/questions/65185411/tailwindcss-blue-rectangle-when-click-on-mobile-device */
 button,
