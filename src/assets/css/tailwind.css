@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./style.css";
+@import "./prism-dark.css";
 
 @font-face {
     font-family: "Satoshi";

@@ -1,24 +1,23 @@
 <header class="bg-white dark:bg-neutral-900">
+    <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" aria-hidden="true"/>
     <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <a href="/" class="-m-1.5 p-1.5 text-lg font-bold text-neutral-900 dark:text-white">NobodyWho</a>
         <div class="flex lg:hidden">
-            <button
-                type="button"
-                command="show-modal"
-                commandfor="mobile-menu"
-                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-neutral-700 dark:text-neutral-400">
-                <span class="sr-only">Open main menu</span>
+            <label
+                for="mobile-menu-toggle"
+                role="button"
+                aria-label="Open main menu"
+                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-neutral-700 dark:text-neutral-400 cursor-pointer">
                 <svg
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    data-slot="icon"
                     aria-hidden="true"
                     class="size-6">
                     <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </button>
+            </label>
         </div>
         <div class="hidden lg:flex lg:items-center lg:gap-x-12">
             {% for item in collections.page %}
@@ -28,68 +27,62 @@
                 href="https://docs.nobodywho.ooo/"
                 aria-label="Documentation"
                 class="text-sm/6 font-medium text-neutral-500 hover:text-primary dark:text-neutral-400">Docs</a>
-            <button
-                type="button"
+            <a
+                href="{{ site.github_url }}"
                 class="inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
                     shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
                     dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
                 {% svg "github", "size-4" %} Github
-            </button>
+            </a>
         </div>
     </nav>
-    <el-dialog>
-        <dialog
-            id="mobile-menu"
-            class="backdrop:bg-transparent lg:hidden fixed inset-0 m-0 p-0 w-full max-w-full h-full max-h-full bg-transparent
-                border-none">
-            <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10
-                    dark:bg-neutral-900 dark:sm:ring-gray-100/10">
-                <div class="flex items-center justify-between">
-                    <a href="#" class="-m-1.5 p-1.5 text-lg font-bold text-neutral-900 dark:text-white">NobodyWho</a>
-                    <button
-                        type="button"
-                        command="close"
-                        commandfor="mobile-menu"
-                        class="-m-2.5 rounded-md p-2.5 text-neutral-700 dark:text-neutral-400">
-                        <span class="sr-only">Close menu</span>
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            data-slot="icon"
-                            aria-hidden="true"
-                            class="size-6">
-                            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+    <!-- Mobile menu backdrop -->
+    <label for="mobile-menu-toggle" class="fixed inset-0 z-40 bg-black/20 hidden peer-checked:block lg:!hidden" aria-hidden="true"></label>
+    <!-- Mobile menu panel -->
+    <div class="fixed inset-y-0 right-0 z-50 w-full sm:max-w-sm overflow-y-auto bg-white p-6 sm:ring-1 sm:ring-gray-900/10
+            dark:bg-neutral-900 dark:sm:ring-gray-100/10 translate-x-full peer-checked:translate-x-0 transition-transform duration-200 ease-in-out lg:!hidden">
+        <div class="flex items-center justify-between">
+            <a href="/" class="-m-1.5 p-1.5 text-lg font-bold text-neutral-900 dark:text-white">NobodyWho</a>
+            <label
+                for="mobile-menu-toggle"
+                role="button"
+                aria-label="Close menu"
+                class="-m-2.5 rounded-md p-2.5 text-neutral-700 dark:text-neutral-400 cursor-pointer">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                    class="size-6">
+                    <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </label>
+        </div>
+        <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
+                <div class="space-y-2 py-6">
+                    {% for item in collections.page %}
+                        <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="-mx-3 block px-3 py-2 text-base/7 {% if item.url == page.url %}font-semibold text-neutral-900 dark:text-white{% else %}font-medium text-neutral-500 dark:text-neutral-400{% endif %} hover:bg-neutral-50 dark:hover:bg-white/5">
+                            {{ item.data.title }}
+                        </a>
+                    {% endfor %}
+                    <a
+                        href="https://docs.nobodywho.ooo/"
+                        aria-label="Documentation"
+                        class="-mx-3 block px-3 py-2 text-base/7 font-medium text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50
+                            dark:hover:bg-white/5">
+                        Documentation
+                    </a>
+                    <a
+                        href="{{ site.github_url }}"
+                        class="mt-4 inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
+                            shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
+                            dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
+                        {% svg "github", "size-4" %} Github
+                    </a>
                 </div>
-                <div class="mt-6 flow-root">
-                    <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
-                        <div class="space-y-2 py-6">
-                            {% for item in collections.page %}
-                                <a href="{{ item.url }}" aria-label="{{ item.data.title }}" class="-mx-3 block px-3 py-2 text-base/7 {% if item.url == page.url %}font-semibold text-neutral-900 dark:text-white{% else %}font-medium text-neutral-500 dark:text-neutral-400{% endif %} hover:bg-neutral-50 dark:hover:bg-white/5">
-                                    {{ item.data.title }}
-                                </a>
-                            {% endfor %}
-                            <a
-                                href="https://docs.nobodywho.ooo/"
-                                aria-label="Documentation"
-                                class="-mx-3 block px-3 py-2 text-base/7 font-medium text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50
-                                    dark:hover:bg-white/5">
-                                Documentation
-                            </a>
-                            <button
-                                type="button"
-                                class="mt-4 inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
-                                    shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
-                                    dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
-                                {% svg "github", "size-4" %} Github
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </el-dialog-panel>
-        </dialog>
-    </el-dialog>
+            </div>
+        </div>
+    </div>
 </header>

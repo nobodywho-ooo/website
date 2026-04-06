@@ -7,15 +7,33 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon/favicon-32x32.png' | url }}"/>
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon/favicon-16x16.png' | url }}"/>
   <link rel="manifest" href="{{ '/assets/favicon/site.webmanifest' | url }}"/>
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/tailwind-dist.css' | url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/prism-dark.css' | url }}">
-        <title>{{ site.name }} -
-          {% if title %}
-            {{ title }}
-          {% endif %}
-        </title>
+  <link rel="preload" href="{{ '/assets/css/tailwind-dist.css' | url }}" as="style"/>
+  <link rel="preload" href="{{ '/assets/fonts/Satoshi-Medium.woff2' | url }}" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="{{ '/assets/fonts/dm-sans-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin/>
+  <link rel="stylesheet" href="{{ '/assets/css/tailwind-dist.css' | url }}">
+        <title>{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
         <meta
           name="description"
-          content=" {% if description %} {{ description }} {% else %} {{ site.description }} {% endif %} "/>
+          content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}"/>
+
+        {% set pageTitle %}{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}{% endset %}
+        {% set pageDescription %}{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}{% endset %}
+        {% set pageUrl %}{{ site.url }}{{ page.url }}{% endset %}
+        {% set pageImage %}{% if image %}{{ site.url }}{{ image }}{% else %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
+
+        <link rel="canonical" href="{{ pageUrl }}"/>
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="{% if layout == 'article' %}article{% else %}website{% endif %}"/>
+        <meta property="og:title" content="{{ pageTitle }}"/>
+        <meta property="og:description" content="{{ pageDescription }}"/>
+        <meta property="og:url" content="{{ pageUrl }}"/>
+        <meta property="og:image" content="{{ pageImage }}"/>
+        <meta property="og:site_name" content="{{ site.name }}"/>
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="{{ pageTitle }}"/>
+        <meta name="twitter:description" content="{{ pageDescription }}"/>
+        <meta name="twitter:image" content="{{ pageImage }}"/>
       </head>

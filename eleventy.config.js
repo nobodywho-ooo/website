@@ -8,25 +8,20 @@ import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
 const isPostPublished = (post) => !post.data.draft;
 
-export default async function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
+export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
-  eleventyConfig.addPassthroughCopy({ "src/robots.txt": "/robots.txt" });
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
-  eleventyConfig.addPassthroughCopy("src/assets/css/prism-dark.css");
-  eleventyConfig.addPassthroughCopy("src/assets/css/terminal.css");
-  
+
   // Reload the website if changes are made to tailwind.css
   eleventyConfig.addWatchTarget("./src/assets/css/tailwind.css");
   eleventyConfig.on("eleventy.before", () => {
     execSync("npx @tailwindcss/cli -i src/assets/css/tailwind.css -o src/assets/css/tailwind-dist.css");
   });
-  
+
   eleventyConfig.setServerOptions({
     watch: ["./src/assets/css/tailwind-dist.css"],
   });
@@ -37,9 +32,6 @@ export default async function (eleventyConfig) {
     "./node_modules/alpinejs/dist/cdn.js": "./js/alpine.js",
   });
 
-  eleventyConfig.addPassthroughCopy({
-    "./node_modules/@tailwindplus/elements/dist/index.js": "./js/elements.js",
-  });
 
   const md = new markdownIt({
     html: true,
@@ -54,8 +46,8 @@ export default async function (eleventyConfig) {
   eleventyConfig.addShortcode("svg", svg);
   eleventyConfig.addShortcode("button", button);
 
-  eleventyConfig.addCollection("page", function (collections) {
-    return collections.getFilteredByTag("page").sort(function (a, b) {
+  eleventyConfig.addCollection("page", function(collections) {
+    return collections.getFilteredByTag("page").sort(function(a, b) {
       return a.data.order - b.data.order;
     });
   });
@@ -70,6 +62,10 @@ export default async function (eleventyConfig) {
 
   eleventyConfig.addFilter("dateFormating", (dateObj) => {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+  });
+
+  eleventyConfig.addFilter("dateISO", (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toISODate();
   });
 
   return {

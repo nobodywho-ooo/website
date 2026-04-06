@@ -11,19 +11,18 @@ pagination:
 ---
 
 <div class="py-24 sm:py-32">
-    <div class="mx-auto max-w-2xl px-6 lg:max-w-4xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-4xl lg:px-8">
         <h2 class="text-4xl font-semibold tracking-tight text-pretty text-neutral-900 sm:text-5xl dark:text-white">Blog</h2>
         <p class="mt-2 text-lg/8 text-neutral-600 dark:text-neutral-300">News, tutorials & more.</p>
         <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 dark:border-gray-700">
             {% for post in posts %}
                 <article class=" flex flex-col items-start justify-between">
                     <div class="flex items-center gap-x-4 text-xs">
-                        <time datetime="2020-03-16" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
+                        <time datetime="{{ post.date | dateISO }}" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
                         {% for category in post.data.categories %}
-                            <a
-                                href="#"
-                                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600 hover:bg-gray-100
-                                    dark:bg-gray-800/60 dark:text-neutral-300 dark:hover:bg-gray-800">{{ category }}</a>
+                            <span
+                                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600
+                                    dark:bg-gray-800/60 dark:text-neutral-300">{{ category }}</span>
                         {% endfor %}
                     </div>
                     <div class="group relative">
