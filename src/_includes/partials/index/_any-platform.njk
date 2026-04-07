@@ -1,9 +1,19 @@
 <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
     <h2 class="text-4xl font-semibold tracking-tight text-balance text-neutral-900 sm:text-5xl dark:text-white">Run
         anywhere, no servers required.</h2>
-    <h2 class="text-4xl font-semibold tracking-tight text-neutral-500 sm:text-5xl dark:text-neutral-400">On-device inference
-        engine that runs in smartwatch, mobile and desktop apps.</h2>
-    <div class="mt-24 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-around items-center gap-x-10 gap-y-8 sm:gap-x-2 place-items-center text-neutral-600 dark:text-white">
+    <h2
+        class="text-4xl font-semibold tracking-tight text-neutral-500 sm:text-5xl dark:text-neutral-400"
+        x-data="{ words: ['smartwatch', 'mobile', 'desktop'], current: 0, fading: false, init() { setInterval(() => { this.fading
+            = true; setTimeout(() => { this.current = (this.current + 1) % this.words.length; this.fading = false; }, 400); }, 3000);
+            } }">
+        On-device inference engine for
+        <span
+            class="inline-block transition-all duration-400 ease-in-out font-[Satoshi] font-semibold text-primary tracking-tight"
+            :class="fading ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'"
+            x-text="words[current]">smartwatch</span>
+        apps.</h2>
+    <div class="mt-24 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-around items-center gap-x-10 gap-y-8 sm:gap-x-2
+            place-items-center text-neutral-600 dark:text-white">
         {% svg "apple", "size-14" %}
         {% svg "android", "size-14" %}
         {% svg "windows", "size-14" %}
