@@ -7,8 +7,9 @@
             <div class="absolute inset-0 rounded-lg bg-white max-lg:rounded-t-4xl lg:rounded-tl-4xl dark:bg-neutral-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]
                     max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-                <div class="h-60 flex items-center justify-center">
-                    {% svg "bolt", "size-38", ["#FBD633", "#FDB41B"] %}
+                <div class="bento-hover h-60 flex items-center justify-center">
+                    <div class="bento-hover-deco"></div>
+                    {% svg "bolt", "size-38", ["#FBD633", "#fbaf0b"] %}
                 </div>
                 <div class="p-10 pt-4">
                     <h3 class="text-sm/4 font-semibold text-primary">Performance</h3>
@@ -25,7 +26,8 @@
         <div class="relative lg:col-span-3">
             <div class="absolute inset-0 rounded-lg bg-white lg:rounded-tr-4xl dark:bg-neutral-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-                <div class="h-60 flex items-center justify-center">
+                <div class="bento-hover h-60 flex items-center justify-center">
+                    <div class="bento-hover-deco"></div>
                     {% svg "lock", "size-38", ["#DBBFC6", "#644C52"] %}
                 </div>
                 <div class="p-10 pt-4">
@@ -57,7 +59,7 @@
         <div class="relative lg:col-span-2">
             <div class="absolute inset-0 rounded-lg bg-white dark:bg-neutral-800"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-                <div class="h-60 flex items-center justify-center text-[#FFD21E]">
+                <div class="shake-on-hover h-60 flex items-center justify-center text-[#FFD21E]">
                     {% svg "huggingface", "size-24" %}
                 </div>
                 <div class="p-10 pt-4">
@@ -86,3 +88,5 @@
         </div>
     </div>
 </div>
+<script src="{{ '/assets/js/gsap.min.js' | url }}"></script>
+<script src="{{ '/assets/js/bento-hover.js' | url }}"></script>
