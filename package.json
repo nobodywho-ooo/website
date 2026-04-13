@@ -1,5 +1,5 @@
 {
-  "name": "nobodywho.ooo",
+  "name": "nobodywho.ai",
   "description": "NobodyWho's website",
   "version": "1.0.0",
   "type": "module",
@@ -11,7 +11,7 @@
     "build:css": "tailwindcss -i src/assets/css/tailwind.css -o src/assets/css/tailwind-dist.css"
   },
   "repository": "https://github.com/nobodywho-ooo/website",
-  "author": "NobodyWho <services@nobodywho.ooo>",
+  "author": "NobodyWho <services@nobodywho.ai>",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
