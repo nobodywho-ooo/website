@@ -6,8 +6,6 @@ description: "A brief commentary on Zetaphor's blog post, open-source citizenshi
 slug: "notes-on-friends-dont-let-friends-use-ollama"
 ---
 
-# Notes on "Friends Don't Let Friends Use Ollama"
-
 [This blog post](https://sleepingrobots.com/dreams/stop-using-ollama/) by Zetaphor has been making the rounds, and it has got me thinking about how we deal with being good stewards of the open source commons in NobodyWho.
 
 This is just a brief commentary on each of the things that Zetaphor brings up, with a perspective on how each of these apply to NobodyWho.
