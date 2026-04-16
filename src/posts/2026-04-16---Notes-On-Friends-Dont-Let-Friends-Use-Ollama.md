@@ -82,4 +82,4 @@ We don't suffer from the problems that come with trying to replace the existing 
 We don't have the trust problems of Ollama. NobodyWho is made to do inference offline, so you can keep your conversation data to yourself.
 By scoping differently, we just avoid a large set of problems.
 
-> This post was written by a human. No words were made up by the machine.
+*This post was written by a human. No words were made up by the machine.*
