@@ -33,3 +33,84 @@ body {
 .ai-logos-fade.is-visible {
   animation: fadeInUp 0.6s ease forwards;
 }
+
+/* End ai logo */
+
+/* Bento animation */
+.bento-hover {
+  position: relative;
+  overflow: hidden;
+  --x: 0px;
+  --y: 0px;
+}
+
+.bento-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgb(23, 24, 37) 30%, rgb(189 195 199) 40%, rgb(44 62 80));
+  mix-blend-mode: darken;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.bento-hover:hover::after {
+  opacity: 1;
+}
+
+.bento-hover-deco {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85rem;
+  word-wrap: break-word;
+  line-height: 1.15;
+  color: #fff;
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(250px circle at var(--x) var(--y), black 20%, rgba(0,0,0,0.25), transparent);
+  mask-image: radial-gradient(250px circle at var(--x) var(--y), black 20%, rgba(0,0,0,0.25), transparent);
+}
+
+.bento-hover svg {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-color-scheme: light) {
+  .bento-hover {
+    isolation: isolate;
+    background: #fff;
+  }
+
+  .bento-hover::after {
+    background: radial-gradient(circle, rgb(255, 255, 255) 30%, rgb(228 229 230) 40%, rgb(0 65 106));
+    mix-blend-mode: lighten;
+  }
+
+  .bento-hover-deco {
+    color: #000;
+  }
+}
+
+/* End bento animation */
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(12deg); }
+  30% { transform: rotate(-10deg); }
+  45% { transform: rotate(8deg); }
+  60% { transform: rotate(-6deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.shake-on-hover:hover svg {
+  animation: shake 0.5s ease-in-out;
+}
