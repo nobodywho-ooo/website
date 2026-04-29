@@ -30,7 +30,7 @@ The React Native bindings expose the same core API our Godot, Rust, Python, and 
 - Tool calling, so the model can call into your JS/TS code
 - Sampling controls (temperature, constrained/JSON output, …)
 - Embeddings and a cross-encoder for RAG
-- Vision, for multimodal models that take images as input
+- Feed image and audio inputs directly to your LLM
 - Any model in `.gguf` format, powered by [llama.cpp](https://github.com/ggerganov/llama.cpp) under the hood
 
 It works on both iOS and Android.
