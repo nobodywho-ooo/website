@@ -51,6 +51,10 @@ A structured collection of data used to train, test, or evaluate a model. Datase
 
 The process of exposing a model to data so it can learn patterns. During training, the model adjusts its internal parameters millions (or billions) of times until it gets better at its task.
 
+### Parameters / Weights
+
+The internal numerical values a model learns during training. Parameters are what the model actually "knows", they encode the patterns extracted from training data. A model with 70 billion parameters has 70 billion of these numbers, all tuned to make its outputs as accurate as possible. Weights is another term for the same thing, often used when referring to the files you download for open-weight models.
+
 ### Fine-tuning
 
 The process of taking a pre-trained model and continuing to train it on a smaller, specialized dataset to adapt it to a specific task or style. Fine-tuning is faster and cheaper than training from scratch, and it's how generic models get turned into domain-specific ones.
@@ -81,15 +85,19 @@ A type of deep learning model trained on massive amounts of text data to underst
 
 Models that are publicly released, allowing anyone to download, run, and fine-tune them. Popular examples include Llama 3, Mistral, Qwen, Gemma and DeepSeek.
 
+### Vision Model
+
+A model specialized in processing and understanding images. Vision models can classify what's in an image, detect objects, generate captions, or power visual search.
+
 ### Multimodal Model
 
 A model that can process and generate more than one type of data — text, images, audio or video. For example, GPT-4o and Gemini are multimodal: you can send them an image and ask a question about it, or have them describe what they hear in an audio file.
 
 ### Reasoning Model vs. Thinking Model
 
-These terms are often used interchangeably, but there’s a subtle distinction. 
-A **reasoning model** is explicitly trained or prompted to work through problems step by step before producing an answer, breaking complex tasks into logical stages. 
-A **thinking model** typically refers to models that have a dedicated internal “thinking” phase, where the model processes before responding. 
+These terms are often used interchangeably, but there's a subtle distinction.
+A **reasoning model** is explicitly trained or prompted to work through problems step by step before producing an answer, breaking complex tasks into logical stages.
+A **thinking model** typically refers to models that have a dedicated internal "thinking" phase, where the model processes before responding.
 In practice, both aim to improve accuracy on complex tasks by slowing down the output process.
 
 ### Stable Diffusion
@@ -136,6 +144,10 @@ The maximum amount of text a model can process at once — both input and output
 
 A setting that controls how random or creative a model's outputs are. Low temperature (close to 0) makes the model more focused and deterministic — it picks the most likely next token. High temperature introduces more randomness and variation. Most production systems run between 0.2 and 0.8.
 
+### Top-p / Top-k
+
+Two sampling settings that work alongside temperature to control how a model picks its next token. **Top-k** limits the model to choosing from only the k most likely tokens at each step. For example, top-k of 40 means only the 40 most probable options are considered. **Top-p** (also called nucleus sampling) is more dynamic: it picks from the smallest group of tokens whose combined probability adds up to p, so at top-p of 0.9, the model considers just enough tokens to cover 90% of the probability mass. Both settings help prevent the model from producing very unlikely or incoherent outputs.
+
 ### Latency
 
 The time it takes for a model to respond after receiving input. In AI products, latency matters for user experience. It's influenced by model size, infrastructure, and whether the output is streamed token by token or returned all at once.
@@ -154,6 +166,10 @@ The act of running a trained model on a new input to get an output. Training is 
 
 The reasoning process a model performs during inference. When a model "infers," it's drawing a conclusion from the input it received based on the patterns it learned. Often used interchangeably with inference, but leans more toward the cognitive act than the technical process.
 
+### Chain-of-Thought (CoT)
+
+A prompting technique where the model is encouraged to reason step by step before giving a final answer, rather than jumping straight to a conclusion. By writing out intermediate reasoning, like a person writing their thoughts on paper, the model tends to make fewer mistakes on complex tasks.
+
 ### Hallucination
 
 When a model generates information that sounds confident but is factually wrong or completely made up. Hallucinations happen because models predict plausible sounding text, not verified truth.
@@ -168,6 +184,10 @@ When a model generates information that sounds confident but is factually wrong 
 
 A technique where a model retrieves relevant external information before generating a response. Instead of relying solely on what it learned during training, the model pulls in fresh data from a database or document store at inference time. It's a practical way to keep responses accurate and up to date.
 
+### Tool Calling
+
+The ability of a model to invoke external functions or APIs during a conversation, things like searching the web, running code, querying a database, or reading a file. Rather than generating a plain text answer, the model recognizes when a tool would help, calls it with the right inputs, receives the result, and incorporates it into its response. Tool calling is what bridges a language model and the real world, and it's the core mechanism behind most agentic systems.
+
 ### Skills
 
 In the context of AI agents, skills are discrete, callable capabilities a model can use, like searching the web, running code or reading a file. They're the building blocks that turn a language model into an agent that can actually do things, not just talk about them.
@@ -181,6 +201,14 @@ In the context of AI agents, skills are discrete, callable capabilities a model 
 ### Agent / Agentic
 
 An AI system that can take actions, use tools, and pursue a goal across multiple steps, rather than just responding once to a single prompt. Agentic systems can browse the web, write and run code, manage files, or call APIs. The key difference from a standard model is autonomy over a sequence of decisions.
+
+### Guardrails
+
+Rules and filters applied to a model's inputs or outputs to keep it within acceptable boundaries. Guardrails can block harmful content, enforce topic restrictions, prevent the model from impersonating real people, or ensure responses stay on-brand for a product.
+
+### Alignment
+
+The challenge of making AI systems behave in ways that reflect human intentions, values, and goals. A misaligned model might be highly capable but pursue objectives in ways its creators didn't intend.
 
 ### Benchmark
 
