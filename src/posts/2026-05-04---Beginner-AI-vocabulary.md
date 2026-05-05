@@ -3,8 +3,11 @@ title: Beginner's Guide to Essential Terms in Artificial Intelligence
 date: 2026-05-04
 categories: ["Guide"]
 description: "This article provides a glossary covering essential AI vocabulary, definitions, and terminology"
+image: /assets/images/blog/2026/beginner-guide-to-essential-terms-in-ai/beginner-guide-in-essential-terms-in-ai.png
 slug: "beginners-guide-to-ai-terms"
 ---
+
+![Beginner's Guide to Essential Terms in Artificial Intelligence](/assets/images/blog/2026/beginner-guide-to-essential-terms-in-ai/beginner-guide-to-essential-terms-in-ai.png)
 
 AI has its own language, and if you're just getting started, it can feel like everyone else got the memo but you.
 
@@ -29,6 +32,10 @@ A subset of AI where systems learn from data instead of being programmed. Rather
 ### Deep Learning (DL)
 
 A subset of machine learning that uses neural networks with many layers to learn from large amounts of data. It's the technology behind most modern AI breakthroughs — image recognition, speech synthesis, and large language models all rely on it.
+
+### Generative AI (Gen AI)
+
+Generative AI refers to Artificial Intelligence systems that are capable of creating new content such as text, images, audio, video, or code.
 
 ---
 

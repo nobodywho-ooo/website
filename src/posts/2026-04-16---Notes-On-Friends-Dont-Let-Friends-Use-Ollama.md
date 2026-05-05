@@ -3,8 +3,11 @@ title: Notes on "Friends Don't Let Friends Use Ollama"
 date: 2026-04-16
 categories: ["ollama", "open-source"]
 description: "A brief commentary on Zetaphor's blog post, open-source citizenship, and how NobodyWho avoids Ollama's mistakes."
+image: /assets/images/blog/2026/friends-dont-let-friends-use-ollama/friends-dont-let-friends-use-ollama.png
 slug: "notes-on-friends-dont-let-friends-use-ollama"
 ---
+
+![Notes on "Friends Don't Let Friends Use Ollama"](/assets/images/blog/2026/friends-dont-let-friends-use-ollama/friends-dont-let-friends-use-ollama.png)
 
 [This blog post](https://sleepingrobots.com/dreams/stop-using-ollama/) by Zetaphor has been making the rounds, and it has got me thinking about how we deal with being good stewards of the open source commons in NobodyWho.
 
