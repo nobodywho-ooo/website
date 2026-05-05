@@ -11,7 +11,7 @@ slug: "beginners-guide-to-ai-terms"
 
 AI has its own language, and if you're just getting started, it can feel like everyone else got the memo but you.
 
-Terms like *neural networks*, *tokens*, and *inference* get tossed around in articles, videos, and job descriptions as if they're common knowledge, but they're not.
+Terms like *tokens*, *inference*, and *quantization* get tossed around in articles, videos, and job descriptions as if they're common knowledge, but they're not.
 
 This guide helps you to navigate in the AI jungle, it covers the core AI vocabulary you'll encounter and defines it simply. Whether you're building something, exploring the field, or just trying to follow the conversation, these are the terms worth knowing.
 
@@ -31,7 +31,7 @@ A subset of AI where systems learn from data instead of being programmed. Rather
 
 ### Deep Learning (DL)
 
-A subset of machine learning that uses neural networks with many layers to learn from large amounts of data. It's the technology behind most modern AI breakthroughs — image recognition, speech synthesis, and large language models all rely on it.
+A subset of machine learning that uses neural networks with many layers to learn from large amounts of data. It's the technology behind most modern AI breakthroughs like image recognition, speech synthesis, and large language models all rely on it.
 
 ### Generative AI (Gen AI)
 
@@ -65,7 +65,7 @@ A training technique where a smaller model (the student) is trained to mimic the
 
 ### Quantization
 
-A technique for reducing a model's size by lowering the precision of its weights — for example, going from 32-bit floats to 8-bit integers. Quantized models are faster and cheaper to run, with a trade-off in accuracy.
+A technique for reducing a model's size by lowering the precision of its weights like for example, going from 32-bit floats to 8-bit integers. Quantized models are faster and cheaper to run, with a trade-off in accuracy.
 
 ---
 
@@ -91,7 +91,7 @@ A model specialized in processing and understanding images. Vision models can cl
 
 ### Multimodal Model
 
-A model that can process and generate more than one type of data — text, images, audio or video. For example, GPT-4o and Gemini are multimodal: you can send them an image and ask a question about it, or have them describe what they hear in an audio file.
+A model that can process and generate more than one type of data like text, images, audio or video. For example, GPT-4o and Gemini are multimodal: you can send them an image and ask a question about it, or have them describe what they hear in an audio file.
 
 ### Reasoning Model vs. Thinking Model
 
@@ -112,7 +112,7 @@ A deep learning model used for converting text to images. It can generate high-q
 
 ### Token
 
-The basic unit an LLM processes. A token is roughly a word fragment — "learning" might be one token, while "unbelievable" could be split into two or three. Models don't read characters or full words, they read tokens.
+The basic unit an LLM processes. A token is roughly a word fragment, "learning" might be one token, while "unbelievable" could be split into two or three. Models don't read characters or full words, they read tokens.
 
 ### Tokenization
 
@@ -138,11 +138,11 @@ A special prompt, invisible to the end user, that sets the model's behavior, ton
 
 ### Context Window
 
-The maximum amount of text a model can process at once — both input and output combined. If a model has a 128k token context window, it can "see" roughly 100,000 words at a time. Anything outside the context window is invisible to the model.
+The maximum amount of text a model can process at once, both input and output combined. If a model has a 128k token context window, it can "see" roughly 100,000 words at a time. Anything outside the context window is invisible to the model.
 
 ### Temperature
 
-A setting that controls how random or creative a model's outputs are. Low temperature (close to 0) makes the model more focused and deterministic — it picks the most likely next token. High temperature introduces more randomness and variation. Most production systems run between 0.2 and 0.8.
+A setting that controls how random or creative a model's outputs are. Low temperature (close to 0) makes the model more focused and deterministic, it picks the most likely next token. High temperature introduces more randomness and variation. Most production systems run between 0.2 and 0.8.
 
 ### Top-p / Top-k
 
@@ -212,4 +212,4 @@ The challenge of making AI systems behave in ways that reflect human intentions,
 
 ### Benchmark
 
-A standardized test used to measure and compare model performance. Benchmarks like MMLU, HumanEval, or HellaSwag evaluate specific capabilities — reasoning, coding, language understanding. They're useful for comparing models, but a high benchmark score doesn't always translate to real-world usefulness.
+A standardized test used to measure and compare model performance. Benchmarks like MMLU, HumanEval, or HellaSwag evaluate specific capabilities, reasoning, coding, language understanding. They're useful for comparing models, but a high benchmark score doesn't always translate to real-world usefulness.
