@@ -8,6 +8,7 @@
                 href="https://docs.nobodywho.ooo/"
                 aria-label="Documentation"
                 class="text-neutral-500 hover:text-primary dark:text-neutral-400 dark:hover:text-white">Docs</a>
+            <a href="/privacy/" aria-label="Privacy Policy" class="{% if page.url == '/privacy/' %}text-neutral-900 dark:text-white{% else %}text-neutral-500 hover:text-primary dark:text-neutral-400 dark:hover:text-white{% endif %}">Privacy</a>
         </nav>
         <div class="mt-16 flex flex-wrap justify-center gap-x-10 gap-y-4">
             {% for item in site.footer %}
