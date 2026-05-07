@@ -77,7 +77,7 @@ A technique for reducing a model's size by lowering the precision of its weights
 
 ### Model
 
-The output of training, which consist of one or several files that have learned to map inputs to outputs. Models can range from a few megabytes to several terabytes.
+The output of training, which consists of one or several files that have learned to map inputs to outputs. Models can range from a few megabytes to several terabytes.
 
 ### LLM (Large Language Model)
 
@@ -85,7 +85,7 @@ A type of deep learning model trained on massive amounts of text data to underst
 
 ### SLM (Small Language Model)
 
-A language model trained with fewer parameters than a typical LLM, designed to run efficiently on limited hardware like laptops, phones, or even smartwatch. SLMs are not categorically different from LLMs, but rather a smaller variant of an LLM.
+A language model trained with fewer parameters than a typical LLM, designed to run efficiently on limited hardware like laptops, phones, or even smartwatches. SLMs are not categorically different from LLMs, but simply smaller variants.
 
 ### Mixture of Experts (MoE)
 
@@ -150,7 +150,7 @@ A special prompt, invisible to the end user, that sets the model's behavior, ton
 
 ### Context Window
 
-The maximum amount of text a model can process at once, both input and output combined. If a model has a 128k token context window, it can "see" roughly 100,000 words at a time, since there's roughly 0.75 words per token. Anything outside the context window is invisible to the model.
+The maximum amount of text a model can process at once, both input and output combined. If a model has a 128k token context window, it can "see" roughly 100,000 words at a time, since there are roughly 0.75 words per token. Anything outside the context window is invisible to the model.
 
 ### Latency
 
@@ -163,14 +163,15 @@ It's useful to measure both the time-to-first-token (TTFT) and the time to compl
 Typically measured in *tokens per second*, this is a measure of how quickly the model can process and generate tokens.
 The speed to read a bunch of tokens and the speed to write a bunch of tokens are very different. The token throughput of reading is often around 10x as fast as the token throughput of writing tokens.
 
+---
 
 ## 6. Sampling
 
-*Controlling how tokens are selected*
+*Controlling how tokens are selected.*
 
 ### Sampling
 
-Under the hood, a generative language models output a probability distribution for the next token in a sequence. If given the sequence of tokens `["Once ", "upon ", "a "]`, a model might output a distribution with a high probability for the token "time", a much lower probability for the token "hill", and an incredibly low probability for nonsens tokens like "13".
+Under the hood, generative language models output a probability distribution for the next token in a sequence. If given the sequence of tokens `["Once ", "upon ", "a "]`, a model might output a distribution with a high probability for the token "time", a much lower probability for the token "hill", and an incredibly low probability for nonsense tokens like "13".
 
 In order to actually generate a sequence, we must select one of these tokens to accept and output to the user. This process of selecting a token from the probability distribution is known as sampling.
 
@@ -202,7 +203,7 @@ If a temperature of less than 1 is applied, the high-probability tokens are made
 A temperature of exactly 1 has no effect.
 
 Low temperature makes the model more focused and deterministic, making it feel measured and predictable.
-High temperature introduces more randomness and variation, making it feal creative and spontaneous.
+High temperature introduces more randomness and variation, making it feel creative and spontaneous.
 
 ### Top-k
 
