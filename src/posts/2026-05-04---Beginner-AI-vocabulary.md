@@ -41,7 +41,7 @@ Generative AI refers to Artificial Intelligence systems that are capable of crea
 
 ## 2. How Models Are Built
 
-*Behind the screnes.*
+*Behind the scenes.*
 
 ### Dataset
 
@@ -80,6 +80,10 @@ The output of training, which consist of one or several files that has learned t
 ### LLM (Large Language Model)
 
 A type of deep learning model trained on massive amounts of text data to understand and generate human language. LLMs like GPT, Claude, and Gemini predict the next most likely word/token given a context. They're the engine behind most modern AI chat and writing tools.
+
+### SLM (Small Language Model)
+
+A language model trained on less data and with fewer parameters than a typical LLM, designed to run efficiently on limited hardware like laptops, phones, or even smartwatch.
 
 ### Open-weight Models
 
