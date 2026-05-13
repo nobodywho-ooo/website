@@ -31,6 +31,8 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "./node_modules/alpinejs/dist/cdn.js": "./js/alpine.js",
   });
+  eleventyConfig.addPassthroughCopy("src/assets/js/gsap.min.js");
+  eleventyConfig.addPassthroughCopy("src/assets/js/bento-hover.js");
 
 
   const md = new markdownIt({
