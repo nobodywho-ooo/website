@@ -107,13 +107,6 @@ A model that can process or generate more than one type of data like text, image
 
 Multimodal models aren't necessarily capable of ingesting and outputting the same types of data. Many multimodal models can receive image or text inputs, and only generate text outputs.
 
-### Reasoning Model vs. Thinking Model
-
-These terms are often used interchangeably, but there's a subtle distinction.
-A **reasoning model** is explicitly trained or prompted to work through problems step by step before producing an answer, breaking complex tasks into logical stages.
-A **thinking model** typically refers to models that have a dedicated internal "thinking" phase, where the model processes before responding.
-In practice, both aim to improve accuracy on complex tasks by slowing down the output process.
-
 ---
 
 ## 4. Language & Text Processing
