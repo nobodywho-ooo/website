@@ -187,3 +187,5 @@ This means that we can work together to strengthen the standard, and keep a grea
 
 This post covers a bunch of stuff that's already great about the GGUF metadata, and a bunch of things that we'd like to improve.
 Keep an eye on our huggingface page and the llama.cpp issues board in the coming weeks, if you'd like to follow our work in this area.
+
+*This post was written entirely by a human. No words were made up by the machine.*
