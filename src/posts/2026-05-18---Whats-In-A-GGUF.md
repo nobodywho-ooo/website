@@ -185,5 +185,5 @@ I also love GGUF because it's an open, extensible format, with a strong communit
 
 This means that we can work together to strengthen the standard, and keep a great developer experience while being able to easily swap out models in an application, without having to re-write any code.
 
-This post covers a bunch of stuff that's already great about the GGUF metadata, and a bunch of things that we'd like to improve
+This post covers a bunch of stuff that's already great about the GGUF metadata, and a bunch of things that we'd like to improve.
 Keep an eye on our huggingface page and the llama.cpp issues board in the coming weeks, if you'd like to follow our work in this area.
