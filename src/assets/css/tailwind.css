@@ -138,14 +138,14 @@
         content: none;
     }
 
-    .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *, pre *)) {
         font-weight: 400;
         background-color: var(--color-gray-200);
         padding: 0.15em 0.2em;
         border-radius: 0.25rem;
     }
 
-    .prose.dark\:prose-invert :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    .prose.dark\:prose-invert :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *, pre *)) {
         background-color: var(--color-neutral-200);
         color: var(--color-gray-800);
     }
