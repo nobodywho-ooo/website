@@ -65,10 +65,10 @@ For example, a few tokens for Gemma4:
 | -------- | ---------------------- | ----------------------------------------------------------- |
 | 1        | `<eos>`                | End of sequence, model emits this to stop generation.       |
 | 2        | `<bos>`                | Beginning of sequence, is prepended to inputs.              |
-| 46       | `<|tool_call>`         | Marks beginning of a tool call.                             |
-| 47       | `<tool_call|>`         | Marks end of a tool call.                                   |
-| 105      | `<|turn>`              | Beginning of a conversational turn.                         |
-| 106      | `<turn|>`              | End of a conversational turn.                               |
+| 46       | `<\|tool_call>`        | Marks beginning of a tool call.                             |
+| 47       | `<tool_call\|>`        | Marks end of a tool call.                                   |
+| 105      | `<\|turn>`             | Beginning of a conversational turn.                         |
+| 106      | `<turn\|>`             | End of a conversational turn.                               |
 
 ## Sampler Configuration
 
