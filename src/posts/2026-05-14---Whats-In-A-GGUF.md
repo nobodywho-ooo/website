@@ -1,6 +1,6 @@
 ---
 title: What's in a GGUF, besides the weights - and what's still missing?
-date: 2026-05-18
+date: 2026-05-14
 description: "What extra stuff is needed to properly run a language model? Besides the weights of a language model, what is the gguf metadata that we need to parse and use?" 
 slug: "whats-in-a-gguf"
 ---
@@ -14,7 +14,6 @@ Compare this to [a typical safetensors repo on huggingface](https://huggingface.
 The contents are roughly the same, but GGUF makes it more ergonomic by keeping all this *stuff* in a single file.
 
 But what is this *stuff*, and does it cover everything needed?
-
 
 ## Chat Templates
 
