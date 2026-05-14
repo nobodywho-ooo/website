@@ -6,7 +6,7 @@ slug: "whats-in-a-gguf"
 ---
 
 
-GGUF is the file format that ggml-org/llama.cpp uses for language models.
+GGUF is the file format that [llama.cpp](https://github.com/ggml-org/llama.cpp) uses for language models.
 
 The *really neat* thing about GGUF is that it's just one file.
 Compare this to [a typical safetensors repo on huggingface](https://huggingface.co/Qwen/Qwen3.5-0.8B/tree/main), where there's a pile of necessary JSON files scattered around - or to [a typical ollama model](https://ollama.com/library/qwen3.5:0.8b), which is an OCI with layers json, go templates, etc inside.
