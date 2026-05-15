@@ -3,3 +3,8 @@
   Access-Control-Allow-Methods: GET, OPTIONS
   Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization
   Content-Type: application/json
+
+/feed.xml
+  Content-Type: application/atom+xml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
