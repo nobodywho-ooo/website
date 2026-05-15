@@ -1,0 +1,8 @@
+{% highlight "swift" %}
+import NobodyWho
+
+let chat = try await Chat.fromPath(modelPath: "./model.gguf")
+let response = try await chat.ask("What is the capital of denmark?").completed();
+
+// The capital of Denmark is Copenhagen.
+{% endhighlight %}

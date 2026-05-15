@@ -8,8 +8,9 @@
                     outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600
                     dark:bg-gray-800/50 dark:text-neutral-100 dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-primary-500">
                 <option value="flutter">Flutter</option>
-                <option value="python">Python</option>
                 <option value="react-native">React Native</option>
+                <option value="swift">Swift</option>
+                <option value="python">Python</option>
                 <option value="godot">Godot</option>
             </select>
             <svg
@@ -31,16 +32,10 @@
                 <button
                     type="button"
                     @click="tab = 'flutter'"
-                    :class="tab === 'flutter' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100' : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Flutter</button>
-                <button
-                    type="button"
-                    @click="tab = 'python'"
-                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
+                    :class="tab === 'flutter' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
                         : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
                     class="px-7 py-1.5 text-lg cursor-pointer">
-                    Python</button>
+                    Flutter</button>
                 <button
                     type="button"
                     @click="tab = 'react-native'"
@@ -48,6 +43,20 @@
                         : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
                     class="px-7 py-1.5 text-lg cursor-pointer">
                     React Native</button>
+                <button
+                    type="button"
+                    @click="tab = 'swift'"
+                    :class="tab === 'swift' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
+                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    class="px-7 py-1.5 text-lg cursor-pointer">
+                    Swift</button>
+                <button
+                    type="button"
+                    @click="tab = 'python'"
+                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
+                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
+                    class="px-7 py-1.5 text-lg cursor-pointer">
+                    Python</button>
                 <button
                     type="button"
                     @click="tab = 'godot'"
@@ -71,18 +80,6 @@
                 {% include "partials/index/snippets/_flutter.njk" %}
             </div>
         </div>
-        <div class="terminal" x-show="tab === 'python'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
-                </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_python.njk" %}
-            </div>
-        </div>
         <div class="terminal" x-show="tab === 'react-native'">
             <div class="terminal__header">
                 <div class="terminal__dots">
@@ -93,6 +90,30 @@
             </div>
             <div class="terminal__body">
                 {% include "partials/index/snippets/_react-native.njk" %}
+            </div>
+        </div>
+        <div class="terminal" x-show="tab === 'swift'">
+            <div class="terminal__header">
+                <div class="terminal__dots">
+                    <span class="terminal__dot terminal__dot--red"></span>
+                    <span class="terminal__dot terminal__dot--yellow"></span>
+                    <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+            </div>
+            <div class="terminal__body">
+                {% include "partials/index/snippets/_swift.njk" %}
+            </div>
+        </div>
+        <div class="terminal" x-show="tab === 'python'">
+            <div class="terminal__header">
+                <div class="terminal__dots">
+                    <span class="terminal__dot terminal__dot--red"></span>
+                    <span class="terminal__dot terminal__dot--yellow"></span>
+                    <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+            </div>
+            <div class="terminal__body">
+                {% include "partials/index/snippets/_python.njk" %}
             </div>
         </div>
         <div class="terminal" x-show="tab === 'godot'">
