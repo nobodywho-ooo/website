@@ -22,6 +22,7 @@
   {% set pageImage %}{% if image %}{{ site.url }}{{ image }}{% else %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
 
   <link rel="canonical" href="{{ pageUrl }}"/>
+  <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="{{ '/feed.xml' | url }}"/>
 
   <!-- Open Graph -->
   <meta property="og:type" content="{% if layout == 'article' %}article{% else %}website{% endif %}"/>

@@ -46,6 +46,11 @@
       "name": "Email",
       "url": "mailto:info@nobodywho.ai?subject=Hello",
       "icon": "email"
+    },
+    {
+      "name": "RSS",
+      "url": "/feed.xml",
+      "icon": "rss"
     }
   ]
 }

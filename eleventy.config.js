@@ -5,6 +5,7 @@ import svg from "./src/_includes/shortcodes/svg.js";
 import button from "./src/_includes/shortcodes/button.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import rssPlugin from "@11ty/eleventy-plugin-rss";
 
 const isPostPublished = (post) => !post.data.draft;
 
@@ -27,6 +28,8 @@ export default async function(eleventyConfig) {
   });
   eleventyConfig.addPlugin(lazyImagesPlugin);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
+
+  eleventyConfig.addPlugin(rssPlugin);
 
   eleventyConfig.addPassthroughCopy({
     "./node_modules/alpinejs/dist/cdn.js": "./js/alpine.js",
