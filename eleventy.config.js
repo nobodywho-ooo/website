@@ -35,6 +35,9 @@ export default async function(eleventyConfig) {
     "./node_modules/alpinejs/dist/cdn.js": "./js/alpine.js",
   });
 
+  eleventyConfig.addPassthroughCopy({
+    "src/_includes/partials/index/cloud.js": "js/cloud.js",
+  });
 
   const md = new markdownIt({
     html: true,

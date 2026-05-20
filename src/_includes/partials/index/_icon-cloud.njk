@@ -1,0 +1,132 @@
+<style>
+.cloud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+:root {
+  --cloud-far:   1400px;
+  --cloud-mid:    980px;
+  --cloud-near:   720px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --cloud-far:   620px;
+    --cloud-mid:   500px;
+    --cloud-near:  380px;
+  }
+}
+
+.cloud__layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.cloud__layer--far {
+  width: var(--cloud-far);
+  height: var(--cloud-far);
+  margin-left: calc(var(--cloud-far) / -2);
+  margin-top:  calc(var(--cloud-far) / -2);
+  filter: blur(6px);
+  opacity: 0.80;
+  z-index: 2;
+}
+
+.cloud__layer--mid {
+  width: var(--cloud-mid);
+  height: var(--cloud-mid);
+  margin-left: calc(var(--cloud-mid) / -2);
+  margin-top:  calc(var(--cloud-mid) / -2);
+  filter: blur(2px);
+  opacity: 1;
+  z-index: 3;
+}
+
+.cloud__layer--near {
+  width: var(--cloud-near);
+  height: var(--cloud-near);
+  margin-left: calc(var(--cloud-near) / -2);
+  margin-top:  calc(var(--cloud-near) / -2);
+  filter: blur(0);
+  opacity: 1;
+  z-index: 4;
+}
+
+.cloud__icon {
+  position: absolute;
+  border-radius: 22%;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 6px 18px rgba(16, 37, 56, 0.10),
+    0 1px 3px rgba(16, 37, 56, 0.06),
+    inset 0 0 0 1px rgba(16, 37, 56, 0.04);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.cloud__icon svg {
+  position: absolute;
+  inset: 14%;
+  width: 72%;
+  height: 72%;
+  display: block;
+  overflow: visible;
+}
+
+.cloud__vignette {
+  position: absolute;
+  inset: -15% -5%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 60% at center,
+    transparent 40%,
+    rgba(255, 255, 255, 0.25) 60%,
+    rgba(255, 255, 255, 0.6) 80%,
+    #ffffff 100%
+  );
+}
+
+.cloud__vignette--dark {
+  position: absolute;
+  inset: -15% -5%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 60% at center,
+    transparent 40%,
+    rgba(23, 23, 23, 0.25) 60%,
+    rgba(23, 23, 23, 0.6) 80%,
+    rgb(23, 23, 23) 100%
+  );
+}
+</style>
+<section
+    class="relative overflow-hidden py-48 sm:py-64 flex flex-col"
+    style="min-height: 200vh;"
+    data-cloud-section="data-cloud-section">
+    <div class="cloud" aria-hidden="true">
+        <div class="cloud__layer cloud__layer--far" data-layer="far"></div>
+        <div class="cloud__layer cloud__layer--mid" data-layer="mid"></div>
+        <div class="cloud__layer cloud__layer--near" data-layer="near"></div>
+    </div>
+    <div class="cloud__vignette dark:hidden" aria-hidden="true"></div>
+    <div class="cloud__vignette--dark hidden dark:block" aria-hidden="true"></div>
+    <div class="relative z-10 flex flex-1 flex-col items-center justify-center text-center px-6 lg:px-8">
+        <div data-cloud-content="data-cloud-content">
+            <h2 class="text-4xl font-semibold tracking-tight text-pretty text-neutral-950 sm:text-5xl dark:text-white">
+                Thousands of LLMs
+            </h2>
+            <div class="mt-10">
+                {% button "Explore Models", "/models", "" %}
+            </div>
+        </div>
+    </div>
+</section>
+<script defer src="/js/cloud.js"></script>
