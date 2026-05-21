@@ -91,6 +91,10 @@ A language model trained with fewer parameters than a typical LLM, designed to r
 
 An architecture where only a fraction of the model's parameters are used for any given token, rather than all of them. This means MoE models still need a lot of memory to hold all the weights, but they spend less compute per token, so they run faster than a dense model of equivalent size. Recent examples include DeepSeek, Mixtral, and Qwen's MoE variants.
 
+### Frontier Model
+
+The most advanced and capable AI models available at a given point in time. Frontier models push the boundaries of what AI can do, typically requiring massive compute resources and large datasets to train. Examples include OpenAI's GPT, Google's Gemini, and Anthropic's Claude.
+
 ### Open-weights Models
 
 Models that are publicly released, allowing anyone to download, run, and fine-tune them. Popular examples include Llama 3, Mistral, Qwen, Gemma and DeepSeek.
