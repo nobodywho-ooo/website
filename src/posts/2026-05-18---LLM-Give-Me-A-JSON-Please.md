@@ -292,7 +292,7 @@ Hopefully, it should now make at least a bit of sense! If you liked this post, c
 
 Were NobodyWho, local inference library, which enables running small models on edge-devices.
 We value open source code, control over your models, solid software engineering, standardization and making simple things simple.
-All of which is missing today in the AI world. Running a model is as easy as:
+All of which is missing in todays AI world. Running a model with us is as easy as:
 ```python
 from nobodywho import Chat
 
