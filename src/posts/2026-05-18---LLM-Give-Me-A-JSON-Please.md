@@ -1,8 +1,8 @@
 ---
-title: LLM, give me a JSON please. Make no mistakes.
+title: LLM, give me a JSON. Make no mistakes.
 date: 2026-05-18
 description: "So how *exactly* do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast? Diving into constrained sampling."
-slug: "llm-give-me-a-json-please"
+slug: "llm-give-me-a-json"
 ---
 
 Imagine, you have finally managed to set up the LLM inference for your application, and now is it even able to respond to you.
