@@ -13,6 +13,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
+  eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
