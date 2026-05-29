@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Blog
-order: 3
+order: 4
 tags: page
 pagination:
     data: collections.posts
@@ -20,9 +20,8 @@ pagination:
                     <div class="flex items-center gap-x-4 text-xs">
                         <time datetime="{{ post.date | dateISO }}" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
                         {% for category in post.data.categories %}
-                            <span
-                                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600
-                                    dark:bg-gray-800/60 dark:text-neutral-300">{{ category }}</span>
+                            <span class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-neutral-600 dark:bg-gray-800/60
+                                dark:text-neutral-300">{{ category }}</span>
                         {% endfor %}
                     </div>
                     <div class="group relative">
