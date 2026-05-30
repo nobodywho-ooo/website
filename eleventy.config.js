@@ -51,7 +51,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addShortcode("svg", svg);
   eleventyConfig.addShortcode("button", button);
 
-  // Inline an SVG logo file referenced from data (e.g. "./logos/assets/labs/google.svg").
+  // Inline an SVG logo file referenced from data (e.g. "./assets/logos/labs/google.svg").
   // Strips the XML prolog/comments and the root width/height so the wrapper controls sizing.
   eleventyConfig.addFilter("inlineLogo", (logoPath) => {
     if (!logoPath) return "";

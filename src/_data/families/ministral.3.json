@@ -2,7 +2,7 @@
   "name": "Ministral 3",
   "pipeline": "imageTextToText",
   "languages": ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Dutch", "Chinese", "Japanese", "Korean", "Arabic"],
-  "logo": "./logos/assets/models/ministral.svg",
+  "logo": "./assets/logos/models/ministral.svg",
   "models": [
     {
       "variant": "3B - Instruct",

@@ -2,7 +2,7 @@
   "name": "Granite 4.1",
   "pipeline": "textGeneration",
   "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
-  "logo": "./logos/assets/models/granite.svg",
+  "logo": "./assets/logos/models/granite.svg",
   "models": [
     {
       "variant": "3B",
