@@ -10,23 +10,25 @@ eleventyComputed:
 ---
 
 <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
-    <a
-        href="/labs/"
-        class="inline-flex items-center gap-x-1.5 text-sm font-medium text-neutral-500 hover:text-primary dark:text-neutral-400">
-        <span aria-hidden="true">&larr;</span> All labs
-    </a>
+    <div class="lg:relative lg:flex lg:min-h-20 lg:items-center">
+        <a
+            href="/labs/"
+            class="inline-flex items-center gap-x-1.5 text-sm font-medium text-neutral-500 hover:text-primary dark:text-neutral-400">
+            <span aria-hidden="true">&larr;</span> All labs
+        </a>
 
-    <div class="mt-6 flex items-center gap-x-5">
-        <span
-            class="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-white p-3 text-neutral-700 ring-1 ring-black/5"
-            aria-hidden="true">
-            {{ lab.logo | inlineLogo | safe }}
-        </span>
-        <div>
-            <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">{{ lab.name }}</h1>
-            {% if lab.country %}
-                <p class="mt-1 mb-0 text-base text-neutral-400">{{ lab.country }}</p>
-            {% endif %}
+        <div class="mt-6 flex items-center gap-x-5 lg:mt-0 lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+            <span
+                class="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-white p-3 text-neutral-700 ring-1 ring-black/5"
+                aria-hidden="true">
+                {{ lab.logo | inlineLogo | safe }}
+            </span>
+            <div>
+                <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">{{ lab.name }}</h1>
+                {% if lab.country %}
+                    <p class="mt-1 mb-0 text-base text-neutral-400">{{ lab.country }}</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 
@@ -44,7 +46,7 @@ eleventyComputed:
                     <div>
                         <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">{{ family.name }}</h2>
                         {% if family.pipeline %}
-                            <p class="text-sm text-neutral-400">{{ family.pipeline }}</p>
+                            <p class="text-sm text-neutral-400">{{ family.pipeline | pipelineLabel }}</p>
                         {% endif %}
                     </div>
                 </div>

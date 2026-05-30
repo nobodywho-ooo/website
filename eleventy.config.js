@@ -69,6 +69,18 @@ export default async function(eleventyConfig) {
     });
   });
 
+  // Map a model pipeline key to a human-readable label.
+  const pipelineLabels = {
+    textGeneration: "Text generation",
+    imageToImage: "Image to Image",
+    imageTextToText: "Image/Text to Text",
+    audioTextToText: "Audio/Text to Text",
+    imageAudioTextToText: "Image/Audio/Text to Text",
+    featureExtraction: "Feature extraction",
+    textRanking: "Text ranking",
+  };
+  eleventyConfig.addFilter("pipelineLabel", (key) => pipelineLabels[key] || key);
+
   eleventyConfig.addCollection("page", function(collections) {
     return collections.getFilteredByTag("page").sort(function(a, b) {
       return a.data.order - b.data.order;
