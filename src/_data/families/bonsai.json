@@ -1,0 +1,20 @@
+{
+  "name": "1-bit Bonsai",
+  "pipeline": "textGeneration",
+  "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
+  "logo": "./logos/assets/models/bonsai.svg",
+  "models": [
+    {
+      "variant": "1.7B",
+      "useCase": "For any smartphones and smartwatches",
+      "sizeGB": "0.2",
+      "huggingfaceUrl": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

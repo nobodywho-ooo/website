@@ -1,0 +1,20 @@
+{
+  "name": "Granite 4.1",
+  "pipeline": "textGeneration",
+  "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
+  "logo": "./logos/assets/models/granite.svg",
+  "models": [
+    {
+      "variant": "3B",
+      "useCase": "For flagship phones and computers",
+      "sizeGB": "2.1",
+      "huggingfaceUrl": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF/resolve/main/granite-4.1-3b-Q4_K_M.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

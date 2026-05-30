@@ -1,0 +1,40 @@
+{
+  "name": "Gemma 4",
+  "pipeline": "imageAudioTextToText",
+  "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
+  "logo": "./logos/assets/models/gemma4.svg",
+  "models": [
+    {
+      "variant": "E2B",
+      "useCase": "For any smartphone",
+      "sizeGB": "3.52",
+      "huggingfaceUrl": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q3_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    },
+    {
+      "variant": "E4B",
+      "useCase": "Ideal for recent computers",
+      "sizeGB": "5.05",
+      "huggingfaceUrl": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q3_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    }
+  ]
+}

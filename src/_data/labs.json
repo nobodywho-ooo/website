@@ -1,222 +1,32 @@
 [
   {
-    "id": 1,
     "name": "Google",
-    "families": [
-      {
-        "name": "Gemma 4",
-        "pipeline": "imageAudioTextToText",
-        "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
-        "logo": "./logos/assets/models/gemma4.svg",
-        "models": [
-          {
-            "variant": "E2B",
-            "useCase": "For any smartphone",
-            "sizeGB": "3.52",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q3_K_M.gguf",
-                "type": "model"
-              },
-              {
-                "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/mmproj-BF16.gguf",
-                "type": "projection"
-              }
-            ]
-          },
-          {
-            "variant": "E4B",
-            "useCase": "Ideal for recent computers",
-            "sizeGB": "5.05",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q3_K_M.gguf",
-                "type": "model"
-              },
-              {
-                "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/mmproj-BF16.gguf",
-                "type": "projection"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "country": "USA",
-    "logo": "./logos/assets/labs/google.svg"
+    "logo": "./logos/assets/labs/google.svg",
+    "families": ["gemma4"]
   },
   {
-    "id": 2,
     "name": "Alibaba Cloud",
-    "families": [
-      {
-        "name": "Qwen3.5",
-        "pipeline": "textGeneration",
-        "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
-        "logo": "./logos/assets/models/qwen.svg",
-        "models": [
-          {
-            "variant": "0.8B",
-            "useCase": "For any smartphone",
-            "parameterCountBillions": 0.8,
-            "sizeGB": "0.59",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_K_M.gguf",
-                "type": "model"
-              }
-            ]
-          },
-          {
-            "variant": "9B",
-            "useCase": "Ideal for recent computers",
-            "parameterCountBillions": 9,
-            "sizeGB": "5.68",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
-                "type": "model"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Qwen3",
-        "pipeline": "textGeneration",
-        "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
-        "logo": "./logos/assets/models/qwen.svg",
-        "models": [
-          {
-            "variant": "0.6B",
-            "useCase": "For any smartphone",
-            "parameterCountBillions": 0.6,
-            "sizeGB": "0.48",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf",
-                "type": "model"
-              }
-            ]
-          },
-          {
-            "variant": "4B",
-            "useCase": "Ideal for any computer",
-            "parameterCountBillions": 4,
-            "sizeGB": "2.5",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF/resolve/main/Qwen_Qwen3-4B-Q4_K_M.gguf",
-                "type": "model"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "country": "China",
-    "logo": "./logos/assets/labs/alibaba-cloud.svg"
+    "logo": "./logos/assets/labs/alibaba-cloud.svg",
+    "families": ["qwen3.5", "qwen3"]
   },
   {
-    "id": 3,
     "name": "Mistral",
-    "families": [
-      {
-        "name": "Ministral 3",
-        "pipeline": "imageTextToText",
-        "languages": ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Dutch", "Chinese", "Japanese", "Korean", "Arabic"],
-        "logo": "./logos/assets/models/ministral.svg",
-        "models": [
-          {
-            "variant": "3B - Instruct",
-            "useCase": "For flagship phones and computers",
-            "parameterCountBillions": 3,
-            "sizeGB": "2.15",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
-                "type": "model"
-              },
-              {
-                "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/mmproj-BF16.gguf",
-                "type": "projection"
-              }
-            ]
-          },
-          {
-            "variant": "14B - Reasoning",
-            "useCase": "For gaming computers",
-            "parameterCountBillions": 14,
-            "sizeGB": "8.24",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
-                "type": "model"
-              },
-              {
-                "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/mmproj-BF16.gguf",
-                "type": "projection"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "country": "France",
-    "logo": "./logos/assets/labs/mistral.svg"
+    "logo": "./logos/assets/labs/mistral.svg",
+    "families": ["ministral.3"]
   },
   {
-    "id": 4,
     "name": "IBM",
-    "families": [
-      {
-        "name": "Granite 4.1",
-        "pipeline": "textGeneration",
-        "logo": "./logos/assets/models/granite.svg",
-        "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
-        "models": [
-          {
-            "variant": "3B",
-            "useCase": "For flagship phones and computers",
-            "sizeGB": "2.1",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF/resolve/main/granite-4.1-3b-Q4_K_M.gguf",
-                "type": "model"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "country": "USA",
-    "logo": "./logos/assets/labs/ibm.svg"
+    "logo": "./logos/assets/labs/ibm.svg",
+    "families": ["granite4.1"]
   },
   {
-    "id": 4,
     "name": "Prism ML",
-    "families": [
-      {
-        "name": "1-bit Bonsai",
-        "pipeline": "textGeneration",
-        "logo": "./logos/assets/models/bonsai.svg",
-        "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
-        "models": [
-          {
-            "variant": "1.7B",
-            "useCase": "For any smartphones and smartwatches",
-            "sizeGB": "0.2",
-            "downloadLinks": [
-              {
-                "url": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B.gguf",
-                "type": "model"
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "country": "USA",
-    "logo": "./logos/assets/labs/prism-ml.svg"
+    "logo": "./logos/assets/labs/prism-ml.svg",
+    "families": ["bonsai"]
   }
 ]

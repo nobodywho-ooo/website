@@ -1,0 +1,42 @@
+{
+  "name": "Ministral 3",
+  "pipeline": "imageTextToText",
+  "languages": ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Dutch", "Chinese", "Japanese", "Korean", "Arabic"],
+  "logo": "./logos/assets/models/ministral.svg",
+  "models": [
+    {
+      "variant": "3B - Instruct",
+      "useCase": "For flagship phones and computers",
+      "parameterCountBillions": 3,
+      "sizeGB": "2.15",
+      "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    },
+    {
+      "variant": "14B - Reasoning",
+      "useCase": "For gaming computers",
+      "parameterCountBillions": 14,
+      "sizeGB": "8.24",
+      "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF",
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    }
+  ]
+}
