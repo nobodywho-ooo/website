@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import fs from "node:fs";
 import { execSync } from "child_process";
 import markdownIt from "markdown-it";
 import svg from "./src/_includes/shortcodes/svg.js";
@@ -49,6 +50,24 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addShortcode("svg", svg);
   eleventyConfig.addShortcode("button", button);
+
+  // Inline an SVG logo file referenced from data (e.g. "./logos/assets/labs/google.svg").
+  // Strips the XML prolog/comments and the root width/height so the wrapper controls sizing.
+  eleventyConfig.addFilter("inlineLogo", (logoPath) => {
+    if (!logoPath) return "";
+    const filePath = logoPath.replace(/^\.\//, "src/");
+    let svg = fs.readFileSync(filePath, "utf8");
+    svg = svg
+      .replace(/<\?xml[\s\S]*?\?>/g, "")
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .trim();
+    return svg.replace(/<svg([^>]*)>/, (match, attrs) => {
+      const cleaned = attrs
+        .replace(/\s(width|height)="[^"]*"/g, "")
+        .replace(/\sstyle="[^"]*"/g, "");
+      return `<svg${cleaned} class="h-full w-full" aria-hidden="true" focusable="false">`;
+    });
+  });
 
   eleventyConfig.addCollection("page", function(collections) {
     return collections.getFilteredByTag("page").sort(function(a, b) {

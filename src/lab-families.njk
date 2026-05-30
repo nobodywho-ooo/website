@@ -1,0 +1,85 @@
+---
+layout: base
+pagination:
+  data: labs
+  size: 1
+  alias: lab
+permalink: "/labs/{{ lab.name | slug }}/"
+eleventyComputed:
+  title: "{{ lab.name }}"
+---
+
+<div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
+    <a
+        href="/labs/"
+        class="inline-flex items-center gap-x-1.5 text-sm font-medium text-neutral-500 hover:text-primary dark:text-neutral-400">
+        <span aria-hidden="true">&larr;</span> All labs
+    </a>
+
+    <div class="mt-6 flex items-center gap-x-5">
+        <span
+            class="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white p-2.5 text-neutral-700 ring-1 ring-black/5"
+            aria-hidden="true">
+            {{ lab.logo | inlineLogo | safe }}
+        </span>
+        <div>
+            <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">{{ lab.name }}</h1>
+            {% if lab.country %}
+                <p class="mt-1 text-base text-neutral-400">{{ lab.country }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-12 space-y-12">
+        {% for family in lab.families %}
+            <section class="rounded-2xl p-6 inset-ring inset-ring-gray-300 dark:inset-ring-white/10">
+                <div class="flex items-start gap-x-4">
+                    {% if family.logo %}
+                        <span
+                            class="flex size-16 shrink-0 items-center justify-center rounded-xl bg-white p-2 text-neutral-700 ring-1 ring-black/5"
+                            aria-hidden="true">
+                            {{ family.logo | inlineLogo | safe }}
+                        </span>
+                    {% endif %}
+                    <div>
+                        <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">{{ family.name }}</h2>
+                        {% if family.pipeline %}
+                            <p class="text-sm text-neutral-400">{{ family.pipeline }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <ul role="list" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {% for model in family.models %}
+                        <li class="rounded-xl p-5 bg-gray-50 dark:bg-white/5">
+                            <div class="flex items-baseline justify-between gap-x-3">
+                                <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">{{ model.variant }}</h3>
+                                {% if model.sizeGB %}
+                                    <span class="text-sm text-neutral-400">{{ model.sizeGB }} GB</span>
+                                {% endif %}
+                            </div>
+                            {% if model.useCase %}
+                                <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{{ model.useCase }}</p>
+                            {% endif %}
+                            {% if model.downloadLinks %}
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    {% for link in model.downloadLinks %}
+                                        <a
+                                            href="{{ link.url }}"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-xs font-semibold
+                                                text-neutral-900 inset-ring inset-ring-gray-300 hover:bg-white transition-colors
+                                                dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
+                                            Download {{ link.type }}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endfor %}
+    </div>
+</div>
