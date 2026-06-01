@@ -6,12 +6,14 @@
   "models": [
     {
       "variant": "3B - Instruct",
-      "useCase": "For flagship phones and computers",
       "parameterCountBillions": 3,
+      "useCase": "For flagship phones and computers",
       "sizeGB": "2.15",
       "releaseDate": "2025-07-31",
       "tags": [],
-      "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF"
+      },
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
@@ -25,12 +27,14 @@
     },
     {
       "variant": "14B - Reasoning",
-      "useCase": "For gaming computers",
       "parameterCountBillions": 14,
+      "useCase": "For gaming computers",
       "sizeGB": "8.24",
       "releaseDate": "2025-07-31",
       "tags": [],
-      "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF"
+      },
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",

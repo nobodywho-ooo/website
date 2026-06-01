@@ -6,12 +6,14 @@
   "models": [
     {
       "variant": "0.6B",
-      "useCase": "For any smartphone or computer",
       "parameterCountBillions": 0.6,
+      "useCase": "For any smartphone",
       "sizeGB": "0.48",
       "releaseDate": "2025-09-01",
       "tags": ["recommended", "thinking"],
-      "huggingfaceUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF"
+      },
       "downloadLinks": [
         {
           "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf",
@@ -21,12 +23,14 @@
     },
     {
       "variant": "4B",
-      "useCase": "Ideal for any computer",
       "parameterCountBillions": 4,
+      "useCase": "Ideal for any computer",
       "sizeGB": "2.5",
       "releaseDate": "2025-09-01",
-      "tags": ["thinking"],
-      "huggingfaceUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF",
+      "tags": ["recommended", "thinking"],
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF"
+      },
       "downloadLinks": [
         {
           "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF/resolve/main/Qwen_Qwen3-4B-Q4_K_M.gguf",

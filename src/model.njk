@@ -8,17 +8,19 @@ permalink: "/models/"
 {% import "macros/model-card.njk" as cards %}
 
 {% set models = labs | allModels(families) %}
-{% set recommended = models | findByTag("recommended") %}
+{% set recommended = models | filterByTag("recommended") %}
 
 <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
     <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">Our Selection</h1>
     <p class="mt-4 text-xl text-neutral-400">The models we recommend running locally, hand-picked across the labs.</p>
 
-    {% if recommended %}
-        <section class="mt-16">
-            <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">Start with this one</h2>
+    {% if recommended.length %}
+        <section class="mt-16" x-data>
+            <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">{% if recommended.length > 1 %}Start with one of these{% else %}Start with this one{% endif %}</h2>
             <ul role="list" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {{ cards.modelCard(recommended) }}
+                {% for m in recommended %}
+                    {{ cards.modelCard(m) }}
+                {% endfor %}
             </ul>
         </section>
     {% endif %}
@@ -163,4 +165,33 @@ permalink: "/models/"
             No models match these filters.
         </p>
     </section>
+
+    <div
+        x-data="{ open: false, html: '' }"
+        @open-modal.window="html = $event.detail; open = true; document.body.style.overflow = 'hidden'"
+        @keydown.escape.window="open = false; document.body.style.overflow = ''">
+        <div
+            x-show="open"
+            style="display: none"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true">
+            <div
+                class="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm"
+                @click="open = false; document.body.style.overflow = ''"></div>
+            <div
+                class="relative z-10 w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-neutral-800">
+                <button
+                    type="button"
+                    @click="open = false; document.body.style.overflow = ''"
+                    aria-label="Close"
+                    class="absolute right-4 top-4 text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-white">
+                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div x-html="html"></div>
+            </div>
+        </div>
+    </div>
 </div>

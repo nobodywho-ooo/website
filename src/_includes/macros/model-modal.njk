@@ -1,0 +1,66 @@
+{% import "macros/model-icons.njk" as iconModel %}
+
+{# Detailed layout shown inside the modal when a card is clicked. #}
+{% macro modelModalBody(m) %}
+    <div class="flex items-start gap-x-4 pr-8">
+        {% if m.familyLogo %}
+            <span
+                class="flex size-14 shrink-0 items-center justify-center rounded-xl bg-white p-2 text-neutral-700 ring-1 ring-black/5"
+                aria-hidden="true">
+                {{ m.familyLogo | inlineLogo | safe }}
+            </span>
+        {% endif %}
+        <div class="min-w-0">
+            <h3 class="text-xl font-semibold text-neutral-900 dark:text-white">{{ m.familyName }} · {{ m.variant }}</h3>
+            <p class="text-sm text-neutral-400">{{ m.labName }}{% if m.pipeline %} · {{ m.pipeline | pipelineLabel }}{% endif %}</p>
+        </div>
+    </div>
+
+    {% if m.useCase %}
+        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.useCase }}</p>
+    {% endif %}
+
+    {{ iconModel.tagBadges(m) }}
+
+    {% if m.downloadLinks %}
+        <div class="mt-10">
+            <h4 class="flex items-center gap-x-2 text-lg font-semibold text-neutral-900 dark:text-white">
+                {{ iconModel.downloadIcon("size-5 text-primary-500") }}
+                Download
+            </h4>
+            <div class="mt-3 flex flex-wrap gap-3">
+                {% for link in m.downloadLinks %}
+                    <a
+                        href="{{ link.url }}"
+                        target="_blank"
+                        rel="noopener"
+                        class="inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold
+                            text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50
+                            dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
+                        {{ link.type | capitalize }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if m.huggingface.pageUrl %}
+        <div class="mt-6">
+            <h4 class="flex items-center gap-x-2 text-lg font-semibold text-neutral-900 dark:text-white">
+                {{ iconModel.hfIcon("size-5 shrink-0 text-[#FFD21E]") }}
+                Hugging Face
+            </h4>
+            <div class="mt-3 flex flex-wrap gap-3">
+                <a
+                    href="{{ m.huggingface.pageUrl }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold
+                        text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50
+                        dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
+                    Page
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

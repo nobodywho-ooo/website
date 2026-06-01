@@ -98,9 +98,10 @@ export default async function(eleventyConfig) {
             variant: model.variant,
             useCase: model.useCase,
             sizeGB: model.sizeGB,
+            parameterCountBillions: model.parameterCountBillions,
             releaseDate: model.releaseDate || "",
             tags: model.tags || [],
-            huggingfaceUrl: model.huggingfaceUrl,
+            huggingface: model.huggingface,
             downloadLinks: model.downloadLinks || [],
           });
         }
@@ -109,10 +110,10 @@ export default async function(eleventyConfig) {
     return list.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
   });
 
-  // Return the first model in a list carrying the given tag (case-insensitive).
-  eleventyConfig.addFilter("findByTag", (list, tag) => {
+  // Return all models in a list carrying the given tag (case-insensitive).
+  eleventyConfig.addFilter("filterByTag", (list, tag) => {
     const t = tag.toLowerCase();
-    return list.find((m) => (m.tags || []).some((x) => x.toLowerCase() === t)) || null;
+    return list.filter((m) => (m.tags || []).some((x) => x.toLowerCase() === t));
   });
 
   eleventyConfig.addCollection("page", function(collections) {

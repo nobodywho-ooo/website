@@ -6,11 +6,14 @@
   "models": [
     {
       "variant": "3B",
+      "parameterCountBillions": 3,
       "useCase": "For flagship phones and computers",
       "sizeGB": "2.1",
       "releaseDate": "2026-04-29",
       "tags": [],
-      "huggingfaceUrl": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF"
+      },
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF/resolve/main/granite-4.1-3b-Q4_K_M.gguf",
