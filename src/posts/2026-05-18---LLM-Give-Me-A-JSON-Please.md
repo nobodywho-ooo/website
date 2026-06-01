@@ -1,15 +1,17 @@
 ---
 title: LLM, give me a JSON. Make no mistakes.
-date: 2026-05-18
+date: 2026-06-01
 description: "So how *exactly* do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast? Diving into constrained sampling."
 slug: "llm-give-me-a-json"
 ---
 
 
-So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast?
-Let us dive into constrained sampling.
+<style>
+.post-img-wrap { position:relative; padding-bottom:56.25%; background:#000; overflow:hidden; }
+.post-img-wrap img { position:absolute; top:0; left:0; width:100%; height:100%; margin:0; }
+</style>
 
-> **Note**: If you feel familiar with JSON schemas and GBNF, just skip into the section "Processing Grammars".
+So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast?
 
 ## Make no mistakes
 
@@ -29,6 +31,9 @@ There is!
 
 Being able to control what format exactly does your LLM produce is super valuable and technically super interesting.
 Let us thus take a deep dive into how you go past "make no mistakes" and how the inference engines do it reliably and fast.
+
+
+> **Note**: If you feel familiar with JSON schemas and GBNF, just skip into the section "Processing Grammars".
 
 ## Autoretries
 
@@ -67,17 +72,26 @@ while True:
 ```
 
 Secondly, the answer tokens don't appear out of the blue. Given a text, LLMs produce a probability distribution on the next token.
+Instead of simply sampling from the distribution immediately, we can start by setting the probability of all tokens
+leading to incorrect output to 0. This way, we are guaranteed to only sample (and thus output) a correct token.
+If we wanted just a number, we could do something like:
 
-```
-IMAGE HOW MASKING WORKS
-```
+<div class="post-img-wrap">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/before_masking.png" alt="Token probability distribution before masking" style="animation:cf-masking 4s infinite 0s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/after_masking.png"  alt="Token probability distribution after masking"  style="animation:cf-masking 4s infinite 2s;">
+</div>
+<style>
+@keyframes cf-masking {
+  0%,42%  { opacity:1; }
+  50%,92% { opacity:0; }
+  100%    { opacity:1; }
+}
+</style>
 
-So instead of simply sampling from the distribution immediately, we can start by setting the probability of all tokens
-leading to incorrect output to 0. This way, we are guaranteed to only sample (and thus output) a correct token. Technically, this
-process is called "masking". One more detail to address is that just shrinking the probability of the tokens we don't want to 0
+Technically, this process is called "masking". One more detail to address is that just shrinking the probability of the tokens we don't want to 0
 would break the distribution property (we want the probabilities to sum to 1). In reality the solution is therefore to set the underlying
-logits to `-inf`, which will result in turning the unwanted tokens' probabilities to 0, but slightly bumping the other tokens up,
-so the probabilities still sum to 1. The pseudocode then could look like this:
+logits to `-inf`, which will result in turning the unwanted tokens' probabilities to 0, but slightly bumping the other tokens up.
+The pseudocode then could look like this:
 ```python
 answer = ""
 while True:
@@ -116,7 +130,7 @@ to get any JSON object. Or, if you want something more specific:
   }
 }
 ```
-This is a more concrete specification and some of the inference engines/APIs accept JSON schemas directly! (e.g. Claude API, OpenAI API, vLLM, etc.)
+This is a more concrete specification and some of the inference engines/APIs accept JSON schemas directly! (e.g. [Claude API](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), [OpenAI API](https://developers.openai.com/api/docs/guides/structured-outputs), [vLLM](https://docs.vllm.ai/en/latest/features/structured_outputs/), etc.)
 On the other hand, we did not really move towards a "lower level" specification of what we want; JSON schemas are still quite abstract.
 
 > **Note** that with all of the formats (regexes, JSON schemas, grammars) it is still important to tell the LLM what
@@ -186,44 +200,47 @@ We will continue with the following four simple rules:
 3. If there is a character at the top, which matches the input, consume both. Otherwise get stuck and _reject_.
 4. If both stack and input are empty, _accept_.
 
-To illustrate how this would go, look at the INT rule and input `-67`. First, the stack is empty, so we proceed with (1).
-```
-stack: [INT]
-string: -67
-```
+To illustrate how this would go, look at the INT rule and input `-1234`. First, the stack is empty, so we proceed with (1).
+
+![stack: [INT], string: -1234](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-1.jpeg)
+
 As the top is a rule, we follow with (2). How do we know which definition to choose from?
 For now, let's pretend the machine _just knows_:
-```
-stack: ["-", DIGITS]
-string: -67
-```
+
+![stack: ["-", DIGITS], string: -1234](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-2.jpeg)
+
 Applying rule (3), as the top is a character which matches the input.
-```
-stack: [DIGITS]
-string: 67
-```
+
+![stack: [DIGITS], string: 1234](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-5.jpeg)
+
 Then, nothing new happens. We just go by the previous rules (2, 3, 2, 3).
-```
-stack: [[0-9], DIGITS]
-string: 67
 
-stack: [DIGITS]
-string: 7
+<div class="post-img-wrap">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-6.jpeg"  alt="stack: [[0-9], DIGITS], string: 1234" style="animation:cf-loop 10.5s infinite 0s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-7.jpeg"  alt="stack: [DIGITS], string: 234"         style="animation:cf-loop 10.5s infinite 1.5s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-8.jpeg"  alt="stack: [[0-9], DIGITS], string: 234"  style="animation:cf-loop 10.5s infinite 3s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-9.jpeg"  alt="stack: [DIGITS], string: 34"          style="animation:cf-loop 10.5s infinite 4.5s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-10.jpeg" alt="stack: [[0-9], DIGITS], string: 34"   style="animation:cf-loop 10.5s infinite 6s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-11.jpeg" alt="stack: [DIGITS], string: 4"           style="animation:cf-loop 10.5s infinite 7.5s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-12.jpeg" alt="stack: [[0-9]], string: 4"            style="animation:cf-loop 10.5s infinite 9s;">
+</div>
+<style>
+@keyframes cf-loop {
+  0%,12%  { opacity:1; }
+  14%,88% { opacity:0; }
+  100%    { opacity:1; }
+}
+</style>
 
-stack: [[0-9]]
-string: 7
-```
 Until arriving at the empty stack and empty input. Well done! We can apply rule (4) and accept.
-```
-stack: []
-string: <empty>
-```
-This way we know the string conforms to the grammar specified. If we were parsing non-integer input, like `3.14`,
+
+![stack: [], string: empty](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-14.jpeg)
+
+This way we know the string conforms to the grammar specified. If we were parsing non-integer input, like `.677`,
 we would arrive at this state:
-```
-stack: [[0-9], DIGITS]
-string: .14
-```
+
+![stack: [[0-9], DIGITS], string: .677](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-15.jpeg)
+
 As both are characters (or character ranges) and don't match, we are forced to reject the input.
 
 Hopefully, now you have an idea of how you would implement such an approach.
@@ -242,14 +259,24 @@ What simply suffices is that we don't get stuck on the way. The result should be
 conforming to the grammar.
 
 There is however one small caveat. Imagine sampling from the following distribution:
-```
-vocab: [{, -42, bar, -, foo]
-```
+
+![vocab distribution with INT on stack](/assets/images/blog/2026/llm-give-me-a-json/token-parsing-1.jpeg)
+
 Initializing the stack again with the INT rule, and running the parsing, we end up just with `-42` and `-`.
 Now we sample, choosing the respective stack associated with the token. Let's say we sampled `-42`.
-```
--42
-```
+
+<div class="post-img-wrap">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/token-parsing-2.jpeg" alt="Two candidate stacks for -42 and -"            style="animation:cf-token 4s infinite 0s;">
+  <img src="/assets/images/blog/2026/llm-give-me-a-json/token-parsing-3.jpeg" alt="Both candidate stacks accepted with checkmarks" style="animation:cf-token 4s infinite 2s;">
+</div>
+<style>
+@keyframes cf-token {
+  0%,42%  { opacity:1; }
+  50%,92% { opacity:0; }
+  100%    { opacity:1; }
+}
+</style>
+
 To continue and get the next token, we can't just reset the stack with the INT rule, but have to remember
 the position in the grammar and the corresponding stack.
 
@@ -278,9 +305,10 @@ With current vocab sizes (100k+) and longer grammars, that can be just incredibl
 Certainly, better solutions like [XGrammar](https://github.com/mlc-ai/xgrammar) or [LLGuidance](https://github.com/guidance-ai/llguidance) exist.
 The main problem with llama.cpp is, that we are doing _a lot_ of work per step. Generally, smart precomputation is where you would go next.
 If you however would have to choose a solution yourself, consider this graph:
-```
-LLGUIDANCE GRAPH HERE
-```
+![LLGuidance benchmark: time-to-first-mask vs time-between-masks across engines](/assets/images/blog/2026/llm-give-me-a-json/llguidance-hero.png)
+
+<small>Source: <a href="https://github.com/guidance-ai/jsonschemabench">guidance-ai/jsonschemabench</a> — MaskBench benchmark</small>
+
 Clearly, there is a tradeoff going on. Engines like XGrammar and Outlines, which choose more precomputation, suffer
 from long "loading" times (shown as TTFM). On the other hand, llama.cpp does little precomputation, but then is generally slower
 per step (shown as TBM). And then there is llguidance, which seems to excel at both.
