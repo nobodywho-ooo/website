@@ -5,6 +5,14 @@ description: "So how *exactly* do you make your LLM output a JSON? What happens 
 slug: "llm-give-me-a-json"
 ---
 
+
+So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast?
+Let us dive into constrained sampling.
+
+> **Note**: If you feel familiar with JSON schemas and GBNF, just skip into the section "Processing Grammars".
+
+## Make no mistakes
+
 Imagine, you have finally managed to set up the LLM inference for your application, and now it is even able to respond to you.
 And it can do so much stuff!
 But for most of these use-cases, getting "just" text back is very limiting. In fact, in order to make most of the non-chatbot use cases work,
@@ -64,7 +72,12 @@ Secondly, the answer tokens don't appear out of the blue. Given a text, LLMs pro
 IMAGE HOW MASKING WORKS
 ```
 
-If we don't just sample from this distribution, but set the probability of wrong tokens to 0, we are guaranteed a right continuation.
+So instead of simply just sampling from the distribution immediately, we can instead start by setting the probability of all tokens,
+leading to incorrect output, to 0. This way, we are guaranteed to only sample (and thus output) correct token. Technically, this
+processed is called "masking". One more detail to address, is that just shrinking the probability of the tokens we don't want to 0
+would break the distribution property (we want the probabilities to sum to 1). In reality the solution is therefore to set the underlying
+logits to `-inf`, which will result to turning the unwanted tokens probabilities to 0, but slightly bumping the other tokens up,
+so we still get sum equal to 1. The pseudocode then could look like this:
 ```python
 answer = ""
 while True:
@@ -107,14 +120,15 @@ This is a more concrete specification and some of the inference engines/APIs acc
 On the other hand, we did not really move towards a "lower level" specification of what we want; JSON schemas are still quite abstract.
 
 > **Note**, that with all of the formats (regexes, JSON schemas, grammars) it is still important to tell the LLM what
-> is it that you expect in the prompt. If you do not, the token distributions will stay as if the output was not constrained
-> but you will probably sample tokens that the LLM did not expect, possibly degrading the performance.
+> is it that you expect in the answer. The LLM does not know it is being constrained, so if you do not tell it what you expect,
+> the token distributions will stay as if the output was not constrained, possibly hurting performance.
 
 ## Grammars to the Rescue
 
-More low-level and general specification can be achieved by passing in grammars.
-Grammars are precise descriptions on what strings can be generated - they are typically utilized in fields like programming language theory (parsers), linguistics, and some parts of theoretical computer science. In the inference engines they typically underlie
-processing all of the constrained generation, whether it is specified by regexes, JSON schemas or "manually".
+More low-level and general specification can be achieved by passing in grammars, specifically Context-Free Grammars (CFGs).
+Grammars are precise descriptions on what strings can be generated - they are typically utilized in fields like programming language theory (parsers), linguistics, and some parts of theoretical computer science.
+In the inference engines they typically underlie processing all of the constrained generation, whether it is specified by regexes,
+JSON schemas or "manually". They also cover most of the wide-spread structured formats used, such as [Python syntax](https://docs.python.org/3/reference/grammar.html).
 
 Example of such a grammar could be:
 ```
@@ -154,28 +168,42 @@ INT ::= "-" DIGITS | DIGITS
 DIGITS ::= [0-9] | [0-9] DIGITS
 ```
 This gets us simplified expressions, which are easier to work with. If you feel a bit lost on what actually happened,
-we just made a few regex transformations, which are equivalent.
+we just made a few regex transformations, which are equivalent to what we had before.
 
 Now, to produce the masks, we will use a machine with a stack (or in the right terms "pushdown automaton", PDA).
-You can think about a stack like an array, where from one end, we are allowed to append and pop elements.
+If you don't know what a stack is, you can think about it like an array, where from one end, we are allowed to append and pop elements.
 In our case, these will be characters (in practice bytes) and _names_ of the rules (INT, ROOT, STRING, ...).
-Normally, to check if a given string corresponds to the INT rule, we would begin by inserting the INT onto the stack.
+
+## Top-Down Parsing
+To make things a little bit easier, we will again focus on a simpler case - we won't generate strings from tokens yet.
+Instead, we will be given a whole string at a start, and only be tasked with checking if such a string
+can be generated with the current grammar or not. The following approach is usually called top-down parsing
+and again, has been here since the [70s](https://en.wikipedia.org/wiki/Top-down_parsing).
+
+We will continue, with following four simple rules:
+1. Start with appending the root rule to the stack.
+2. If there is a rule at the top, pop it and replace it with one of its definitions.
+3. If there is a character at the top, which matches the input, consume both. Otherwise get stuck and _reject_.
+4. If both stack and input are empty, _accept_.
+
+To illustrate how this would go, look at the INT rule and input `-67`. First, the stack is empty, so we proceed with (1).
 ```
 stack: [INT]
 string: -67
 ```
-Whenever the machine sees a rule name, it then pops it and replaces by its definition. Moreover,
-it also has to know which way to go (either with minus or without minus), as the rule allows `"-" DIGITS | DIGITS`.
-For now, let's pretend it _just knows_:
+As the top is a rule, we follow with (2). How do we know which definition to choose from?
+For now, let's pretend the machine _just knows_:
 ```
 stack: ["-", DIGITS]
 string: -67
 ```
-If it notices, that the string and the stack begin with the same symbol, it removes both and continues:
+Follow with applying the rule (3), as the top is a character which matches the input.
 ```
 stack: [DIGITS]
 string: 67
-
+```
+Then, nothing new happens. We just go by the previous rules (2, 3, 2, 3).
+```
 stack: [[0-9], DIGITS]
 string: 67
 
@@ -184,70 +212,34 @@ string: 7
 
 stack: [[0-9]]
 string: 7
-
+```
+Until arriving at the empty stack and empty input. Well done! We can apply rule (4) and accept.
+```
 stack: []
 string: <empty>
 ```
-Now that we arrived at an empty stack and empty string, we are ready to *accept*.
-This way we know the string conforms to the grammar specified.
+This way we know the string conforms to the grammar specified. If we were parsing non-integer input, like `3.14`,
+we would arrive into this state:
+```
+stack: [[0-9], DIGITS]
+string: .14
+```
+As both are characters (or character ranges) and don't match, we are forced to reject the input.
 
+Hopefully, now you have an idea how would you implement such an approach.
 The last two problems we have are:
 1. We can consume whole strings, but LLMs produce tokens.
-2. The grammars can have multiple valid derivations, as in the example above.
+2. How does the machine _just know_, which definition to choose?
 
 How exactly you solve these problems then depends on the particular grammar library you use.
 In the following, I will describe how [llama.cpp](https://github.com/ggml-org/llama.cpp) does this.
 
 ## From Whole Strings to Masks
 
-Going from strings to tokens is _quite_ hard. If you look at the stack construction again, we are sort of consuming
-our string character by character. We can take advantage of this.
-
-Again, let's imagine we are constrained with the rule INT:
-```
-INT ::= "-" DIGITS | DIGITS
-DIGITS ::= [0-9] DIGITS | [0-9]
-```
-Before starting the inference, we will instantiate the stack with the top rule - in this case `[INT]`.
-```
-stack: [INT]
-```
-Now it's time to sample a token! We will look at all of the tokens one by one. Tokens can be various byte sequences in general:
-```
-vocab: {42, 13, 7b, haha, ...}
-```
-For each token, starting with `42` we will try to advance the current stack. First, we will unroll the stack to get a non-rule on top.
-```
-stack: [INT]
-stack: [DIGITS]
-stack: [[0-9], DIGITS]
-```
-Then match as we are used to:
-```
-stack: [DIGITS]
-token: 42 -> 2
-```
-and repeat:
-```
-stack: [[0-9]]
-token: 2
-
-stack: []
-token: 2 -> empty
-```
-Great! We reached a state where the token is consumed and the stack is empty. This is thus a viable token to be generated.
-For `7b`, this is not the case:
-```
-stack: [INT]
-stack: [DIGITS]
-stack: [[0-9], DIGITS]
-token: 7b -> b
-stack: [DIGITS]
-stack: [[0-9]]
-token: b
-```
-Here we are stuck and can't advance. This means the token `7b` is not suitable for our generation. We will mask this with `-inf`,
-to ensure it won't be generated.
+Adapting to strings is now easier than it looks like. What we will do, is simply run the top-down parsing for each token.
+The only exception to the previous algorithm is, that we don't need to consume the whole input and the whole stack.
+What simply suffices is that we don't get stuck on the way. The result should be a distribution, containing only tokens
+conforming to the grammar.
 
 ## Dealing with Non-determinism
 
@@ -263,25 +255,56 @@ about infinite recursion (having a stack that would always expand DIGITS branch)
 
 And that's it! Conceptually, this is how llama.cpp works!
 
-## Conclusion
+## Other Solutions
 
-Somehow, I very much like how constrained generation is a new problem, where we were able to apply already existing
-theory to solve it in a nice, tractable way. I feel like that does not happen as often as it should.
-
-Still, bear in mind, that the llama.cpp solution is more on the side of _slow_ solutions. As it does everything
+Bear in mind, that the llama.cpp solution is more on the side of _slow_ solutions. As it does everything
 at inference time, it does not really scale well with bigger grammars, because you could be keeping
 an enormous amount of parallel stacks. In the end, you incur something like `O(vocab_size * active_stacks)` cost,
 which with current vocab sizes (100k+) can be just incredibly time-consuming.
 
 Certainly, better solutions like [XGrammar](https://github.com/mlc-ai/xgrammar) or [LLGuidance](https://github.com/guidance-ai/llguidance) exist.
-I just believe that the llama.cpp approach is a good way to get into what is generally happening.
-A next interesting step is going into the precomputation side of things - clearly, you don't want to do everything per step.
-If you liked this, I would go for:
+The main problem with llama.cpp is, that we are doing _a lot_ of work per each step. Generally, smart precomputation is where you would go next.
+If you however would have to choose a solution yourself, consider this graph:
+```
+LLGUIDANCE GRAPH HERE
+```
+Clearly, there is a tradeoff going on. Engines like XGrammar and Outlines, which choose more precomputation suffer
+from long "loading" times (shown as TTFM). On the other hand, llama.cpp does little precomputation, but then is generally slower
+per step (shown as TBM). And then there is llguidance, which seems to excel at both.
+
+## How Do We Use It
+
+Few weeks ago, we decided to integrate NobodyWho with LLGuidance. This way, we get all of the benefits. Now, you can simply:
+- pass in regex,
+- pass in json schema,
+- and pass in grammars.
+All wrapped nicely in an API, which is just as simple as it should be:
+```python
+from nobodywho import Chat, SamplerPresets
+sampler = SamplerPresets.constrain_with_regex(r"yes|no")
+chat = Chat('./model.gguf', sampler=sampler)
+answer = chat.ask("Is the sky blue?").completed()
+print(answer) # yes!
+```
+
+## Conclusion
+
+I very much like how constrained generation is a new problem, where we were able to apply already existing
+theory to solve it in a nice, tractable way. I feel like that does not happen as often as it should.
+
+At this point you know why:
+1. you should *not* do auto-retries, if absolutely don't have to,
+2. having to sample other formats than JSON is not the end of the world, as you have grammars,
+3. there is a tradeoff between precomputation and per-step work with constrained sampling.
+
+If you want to dive even deeper, I would go for:
 - reading this [incredible blog post](https://guidance-ai.github.io/llguidance/llg-go-brrr) about how LLGuidance is built,
 - looking at the [outlines paper](https://arxiv.org/pdf/2307.09702) to understand what you might cache before generating,
 - or [xgrammar paper](https://proceedings.mlsys.org/paper_files/paper/2025/file/5c20ca4b0b20b0bd2f1d839dc605e70f-Paper-Conference.pdf) which has nice insights into what is good to precompute.
 
-Hopefully, it should now make at least a bit of sense! If you liked this post, consider [giving us a star](https://github.com/nobodywho-ooo/nobodywho)!
+Did you like this post? Consider [giving us a star](https://github.com/nobodywho-ooo/nobodywho)! That would mean a lot.
+
+Thanks for reading!
 
 *This post was written entirely by a human. No words were made up by the machine.*
 
