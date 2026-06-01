@@ -72,7 +72,7 @@ Secondly, the answer tokens don't appear out of the blue. Given a text, LLMs pro
 IMAGE HOW MASKING WORKS
 ```
 
-So instead of simply sampling from the distribution immediately, we can instead start by setting the probability of all tokens
+So instead of simply sampling from the distribution immediately, we can start by setting the probability of all tokens
 leading to incorrect output to 0. This way, we are guaranteed to only sample (and thus output) a correct token. Technically, this
 process is called "masking". One more detail to address is that just shrinking the probability of the tokens we don't want to 0
 would break the distribution property (we want the probabilities to sum to 1). In reality the solution is therefore to set the underlying
@@ -96,12 +96,12 @@ so the LLM is not waiting for us.
 ## Specifying the Format
 
 What exactly is JSON? To construct the mask, we have to be able to answer this token by token.
-One of the great ways that we are able to precisely specify some text format are regexes.
+One of the great ways that we are able to precisely specify some text format is regexes.
 Unfortunately, as the name suggests, regexes are made for specifying regular languages, which JSON is not.
-With the (basic set of) regex features, you won't be able to for example guarantee, that any opened `{` will be also closed by a corresponding `}`.
+With the (basic set of) regex features, you won't be able to for example guarantee that any opened `{` will also be closed by a corresponding `}`.
 
 A more fitting way for this use case is employing [JSON schemas](https://json-schema.org/).
-If you don't know JSON schemas, they are essentially a meta language
+If you don't know JSON schemas, they are essentially a metalanguage
 on top of JSON, to specify what JSON format you expect. This way, we can say for example:
 ```json
 { "type": "object" }
@@ -119,7 +119,7 @@ to get any JSON object. Or, if you want something more specific:
 This is a more concrete specification and some of the inference engines/APIs accept JSON schemas directly! (e.g. Claude API, OpenAI API, vLLM, etc.)
 On the other hand, we did not really move towards a "lower level" specification of what we want; JSON schemas are still quite abstract.
 
-> **Note**, that with all of the formats (regexes, JSON schemas, grammars) it is still important to tell the LLM what
+> **Note** that with all of the formats (regexes, JSON schemas, grammars) it is still important to tell the LLM what
 > it is that you expect in the answer. The LLM does not know it is being constrained, so if you do not tell it what you expect,
 > the token distributions will stay as if the output was not constrained, possibly hurting performance.
 
@@ -176,7 +176,7 @@ In our case, these will be characters (in practice bytes) and _names_ of the rul
 
 ## Top-Down Parsing
 To make things a little bit easier, we will again focus on a simpler case - we won't generate strings from tokens yet.
-Instead, we will be given a whole string at a start, and only be tasked with checking if such a string
+Instead, we will be given a whole string at the start, and only be tasked with checking if such a string
 can be generated with the current grammar or not. The following approach is usually called top-down parsing
 and again, has been here since the [70s](https://en.wikipedia.org/wiki/Top-down_parsing).
 
@@ -197,7 +197,7 @@ For now, let's pretend the machine _just knows_:
 stack: ["-", DIGITS]
 string: -67
 ```
-Follow with applying the rule (3), as the top is a character which matches the input.
+Applying rule (3), as the top is a character which matches the input.
 ```
 stack: [DIGITS]
 string: 67
@@ -219,27 +219,40 @@ stack: []
 string: <empty>
 ```
 This way we know the string conforms to the grammar specified. If we were parsing non-integer input, like `3.14`,
-we would arrive into this state:
+we would arrive at this state:
 ```
 stack: [[0-9], DIGITS]
 string: .14
 ```
 As both are characters (or character ranges) and don't match, we are forced to reject the input.
 
-Hopefully, now you have an idea how you would implement such an approach.
+Hopefully, now you have an idea of how you would implement such an approach.
 The last two problems we have are:
 1. We can consume whole strings, but LLMs produce tokens.
-2. How does the machine _just know_, which definition to choose?
+2. How does the machine _just know_ which definition to choose?
 
 How exactly you solve these problems then depends on the particular grammar library you use.
 In the following, I will describe how [llama.cpp](https://github.com/ggml-org/llama.cpp) does this.
 
 ## From Whole Strings to Masks
 
-Adapting to strings is now easier than it looks. What we will do, is simply run the top-down parsing for each token.
+Adapting to strings is now easier than it looks. What we will do is simply run the top-down parsing for each token.
 The only exception to the previous algorithm is that we don't need to consume the whole input and the whole stack.
 What simply suffices is that we don't get stuck on the way. The result should be a distribution, containing only tokens
 conforming to the grammar.
+
+There is however one small caveat. Imagine sampling from the following distribution:
+```
+vocab: [{, -42, bar, -, foo]
+```
+Initializing the stack again with the INT rule, and running the parsing, we end up just with `-42` and `-`.
+Now we sample, choosing the respective stack associated with the token. Let's say we sampled `-42`.
+```
+-42
+```
+To continue and get the next token, we can't just reset the stack with the INT rule, but have to remember
+the position in the grammar and the corresponding stack.
+
 
 ## Dealing with Non-determinism
 
@@ -257,13 +270,13 @@ And that's it! Conceptually, this is how llama.cpp works!
 
 ## Other Solutions
 
-Bear in mind that the llama.cpp solution is more on the side of _slow_ solutions. As it does everything
-at inference time, it does not really scale well with bigger grammars, because you could be keeping
-an enormous amount of parallel stacks. In the end, you incur something like `O(vocab_size * active_stacks)` cost,
-which with current vocab sizes (100k+) can be just incredibly time-consuming.
+Bear in mind that the llama.cpp solution is more on the side of _slow_ solutions, as it does everything
+at inference time. In the end, you incur something like `O(vocab_size * active_stacks)` cost,
+as you are keeping stacks for each token and for each different route through the grammar.
+With current vocab sizes (100k+) and longer grammars, that can be just incredibly time-consuming.
 
 Certainly, better solutions like [XGrammar](https://github.com/mlc-ai/xgrammar) or [LLGuidance](https://github.com/guidance-ai/llguidance) exist.
-The main problem with llama.cpp is, that we are doing _a lot_ of work per each step. Generally, smart precomputation is where you would go next.
+The main problem with llama.cpp is, that we are doing _a lot_ of work per step. Generally, smart precomputation is where you would go next.
 If you however would have to choose a solution yourself, consider this graph:
 ```
 LLGUIDANCE GRAPH HERE
@@ -289,7 +302,7 @@ print(answer) # yes!
 
 ## Conclusion
 
-I very much like how constrained generation is a new problem, where we were able to apply already existing
+I very much like how constrained generation is a new problem, where we were able to apply existing
 theory to solve it in a nice, tractable way. I feel like that does not happen as often as it should.
 
 At this point you know why:
