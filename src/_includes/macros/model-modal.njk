@@ -33,7 +33,7 @@
                         text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50
                         dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
                     {{ iconModel.downloadIcon("size-5 text-primary-500") }}
-                    {{ link.type | capitalize }}
+                    Download {{ link.type | capitalize }}
                 </a>
             {% endfor %}
             {% if m.huggingface.pageUrl %}
