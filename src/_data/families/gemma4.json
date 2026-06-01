@@ -8,6 +8,8 @@
       "variant": "E2B",
       "useCase": "For any smartphone",
       "sizeGB": "3.52",
+      "releaseDate": "2026-04-02",
+      "tags": ["thinking"],
       "huggingfaceUrl": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF",
       "downloadLinks": [
         {
@@ -24,6 +26,8 @@
       "variant": "E4B",
       "useCase": "Ideal for recent computers",
       "sizeGB": "5.05",
+      "releaseDate": "2026-04-02",
+      "tags": ["thinking"],
       "huggingfaceUrl": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF",
       "downloadLinks": [
         {

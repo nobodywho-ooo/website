@@ -81,6 +81,40 @@ export default async function(eleventyConfig) {
   };
   eleventyConfig.addFilter("pipelineLabel", (key) => pipelineLabels[key] || key);
 
+  // Flatten every model across all labs/families into a single list,
+  // annotated with its lab/family context and sorted newest-first by release date.
+  eleventyConfig.addFilter("allModels", (labs, families) => {
+    const list = [];
+    for (const lab of labs) {
+      for (const familyKey of lab.families || []) {
+        const family = families[familyKey];
+        if (!family) continue;
+        for (const model of family.models || []) {
+          list.push({
+            labName: lab.name,
+            familyName: family.name,
+            familyLogo: family.logo,
+            pipeline: family.pipeline,
+            variant: model.variant,
+            useCase: model.useCase,
+            sizeGB: model.sizeGB,
+            releaseDate: model.releaseDate || "",
+            tags: model.tags || [],
+            huggingfaceUrl: model.huggingfaceUrl,
+            downloadLinks: model.downloadLinks || [],
+          });
+        }
+      }
+    }
+    return list.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+  });
+
+  // Return the first model in a list carrying the given tag (case-insensitive).
+  eleventyConfig.addFilter("findByTag", (list, tag) => {
+    const t = tag.toLowerCase();
+    return list.find((m) => (m.tags || []).some((x) => x.toLowerCase() === t)) || null;
+  });
+
   eleventyConfig.addCollection("page", function(collections) {
     return collections.getFilteredByTag("page").sort(function(a, b) {
       return a.data.order - b.data.order;

@@ -9,6 +9,8 @@
       "useCase": "For flagship phones and computers",
       "parameterCountBillions": 3,
       "sizeGB": "2.15",
+      "releaseDate": "2025-07-31",
+      "tags": [],
       "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF",
       "downloadLinks": [
         {
@@ -26,6 +28,8 @@
       "useCase": "For gaming computers",
       "parameterCountBillions": 14,
       "sizeGB": "8.24",
+      "releaseDate": "2025-07-31",
+      "tags": [],
       "huggingfaceUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF",
       "downloadLinks": [
         {

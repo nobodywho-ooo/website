@@ -9,6 +9,8 @@
       "useCase": "For any smartphone",
       "parameterCountBillions": 0.8,
       "sizeGB": "0.59",
+      "releaseDate": "2026-05-29",
+      "tags": ["thinking"],
       "huggingfaceUrl": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF",
       "downloadLinks": [
         {
@@ -22,6 +24,8 @@
       "useCase": "Ideal for recent computers",
       "parameterCountBillions": 9,
       "sizeGB": "5.68",
+      "releaseDate": "2026-05-29",
+      "tags": ["thinking"],
       "huggingfaceUrl": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF",
       "downloadLinks": [
         {
