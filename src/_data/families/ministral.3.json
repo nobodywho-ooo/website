@@ -17,10 +17,12 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-3B-Instruct-2512-GGUF/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
           "type": "model"
         },
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-3B-Instruct-2512-GGUF/mmproj-BF16.gguf",
           "type": "projection"
         }
       ]
@@ -38,10 +40,12 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-14B-Reasoning-2512-GGUF/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
           "type": "model"
         },
         {
           "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-14B-Reasoning-2512-GGUF/mmproj-BF16.gguf",
           "type": "projection"
         }
       ]

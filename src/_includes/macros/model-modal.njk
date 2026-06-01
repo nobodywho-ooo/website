@@ -22,31 +22,46 @@
 
     {{ iconModel.tagBadges(m) }}
 
-    {% if m.downloadLinks or m.huggingface.pageUrl %}
+    {% set btnClass = "inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50 dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10" %}
+    {% set summaryClass = btnClass + " cursor-pointer select-none list-none marker:hidden [&::-webkit-details-marker]:hidden" %}
+    {% set menuClass = "absolute left-0 top-full z-20 mt-2 w-max min-w-full rounded-2xl bg-white p-2 shadow-lg inset-ring inset-ring-gray-200 dark:bg-neutral-800 dark:inset-ring-white/10" %}
+    {% set itemClass = "block w-full cursor-pointer whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-neutral-700 transition-colors hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-white/10" %}
+
+    {% if m.downloadLinks.length or m.huggingface.pageUrl %}
         <div class="mt-10 flex flex-wrap gap-3">
-            {% for link in m.downloadLinks %}
-                <a
-                    href="{{ link.url }}"
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold
-                        text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50
-                        dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
-                    {{ iconModel.downloadIcon("size-5 text-primary-500") }}
-                    Download {{ link.type | capitalize }}
+            {% if m.downloadLinks.length === 1 %}
+                <a href="{{ m.downloadLinks[0].url }}" target="_blank" rel="noopener" class="{{ btnClass }}">
+                    {{ m.downloadLinks[0].type | capitalize }} download
                 </a>
-            {% endfor %}
+            {% elif m.downloadLinks.length > 1 %}
+                <details class="relative">
+                    <summary class="{{ summaryClass }}">
+                        Download
+                        <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" /></svg>
+                    </summary>
+                    <div class="{{ menuClass }}">
+                        {% for link in m.downloadLinks %}
+                            <a href="{{ link.url }}" target="_blank" rel="noopener" class="{{ itemClass }}">{{ link.type | capitalize }}</a>
+                        {% endfor %}
+                    </div>
+                </details>
+            {% endif %}
+
             {% if m.huggingface.pageUrl %}
-                <a
-                    href="{{ m.huggingface.pageUrl }}"
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold
-                        text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50
-                        dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10">
-                    {{ iconModel.hfIcon("size-5 shrink-0 text-[#FFD21E]") }}
-                    Hugging Face
-                </a>
+                <details class="relative">
+                    <summary class="{{ summaryClass }}">
+                        Hugging Face
+                        <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" /></svg>
+                    </summary>
+                    <div class="{{ menuClass }}">
+                        <a href="{{ m.huggingface.pageUrl }}" target="_blank" rel="noopener" class="{{ itemClass }}">Page</a>
+                        {% for link in m.downloadLinks %}
+                            {% if link.huggingfacePath %}
+                                <button type="button" onclick="navigator.clipboard.writeText('{{ link.huggingfacePath }}'); this.closest('details').open = false" class="{{ itemClass }}">Copy {{ link.type }} path</button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </details>
             {% endif %}
         </div>
     {% endif %}

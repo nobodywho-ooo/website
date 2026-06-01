@@ -17,10 +17,12 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q3_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/gemma-4-E2B-it-GGUF/gemma-4-E2B-it-Q3_K_M.gguf",
           "type": "model"
         },
         {
           "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/gemma-4-E2B-it-GGUF/mmproj-BF16.gguf",
           "type": "projection"
         }
       ]
@@ -38,10 +40,12 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q3_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q3_K_M.gguf",
           "type": "model"
         },
         {
           "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/gemma-4-E4B-it-GGUF/mmproj-BF16.gguf",
           "type": "projection"
         }
       ]

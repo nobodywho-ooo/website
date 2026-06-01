@@ -17,6 +17,7 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B.gguf",
+          "huggingfacePath": "hf:prism-ml/Bonsai-1.7B-gguf/Bonsai-1.7B.gguf",
           "type": "model"
         }
       ]

@@ -195,3 +195,12 @@ permalink: "/models/"
         </div>
     </div>
 </div>
+
+<script>
+    // Close any open <details> dropdown when clicking outside of it.
+    document.addEventListener("click", (event) => {
+        document.querySelectorAll("details[open]").forEach((details) => {
+            if (!details.contains(event.target)) details.open = false;
+        });
+    });
+</script>

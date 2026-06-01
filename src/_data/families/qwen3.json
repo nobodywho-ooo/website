@@ -17,6 +17,7 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth//",
           "type": "model"
         }
       ]
@@ -34,6 +35,7 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF/resolve/main/Qwen_Qwen3-4B-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth//",
           "type": "model"
         }
       ]
