@@ -3,7 +3,7 @@ title: What's in a GGUF, besides the weights - and what's still missing?
 date: 2026-05-14
 description: "What extra stuff is needed to properly run a language model? Besides the weights of a language model, what is the gguf metadata that we need to parse and use?" 
 slug: "whats-in-a-gguf"
-categories: ["GGUF", "open-source"]
+categories: ["GGUF", "open-source", "Technical"]
 ---
 
 
