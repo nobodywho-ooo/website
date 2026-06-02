@@ -7,10 +7,11 @@
     {
       "variant": "0.6B",
       "parameterCountBillions": 0.6,
-      "useCase": "For any smartphone",
+      "idealDeviceDeployment": "smartphone",
       "sizeGB": "0.48",
       "releaseDate": "2025-09-01",
-      "tags": ["recommended", "thinking"],
+      "recommended": true,
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF"
       },
@@ -25,10 +26,11 @@
     {
       "variant": "4B",
       "parameterCountBillions": 4,
-      "useCase": "Ideal for any computer",
+      "idealDeviceDeployment": "laptop",
       "sizeGB": "2.5",
       "releaseDate": "2025-09-01",
-      "tags": ["recommended", "thinking"],
+      "recommended": true,
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF"
       },

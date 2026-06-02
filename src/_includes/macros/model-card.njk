@@ -21,13 +21,11 @@
             {% endif %}
             <div class="min-w-0">
                 <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">{{ m.familyName }} · {{ m.variant }}</h3>
-                <p class="text-sm text-neutral-400">{{ m.labName }}{% if m.pipeline %} · {{ m.pipeline | pipelineLabel }}{% endif %}</p>
+                <p class="text-sm text-neutral-400">{{ m.labName }}</p>
             </div>
         </div>
 
-        {% if m.useCase %}
-            <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.useCase }}</p>
-        {% endif %}
+        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.pipeline | pipelineLabel }} · Released in {{ m.releaseDate | monthYear }}</p>
 
         {{ iconModel.tagBadges(m) }}
 

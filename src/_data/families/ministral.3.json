@@ -7,10 +7,10 @@
     {
       "variant": "3B - Instruct",
       "parameterCountBillions": 3,
-      "useCase": "For flagship phones and computers",
+      "idealDeviceDeployment": "smartphone",
       "sizeGB": "2.15",
       "releaseDate": "2025-07-31",
-      "tags": ["thinking"],
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF"
       },
@@ -30,10 +30,10 @@
     {
       "variant": "14B - Reasoning",
       "parameterCountBillions": 14,
-      "useCase": "For gaming computers",
+      "idealDeviceDeployment": "computer",
       "sizeGB": "8.24",
       "releaseDate": "2025-07-31",
-      "tags": ["thinking"],
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF"
       },

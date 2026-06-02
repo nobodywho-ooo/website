@@ -7,10 +7,10 @@
     {
       "variant": "E2B",
       "parameterCountBillions": 5.1,
-      "useCase": "For any smartphone",
+      "idealDeviceDeployment": "smartphone",
       "sizeGB": "3.52",
       "releaseDate": "2026-04-02",
-      "tags": ["thinking"],
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF"
       },
@@ -30,10 +30,10 @@
     {
       "variant": "E4B",
       "parameterCountBillions": 8,
-      "useCase": "Ideal for recent computers",
+      "idealDeviceDeployment": "laptop",
       "sizeGB": "5.05",
       "releaseDate": "2026-04-02",
-      "tags": ["thinking"],
+      "thinking": true,
       "huggingface": {
         "pageUrl": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF"
       },

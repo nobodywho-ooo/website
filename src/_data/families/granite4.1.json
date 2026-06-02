@@ -7,10 +7,9 @@
     {
       "variant": "3B",
       "parameterCountBillions": 3,
-      "useCase": "For flagship phones and computers",
+      "idealDeviceDeployment": "smartphone",
       "sizeGB": "2.1",
       "releaseDate": "2026-04-29",
-      "tags": [],
       "huggingface": {
         "pageUrl": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF"
       },

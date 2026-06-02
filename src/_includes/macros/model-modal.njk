@@ -12,15 +12,11 @@
         {% endif %}
         <div class="min-w-0">
             <h3 class="text-xl font-semibold text-neutral-900 dark:text-white">{{ m.familyName }} · {{ m.variant }}</h3>
-            <p class="text-sm text-neutral-400">{{ m.labName }}{% if m.pipeline %} · {{ m.pipeline | pipelineLabel }}{% endif %}</p>
+            <p class="text-sm text-neutral-400">{{ m.labName }}</p>
         </div>
     </div>
 
-    {% if m.useCase %}
-        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.useCase }}</p>
-    {% endif %}
-
-    {{ iconModel.tagBadges(m) }}
+    <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.pipeline | pipelineLabel }} · Released in {{ m.releaseDate | monthYear }}</p>
 
     {% set btnClass = "inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50 dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10" %}
     {% set summaryClass = btnClass + " cursor-pointer select-none list-none marker:hidden [&::-webkit-details-marker]:hidden" %}
@@ -28,7 +24,7 @@
     {% set itemClass = "block w-full cursor-pointer whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-neutral-700 transition-colors hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-white/10" %}
 
     {% if m.downloadLinks.length or m.huggingface.pageUrl %}
-        <div class="mt-10 flex flex-wrap gap-3">
+        <div class="my-10 flex flex-wrap gap-3">
             {% if m.downloadLinks.length === 1 %}
                 <a href="{{ m.downloadLinks[0].url }}" target="_blank" rel="noopener" class="{{ btnClass }}">
                     {{ m.downloadLinks[0].type | capitalize }} download
@@ -64,5 +60,12 @@
                 </details>
             {% endif %}
         </div>
+    {% endif %}
+
+    {{ iconModel.tagBadges(m, false) }}
+
+    {% if m.languages.length %}
+        <h4 class="mt-6 text-sm font-semibold text-neutral-900 dark:text-white">Supported Languages</h4>
+        <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">{{ m.languages | join(", ") }}</p>
     {% endif %}
 {% endmacro %}

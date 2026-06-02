@@ -7,10 +7,10 @@
     {
       "variant": "1.7B",
       "parameterCountBillions": 1.7,
-      "useCase": "For any smartphones and smartwatches",
+      "idealDeviceDeployment": "smartwatch",
       "sizeGB": "0.2",
       "releaseDate": "2026-03-31",
-      "tags": [],
+      "tags": ["Dense intelligence"],
       "huggingface": {
         "pageUrl": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf"
       },

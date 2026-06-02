@@ -95,12 +95,15 @@ export default async function(eleventyConfig) {
             familyName: family.name,
             familyLogo: family.logo,
             pipeline: family.pipeline,
+            languages: family.languages || [],
             variant: model.variant,
-            useCase: model.useCase,
+            idealDeviceDeployment: model.idealDeviceDeployment || "",
             sizeGB: model.sizeGB,
             parameterCountBillions: model.parameterCountBillions,
             releaseDate: model.releaseDate || "",
             tags: model.tags || [],
+            thinking: model.thinking || false,
+            recommended: model.recommended || false,
             huggingface: model.huggingface,
             downloadLinks: model.downloadLinks || [],
           });
@@ -108,12 +111,6 @@ export default async function(eleventyConfig) {
       }
     }
     return list.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
-  });
-
-  // Return all models in a list carrying the given tag (case-insensitive).
-  eleventyConfig.addFilter("filterByTag", (list, tag) => {
-    const t = tag.toLowerCase();
-    return list.filter((m) => (m.tags || []).some((x) => x.toLowerCase() === t));
   });
 
   eleventyConfig.addCollection("page", function(collections) {
@@ -136,6 +133,12 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addFilter("dateISO", (dateObj) => {
     return DateTime.fromJSDate(dateObj).toISODate();
+  });
+
+  // Format an ISO date string (e.g. "2026-05-29") as "Month year" (e.g. "May 2026").
+  eleventyConfig.addFilter("monthYear", (isoDate) => {
+    if (!isoDate) return "";
+    return DateTime.fromISO(isoDate).toFormat("LLLL yyyy");
   });
 
   return {

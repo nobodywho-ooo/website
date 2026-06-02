@@ -8,7 +8,7 @@ permalink: "/models/"
 {% import "macros/model-card.njk" as cards %}
 
 {% set models = labs | allModels(families) %}
-{% set recommended = models | filterByTag("recommended") %}
+{% set recommended = models | selectattr("recommended") | list %}
 
 <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
     <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">Our Selection</h1>
@@ -26,18 +26,21 @@ permalink: "/models/"
     {% endif %}
 
     {% set pipelines = ["textGeneration", "imageAudioTextToText"] %}
+    {% set devices = ["smartwatch", "smartphone", "laptop", "computer"] %}
 
     <section
         class="mt-20"
         x-data='{
             lab: "all",
             pipeline: "all",
+            device: "any",
             thinking: false,
             sort: "releaseDate",
-            items: [{% for m in models %}{ i: {{ loop.index0 }}, lab: {{ m.labName | dump | safe }}, pipeline: {{ m.pipeline | dump | safe }}, thinking: {{ "thinking" in m.tags }}, size: {{ m.sizeGB or 0 }}, date: {{ m.releaseDate | dump | safe }} }{% if not loop.last %}, {% endif %}{% endfor %}],
+            items: [{% for m in models %}{ i: {{ loop.index0 }}, lab: {{ m.labName | dump | safe }}, pipeline: {{ m.pipeline | dump | safe }}, device: {{ m.idealDeviceDeployment | dump | safe }}, thinking: {{ m.thinking }}, size: {{ m.sizeGB or 0 }}, date: {{ m.releaseDate | dump | safe }} }{% if not loop.last %}, {% endif %}{% endfor %}],
             matches(i) {
                 return (this.lab === "all" || this.lab === i.lab)
                     && (this.pipeline === "all" || this.pipeline === i.pipeline)
+                    && (this.device === "any" || this.device === i.device)
                     && (!this.thinking || i.thinking);
             },
             get sorted() {
@@ -54,11 +57,12 @@ permalink: "/models/"
                 return this.items.filter((i) => this.matches(i)).length;
             },
             get isFiltered() {
-                return this.lab !== "all" || this.pipeline !== "all" || this.thinking || this.sort !== "releaseDate";
+                return this.lab !== "all" || this.pipeline !== "all" || this.device !== "any" || this.thinking || this.sort !== "releaseDate";
             },
             reset() {
                 this.lab = "all";
                 this.pipeline = "all";
+                this.device = "any";
                 this.thinking = false;
                 this.sort = "releaseDate";
             }
@@ -72,14 +76,17 @@ permalink: "/models/"
                     <select
                         id="sort-filter"
                         x-model="sort"
-                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium text-neutral-900 inset-ring inset-ring-gray-300
-                            focus:outline-none dark:bg-white/5 dark:text-white dark:inset-ring-white/10">
+                        :class="sort !== 'releaseDate'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
                         <option value="releaseDate">Release date</option>
                         <option value="sizeAsc">Size: small to large</option>
                         <option value="sizeDesc">Size: large to small</option>
                     </select>
                     <svg
-                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400"
+                        :class="sort !== 'releaseDate' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
                         fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
@@ -90,15 +97,18 @@ permalink: "/models/"
                     <select
                         id="lab-filter"
                         x-model="lab"
-                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium text-neutral-900 inset-ring inset-ring-gray-300
-                            focus:outline-none dark:bg-white/5 dark:text-white dark:inset-ring-white/10">
+                        :class="lab !== 'all'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
                         <option value="all">All labs</option>
                         {% for lab in labs %}
                             <option value="{{ lab.name }}">{{ lab.name }}</option>
                         {% endfor %}
                     </select>
                     <svg
-                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400"
+                        :class="lab !== 'all' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
                         fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
@@ -109,15 +119,40 @@ permalink: "/models/"
                     <select
                         id="pipeline-filter"
                         x-model="pipeline"
-                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium text-neutral-900 inset-ring inset-ring-gray-300
-                            focus:outline-none dark:bg-white/5 dark:text-white dark:inset-ring-white/10">
+                        :class="pipeline !== 'all'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
                         <option value="all">All pipelines</option>
                         {% for pipeline in pipelines %}
                             <option value="{{ pipeline }}">{{ pipeline | pipelineLabel }}</option>
                         {% endfor %}
                     </select>
                     <svg
-                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400"
+                        :class="pipeline !== 'all' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                </div>
+
+                <label class="sr-only" for="device-filter">Filter by device</label>
+                <div class="relative">
+                    <select
+                        id="device-filter"
+                        x-model="device"
+                        :class="device !== 'any'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
+                        <option value="any">Any device</option>
+                        {% for device in devices %}
+                            <option value="{{ device }}">{{ device | capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                    <svg
+                        :class="device !== 'any' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
                         fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
@@ -138,7 +173,7 @@ permalink: "/models/"
                     x-show="isFiltered"
                     @click="reset()"
                     style="display: none"
-                    class="ml-auto inline-flex items-center gap-x-1.5 rounded-full px-4 py-2 text-sm font-medium
+                    class="sm:ml-auto inline-flex items-center gap-x-1.5 rounded-full px-4 py-2 text-sm font-medium
                         text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
                     <svg class="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -180,7 +215,7 @@ permalink: "/models/"
                 class="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm"
                 @click="open = false; document.body.style.overflow = ''"></div>
             <div
-                class="relative z-10 w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-neutral-800">
+                class="relative z-10 flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col rounded-2xl bg-white p-6 shadow-xl dark:bg-neutral-800">
                 <button
                     type="button"
                     @click="open = false; document.body.style.overflow = ''"
@@ -190,7 +225,8 @@ permalink: "/models/"
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <div x-html="html"></div>
+                <div class="h-5 shrink-0" aria-hidden="true"></div>
+                <div class="min-h-0 overflow-y-auto" x-html="html"></div>
             </div>
         </div>
     </div>

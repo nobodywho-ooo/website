@@ -2,31 +2,31 @@
   {
     "name": "Google",
     "country": "USA",
-    "logo": "./assets/logos/labs/google.svg",
     "families": ["gemma4"]
   },
   {
     "name": "Alibaba Cloud",
     "country": "China",
-    "logo": "./assets/logos/labs/alibaba-cloud.svg",
     "families": ["qwen3.5", "qwen3"]
   },
   {
     "name": "Mistral",
     "country": "France",
-    "logo": "./assets/logos/labs/mistral.svg",
     "families": ["ministral.3"]
   },
   {
     "name": "IBM",
     "country": "USA",
-    "logo": "./assets/logos/labs/ibm.svg",
     "families": ["granite4.1"]
   },
   {
     "name": "Prism ML",
     "country": "USA",
-    "logo": "./assets/logos/labs/prism-ml.svg",
     "families": ["bonsai"]
+  },
+  {
+    "name": "Liquid",
+    "country": "USA",
+    "families": ["lfm2"]
   }
 ]
