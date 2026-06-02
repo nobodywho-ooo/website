@@ -27,7 +27,7 @@
         <div class="my-10 flex flex-wrap gap-3">
             {% if m.downloadLinks.length === 1 %}
                 <a href="{{ m.downloadLinks[0].url }}" target="_blank" rel="noopener" class="{{ btnClass }}">
-                    {{ m.downloadLinks[0].type | capitalize }} download
+                    Download {{ m.downloadLinks[0].type | capitalize }}
                 </a>
             {% elif m.downloadLinks.length > 1 %}
                 <details class="relative">
