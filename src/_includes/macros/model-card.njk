@@ -8,9 +8,9 @@
         @click="$event.target.closest('a') || $dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
         @keydown.enter="$dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
         @keydown.space.prevent="$dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
-        class="flex flex-col rounded-2xl p-6 inset-ring inset-ring-gray-300 transition-colors duration-200 cursor-pointer
+        class="flex flex-col rounded-2xl p-6 inset-ring inset-ring-gray-100 transition-colors duration-200 cursor-pointer
             hover:bg-gray-50
-            dark:inset-ring-white/10 dark:hover:bg-white/5"{% if sortable %} :style="'order: ' + rank({{ idx }})"{% endif %}>
+            dark:inset-ring-white/5 dark:hover:bg-white/5"{% if sortable %} :style="'order: ' + rank({{ idx }})"{% endif %}>
         <div class="flex items-start gap-x-4">
             {% if m.familyLogo %}
                 <span
@@ -25,7 +25,11 @@
             </div>
         </div>
 
-        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.pipeline | pipelineLabel }} · Released in {{ m.releaseDate | monthYear }}</p>
+        
+        <div class="my-4 [&_p]:my-0">
+            <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ m.pipeline | pipelineLabel }}</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">Released in {{ m.releaseDate | monthYear }}</p>
+        </div>
 
         {{ iconModel.tagBadges(m) }}
 

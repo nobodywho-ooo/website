@@ -7,12 +7,12 @@
   {
     "name": "Alibaba Cloud",
     "country": "China",
-    "families": ["qwen3.5", "qwen3"]
+    "families": ["qwen3.6", "qwen3"]
   },
   {
     "name": "Mistral",
     "country": "France",
-    "families": ["ministral.3"]
+    "families": ["ministral3"]
   },
   {
     "name": "IBM",
@@ -27,6 +27,6 @@
   {
     "name": "Liquid",
     "country": "USA",
-    "families": ["lfm2"]
+    "families": ["lfm2", "lfm2.5"]
   }
 ]

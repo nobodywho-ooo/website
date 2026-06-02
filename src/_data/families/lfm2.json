@@ -5,23 +5,6 @@
   "logo": "./assets/logos/models/liquid.svg",
   "models": [
     {
-      "variant": "350M",
-      "parameterCountBillions": 0.4,
-      "idealDeviceDeployment": "smartwatch",
-      "sizeGB": "0.2",
-      "releaseDate": "2025-07-10",
-      "huggingface": {
-        "pageUrl": "https://huggingface.co/unsloth/LFM2-350M-GGUF"
-      },
-      "downloadLinks": [
-        {
-          "url": "https://huggingface.co/unsloth/LFM2-350M-GGUF/resolve/main/LFM2-350M-Q3_K_M.gguf",
-          "huggingfacePath": "hf:unsloth/unsloth/LFM2-350M-GGUF/LFM2-350M-Q3_K_M.gguf",
-          "type": "model"
-        }
-      ]
-    },
-    {
       "variant": "700M",
       "parameterCountBillions": 0.7,
       "idealDeviceDeployment": "smartwatch",
@@ -33,7 +16,7 @@
       "downloadLinks": [
         {
           "url": "https://huggingface.co/unsloth/LFM2-700M-GGUF/resolve/main/LFM2-700M-Q3_K_M.gguf",
-          "huggingfacePath": "hf:unsloth/unsloth/LFM2-700M-GGUF/LFM2-700M-Q3_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/LFM2-700M-GGUF/LFM2-700M-Q3_K_M.gguf",
           "type": "model"
         }
       ]

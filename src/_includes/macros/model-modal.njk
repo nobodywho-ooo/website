@@ -16,7 +16,11 @@
         </div>
     </div>
 
-    <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{{ m.pipeline | pipelineLabel }} · Released in {{ m.releaseDate | monthYear }}</p>
+    
+    <div class="mt-4 [&_p]:my-0">
+        <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ m.pipeline | pipelineLabel }}</p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">Released in {{ m.releaseDate | monthYear }}</p>
+    </div>
 
     {% set btnClass = "inline-flex items-center gap-x-2 rounded-full px-5 py-2 text-sm font-semibold text-neutral-900 inset-ring inset-ring-gray-300 transition-colors hover:bg-gray-50 dark:text-white dark:inset-ring-white/10 dark:hover:bg-white/10" %}
     {% set summaryClass = btnClass + " cursor-pointer select-none list-none marker:hidden [&::-webkit-details-marker]:hidden" %}
