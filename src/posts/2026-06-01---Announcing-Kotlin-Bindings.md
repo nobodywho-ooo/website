@@ -3,8 +3,11 @@ title: Announcing Kotlin bindings for NobodyWho
 date: 2026-06-01
 categories: ["Kotlin", "Release"]
 description: "NobodyWho now ships Kotlin bindings — run LLMs fully on-device in your Android and JVM apps, no cloud or server required."
+image: /assets/images/blog/2026/announcing-kotlin-bindings/kotlin-llm.png
 slug: "announcing-kotlin-bindings"
 ---
+
+![NobodyWho running an on-device LLM in a Kotlin Android app](/assets/images/blog/2026/announcing-kotlin-bindings/kotlin-llm.png)
 
 You can now add NobodyWho as a Gradle dependency and ship an LLM that runs entirely on your users' devices. No API keys, no servers to babysit, no per-token bill at the end of the month — just a `.gguf` file on the device and a chat loop in your app.
 
