@@ -7,7 +7,7 @@ image: /assets/images/blog/2026/apple-watch-vision-pro-apps/apple-watch-vision-p
 slug: "apple-watch-vision-pro-apps"
 ---
 
-![Apple Watch Vision Pro](/assets/images/blog/2026/apple-watch-vision-pro-apps/apple-watch-and-vision-pro-apps.png)
+![Apple Watch Vision Pro](/assets/images/blog/2026/apple-watch-vision-pro-apps/apple-watch-vision-pro.png)
 
 We are excited to announce the release of our first two apps! Both are personal AI assistants that run completely offline, powered by the NobodyWho inference engine.
 
