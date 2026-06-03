@@ -1,6 +1,6 @@
 ---
 title: Announcing Kotlin bindings for NobodyWho
-date: 2026-06-01
+date: 2026-06-03
 categories: ["Kotlin", "Release"]
 description: "NobodyWho now ships Kotlin bindings — run LLMs fully on-device in your Android and JVM apps, no cloud or server required."
 image: /assets/images/blog/2026/announcing-kotlin-bindings/kotlin-llm.png
