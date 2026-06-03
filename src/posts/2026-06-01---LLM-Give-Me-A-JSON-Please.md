@@ -324,5 +324,4 @@ chat = Chat("model.gguf")
 answer = chat.ask("Is water wet?").completed()
 print(answer)
 ```
-If you value the same things, come and [become a contributor](https://github.com/nobodywho-ooo/nobodywho)
-or just [download and test our library](https://docs.nobodywho.ooo/).
+If you value the same things, come and [become a contributor](https://github.com/nobodywho-ooo/nobodywho) or just [download and test our library](https://docs.nobodywho.ooo/).
