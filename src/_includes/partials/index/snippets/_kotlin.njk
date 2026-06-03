@@ -1,0 +1,9 @@
+{% highlight "kotlin" %}
+import ai.nobodywho.Chat
+import kotlinx.coroutines.runBlocking
+
+val chat = runBlocking { Chat.fromPath(modelPath = "./model.gguf") }
+val response = runBlocking { chat.ask("What is the capital of denmark?").completed() }
+
+// The capital of Denmark is Copenhagen.
+{% endhighlight %}
