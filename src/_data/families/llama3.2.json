@@ -1,0 +1,30 @@
+{
+  "name": "Llama 3.2",
+  "pipeline": "audioTextToText",
+  "languages": ["English", "German", "French", "Italian", "Portuguese", "Hindi", "Spanish", "Thai"],
+  "logo": "./assets/logos/models/meta.svg",
+  "models": [
+    {
+      "variant": "1B",
+      "parameterCountBillions": 1,
+      "idealDeviceDeployment": "smartphone",
+      "sizeGB": "2.2",
+      "releaseDate": "2024-09-25",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/ggml-org/ultravox-v0_5-llama-3_2-1b-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/ggml-org/ultravox-v0_5-llama-3_2-1b-GGUF/resolve/main/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+          "huggingfacePath": "hf:ggml-org/ultravox-v0_5-llama-3_2-1b-GGUF/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/ggml-org/ultravox-v0_5-llama-3_2-1b-GGUF/resolve/main/mmproj-ultravox-v0_5-llama-3_2-1b-f16.gguf",
+          "huggingfacePath": "hf:ggml-org/ultravox-v0_5-llama-3_2-1b-GGUF/mmproj-ultravox-v0_5-llama-3_2-1b-f16.gguf",
+          "type": "projection"
+        }
+      ]
+    }
+  ]
+}

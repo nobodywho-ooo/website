@@ -7,7 +7,7 @@
   {
     "name": "Alibaba Cloud",
     "country": "China",
-    "families": ["qwen3.6", "qwen3"]
+    "families": ["qwen3.6", "qwen3", "qwen3-VL"]
   },
   {
     "name": "Mistral",
@@ -28,5 +28,10 @@
     "name": "Liquid",
     "country": "USA",
     "families": ["lfm2", "lfm2.5"]
+  },
+  {
+    "name": "Meta",
+    "country": "USA",
+    "families": ["llama3.2"]
   }
 ]
