@@ -1,0 +1,242 @@
+---
+layout: base
+title: Model Selection
+tags: pageHiddenInMenu
+permalink: "/models/"
+---
+
+{% import "macros/model-card.njk" as cards %}
+
+{% set models = labs | allModels(families) %}
+{% set recommended = models | selectattr("recommended") | list %}
+
+<div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-24 sm:py-32">
+    <h1 class="text-4xl font-semibold sm:text-5xl text-neutral-900 dark:text-white">Our Selection</h1>
+    <p class="mt-4 text-xl text-neutral-400">The models we recommend running locally, hand-picked across the labs.</p>
+
+    {% if recommended.length %}
+        <section class="mt-16" x-data>
+            <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">{% if recommended.length > 1 %}Start with one of these{% else %}Start with this one{% endif %}</h2>
+            <ul role="list" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {% for m in recommended %}
+                    {{ cards.modelCard(m) }}
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
+    {% set pipelines = ["textGeneration", "imageAudioTextToText", "audioTextToText", "imageTextToText"] %}
+    {% set devices = ["smartwatch", "smartphone", "laptop", "workstation"] %}
+
+    <section
+        class="mt-20"
+        x-data='{
+            lab: "all",
+            pipeline: "all",
+            device: "any",
+            thinking: false,
+            sort: "releaseDate",
+            items: [{% for m in models %}{ i: {{ loop.index0 }}, lab: {{ m.labName | dump | safe }}, pipeline: {{ m.pipeline | dump | safe }}, device: {{ m.idealDeviceDeployment | dump | safe }}, thinking: {{ m.thinking }}, size: {{ m.sizeGB or 0 }}, date: {{ m.releaseDate | dump | safe }} }{% if not loop.last %}, {% endif %}{% endfor %}],
+            matches(i) {
+                return (this.lab === "all" || this.lab === i.lab)
+                    && (this.pipeline === "all" || this.pipeline === i.pipeline)
+                    && (this.device === "any" || this.device === i.device)
+                    && (!this.thinking || i.thinking);
+            },
+            get sorted() {
+                return [...this.items].sort((a, b) => {
+                    if (this.sort === "sizeAsc") return a.size - b.size;
+                    if (this.sort === "sizeDesc") return b.size - a.size;
+                    return b.date.localeCompare(a.date);
+                });
+            },
+            rank(i) {
+                return this.sorted.findIndex((m) => m.i === i);
+            },
+            get visibleCount() {
+                return this.items.filter((i) => this.matches(i)).length;
+            },
+            get isFiltered() {
+                return this.lab !== "all" || this.pipeline !== "all" || this.device !== "any" || this.thinking || this.sort !== "releaseDate";
+            },
+            reset() {
+                this.lab = "all";
+                this.pipeline = "all";
+                this.device = "any";
+                this.thinking = false;
+                this.sort = "releaseDate";
+            }
+        }'>
+        <div>
+            <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">All models</h2>
+
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+                <label class="sr-only" for="sort-filter">Sort by</label>
+                <div class="relative">
+                    <select
+                        id="sort-filter"
+                        x-model="sort"
+                        :class="sort !== 'releaseDate'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
+                        <option value="releaseDate">Release date</option>
+                        <option value="sizeAsc">Size: small to large</option>
+                        <option value="sizeDesc">Size: large to small</option>
+                    </select>
+                    <svg
+                        :class="sort !== 'releaseDate' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                </div>
+
+                <label class="sr-only" for="lab-filter">Filter by lab</label>
+                <div class="relative">
+                    <select
+                        id="lab-filter"
+                        x-model="lab"
+                        :class="lab !== 'all'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
+                        <option value="all">All labs</option>
+                        {% for lab in labs %}
+                            <option value="{{ lab.name }}">{{ lab.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <svg
+                        :class="lab !== 'all' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                </div>
+
+                <label class="sr-only" for="pipeline-filter">Filter by pipeline</label>
+                <div class="relative">
+                    <select
+                        id="pipeline-filter"
+                        x-model="pipeline"
+                        :class="pipeline !== 'all'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
+                        <option value="all">All pipelines</option>
+                        {% for pipeline in pipelines %}
+                            <option value="{{ pipeline }}">{{ pipeline | pipelineLabel }}</option>
+                        {% endfor %}
+                    </select>
+                    <svg
+                        :class="pipeline !== 'all' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                </div>
+
+                <label class="sr-only" for="device-filter">Filter by device</label>
+                <div class="relative">
+                    <select
+                        id="device-filter"
+                        x-model="device"
+                        :class="device !== 'any'
+                            ? 'bg-primary-500 text-white inset-ring-primary-500'
+                            : 'text-neutral-900 inset-ring-gray-300 dark:bg-white/5 dark:text-white dark:inset-ring-white/10'"
+                        class="appearance-none rounded-full pl-4 pr-9 py-2 text-sm font-medium inset-ring focus:outline-none transition-colors">
+                        <option value="any">Any device</option>
+                        {% for device in devices %}
+                            <option value="{{ device }}">{{ device | capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                    <svg
+                        :class="device !== 'any' ? 'text-white' : 'text-neutral-400'"
+                        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                    </svg>
+                </div>
+
+                <button
+                    type="button"
+                    @click="thinking = !thinking"
+                    :class="thinking
+                        ? 'bg-primary-500 text-white inset-ring-primary-500'
+                        : 'text-neutral-900 inset-ring-gray-300 dark:text-white dark:inset-ring-white/10'"
+                    class="rounded-full px-4 py-2 text-sm font-medium inset-ring transition-colors">
+                    Thinking
+                </button>
+
+                <button
+                    type="button"
+                    x-show="isFiltered"
+                    @click="reset()"
+                    style="display: none"
+                    class="sm:ml-auto inline-flex items-center gap-x-1.5 rounded-full px-4 py-2 text-sm font-medium
+                        text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
+                    <svg class="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                    Reset
+                </button>
+            </div>
+        </div>
+
+        <ul role="list" class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {% for m in models %}
+                <template x-if="matches(items[{{ loop.index0 }}])">
+                    <div class="contents">
+                        {{ cards.modelCard(m, loop.index0, true) }}
+                    </div>
+                </template>
+            {% endfor %}
+        </ul>
+
+        <p
+            class="mt-8 text-center text-neutral-400"
+            style="display: none"
+            x-show="visibleCount === 0">
+            No models match these filters.
+        </p>
+    </section>
+
+    <div
+        x-data="{ open: false, html: '' }"
+        @open-modal.window="html = $event.detail; open = true; document.body.style.overflow = 'hidden'"
+        @keydown.escape.window="open = false; document.body.style.overflow = ''">
+        <div
+            x-show="open"
+            style="display: none"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true">
+            <div
+                class="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm"
+                @click="open = false; document.body.style.overflow = ''"></div>
+            <div
+                class="relative z-10 flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col rounded-2xl bg-white p-6 shadow-xl dark:bg-neutral-800">
+                <button
+                    type="button"
+                    @click="open = false; document.body.style.overflow = ''"
+                    aria-label="Close"
+                    class="absolute right-4 top-4 text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-white">
+                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="h-5 shrink-0" aria-hidden="true"></div>
+                <div class="min-h-0 overflow-y-auto" x-html="html"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Close any open <details> dropdown when clicking outside of it.
+    document.addEventListener("click", (event) => {
+        document.querySelectorAll("details[open]").forEach((details) => {
+            if (!details.contains(event.target)) details.open = false;
+        });
+    });
+</script>

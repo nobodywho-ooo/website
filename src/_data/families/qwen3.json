@@ -1,0 +1,46 @@
+{
+  "name": "Qwen3",
+  "pipeline": "textGeneration",
+  "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
+  "logo": "./assets/logos/models/qwen.svg",
+  "models": [
+    {
+      "variant": "0.6B",
+      "parameterCountBillions": 0.6,
+      "idealDeviceDeployment": "smartphone",
+      "sizeGB": "0.48",
+      "releaseDate": "2025-09-01",
+      "recommended": true,
+      "thinking": true,
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth//",
+          "type": "model"
+        }
+      ]
+    },
+    {
+      "variant": "4B",
+      "parameterCountBillions": 4,
+      "idealDeviceDeployment": "laptop",
+      "sizeGB": "2.5",
+      "releaseDate": "2025-09-01",
+      "recommended": true,
+      "thinking": true,
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/NobodyWho/Qwen_Qwen3-4B-GGUF/resolve/main/Qwen_Qwen3-4B-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth//",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

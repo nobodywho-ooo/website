@@ -1,0 +1,25 @@
+{
+  "name": "Granite 4.1",
+  "pipeline": "textGeneration",
+  "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
+  "logo": "./assets/logos/models/granite.svg",
+  "models": [
+    {
+      "variant": "3B",
+      "parameterCountBillions": 3,
+      "idealDeviceDeployment": "smartphone",
+      "sizeGB": "2.1",
+      "releaseDate": "2026-04-29",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/granite-4.1-3b-GGUF/resolve/main/granite-4.1-3b-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/granite-4.1-3b-GGUF/granite-4.1-3b-Q4_K_M.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

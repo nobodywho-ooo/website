@@ -1,0 +1,54 @@
+{
+  "name": "Ministral 3",
+  "pipeline": "imageTextToText",
+  "languages": ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Dutch", "Chinese", "Japanese", "Korean", "Arabic"],
+  "logo": "./assets/logos/models/ministral.svg",
+  "models": [
+    {
+      "variant": "3B - Instruct",
+      "parameterCountBillions": 3,
+      "idealDeviceDeployment": "smartphone",
+      "sizeGB": "2.15",
+      "releaseDate": "2025-07-31",
+      "thinking": true,
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-3B-Instruct-2512-GGUF/Ministral-3-3B-Instruct-2512-Q4_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-3B-Instruct-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-3B-Instruct-2512-GGUF/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    },
+    {
+      "variant": "14B - Reasoning",
+      "parameterCountBillions": 14,
+      "idealDeviceDeployment": "workstation",
+      "sizeGB": "8.24",
+      "releaseDate": "2025-07-31",
+      "thinking": true,
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-14B-Reasoning-2512-GGUF/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+          "type": "model"
+        },
+        {
+          "url": "https://huggingface.co/unsloth/Ministral-3-14B-Reasoning-2512-GGUF/resolve/main/mmproj-BF16.gguf",
+          "huggingfacePath": "hf:unsloth/Ministral-3-14B-Reasoning-2512-GGUF/mmproj-BF16.gguf",
+          "type": "projection"
+        }
+      ]
+    }
+  ]
+}

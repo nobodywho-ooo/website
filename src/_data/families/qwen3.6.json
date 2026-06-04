@@ -1,0 +1,26 @@
+{
+  "name": "Qwen3.6",
+  "pipeline": "textGeneration",
+  "languages": ["English", "French", "Portuguese", "German", "Romanian", "Swedish", "Danish", "Bulgarian", "Russian", "Czech", "Greek", "Ukrainian", "Spanish", "Dutch", "Slovak", "Croatian", "Polish", "Lithuanian", "Norwegian Bokmål", "Norwegian Nynorsk", "Persian", "Slovenian", "Gujarati", "Latvian", "Italian", "Occitan", "Nepali", "Marathi", "Belarusian", "Serbian", "Luxembourgish", "Venetian", "Assamese", "Welsh", "Silesian", "Asturian", "Chhattisgarhi", "Awadhi", "Maithili", "Bhojpuri", "Sindhi", "Irish", "Faroese", "Hindi", "Punjabi", "Bengali", "Oriya", "Tajik", "Eastern Yiddish", "Lombard", "Ligurian", "Sicilian", "Friulian", "Sardinian", "Galician", "Catalan", "Icelandic", "Tosk Albanian", "Limburgish", "Dari", "Afrikaans", "Macedonian", "Sinhala", "Urdu", "Magahi", "Bosnian", "Armenian", "Chinese", "Burmese", "Arabic", "Hebrew", "Maltese", "Indonesian", "Malay", "Tagalog", "Cebuano", "Javanese", "Sundanese", "Minangkabau", "Balinese", "Banjar", "Pangasinan", "Iloko", "Waray", "Tamil", "Telugu", "Kannada", "Malayalam", "Turkish", "North Azerbaijani", "Northern Uzbek", "Kazakh", "Bashkir", "Tatar", "Thai", "Lao", "Finnish", "Estonian", "Hungarian", "Vietnamese", "Khmer", "Japanese", "Korean", "Georgian", "Basque", "Haitian", "Papiamento", "Kabuverdianu", "Tok Pisin", "Swahili"],
+  "logo": "./assets/logos/models/qwen.svg",
+  "models": [
+    {
+      "variant": "35B A3B",
+      "parameterCountBillions": 35,
+      "idealDeviceDeployment": "workstation",
+      "sizeGB": "16.6",
+      "releaseDate": "2026-04-01",
+      "thinking": true,
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q3_K_M.gguf",
+          "huggingfacePath": "hf:unsloth/Qwen3.6-35B-A3B-GGUF/Qwen3.6-35B-A3B-UD-Q3_K_M.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

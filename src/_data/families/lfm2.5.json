@@ -1,0 +1,25 @@
+{
+  "name": "LFM2.5",
+  "pipeline": "textGeneration",
+  "languages": ["English", "Arabic", "Chinese", "French", "German", "Japanese", "Korean", "Spanish"],
+  "logo": "./assets/logos/models/liquid.svg",
+  "models": [
+    {
+      "variant": "350M",
+      "parameterCountBillions": 0.4,
+      "idealDeviceDeployment": "smartwatch",
+      "sizeGB": "0.2",
+      "releaseDate": "2026-01-01",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q4_K_M.gguf",
+          "huggingfacePath": "hf:LiquidAI/LFM2.5-350M-GGUF/LFM2.5-350M-Q4_K_M.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

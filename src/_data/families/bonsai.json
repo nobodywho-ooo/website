@@ -1,0 +1,26 @@
+{
+  "name": "1-bit Bonsai",
+  "pipeline": "textGeneration",
+  "languages": ["English", "German", "Spanish", "French", "Japanese", "Portuguese", "Arabic", "Czech", "Italian", "Korean", "Dutch", "Chinese"],
+  "logo": "./assets/logos/models/bonsai.svg",
+  "models": [
+    {
+      "variant": "1.7B",
+      "parameterCountBillions": 1.7,
+      "idealDeviceDeployment": "smartwatch",
+      "sizeGB": "0.2",
+      "releaseDate": "2026-03-31",
+      "tags": ["Dense intelligence"],
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf"
+      },
+      "downloadLinks": [
+        {
+          "url": "https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B.gguf",
+          "huggingfacePath": "hf:prism-ml/Bonsai-1.7B-gguf/Bonsai-1.7B.gguf",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

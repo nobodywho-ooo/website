@@ -1,0 +1,38 @@
+{% import "macros/model-icons.njk" as iconModel %}
+{% import "macros/model-modal.njk" as modal %}
+
+{% macro modelCard(m, idx, sortable) %}
+    <li
+        role="button"
+        tabindex="0"
+        @click="$event.target.closest('a') || $dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
+        @keydown.enter="$dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
+        @keydown.space.prevent="$dispatch('open-modal', $el.querySelector('[data-modal-body]').innerHTML)"
+        class="flex flex-col rounded-2xl p-6 inset-ring inset-ring-gray-100 transition-colors duration-200 cursor-pointer
+            hover:bg-gray-50
+            dark:inset-ring-white/5 dark:hover:bg-white/5"{% if sortable %} :style="'order: ' + rank({{ idx }})"{% endif %}>
+        <div class="flex items-start gap-x-4">
+            {% if m.familyLogo %}
+                <span
+                    class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-white p-2 text-neutral-700 ring-1 ring-black/5"
+                    aria-hidden="true">
+                    {{ m.familyLogo | inlineLogo | safe }}
+                </span>
+            {% endif %}
+            <div class="min-w-0">
+                <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">{{ m.familyName }} · {{ m.variant }}</h3>
+                <p class="text-sm text-neutral-400">{{ m.labName }}</p>
+            </div>
+        </div>
+
+        
+        <div class="my-4 [&_p]:my-0">
+            <p class="text-sm font-semibold text-neutral-900 dark:text-white">{{ m.pipeline | pipelineLabel }}</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">Released in {{ m.releaseDate | monthYear }}</p>
+        </div>
+
+        {{ iconModel.tagBadges(m) }}
+
+        <template data-modal-body>{{ modal.modelModalBody(m) }}</template>
+    </li>
+{% endmacro %}

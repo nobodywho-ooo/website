@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Google",
+    "country": "USA",
+    "families": ["gemma4"]
+  },
+  {
+    "name": "Alibaba Cloud",
+    "country": "China",
+    "families": ["qwen3.6", "qwen3", "qwen3-VL"]
+  },
+  {
+    "name": "Mistral",
+    "country": "France",
+    "families": ["ministral3"]
+  },
+  {
+    "name": "IBM",
+    "country": "USA",
+    "families": ["granite4.1"]
+  },
+  {
+    "name": "Prism ML",
+    "country": "USA",
+    "families": ["bonsai"]
+  },
+  {
+    "name": "Liquid",
+    "country": "USA",
+    "families": ["lfm2", "lfm2.5"]
+  },
+  {
+    "name": "Meta",
+    "country": "USA",
+    "families": ["llama3.2"]
+  }
+]
