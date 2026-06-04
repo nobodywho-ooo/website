@@ -4,10 +4,9 @@
             id="orbit-canvas"
             class="pointer-events-none absolute inset-0 h-full w-full"
             style="opacity: 0; transition: opacity 1.5s ease-out;"></canvas>
-
         <div class="relative z-10 max-w-xs text-center">
-            <h2 class="text-4xl font-semibold tracking-tight text-pretty text-neutral-950 sm:text-5xl dark:text-white">
-                Thousands of<br>LLMs
+            <h2 class="text-4xl font-semibold text-neutral-950 sm:text-5xl dark:text-white">
+                Model selection
             </h2>
             <div class="mt-10">
                 {% button "Find yours", "/models/", "" %}
@@ -15,5 +14,4 @@
         </div>
     </div>
 </section>
-
 <script defer src="{{ '/assets/js/orbit.js' | url }}"></script>
