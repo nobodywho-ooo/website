@@ -12,9 +12,9 @@
 
 {% macro laptopIcon(klass) %}<svg class="{{ klass }} shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" /></svg>{% endmacro %}
 
-{% macro computerIcon(klass) %}<svg class="{{ klass }} shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" /></svg>{% endmacro %}
+{% macro workstationIcon(klass) %}<svg class="{{ klass }} shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 3h8.5A2.25 2.25 0 0 1 16 5.25v13.5A2.25 2.25 0 0 1 13.75 21h-8.5A2.25 2.25 0 0 1 3 18.75V5.25A2.25 2.25 0 0 1 5.25 3Zm.75 3.75h6.5M6 9.75h6.5M9.5 15.75v.008M19.5 8.25v7.5" /></svg>{% endmacro %}
 
-{% macro deviceIcon(device, klass) %}{% if device === "smartphone" %}{{ smartphoneIcon(klass) }}{% elif device === "smartwatch" %}{{ smartwatchIcon(klass) }}{% elif device === "laptop" %}{{ laptopIcon(klass) }}{% elif device === "computer" %}{{ computerIcon(klass) }}{% endif %}{% endmacro %}
+{% macro deviceIcon(device, klass) %}{% if device === "smartphone" %}{{ smartphoneIcon(klass) }}{% elif device === "smartwatch" %}{{ smartwatchIcon(klass) }}{% elif device === "laptop" %}{{ laptopIcon(klass) }}{% elif device === "workstation" %}{{ workstationIcon(klass) }}{% endif %}{% endmacro %}
 
 {% macro tagBadges(m, showLanguages=true) %}
     {% set badgeClass = "inline-flex items-center gap-x-1 rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700 dark:bg-white/10 dark:text-neutral-300" %}

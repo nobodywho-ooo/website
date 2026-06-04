@@ -30,7 +30,7 @@
     {
       "variant": "14B - Reasoning",
       "parameterCountBillions": 14,
-      "idealDeviceDeployment": "computer",
+      "idealDeviceDeployment": "workstation",
       "sizeGB": "8.24",
       "releaseDate": "2025-07-31",
       "thinking": true,

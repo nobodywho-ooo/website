@@ -7,7 +7,7 @@
     {
       "variant": "35B A3B",
       "parameterCountBillions": 35,
-      "idealDeviceDeployment": "computer",
+      "idealDeviceDeployment": "workstation",
       "sizeGB": "16.6",
       "releaseDate": "2026-04-01",
       "thinking": true,
