@@ -1,15 +1,11 @@
 ---
 title: LLM, give me a JSON. Make no mistakes.
 date: 2026-06-01
-description: "So how *exactly* do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast? Diving into constrained sampling."
+description: "So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast? Diving into constrained sampling."
 slug: "llm-give-me-a-json"
+categories: ["Technical"]
 ---
 
-
-<style>
-.post-img-wrap { position:relative; padding-bottom:56.25%; background:#000; overflow:hidden; }
-.post-img-wrap img { position:absolute; top:0; left:0; width:100%; height:100%; margin:0; }
-</style>
 
 So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast?
 
@@ -76,17 +72,7 @@ Instead of simply sampling from the distribution immediately, we can start by se
 leading to incorrect output to 0. This way, we are guaranteed to only sample (and thus output) a correct token.
 If we wanted just a number, we could do something like:
 
-<div class="post-img-wrap">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/before_masking.png" alt="Token probability distribution before masking" style="animation:cf-masking 4s infinite 0s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/after_masking.png"  alt="Token probability distribution after masking"  style="animation:cf-masking 4s infinite 2s;">
-</div>
-<style>
-@keyframes cf-masking {
-  0%,42%  { opacity:1; }
-  50%,92% { opacity:0; }
-  100%    { opacity:1; }
-}
-</style>
+![Token probability distribution before and after masking](/assets/images/blog/2026/llm-give-me-a-json/masking.gif)
 
 Technically, this process is called "masking". One more detail to address is that just shrinking the probability of the tokens we don't want to 0
 would break the distribution property (we want the probabilities to sum to 1). In reality the solution is therefore to set the underlying
@@ -215,22 +201,7 @@ Applying rule (3), as the top is a character which matches the input.
 
 Then, nothing new happens. We just go by the previous rules (2, 3, 2, 3).
 
-<div class="post-img-wrap">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-6.jpeg"  alt="stack: [[0-9], DIGITS], string: 1234" style="animation:cf-loop 10.5s infinite 0s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-7.jpeg"  alt="stack: [DIGITS], string: 234"         style="animation:cf-loop 10.5s infinite 1.5s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-8.jpeg"  alt="stack: [[0-9], DIGITS], string: 234"  style="animation:cf-loop 10.5s infinite 3s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-9.jpeg"  alt="stack: [DIGITS], string: 34"          style="animation:cf-loop 10.5s infinite 4.5s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-10.jpeg" alt="stack: [[0-9], DIGITS], string: 34"   style="animation:cf-loop 10.5s infinite 6s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-11.jpeg" alt="stack: [DIGITS], string: 4"           style="animation:cf-loop 10.5s infinite 7.5s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-12.jpeg" alt="stack: [[0-9]], string: 4"            style="animation:cf-loop 10.5s infinite 9s;">
-</div>
-<style>
-@keyframes cf-loop {
-  0%,12%  { opacity:1; }
-  14%,88% { opacity:0; }
-  100%    { opacity:1; }
-}
-</style>
+![Top-down parsing repeatedly expanding DIGITS and consuming the input string](/assets/images/blog/2026/llm-give-me-a-json/top-down-parsing-loop.gif)
 
 Until arriving at the empty stack and empty input. Well done! We can apply rule (4) and accept.
 
@@ -265,17 +236,7 @@ There is however one small caveat. Imagine sampling from the following distribut
 Initializing the stack again with the INT rule, and running the parsing, we end up just with `-42` and `-`.
 Now we sample, choosing the respective stack associated with the token. Let's say we sampled `-42`.
 
-<div class="post-img-wrap">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/token-parsing-2.jpeg" alt="Two candidate stacks for -42 and -"            style="animation:cf-token 4s infinite 0s;">
-  <img src="/assets/images/blog/2026/llm-give-me-a-json/token-parsing-3.jpeg" alt="Both candidate stacks accepted with checkmarks" style="animation:cf-token 4s infinite 2s;">
-</div>
-<style>
-@keyframes cf-token {
-  0%,42%  { opacity:1; }
-  50%,92% { opacity:0; }
-  100%    { opacity:1; }
-}
-</style>
+![Two candidate stacks for -42 and -, both accepted with checkmarks](/assets/images/blog/2026/llm-give-me-a-json/token-parsing.gif)
 
 To continue and get the next token, we can't just reset the stack with the INT rule, but have to remember
 the position in the grammar and the corresponding stack.
@@ -307,7 +268,7 @@ The main problem with llama.cpp is, that we are doing _a lot_ of work per step. 
 If you however would have to choose a solution yourself, consider this graph:
 ![LLGuidance benchmark: time-to-first-mask vs time-between-masks across engines](/assets/images/blog/2026/llm-give-me-a-json/llguidance-hero.png)
 
-<small>Source: <a href="https://github.com/guidance-ai/jsonschemabench">guidance-ai/jsonschemabench</a> — MaskBench benchmark</small>
+*Source: [guidance-ai/jsonschemabench](https://github.com/guidance-ai/jsonschemabench) — MaskBench benchmark*
 
 Clearly, there is a tradeoff going on. Engines like XGrammar and Outlines, which choose more precomputation, suffer
 from long "loading" times (shown as TTFM). On the other hand, llama.cpp does little precomputation, but then is generally slower
@@ -363,5 +324,4 @@ chat = Chat("model.gguf")
 answer = chat.ask("Is water wet?").completed()
 print(answer)
 ```
-If you value the same things, come and [become a contributor](https://github.com/nobodywho-ooo/nobodywho)
-or just [download and test our library](https://docs.nobodywho.ooo/).
+If you value the same things, come and [become a contributor](https://github.com/nobodywho-ooo/nobodywho) or just [download and test our library](https://docs.nobodywho.ooo/).
