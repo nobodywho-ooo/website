@@ -6,17 +6,18 @@ metadata:
   title: "NobodyWho Blog"
   subtitle: "NobodyWho is an inference engine that lets you run LLMs locally on any device"
   language: "en"
-  base: "https://nobodywho.ooo"
+  base: "https://www.nobodywho.ai"
   author:
     name: "NobodyWho"
     email: "info@nobodywho.ai"
 ---
+
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language }}">
   <title>{{ metadata.title }}</title>
   <subtitle>{{ metadata.subtitle }}</subtitle>
-  <link href="{{ metadata.base }}/feed.xml" rel="self" />
-  <link href="{{ metadata.base }}/" />
+  <link href="{{ metadata.base }}/feed.xml" rel="self"/>
+  <link href="{{ metadata.base }}/"/>
   <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>{{ metadata.base }}/</id>
   <author>
@@ -24,16 +25,16 @@ metadata:
     <email>{{ metadata.author.email }}</email>
   </author>
   {%- for post in collections.posts | reverse %}
-  {%- set absolutePostUrl %}{{ metadata.base }}{{ post.url }}{% endset %}
-  <entry>
-    <title>{{ post.data.title }}</title>
-    <link href="{{ absolutePostUrl }}" />
-    <updated>{{ post.date | dateToRfc3339 }}</updated>
-    <id>{{ absolutePostUrl }}</id>
-    {%- if post.data.description %}
-    <summary>{{ post.data.description }}</summary>
-    {%- endif %}
-    <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
-  </entry>
+    {%- set absolutePostUrl %}{{ metadata.base }}{{ post.url }}{% endset %}
+    <entry>
+      <title>{{ post.data.title }}</title>
+      <link href="{{ absolutePostUrl }}"/>
+      <updated>{{ post.date | dateToRfc3339 }}</updated>
+      <id>{{ absolutePostUrl }}</id>
+      {%- if post.data.description %}
+        <summary>{{ post.data.description }}</summary>
+      {%- endif %}
+      <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+    </entry>
   {%- endfor %}
 </feed>
