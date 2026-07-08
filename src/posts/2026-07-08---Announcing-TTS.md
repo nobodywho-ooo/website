@@ -9,12 +9,12 @@ slug: "announcing-text-to-speech"
 
 ![TTS with NobodyWho](/assets/images/blog/2026/announcing-text-to-speech/nobodywho-text-to-speech.png)
 
-Today, Text-to-Speech is landing in NobodyWho! 🔊
+Today, Text to Speech is landing in NobodyWho! 🔊
 
 This is another step on our way to become do it all local model inference library.
-We released support for Kokoro, with Piper, Chatterbox, and Røest coming over the summer, after we finish internal phase of testing.
+We released support for **Kokoro** & **Supertonic**, with Piper, Chatterbox, and Røest coming over the summer, after we finish internal phase of testing.
 
-TTS is wild west with many different architectures, and we cannot use our beloved llama.cpp for inference.
+Text to Speech (TTS) is the wild west with many different architectures, and we cannot use our beloved llama.cpp for inference.
 Thus, we had to develop our own solution.
 There are several ways to do it. One can wrap existing implementations behind a common interface, using tensor library such as candle to spell out the forward passes, or leverage onnx to handle inference and backend support for us.
 In the end, we decided to go with onnx for two main reasons.
@@ -26,7 +26,7 @@ Moreover, we want to get on top of supporting new model releases, so relying on 
 
 Also, we would like to faithfuly support the upstream as much as possible, which sometimes require custom glueing code (phoneme translations between espeak and misaki)
 
-We are also picky about the dependencies, and already existing projects sometimes depend on c/cpp libs, something we are actively trying to avoid due to build issues on various platforms we support.
+We are also picky about the dependencies, and already existing projects sometimes depend on C/C++ libs, something we are actively trying to avoid due to build issues on various platforms we support.
 
 Candle vs onnx, and why we like candle but do not use it - backend support
 
