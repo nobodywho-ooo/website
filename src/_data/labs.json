@@ -33,5 +33,15 @@
     "name": "Meta",
     "country": "USA",
     "families": ["llama3.2"]
+  },
+  {
+    "name": "Hexgrad",
+    "country": "USA",
+    "families": ["kokoro"]
+  },
+  {
+    "name": "Supertone",
+    "country": "Korea",
+    "families": ["supertonic3"]
   }
 ]

@@ -27,20 +27,21 @@
     {% set menuClass = "absolute left-0 top-full z-20 mt-2 w-max min-w-full rounded-2xl bg-white p-2 shadow-lg inset-ring inset-ring-gray-200 dark:bg-neutral-800 dark:inset-ring-white/10" %}
     {% set itemClass = "block w-full cursor-pointer whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-neutral-700 transition-colors hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-white/10" %}
 
-    {% if m.downloadLinks.length or m.huggingface.pageUrl %}
+    {% set downloadable = m.downloadLinks | selectattr("url") | list %}
+    {% if downloadable.length or m.huggingface.pageUrl %}
         <div class="my-10 flex flex-wrap gap-3">
-            {% if m.downloadLinks.length === 1 %}
-                <a href="{{ m.downloadLinks[0].url }}" target="_blank" rel="noopener" class="{{ btnClass }}">
-                    Download {{ m.downloadLinks[0].type | capitalize }}
+            {% if downloadable.length === 1 %}
+                <a href="{{ downloadable[0].url }}" target="_blank" rel="noopener" class="{{ btnClass }}">
+                    Download {{ downloadable[0].type | capitalize }}
                 </a>
-            {% elif m.downloadLinks.length > 1 %}
+            {% elif downloadable.length > 1 %}
                 <details class="relative">
                     <summary class="{{ summaryClass }}">
                         Download
                         <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" /></svg>
                     </summary>
                     <div class="{{ menuClass }}">
-                        {% for link in m.downloadLinks %}
+                        {% for link in downloadable %}
                             <a href="{{ link.url }}" target="_blank" rel="noopener" class="{{ itemClass }}">{{ link.type | capitalize }}</a>
                         {% endfor %}
                     </div>
