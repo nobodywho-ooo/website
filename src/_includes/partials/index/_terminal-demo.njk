@@ -1,4 +1,4 @@
-<div class="py-24 sm:py-32" x-data="{ tab: 'react-native', mode: 'llm' }" x-effect="if (tab === 'godot') mode = 'llm'">
+<div class="py-24 sm:py-32" x-data="{ tab: 'react-native', mode: 'llm' }">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mb-10 sm:mb-12">
             <p class="font-satoshi font-medium text-[20px] text-[#A4A4A4] mb-0 sm:mb-0 md:mb-0 lg:mb-0">Integrate</p>
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                    {% set ttsPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python'] %}
+                    {% set ttsPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
                     {% for platform in ttsPlatforms %}
                         <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'tts'">
                             <div class="terminal__header">
@@ -86,10 +86,8 @@
                     <button
                         type="button"
                         @click="mode = 'tts'"
-                        :disabled="tab === 'godot'"
                         :class="mode === 'tts' && 'demo-toggle--active'"
-                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors
-                            disabled:cursor-not-allowed disabled:opacity-40">
+                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
                         TTS - Speaking</button>
                 </div>
             </div>

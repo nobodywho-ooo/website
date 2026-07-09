@@ -1,0 +1,19 @@
+{% highlight "python" %}
+extends Node
+
+@onready var tts: NobodyWhoTts = $NobodyWhoTts
+
+func _ready():
+    tts.source = "NobodyWho/Kokoro-82M"
+
+    tts.start_worker()
+    await tts.worker_started
+
+    var result: Dictionary = await tts.synthesize("Hello from NobodyWho!")
+    if not result.ok:
+        push_error(result.error)
+        return
+
+    var file = FileAccess.open("user://out.wav", FileAccess.WRITE)
+    file.store_buffer(result.wav)
+{% endhighlight %}
