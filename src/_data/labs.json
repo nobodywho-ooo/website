@@ -5,7 +5,7 @@
     "families": ["gemma4"]
   },
   {
-    "name": "Alibaba Cloud",
+    "name": "Qwen",
     "country": "China",
     "families": ["qwen3.6", "qwen3", "qwen3-VL"]
   },
