@@ -1,0 +1,5 @@
+{% highlight "kotlin" %}
+val stt = Stt(source = "hf://onnx-community/whisper-base")
+
+val text = stt.transcribeFile("recording.mp3").completed()
+{% endhighlight %}

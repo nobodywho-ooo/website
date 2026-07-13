@@ -1,0 +1,25 @@
+{
+  "name": "Supertonic 3",
+  "pipeline": "textToSpeech",
+  "languages": ["English", "Korean", "Japanese", "Arabic", "Bulgarian", "Czech", "Danish", "German", "Greek", "Spanish", "Estonian", "Finnish", "French", "Hindi", "Croatian", "Hungarian", "Indonesian", "Italian", "Lithuanian", "Latvian", "Dutch", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Swedish", "Turkish", "Ukrainian", "Vietnamese"],
+  "logo": "./assets/logos/models/supertonic.svg",
+  "models": [
+    {
+      "variant": "99M",
+      "parameterCountBillions": 0.099,
+      "idealDeviceDeployment": "laptop",
+      "sizeGB": "0.4",
+      "releaseDate": "2026-05-17",
+      "tags": ["Large language support"],
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/Supertone/supertonic-3"
+      },
+      "downloadLinks": [
+        {
+          "huggingfacePath": "hf:Supertone/supertonic-3",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

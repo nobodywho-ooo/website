@@ -1,0 +1,8 @@
+{% highlight "python" %}
+stt.model_path = "hf://onnx-community/whisper-base"
+stt.start_worker()
+await stt.worker_started
+
+stt.transcribe_file("res://recording.mp3")
+var text = await stt.transcription_finished
+{% endhighlight %}

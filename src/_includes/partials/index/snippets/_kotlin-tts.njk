@@ -1,0 +1,10 @@
+{% highlight "kotlin" %}
+val tts = Tts.load(
+    source = "NobodyWho/Kokoro-82M",
+    voice = "bf_emma",
+    language = "en-gb",
+)
+
+val wav = tts.synthesize(text = "Hello from NobodyWho!")
+File("out.wav").writeBytes(wav)
+{% endhighlight %}

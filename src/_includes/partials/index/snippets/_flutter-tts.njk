@@ -1,0 +1,10 @@
+{% highlight "dart" %}
+final tts = await nobodywho.Tts.load(
+  source: 'NobodyWho/Kokoro-82M',
+  voice: 'bf_emma',
+  language: 'en-gb',
+);
+
+final wav = await tts.synthesize(text: 'Hello from NobodyWho!');
+await File('out.wav').writeAsBytes(wav);
+{% endhighlight %}

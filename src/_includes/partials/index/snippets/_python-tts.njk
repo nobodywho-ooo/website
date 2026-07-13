@@ -1,0 +1,10 @@
+{% highlight "python" %}
+tts = Tts(
+    source="NobodyWho/Kokoro-82M",
+    voice="bf_emma",
+    language="en-gb",
+)
+
+wav = tts.synthesize("Hello from NobodyWho!")
+Path("out.wav").write_bytes(wav)
+{% endhighlight %}

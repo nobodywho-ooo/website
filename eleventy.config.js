@@ -76,6 +76,7 @@ export default async function(eleventyConfig) {
     imageTextToText: "Image/Text to Text",
     audioTextToText: "Audio/Text to Text",
     imageAudioTextToText: "Image/Audio/Text to Text",
+    textToSpeech: "Text To Speech",
     featureExtraction: "Feature extraction",
     textRanking: "Text ranking",
   };

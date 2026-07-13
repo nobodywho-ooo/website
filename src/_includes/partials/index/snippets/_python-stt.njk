@@ -1,0 +1,5 @@
+{% highlight "python" %}
+stt = STT(source="hf://onnx-community/whisper-base")
+
+text = stt.transcribe_file("recording.mp3").completed()
+{% endhighlight %}

@@ -1,0 +1,9 @@
+{% highlight "ts" %}
+const tts = await Tts.load({
+  source: "NobodyWho/Kokoro-82M",
+  voice: "bf_emma",
+  language: "en-gb",
+});
+
+const wav = await tts.synthesize("Hello from NobodyWho!");
+{% endhighlight %}

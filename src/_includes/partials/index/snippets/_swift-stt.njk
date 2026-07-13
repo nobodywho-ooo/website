@@ -1,0 +1,5 @@
+{% highlight "swift" %}
+let stt = try STT(source: "hf://onnx-community/whisper-base")
+
+let text = try await stt.transcribeFile(path: "recording.mp3").completed()
+{% endhighlight %}
