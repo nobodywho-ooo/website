@@ -5,11 +5,12 @@ categories: ["Feature", "Release"]
 description: "NobodyWho now ships STT & TTS — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
 slug: "announcing-stt-tts"
+draft: true
 ---
 
 ![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-stt-tts.png)
 
-Today, Text to Speech is landing in NobodyWho! 🔊
+Today, Speech To Text & Text To Speech are landing in NobodyWho! 🔊
 
 This is another step on our way to become do it all local model inference library.
 We released support for **Kokoro** & **Supertonic**, with Piper, Chatterbox, and Røest coming over the summer, after we finish internal phase of testing.
