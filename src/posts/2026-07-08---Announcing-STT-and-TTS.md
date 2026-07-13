@@ -1,13 +1,13 @@
 ---
-title: Announcing Text To Speech
+title: Announcing Speech To Text & Text To Speech
 date: 2026-07-08
 categories: ["Feature", "Release"]
-description: "NobodyWho now ships TTS — easily generate audio from text!"
-image: /assets/images/blog/2026/announcing-text-to-speech/nobodywho-text-to-speech.png
+description: "NobodyWho now ships STT & TTS — easily generate and transcribe audio!"
+image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
 slug: "announcing-text-to-speech"
 ---
 
-![TTS with NobodyWho](/assets/images/blog/2026/announcing-text-to-speech/nobodywho-text-to-speech.png)
+![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png)
 
 Today, Text to Speech is landing in NobodyWho! 🔊
 
