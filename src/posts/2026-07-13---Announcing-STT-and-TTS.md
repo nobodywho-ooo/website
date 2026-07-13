@@ -4,7 +4,7 @@ date: 2026-07-13
 categories: ["Feature", "Release"]
 description: "NobodyWho now ships STT & TTS — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
-slug: "announcing-text-to-speech"
+slug: "announcing-stt-tts"
 ---
 
 ![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png)
