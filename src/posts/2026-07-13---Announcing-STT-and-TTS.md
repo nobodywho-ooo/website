@@ -7,7 +7,7 @@ image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
 slug: "announcing-stt-tts"
 ---
 
-![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png)
+![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-stt-tts.png)
 
 Today, Text to Speech is landing in NobodyWho! 🔊
 
