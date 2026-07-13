@@ -24,6 +24,21 @@
                             </div>
                         </div>
                     {% endfor %}
+                    {% set sttPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
+                    {% for platform in sttPlatforms %}
+                        <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'stt'">
+                            <div class="terminal__header">
+                                <div class="terminal__dots">
+                                    <span class="terminal__dot terminal__dot--red"></span>
+                                    <span class="terminal__dot terminal__dot--yellow"></span>
+                                    <span class="terminal__dot terminal__dot--green"></span>
+                                </div>
+                            </div>
+                            <div class="terminal__body">
+                                {% include "partials/index/snippets/_" + platform + "-stt.njk" %}
+                            </div>
+                        </div>
+                    {% endfor %}
                     {% set ttsPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
                     {% for platform in ttsPlatforms %}
                         <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'tts'">
@@ -83,6 +98,12 @@
                         :class="mode === 'llm' && 'demo-toggle--active'"
                         class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
                         LLM - Language</button>
+                    <button
+                        type="button"
+                        @click="mode = 'stt'"
+                        :class="mode === 'stt' && 'demo-toggle--active'"
+                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
+                        STT - Hearing</button>
                     <button
                         type="button"
                         @click="mode = 'tts'"

@@ -1,0 +1,5 @@
+{% highlight "dart" %}
+final stt = nobodywho.Stt(source: 'hf://onnx-community/whisper-base');
+
+final text = await stt.transcribeFile('recording.mp3').completed();
+{% endhighlight %}
