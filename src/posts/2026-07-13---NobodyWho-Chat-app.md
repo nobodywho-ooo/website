@@ -1,6 +1,6 @@
 ---
 title: "NobodyWho Chat app"
-date: 2026-07-07
+date: 2026-07-13
 categories: ["Apps", "React Native"]
 description: "NobodyWho Chat app is now available on mobile!"
 image: /assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-app-preview.png
@@ -23,7 +23,7 @@ The app also supports **vision and hearing**: give it an image or an audio clip 
 
 NobodyWho Chat is built with **React Native**, and it's fully **open-source**. The code is on GitHub for anyone curious about how a local LLM chat app comes together, or looking to build their own with [NobodyWho's React Native bindings](https://docs.nobodywho.ooo/react-native/).
 
-Why NobodyWho Chat:
+### Why NobodyWho Chat:
 - Works offline, no account required
 - Fully private, your data never leaves your device
 - Download and use latest AI models
