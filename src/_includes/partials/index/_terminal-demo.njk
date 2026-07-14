@@ -1,151 +1,116 @@
-<div class="py-24 sm:py-32" x-data="{ tab: 'flutter' }">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8 flex justify-center">
-        <div class="grid grid-cols-1 sm:hidden">
-            <select
-                aria-label="Select a tab"
-                x-model="tab"
-                class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-neutral-900
-                    outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600
-                    dark:bg-gray-800/50 dark:text-neutral-100 dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-primary-500">
-                <option value="flutter">Flutter</option>
-                <option value="react-native">React Native</option>
-                <option value="kotlin">Kotlin</option>
-                <option value="swift">Swift</option>
-                <option value="python">Python</option>
-                <option value="godot">Godot</option>
-            </select>
-            <svg
-                viewbox="0 0 16 16"
-                fill="currentColor"
-                data-slot="icon"
-                aria-hidden="true"
-                class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end fill-gray-500
-                    dark:fill-gray-400">
-                <path
-                    d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75
-                        0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"/>
-            </svg>
+<div class="py-24 sm:py-32" x-data="{ tab: 'react-native', mode: 'llm' }">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mb-10 sm:mb-12">
+            <p class="font-satoshi font-medium text-[20px] text-[#A4A4A4] mb-0 sm:mb-0 md:mb-0 lg:mb-0">Integrate</p>
+            <h2 class="font-satoshi font-bold text-[35px] text-gray-900 dark:text-white mt-2">Start using AI in a few lines of code</h2>
         </div>
-        <div class="hidden sm:block">
-            <nav aria-label="Tabs" class="flex space-x-4 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-xl">
-                <button
-                    type="button"
-                    @click="tab = 'flutter'"
-                    :class="tab === 'flutter' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Flutter</button>
-                <button
-                    type="button"
-                    @click="tab = 'react-native'"
-                    :class="tab === 'react-native' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    React Native</button>
-                <button
-                    type="button"
-                    @click="tab = 'kotlin'"
-                    :class="tab === 'kotlin' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Kotlin</button>
-                <button
-                    type="button"
-                    @click="tab = 'swift'"
-                    :class="tab === 'swift' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Swift</button>
-                <button
-                    type="button"
-                    @click="tab = 'python'"
-                    :class="tab === 'python' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Python</button>
-                <button
-                    type="button"
-                    @click="tab = 'godot'"
-                    :class="tab === 'godot' ? 'rounded-xl bg-white dark:bg-primary-600 font-semibold text-neutral-900 dark:text-primary-100'
-                        : 'rounded-full font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'"
-                    class="px-7 py-1.5 text-lg cursor-pointer">
-                    Godot</button>
-            </nav>
-        </div>
-    </div>
-    <div class="mx-auto max-w-5xl px-4 lg:px-8 py-10 sm:py-12 sm:pt-26 pt-10">
-        <div class="terminal" x-show="tab === 'flutter'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
+        <div class="flex flex-col lg:flex-row overflow-hidden rounded-3xl">
+            <div
+                class="lg:w-[70%] flex items-center justify-center bg-cover bg-center p-6 sm:p-10 lg:min-h-[540px]"
+                style="background-image: url('/assets/images/index/terminal-demo-bg.png')">
+                <div class="w-full max-w-3xl">
+                    {% set platforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
+                    {% for platform in platforms %}
+                        <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'llm'">
+                            <div class="terminal__header">
+                                <div class="terminal__dots">
+                                    <span class="terminal__dot terminal__dot--red"></span>
+                                    <span class="terminal__dot terminal__dot--yellow"></span>
+                                    <span class="terminal__dot terminal__dot--green"></span>
+                                </div>
+                            </div>
+                            <div class="terminal__body">
+                                {% include "partials/index/snippets/_" + platform + ".njk" %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% set sttPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
+                    {% for platform in sttPlatforms %}
+                        <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'stt'">
+                            <div class="terminal__header">
+                                <div class="terminal__dots">
+                                    <span class="terminal__dot terminal__dot--red"></span>
+                                    <span class="terminal__dot terminal__dot--yellow"></span>
+                                    <span class="terminal__dot terminal__dot--green"></span>
+                                </div>
+                            </div>
+                            <div class="terminal__body">
+                                {% include "partials/index/snippets/_" + platform + "-stt.njk" %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% set ttsPlatforms = ['react-native', 'flutter', 'kotlin', 'swift', 'python', 'godot'] %}
+                    {% for platform in ttsPlatforms %}
+                        <div class="terminal" x-show="tab === '{{ platform }}' && mode === 'tts'">
+                            <div class="terminal__header">
+                                <div class="terminal__dots">
+                                    <span class="terminal__dot terminal__dot--red"></span>
+                                    <span class="terminal__dot terminal__dot--yellow"></span>
+                                    <span class="terminal__dot terminal__dot--green"></span>
+                                </div>
+                            </div>
+                            <div class="terminal__body">
+                                {% include "partials/index/snippets/_" + platform + "-tts.njk" %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_flutter.njk" %}
-            </div>
-        </div>
-        <div class="terminal" x-show="tab === 'react-native'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
+            <div class="lg:w-[30%] bg-[#F8F9F6] dark:bg-[#2F2F2F] flex flex-col justify-center lg:justify-start gap-10 p-8 sm:p-10
+                    lg:pt-14">
+                <div>
+                    <label for="platform" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Platform</label>
+                    <div class="mt-2 grid grid-cols-1">
+                        <select
+                            id="platform"
+                            name="platform"
+                            x-model="tab"
+                            class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900
+                                outline-1 -outline-offset-1 outline-gray-300 focus-visible:outline-2 focus-visible:-outline-offset-2
+                                focus-visible:outline-primary-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800
+                                dark:focus-visible:outline-primary-500">
+                            <option value="react-native">React Native</option>
+                            <option value="flutter">Flutter</option>
+                            <option value="kotlin">Kotlin</option>
+                            <option value="swift">Swift</option>
+                            <option value="python">Python</option>
+                            <option value="godot">Godot</option>
+                        </select>
+                        <svg
+                            viewbox="0 0 16 16"
+                            fill="currentColor"
+                            data-slot="icon"
+                            aria-hidden="true"
+                            class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4
+                                dark:text-gray-400">
+                            <path
+                                d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75
+                                    0 0 1 0-1.06Z"
+                                clip-rule="evenodd"
+                                fill-rule="evenodd"/>
+                        </svg>
+                    </div>
                 </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_react-native.njk" %}
-            </div>
-        </div>
-        <div class="terminal" x-show="tab === 'kotlin'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
+                <div class="flex flex-col items-start gap-4 lg:flex-1 lg:justify-end lg:pb-6">
+                    <button
+                        type="button"
+                        @click="mode = 'llm'"
+                        :class="mode === 'llm' && 'demo-toggle--active'"
+                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
+                        LLM - Language</button>
+                    <button
+                        type="button"
+                        @click="mode = 'stt'"
+                        :class="mode === 'stt' && 'demo-toggle--active'"
+                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
+                        STT - Hearing</button>
+                    <button
+                        type="button"
+                        @click="mode = 'tts'"
+                        :class="mode === 'tts' && 'demo-toggle--active'"
+                        class="demo-toggle font-satoshi font-medium text-[28px] leading-tight text-left cursor-pointer transition-colors">
+                        TTS - Speaking</button>
                 </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_kotlin.njk" %}
-            </div>
-        </div>
-        <div class="terminal" x-show="tab === 'swift'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
-                </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_swift.njk" %}
-            </div>
-        </div>
-        <div class="terminal" x-show="tab === 'python'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
-                </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_python.njk" %}
-            </div>
-        </div>
-        <div class="terminal" x-show="tab === 'godot'">
-            <div class="terminal__header">
-                <div class="terminal__dots">
-                    <span class="terminal__dot terminal__dot--red"></span>
-                    <span class="terminal__dot terminal__dot--yellow"></span>
-                    <span class="terminal__dot terminal__dot--green"></span>
-                </div>
-            </div>
-            <div class="terminal__body">
-                {% include "partials/index/snippets/_godot.njk" %}
             </div>
         </div>
     </div>

@@ -1,0 +1,10 @@
+{% highlight "swift" %}
+let tts = try await Tts.load(
+    source: "NobodyWho/Kokoro-82M",
+    voice: "bf_emma",
+    language: "en-gb"
+)
+
+let wav = try await tts.synthesize("Hello from NobodyWho!")
+try wav.write(to: URL(fileURLWithPath: "out.wav"))
+{% endhighlight %}

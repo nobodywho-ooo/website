@@ -5,7 +5,7 @@
     "families": ["gemma4"]
   },
   {
-    "name": "Alibaba Cloud",
+    "name": "Qwen",
     "country": "China",
     "families": ["qwen3.6", "qwen3", "qwen3-VL"]
   },
@@ -33,5 +33,15 @@
     "name": "Meta",
     "country": "USA",
     "families": ["llama3.2"]
+  },
+  {
+    "name": "Hexgrad",
+    "country": "USA",
+    "families": ["kokoro"]
+  },
+  {
+    "name": "Supertone",
+    "country": "Korea",
+    "families": ["supertonic3"]
   }
 ]

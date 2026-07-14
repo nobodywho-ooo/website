@@ -1,7 +1,7 @@
 /* Terminal Window */
 .terminal {
   background-color: #111b27;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -39,6 +39,33 @@
 .terminal__dot--red { background-color: #ff5f56; }
 .terminal__dot--yellow { background-color: #ffbd2e; }
 .terminal__dot--green { background-color: #27c93f; }
+
+/* LLM / TTS toggles in the terminal demo section */
+.demo-toggle {
+  color: #C2C3BD;
+}
+
+.demo-toggle:not(.demo-toggle--active):hover {
+  color: #737373;
+}
+
+.demo-toggle--active {
+  color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  .demo-toggle {
+    color: #5E5F58;
+  }
+
+  .demo-toggle:not(.demo-toggle--active):hover {
+    color: #a3a3a3;
+  }
+
+  .demo-toggle--active {
+    color: #fff;
+  }
+}
 
 /* Terminal Content */
 .terminal__body {

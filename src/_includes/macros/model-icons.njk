@@ -21,7 +21,7 @@
     {% if m.parameterCountBillions or m.sizeGB or m.idealDeviceDeployment or (showLanguages and m.languages.length) or m.thinking or m.tags.length %}
         <div class="mt-3 flex flex-wrap gap-2">
             {% if m.parameterCountBillions %}
-                <span class="{{ badgeClass }}">{{ cpuIcon("size-3.5") }}{{ m.parameterCountBillions }}B</span>
+                <span class="{{ badgeClass }}">{{ cpuIcon("size-3.5") }}{% if m.parameterCountBillions < 1 %}{{ (m.parameterCountBillions * 1000) | round }}M{% else %}{{ m.parameterCountBillions }}B{% endif %}</span>
             {% endif %}
             {% if m.sizeGB %}
                 <span class="{{ badgeClass }}">{{ sizeIcon("size-3.5") }}{{ m.sizeGB }} GB</span>
