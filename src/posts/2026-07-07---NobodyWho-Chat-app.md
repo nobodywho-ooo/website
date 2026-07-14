@@ -2,7 +2,7 @@
 title: "NobodyWho Chat app"
 date: 2026-07-07
 categories: ["Apps", "React Native"]
-description: "NobodyWho Swift bindings are now available! This article briefly introduces some of the interesting things we dealt with during development."
+description: "NobodyWho Chat app is now available on mobile!"
 image: /assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-app-preview.png
 slug: "nobodywho-chat-app"
 ---
