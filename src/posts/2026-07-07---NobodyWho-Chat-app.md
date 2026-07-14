@@ -1,7 +1,7 @@
 ---
 title: "NobodyWho Chat app"
 date: 2026-07-07
-categories: ["Apps", "Swift"]
+categories: ["Apps", "React Native"]
 description: "NobodyWho Swift bindings are now available! This article briefly introduces some of the interesting things we dealt with during development."
 image: /assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-app-preview.png
 slug: "nobodywho-chat-app"
@@ -32,8 +32,8 @@ Why NobodyWho Chat:
 ![NobodyWho Chat app download](/assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-download.png)
 
 Links:
-- [App Store]()
-- [Google Play]()
+- [App Store](https://apps.apple.com/us/app/nobodywho-chat/id6781001350)
+<!-- - [Google Play]() -->
 - [GitHub repository](https://github.com/nobodywho-ooo/NobodyWho-Chat)
 
 ---
