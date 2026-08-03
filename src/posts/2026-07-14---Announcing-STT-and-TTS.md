@@ -1,48 +1,60 @@
 ---
 title: Announcing Speech To Text & Text To Speech
-date: 2026-07-14
+date: 2026-08-3
 categories: ["Feature", "Release"]
-description: "NobodyWho now ships STT & TTS — easily generate and transcribe audio!"
+description: "STT & TTS in NobodyWho — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
 slug: "announcing-stt-tts"
-draft: true
+draft: false
 ---
 
 ![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-stt-tts.png)
 
-Today, Speech To Text & Text To Speech are landing in NobodyWho! 🔊
+Recently, we shipped speech support in NobodyWho! 🔊
 
-This is another step on our way to become do it all local model inference library.
-We released support for **Kokoro** & **Supertonic**, with Piper, Chatterbox, and Røest coming over the summer, after we finish internal phase of testing.
+We support both Text to Speech (TTS) and Speech to Text (STT), running through the same on-device inference engine you already use for language models.
+On the TTS side, we support [Kokoro](https://kokorottsai.com/) and [Supertonic](https://github.com/supertone-inc/supertonic).
+On the STT side, we support Whisper. All three run on top of ONNX Runtime, sharing the same accelerator and backend logic.
 
-Text to Speech (TTS) is the wild west with many different architectures, and we cannot use our beloved llama.cpp for inference.
-Thus, we had to develop our own solution.
-There are several ways to do it. One can wrap existing implementations behind a common interface, using tensor library such as candle to spell out the forward passes, or leverage onnx to handle inference and backend support for us.
-In the end, we decided to go with onnx for two main reasons.
-The main reason to NOT go with existing implementations, was that we want have the same acclerator support regardless of the model. Conveniently, ort provides a beautiful and convenient rust wrapper around the C++ runtime, allowing us to support most of the backends that llama.cpp does (RIP metal, you will be missed).
-Feature parity to upstream.
+## **Why not llama.cpp?**
 
-The backend support was the thing that broke the scales for us. onnx gives us ...
-Moreover, we want to get on top of supporting new model releases, so relying on others implementing it for us is not something we want to do.
+llama.cpp is built to support a wide range of autoregressive language model architectures.
+Speech (notably TTS) has a different landscape with a mix of architectures that llama.cpp doesn't support.
+Getting them supported isn't a matter of filing feature requests upstream either, since it would mean asking a project scoped around language models to take on an entirely different class of them.
+If we wanted first-class speech support, we had to build the inference layer ourselves.
 
-Also, we would like to faithfuly support the upstream as much as possible, which sometimes require custom glueing code (phoneme translations between espeak and misaki)
+## **Why ONNX**
 
-We are also picky about the dependencies, and already existing projects sometimes depend on C/C++ libs, something we are actively trying to avoid due to build issues on various platforms we support.
+We considered three approaches.
+We could wrap existing per-model implementations behind a common interface, we could use a Rust-native tensor library such as candle and implement each model's forward pass ourselves, or we could build on ONNX and let it handle inference and backend support for us.
 
-Candle vs onnx, and why we like candle but do not use it - backend support
+We like [candle](https://github.com/huggingface/candle), and pure Rust is where we'd prefer to land.
+But candle's accelerator coverage isn't yet where we need it to be, and backend support was the deciding factor.
+ONNX, via the [ort](https://github.com/pykeio/ort) crate, gave us a Rust interface to a runtime that already covers most of the accelerators we rely on elsewhere in NobodyWho for text generation.
 
-## The good
-- pure rust with misaki-rs, espeak-ng-rs, hound
-- (onnx cpp runtime) :(
-- add some data on how long the synthesis takes
-- piper, chatterbox, roest, omnivoice soon on God fr
+Backend support aside, wrapping per-model implementations directly would have left us dependent on upstream authors, or the community, to support new models as they're released.
+Each project also makes its own dependency choices, which often mean pulling in various C or C++ libraries, which is something we prefer to avoid, since it complicates our build pipelines.
 
-## The bad
-- onnx does not support metal, only via MLCORE
-- torch.export does not really work
+Building on a single runtime also lets us stay closer to actual upstream model behavior.
+It enables us to write custom code, such as translating phonemes between the eSpeak and Misaki phoneme sets for Kokoro, where needed, in order to match the original implementation.
 
-## The ugly
-- some custom glueing code
-- kokoro support: english good, others limited
+### The good
 
+Outside of the ONNX runtime itself, our stack here is pure Rust: `misaki-rs` and `espeak-ng-rs` for phonemization, `hound` for audio I/O.
+
+Adding a new architecture is also largely straightforward.
+The ONNX file already describes the model, so most of the remaining work is accounting for whatever pre-processing the upstream implementation does.
+
+### The bad
+
+ONNX Runtime has no direct Metal backend.
+Apple Silicon acceleration is only available through the CoreML execution provider.
+That's a step down from the Metal support we already offer for text generation elsewhere in NobodyWho.
+Also, ONNX does not ship binaries for Android, we need to compile them from scratch in our build pipelines, which slows it down a bit.
+
+**What's next**
+
+This is the first release of speech support in NobodyWho, and we intend to keep building on it.
+If you run into issues, have feedback, or there is a specific model you would like to be supported, open an issue on GitHub.
+If you're already building with NobodyWho, we'd love to see what you make with speech!
 
