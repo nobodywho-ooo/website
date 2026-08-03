@@ -1,6 +1,6 @@
 ---
 title: "NobodyWho Chat app"
-date: 2026-07-13
+date: 2026-08-03
 categories: ["Apps", "React Native"]
 description: "NobodyWho Chat app is now available on mobile!"
 image: /assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-app-preview.png
@@ -33,7 +33,7 @@ NobodyWho Chat is built with **React Native**, and it's fully **open-source**. T
 
 Links:
 - [App Store](https://apps.apple.com/us/app/nobodywho-chat/id6781001350)
-<!-- - [Google Play]() -->
+- [Google Play](https://play.google.com/store/apps/details?id=ai.nobodywho.mobile)
 - [GitHub repository](https://github.com/nobodywho-ooo/NobodyWho-Chat)
 
 ---
