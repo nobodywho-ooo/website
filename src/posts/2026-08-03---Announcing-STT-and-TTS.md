@@ -1,6 +1,6 @@
 ---
 title: Announcing Speech To Text & Text To Speech
-date: 2026-08-3
+date: 2026-08-03
 categories: ["Feature", "Release"]
 description: "STT & TTS in NobodyWho — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
@@ -57,4 +57,3 @@ Also, ONNX does not ship binaries for Android, we need to compile them from scra
 This is the first release of speech support in NobodyWho, and we intend to keep building on it.
 If you run into issues, have feedback, or there is a specific model you would like to be supported, open an issue on GitHub.
 If you're already building with NobodyWho, we'd love to see what you make with speech!
-
