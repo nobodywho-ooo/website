@@ -1,11 +1,10 @@
 ---
 title: Announcing Speech To Text & Text To Speech
-date: 2026-08-03
+date: 2026-08-05
 categories: ["Feature", "Release"]
 description: "STT & TTS in NobodyWho — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png
 slug: "announcing-stt-tts"
-draft: true
 ---
 
 ![STT/TTS with NobodyWho](/assets/images/blog/2026/announcing-stt-tts/nobodywho-stt-tts.png)
@@ -13,7 +12,7 @@ draft: true
 Recently, we shipped speech support in NobodyWho! 🔊
 
 We support both Text to Speech (TTS) and Speech to Text (STT), running through the same on-device inference engine you already use for language models.
-On the TTS side, we support [Kokoro](https://kokorottsai.com/) and [Supertonic](https://github.com/supertone-inc/supertonic).
+On the TTS side, we support [Kokoro](https://kokorottsai.com/), [Pocket TTS](https://github.com/kyutai-labs/pocket-tts) and [Supertonic](https://github.com/supertone-inc/supertonic).
 On the STT side, we support Whisper. All three run on top of ONNX Runtime, sharing the same accelerator and backend logic.
 
 ## **Why not llama.cpp?**
