@@ -1,24 +1,31 @@
 ---
 layout: base
 ---
+
 <div class="flex justify-center pt-0 lg:pt-8">
     <article class="prose lg:prose-xl dark:prose-invert divide-y overflow-x-hidden mx-auto max-w-2xl px-6 lg:max-w-4xl">
         <div class="pt-12 sm:pt-32">
-            <h1 class="mt-12 mb-10 font-bold dark:text-white">
+            <h1 class="mt-12 font-bold dark:text-white">
                 {{ title }}
             </h1>
             {{ content | safe }}
             <div class="mb-10 mt-20">
-                <p class="font-light mb-5 italic text-neutral-800 dark:text-white">Published {{ date|dateFormating }}</p>
-                <div class="flex flex-wrap gap-x-4">
-                    {% for category in categories %}
-                        <span class="inline-flex items-center rounded-full bg-gray-50 px-4 py-1.5 text-base font-medium text-neutral-600 inset-ring
-                                inset-ring-gray-500/10 dark:bg-gray-400/10 dark:text-neutral-400 dark:inset-ring-gray-400/20">
-                            {{ category }}
-                        </span>
-                    {% endfor %}
+                <hr class="border-t border-neutral-200 dark:border-neutral-700 mb-6">
+                    <p class="pb-6 text-neutral-800 dark:text-white">
+                        Everything NobodyWho do is open-source, please leave a
+                        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener noreferrer">star on Github</a>
+                        to support us ❤️
+                    </p>
+                    <p class="font-light mb-5 italic text-neutral-800 dark:text-white">Published {{ date|dateFormating }}</p>
+                    <div class="flex flex-wrap gap-x-4">
+                        {% for category in categories %}
+                            <span class="inline-flex items-center rounded-full bg-gray-50 px-4 py-1.5 text-base font-medium text-neutral-600 inset-ring
+                                    inset-ring-gray-500/10 dark:bg-gray-400/10 dark:text-neutral-400 dark:inset-ring-gray-400/20">
+                                {{ category }}
+                            </span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </article>
-</div>
+        </article>
+    </div>

@@ -307,21 +307,3 @@ If you want to dive even deeper, I would go for:
 Did you like this post? Consider [giving us a star](https://github.com/nobodywho-ooo/nobodywho)! That would mean a lot.
 
 Thanks for reading!
-
-*This post was written entirely by a human. No words were made up by the machine.*
-
----
-
-## Who We Are
-
-We're NobodyWho, a local inference library, which enables running small models on edge-devices.
-We value open-source code, control over your models, solid software engineering, standardization and making simple things simple.
-All of which is missing in today's AI world. Running a model with us is as easy as:
-```python
-from nobodywho import Chat
-
-chat = Chat("model.gguf")
-answer = chat.ask("Is water wet?").completed()
-print(answer)
-```
-If you value the same things, come and [become a contributor](https://github.com/nobodywho-ooo/nobodywho) or just [download and test our library](https://docs.nobodywho.ooo/).
