@@ -1,0 +1,29 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+layout: false
+---
+# {{ site.name }}
+
+> {{ site.description }}
+
+NobodyWho is a library to runs large language models fully on-device, with support for Godot, Python, Flutter, React Native, Kotlin and Swift. No cloud, no server required.
+
+## Main pages
+
+- [Home]({{ site.url }}/): What NobodyWho is and the platforms it supports.
+- [Apps]({{ site.url }}/apps/): Apps built by NobodyWho.
+- [Model Selection]({{ site.url }}/models/): Recommended on-device models by size, device and capability.
+- [Starter Pack]({{ site.url }}/starter-pack/): Examples and starter projects for running AI locally.
+- [About]({{ site.url }}/about/): The team and project milestones.
+- [Blog]({{ site.url }}/posts/): News, tutorials and technical write-ups.
+
+## Blog posts
+{% for post in collections.posts | reverse %}
+- [{{ post.data.title | safe }}]({{ site.url }}{{ post.url }}){% if post.data.description %}: {{ post.data.description | safe }}{% endif %}
+{%- endfor %}
+
+## More
+
+- [RSS/Atom feed]({{ site.url }}/feed.xml)
+- [GitHub]({{ site.github_url }})
