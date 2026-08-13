@@ -136,6 +136,11 @@ export default async function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toISODate();
   });
 
+  // SEO / Structured data (JSON-LD) in _head.njk : Collect only the https(s) profile URLs from footer links, for schema.org sameAs.
+  eleventyConfig.addFilter("socialUrls", (footer) =>
+    (footer || []).map((l) => l.url).filter((u) => u && u.startsWith("https://"))
+  );
+
   // Format an ISO date string (e.g. "2026-05-29") as "Month year" (e.g. "May 2026").
   eleventyConfig.addFilter("monthYear", (isoDate) => {
     if (!isoDate) return "";

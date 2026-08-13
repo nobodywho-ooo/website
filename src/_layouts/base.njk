@@ -2,8 +2,9 @@
 <html lang="en" class="bg-white dark:bg-neutral-900">
     {% include "partials/_head.njk" %}
     <body>
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-neutral-900 focus:shadow focus:outline-2 focus:outline-primary dark:focus:bg-neutral-900 dark:focus:text-white">Skip to main content</a>
         {% include "partials/_menu.njk" %}
-        <main class="font-sans leading-normal tracking-normal">
+        <main id="main-content" tabindex="-1" class="font-sans leading-normal tracking-normal">
             {% block content %}
                 {{ content | safe }}
             {% endblock %}
