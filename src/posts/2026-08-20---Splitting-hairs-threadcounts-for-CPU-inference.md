@@ -14,7 +14,7 @@ If you spawn fewer threads than your CPU can handle, you have compute standing b
 
 Use something like Rust's `std::thread::available_parallelism()` to count the number of cores on your machine, spawn that many threads, and call it a day.
 
-However, for compute-bound tasks, this often results in a too-high number of threads.
+This is used to great effect by `rayon` and the like, however for non-work-stealing compute-bound tasks, such as those spawned by `llama.cpp`, this often results in a too-high number of threads.
 
 ## Hyperthreading
 
@@ -42,7 +42,7 @@ However, your computer might already have other compute-heavy work running on th
 
 It turns out that if one of your fast cores is occupied, it's faster to run one fewer thread than to fight for that fast core and end up on a slow one.
 
-But how do you detect how occupied the fast cores are? We haven't solved that problem yet in NobodyWho.
+But how do you detect how occupied the fast cores are? As you can see, we haven't solved the problem fully yet in NobodyWho, please do let us know if you know of a better approach!
 
 ## Manual control
 
