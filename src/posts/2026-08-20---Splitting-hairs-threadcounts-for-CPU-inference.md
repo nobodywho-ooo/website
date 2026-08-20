@@ -1,9 +1,9 @@
 ---
-title: "Splitting hairs: threadcounts for CPU inference"
+title: "Use fewer threads for CPU inference"
 date: 2026-08-20
 categories: ["Technical"]
-description: "A technical deep-dive into CPU thread allocation for on-device LLM inference"
-slug: "splitting-hairs-threadcounts-for-CPU-inference"
+description: "How many worker threads should you use for CPU inference? Not all of them."
+slug: "threadcounts-for-cpu-inference"
 ---
 
 How many threads should you use for CPU inference?
