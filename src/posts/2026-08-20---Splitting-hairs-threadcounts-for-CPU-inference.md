@@ -20,7 +20,7 @@ Modern x86 CPUs support [hyper-threading](https://en.wikipedia.org/wiki/Hyper-th
 
 If your program is reasonably efficient, hyperthreading means several threads end up competing for the same execution resources on a single physical core, so threads end up waiting.
 
-Here's a inference benchmark of Gemma4-E4B on my Ryzen 7040 CPU, which has 8 phyiscal cores and 16 logical cores.
+Here's a inference benchmark of Gemma4-E4B on my Ryzen 7040 CPU, which has 8 phyiscal cores and 16 logical cores. It's much faster to only run as many threads are there are physical cores.
 
 | threads |            test |                  t/s |
 | ------- | --------------: | -------------------: |
@@ -43,7 +43,7 @@ This lets you run as many threads as there are physical cores, even on CPUs with
 
 **However**, for mixed-core CPUs, like those in MacBooks or smartphones, running on every physical core is bad. These machines have some fast cores and some slower, power-efficient cores. You might expect running both to yield more compute than running the fast ones alone, but in practice, for workloads like inference, the fast cores finish quickly and then wait on the slow cores.
 
-Here's a inference benchmark of Gemma4-E4B on an M4 Pro Mac Mini, which has 8 fast cores, and 4 slow cores (Metal disabled to show CPU inference):
+Here's a inference benchmark of Gemma4-E4B on an M4 Pro Mac Mini, which has 8 fast cores, and 4 slow cores (Metal disabled to show CPU inference). It's much faster to only run on the performance cores.
 
 | threads |            test |                  t/s |
 | ------- | --------------: | -------------------: |
