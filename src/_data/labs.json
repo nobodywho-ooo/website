@@ -43,5 +43,15 @@
     "name": "Supertone",
     "country": "Korea",
     "families": ["supertonic3"]
+  },
+  {
+    "name": "Open AI",
+    "country": "USA",
+    "families": ["whisper"]
+  },
+  {
+    "name": "Silero",
+    "country": "Russia",
+    "families": ["silero"]
   }
 ]

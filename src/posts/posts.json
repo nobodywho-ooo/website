@@ -1,5 +1,7 @@
 {
   "layout": "article",
   "tags": "posts",
-  "permalink": "posts/{{ slug }}/"
+  "permalink": "posts/{{ slug }}/",
+  "draft": false,
+  "hideInBlog": false
 }

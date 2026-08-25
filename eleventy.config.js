@@ -7,8 +7,16 @@ import button from "./src/_includes/shortcodes/button.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import rssPlugin from "@11ty/eleventy-plugin-rss";
+import blogCategories from "./src/_data/blogCategories.js";
 
-const isPostPublished = (post) => !post.data.draft;
+const isListedInBlog = (post) => !post.data.draft && !post.data.hideInBlog;
+
+// Number of posts per page in the blog index and in each category listing - Keep this in sync with the `pagination.size` in src/posts.njk.
+const POSTS_PER_PAGE = 10;
+
+// Turn a category name into a URL-safe slug, e.g. "React Native" -> "react-native".
+const slugify = (value) =>
+  String(value).toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
@@ -77,6 +85,8 @@ export default async function(eleventyConfig) {
     audioTextToText: "Audio/Text to Text",
     imageAudioTextToText: "Image/Audio/Text to Text",
     textToSpeech: "Text To Speech",
+    speechToText: "Speech To Text",
+    voiceActivityDetection: "Voice Activity Detection",
     featureExtraction: "Feature extraction",
     textRanking: "Text ranking",
   };
@@ -115,13 +125,51 @@ export default async function(eleventyConfig) {
   });
 
   eleventyConfig.addCollection("page", function(collections) {
-    return collections.getFilteredByTag("page").sort(function(a, b) {
-      return a.data.order - b.data.order;
-    });
+    return collections.getFilteredByTag("page")
+      // Only keep the first page of any paginated menu item (e.g. the blog), otherwise /posts/page-2/ etc. would each add a duplicate nav entry.
+      .filter((item) => !item.data.pagination || item.data.pagination.pageNumber === 0)
+      .sort(function(a, b) {
+        return a.data.order - b.data.order;
+      });
   });
 
   eleventyConfig.addCollection("posts", (collection) => {
-    return collection.getFilteredByGlob("./src/posts/*.md").filter(isPostPublished);
+    return collection.getFilteredByGlob("./src/posts/*.md").filter(isListedInBlog);
+  });
+
+  // Expose the slug helper to templates (used for category pill links in blog).
+  eleventyConfig.addFilter("blogSlug", slugify);
+
+  // Build one entry per (category, page) so each category gets its own paginated listing
+  eleventyConfig.addCollection("categoryPages", (collection) => {
+    const posts = collection
+      .getFilteredByGlob("./src/posts/*.md")
+      .filter(isListedInBlog)
+      .sort((a, b) => b.date - a.date);
+
+    const pages = [];
+    for (const category of blogCategories) {
+      const slug = slugify(category);
+      const base = `/posts/category/${slug}/`;
+      const hrefFor = (pageIndex) => (pageIndex === 0 ? base : `${base}page-${pageIndex + 1}/`);
+      const catPosts = posts.filter((post) => (post.data.categories || []).includes(category));
+      const totalPages = Math.max(1, Math.ceil(catPosts.length / POSTS_PER_PAGE));
+      const pageHrefs = Array.from({ length: totalPages }, (_, i) => hrefFor(i));
+      for (let i = 0; i < totalPages; i++) {
+        pages.push({
+          category,
+          slug,
+          posts: catPosts.slice(i * POSTS_PER_PAGE, (i + 1) * POSTS_PER_PAGE),
+          pageNumber: i,
+          totalPages,
+          pageHref: hrefFor(i),
+          pageHrefs,
+          prevHref: i > 0 ? hrefFor(i - 1) : null,
+          nextHref: i < totalPages - 1 ? hrefFor(i + 1) : null,
+        });
+      }
+    }
+    return pages;
   });
 
   eleventyConfig.addShortcode("currentDate", (date = DateTime.now()) => {
