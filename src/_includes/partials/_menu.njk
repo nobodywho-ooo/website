@@ -27,13 +27,23 @@
                 href="https://docs.nobodywho.ooo/"
                 aria-label="Documentation"
                 class="text-sm/6 font-medium text-neutral-500 hover:text-primary dark:text-neutral-400">Docs</a>
-            <a
-                href="{{ site.github_url }}"
-                class="inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
-                    shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
-                    dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
-                {% svg "github", "size-4" %} Github
-            </a>
+            <div class="flex items-center gap-x-3">
+                <a
+                    href="{{ site.github_url }}"
+                    class="inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
+                        shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
+                        dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
+                    {% svg "github", "size-4" %} Github
+                </a>
+                <a
+                    href="/get-in-touch/"
+                    aria-label="Get in touch"
+                    class="inline-flex items-center gap-x-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-semibold text-white
+                        shadow-xs hover:bg-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
+                        dark:bg-primary-600 dark:shadow-none dark:hover:bg-primary-500 dark:focus-visible:outline-primary-500">
+                    {% svg "email", "size-4" %} Get in touch
+                </a>
+            </div>
         </div>
     </nav>
     <!-- Mobile menu backdrop -->
@@ -74,13 +84,23 @@
                             dark:hover:bg-white/5">
                         Documentation
                     </a>
-                    <a
-                        href="{{ site.github_url }}"
-                        class="mt-4 inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
-                            shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
-                            dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
-                        {% svg "github", "size-4" %} Github
-                    </a>
+                    <div class="mt-4 flex flex-col items-start gap-y-5">
+                        <a
+                            href="{{ site.github_url }}"
+                            class="inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-3.5 py-1.5 text-sm font-semibold text-white
+                                shadow-xs hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600
+                                dark:bg-neutral-700 dark:shadow-none dark:hover:bg-neutral-600 dark:focus-visible:outline-neutral-500">
+                            {% svg "github", "size-4" %} Github
+                        </a>
+                        <a
+                            href="/get-in-touch/"
+                            aria-label="Get in touch"
+                            class="inline-flex items-center gap-x-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-semibold text-white
+                                shadow-xs hover:bg-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
+                                dark:bg-primary-600 dark:shadow-none dark:hover:bg-primary-500 dark:focus-visible:outline-primary-500">
+                            {% svg "email", "size-4" %} Get in touch
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
