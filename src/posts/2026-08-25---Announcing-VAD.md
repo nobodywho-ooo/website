@@ -57,11 +57,11 @@ We currently target Silero specifically, though the source is configurable so yo
 And it inherits the same ONNX tradeoffs we wrote about with speech: Apple Silicon acceleration goes through CoreML rather than Metal, and we compile the Android runtime ourselves.
 
 ### Versions and how to update
-- Python 2.0.0: pip install --upgrade nobodywho
-- React Native 3.0.0: npm install react-native-nobodywho@3.0.0
-- Flutter 3.0.0: bump nobodywho to 3.0.0 in pubspec.yaml, then flutter pub get
-- Kotlin 3.0.0: bump ai.nobodywho:nobodywho-android (or ai.nobodywho:nobodywho) to 3.0.0
-- Swift 3.0.0: bump the NobodyWho Swift package to 3.0.0
+- Python 2.0.0: `pip install --upgrade nobodywho`
+- React Native 3.0.0: `npm install react-native-nobodywho@3.0.0`
+- Flutter 3.0.0: bump nobodywho to `3.0.0` in `pubspec.yaml`, then `flutter pub get`
+- Kotlin 3.0.0: bump `ai.nobodywho:nobodywho-android` (or `ai.nobodywho:nobodywho`) to `3.0.0`
+- Swift 3.0.0: bump the NobodyWho Swift package to `3.0.0`
 - Godot 10.0.0: grab the new version from the Asset Library or the GitHub releases page
 
 If you run into issues, have feedback, or want a specific model supported, open an issue on GitHub.

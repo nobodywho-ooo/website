@@ -1,0 +1,18 @@
+---
+layout: base
+pagination:
+    data: collections.categoryPages
+    size: 1
+    alias: catPage
+permalink: "{{ catPage.pageHref }}"
+eleventyComputed:
+    title: "Blog – {{ catPage.category }}"
+---
+
+{% set selectedCategory = catPage.category %}
+{% set postsToShow = catPage.posts %}
+{% set pageHrefs = catPage.pageHrefs %}
+{% set currentPage = catPage.pageNumber %}
+{% set prevHref = catPage.prevHref %}
+{% set nextHref = catPage.nextHref %}
+{% include "partials/_blog-list.njk" %}

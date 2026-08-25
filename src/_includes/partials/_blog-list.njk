@@ -1,0 +1,84 @@
+{#
+  Shared blog listing UI, used by both /posts/ (all posts) and the per-category pages at /posts/category/<slug>/.
+
+  Expects these variables to be set by the including template:
+    - selectedCategory : "all" or a category name (drives the active pill)
+    - postsToShow      : the list of post items to render on this page
+    - pageHrefs        : array of every page URL for this listing (index 0 = page 1)
+    - currentPage      : 0-based index of the current page within pageHrefs
+    - prevHref         : URL of the newer page, or falsy if none
+    - nextHref         : URL of the older page, or falsy if none
+#}
+
+{% set pillBase = "cursor-pointer rounded-full px-4.5 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-white" %}
+{% set pillActive = "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" %}
+{% set pillInactive = "bg-neutral-200 text-neutral-700 hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600" %}
+
+<div class="py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-4xl lg:px-8">
+        <h2 class="text-4xl font-semibold tracking-tight text-pretty text-neutral-900 sm:text-5xl dark:text-white">Blog</h2>
+        <p class="mt-2 text-lg/8 text-neutral-600 dark:text-neutral-300">News, tutorials & more.</p>
+
+        <div class="mt-6 flex flex-wrap gap-2 sm:gap-3">
+            <a href="/posts/" class="{{ pillBase }} {{ pillActive if selectedCategory == 'all' else pillInactive }}"{% if selectedCategory == 'all' %} aria-current="page"{% endif %}>All categories</a>
+            {% for category in blogCategories %}
+                <a href="/posts/category/{{ category | blogSlug }}/" class="{{ pillBase }} {{ pillActive if selectedCategory == category else pillInactive }}"{% if selectedCategory == category %} aria-current="page"{% endif %}>{{ category }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 dark:border-gray-700">
+            {% if postsToShow.length %}
+                {% for post in postsToShow %}
+                    <article class=" flex flex-col items-start justify-between">
+                        <div class="flex items-center gap-x-4 text-xs">
+                            <time datetime="{{ post.date | dateISO }}" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
+                            {% for category in post.data.categories %}
+                                <span class="relative z-10 rounded-full bg-neutral-50 px-3 py-1 font-medium text-neutral-600 dark:bg-neutral-800/60
+                                    dark:text-neutral-300">{{ category }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="group relative">
+                            <a href="{{ post.url }}">
+                                <h3 class="mt-3 text-2xl text-neutral-900 group-hover:text-neutral-600 dark:text-white dark:group-hover:text-neutral-300">
+                                    <span class="absolute inset-0"></span>
+                                    {{ post.data.title }}
+                                </h3>
+                                <p class="mt-2 line-clamp-3 text-sm/6 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p class="text-neutral-600 dark:text-neutral-400">No articles in this category yet.</p>
+            {% endif %}
+        </div>
+
+        {% if pageHrefs and pageHrefs.length > 1 %}
+            {% set navBtn = "inline-flex h-9 min-w-9 items-center justify-center rounded-full px-3 text-sm font-medium transition-colors" %}
+            {% set navLink = "text-neutral-600 hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-white" %}
+            {% set navActive = "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" %}
+            {% set navDisabled = "text-neutral-300 dark:text-neutral-600 cursor-not-allowed" %}
+            <nav class="mt-16 flex items-center justify-center gap-1 pt-8 dark:border-gray-700" aria-label="Pagination">
+                {% if prevHref %}
+                    <a href="{{ prevHref }}" rel="prev" aria-label="Previous page" class="{{ navBtn }} {{ navLink }}">&larr;</a>
+                {% else %}
+                    <span aria-hidden="true" class="{{ navBtn }} {{ navDisabled }}">&larr;</span>
+                {% endif %}
+
+                {% for href in pageHrefs %}
+                    {% if loop.index0 == currentPage %}
+                        <span aria-current="page" class="{{ navBtn }} {{ navActive }}">{{ loop.index }}</span>
+                    {% else %}
+                        <a href="{{ href }}" aria-label="Page {{ loop.index }}" class="{{ navBtn }} {{ navLink }}">{{ loop.index }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if nextHref %}
+                    <a href="{{ nextHref }}" rel="next" aria-label="Next page" class="{{ navBtn }} {{ navLink }}">&rarr;</a>
+                {% else %}
+                    <span aria-hidden="true" class="{{ navBtn }} {{ navDisabled }}">&rarr;</span>
+                {% endif %}
+            </nav>
+        {% endif %}
+    </div>
+</div>
