@@ -11,11 +11,11 @@ slug: "announcing-vad"
 
 Following our speech release, we just shipped Voice Activity Detection (VAD) in NobodyWho! 🎙️ It's available for all our bindings: Python, React Native, Flutter, Kotlin, Swift and Godot.
 
-VAD answers a deceptively simple question: is someone speaking right now, and when did they stop?
+VAD answers a simple question: is someone speaking right now, and when did they stop?
 It runs on-device through the same ONNX Runtime stack we built for Speech to Text and Text to Speech, so it shares the same accelerators, the same model download and cache, and the same offline-after-first-use behavior.
 It pairs naturally with STT: use VAD to decide when a turn is over, then hand that audio to Whisper to transcribe.
 
-## **Why not a silence timeout?**
+## Why not a silence timeout?
 
 The usual way to detect the end of a turn is a timer: once the microphone has been quiet for N milliseconds, assume the user is done. 
 It works, but it comes with a bad tradeoff: set the timeout short and you cut people off during natural pauses, set it long and every interaction feels sluggish. A timer only measures loudness over time, it has no idea whether the sound it is hearing is speech.
@@ -24,7 +24,7 @@ VAD replaces that with a small model that was trained on the actual shape of spe
 We use [Silero VAD](https://github.com/snakers4/silero-vad) (MIT licensed), a tiny recurrent model that carries state between frames and emits a speech probability for each one.
 It reliably tells speech and silence apart even against background noise, which a timeout never can.
 
-## **How it works**
+## How it works
 
 Silero processes audio in fixed 512-sample frames at 16kHz (32ms each) and carries a hidden state forward from one frame to the next, so it understands speech as a continuous stream rather than isolated snapshots.
 Whatever sample rate you feed us gets resampled to 16kHz internally with [rubato](https://github.com/HEnquist/rubato), a streaming sinc resampler whose filter state persists across calls, so live chunks resample seamlessly.
