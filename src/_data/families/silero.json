@@ -1,0 +1,24 @@
+{
+  "name": "Silero",
+  "pipeline": "voiceActivityDetection",
+  "languages": [],
+  "logo": "./assets/logos/models/silero.svg",
+  "models": [
+    {
+      "variant": "VAD",
+      "parameterCountBillions": 0.000309,
+      "idealDeviceDeployment": "smartwatch",
+      "sizeGB": "0.002",
+      "releaseDate": "2020-12-15",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/onnx-community/silero-vad"
+      },
+      "downloadLinks": [
+        {
+          "huggingfacePath": "hf:onnx-community/silero-vad",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

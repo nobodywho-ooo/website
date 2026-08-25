@@ -1,0 +1,24 @@
+{
+  "name": "Whisper",
+  "pipeline": "speechToText",
+  "languages": ["Albanian", "Amharic", "Arabic", "Armenian", "Assamese", "Azerbaijani", "Bashkir", "Basque", "Belarusian", "Bengali", "Bosnian", "Breton", "Bulgarian", "Cantonese", "Catalan", "Chinese", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Faroese", "Finnish", "French", "Galician", "Georgian", "German", "Greek", "Gujarati", "Haitian Creole", "Hausa", "Hawaiian", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Italian", "Japanese", "Javanese", "Kannada", "Kazakh", "Khmer", "Korean", "Lao", "Latin", "Latvian", "Lingala", "Lithuanian", "Luxembourgish", "Macedonian", "Malagasy", "Malay", "Malayalam", "Maltese", "Marathi", "Mongolian", "Myanmar", "Maori", "Nepali", "Norwegian", "Nynorsk", "Occitan", "Pashto", "Persian", "Polish", "Portuguese", "Punjabi", "Romanian", "Russian", "Sanskrit", "Serbian", "Shona", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Somali", "Spanish", "Sundanese", "Swahili", "Swedish", "Tagalog", "Tajik", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Turkish", "Turkmen", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Yiddish", "Yoruba"],
+  "logo": "./assets/logos/models/openai.svg",
+  "models": [
+    {
+      "variant": "Base",
+      "parameterCountBillions": 0.073,
+      "idealDeviceDeployment": "smartphone",
+      "sizeGB": "0.15",
+      "releaseDate": "2022-09-21",
+      "huggingface": {
+        "pageUrl": "https://huggingface.co/onnx-community/whisper-base"
+      },
+      "downloadLinks": [
+        {
+          "huggingfacePath": "hf:onnx-community/whisper-base",
+          "type": "model"
+        }
+      ]
+    }
+  ]
+}

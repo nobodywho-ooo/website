@@ -21,10 +21,11 @@
     {% if m.parameterCountBillions or m.sizeGB or m.idealDeviceDeployment or (showLanguages and m.languages.length) or m.thinking or m.tags.length %}
         <div class="mt-3 flex flex-wrap gap-2">
             {% if m.parameterCountBillions %}
-                <span class="{{ badgeClass }}">{{ cpuIcon("size-3.5") }}{% if m.parameterCountBillions < 1 %}{{ (m.parameterCountBillions * 1000) | round }}M{% else %}{{ m.parameterCountBillions }}B{% endif %}</span>
+                <span class="{{ badgeClass }}">{{ cpuIcon("size-3.5") }}{% if m.parameterCountBillions >= 1 %}{{ m.parameterCountBillions }}B{% elif m.parameterCountBillions >= 0.001 %}{{ (m.parameterCountBillions * 1000) | round }}M{% else %}{{ (m.parameterCountBillions * 1000000) | round }}K{% endif %}</span>
             {% endif %}
             {% if m.sizeGB %}
-                <span class="{{ badgeClass }}">{{ sizeIcon("size-3.5") }}{{ m.sizeGB }} GB</span>
+                {% set sizeGBNum = m.sizeGB | float %}
+                <span class="{{ badgeClass }}">{{ sizeIcon("size-3.5") }}{% if sizeGBNum >= 1 %}{{ m.sizeGB }} GB{% elif sizeGBNum >= 0.001 %}{{ (sizeGBNum * 1000) | round }} MB{% else %}{{ (sizeGBNum * 1000000) | round }} KB{% endif %}</span>
             {% endif %}
             {% if m.idealDeviceDeployment %}
                 <span class="{{ badgeClass }}">{{ deviceIcon(m.idealDeviceDeployment, "size-3.5") }}{{ m.idealDeviceDeployment | capitalize }}</span>
