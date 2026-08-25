@@ -5,6 +5,7 @@ categories: ["Guide"]
 description: "This article provides a glossary covering essential AI vocabulary, definitions, and terminology"
 image: /assets/images/blog/2026/beginner-guide-to-essential-terms-in-ai/beginner-guide-in-essential-terms-in-ai.png
 slug: "beginners-guide-to-ai-terms"
+hideInBlog: true
 ---
 
 ![Beginner's Guide to Essential Terms in Artificial Intelligence](/assets/images/blog/2026/beginner-guide-to-essential-terms-in-ai/beginner-guide-to-essential-terms-in-ai.png)

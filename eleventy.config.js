@@ -8,7 +8,7 @@ import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import rssPlugin from "@11ty/eleventy-plugin-rss";
 
-const isPostPublished = (post) => !post.data.draft;
+const isListedInBlog = (post) => !post.data.draft && !post.data.hideInBlog;
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
@@ -121,7 +121,7 @@ export default async function(eleventyConfig) {
   });
 
   eleventyConfig.addCollection("posts", (collection) => {
-    return collection.getFilteredByGlob("./src/posts/*.md").filter(isPostPublished);
+    return collection.getFilteredByGlob("./src/posts/*.md").filter(isListedInBlog);
   });
 
   eleventyConfig.addShortcode("currentDate", (date = DateTime.now()) => {
