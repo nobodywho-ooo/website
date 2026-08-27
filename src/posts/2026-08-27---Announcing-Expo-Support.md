@@ -1,7 +1,7 @@
 ---
 title: Announcing Expo support for NobodyWho
 date: 2026-08-27
-categories: ["Expo", "React Native", "Release"]
+categories: ["Expo", "Release"]
 description: "NobodyWho now works with Expo — run on-device LLMs in your Expo apps."
 image: /assets/images/blog/2026/announcing-expo-support/expo-nobodywho-llm.png
 slug: "announcing-expo-support"
