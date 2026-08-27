@@ -63,7 +63,7 @@ for await (const token of chat.ask("Is water wet?")) {
 }
 ```
 
-Because NobodyWho ships native code, you'll run a prebuild (`npx expo run:ios` / `npx expo run:android`) and cannot use Expo Go. The first run links the native modules and generates the `ios/` and `android/` folders for you.
+Then run the app with `npx expo run:ios` or `npx expo run:android`.
 
 ## One core, many languages
 
