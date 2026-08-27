@@ -17,10 +17,10 @@ To help you get up and running quickly, we've also published a full [Expo starte
 
 Most AI features in mobile apps today route every processing request through a hosted API. Running the model directly on the user's device is a different shape of product, and it brings several benefits:
 
-- **Privacy by design** — user data never leaves the device
-- **Works offline** — no internet connection required
-- **Low latency** — no network round trip on every interaction
-- **No cloud costs** — inference is free, no per-token billing
+- **Privacy by design**: user data never leaves the device
+- **Works offline**: no internet connection required
+- **Low latency**: no network round trip on every interaction
+- **No cloud costs** :inference is free, no per-token billing
 
 The tradeoff is raw capability: local models are smaller than frontier cloud models, but for chat, summarization, classification, transcription, and many agentic workflows they're more than enough. And on modern phones, GPU-accelerated inference (Metal on iOS, Vulkan on Android) makes them fast.
 
