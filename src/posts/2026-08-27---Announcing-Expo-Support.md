@@ -31,7 +31,7 @@ You get the same core API as our other bindings:
 - **Text generation** - streaming, token-by-token chat with full conversation memory
 - **Use any `.gguf` model** - Gemma, Qwen, Mistral, LFM, Granite, and thousands more
 - **Tool calling** - type-safe function calling that generates structured grammars directly from your TypeScript function signatures
-- **Multimodal input**: feed images and audio straight to a vision or audio-capable model
+- **Multimodal input** - feed images and audio straight to a vision or audio-capable model
 - **Text-to-speech (TTS)** - synthesize natural-sounding WAV audio locally with Kokoro, Pocket-tts, and Supertonic backends
 - **Speech-to-text (STT)** - transcribe audio into text with Whisper models
 - **Voice activity detection (VAD)** - reliably detect speech from silence with Silero VAD
