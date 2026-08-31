@@ -29,6 +29,7 @@ The tradeoff is raw capability: local models are smaller than frontier cloud mod
 You get the same core API as our other bindings:
 
 - **Text generation** - streaming, token-by-token chat with full conversation memory
+- **Use any `.gguf` model** - Gemma, Qwen, Mistral, LFM, Granite, and thousands more
 - **Tool calling** - type-safe function calling that generates structured grammars directly from your TypeScript function signatures
 - **Multimodal input**: feed images and audio straight to a vision or audio-capable model
 - **Text-to-speech (TTS)** - synthesize natural-sounding WAV audio locally with Kokoro, Pocket-tts, and Supertonic backends
@@ -36,7 +37,6 @@ You get the same core API as our other bindings:
 - **Voice activity detection (VAD)** - reliably detect speech from silence with Silero VAD
 - **Embeddings & RAG** - an embedding encoder plus a cross-encoder reranker for semantic search
 - **Model downloading** - load models directly from Hugging Face (`hf://…`) or any URL, on demand
-- **Any `.gguf` model** - Gemma, Qwen, Mistral, LFM, Granite, and thousands more
 
 Under the hood you also get conversation-aware preemptive context shifting, so you keep full conversation memory without hard message-length limits. It works on both iOS and Android.
 
