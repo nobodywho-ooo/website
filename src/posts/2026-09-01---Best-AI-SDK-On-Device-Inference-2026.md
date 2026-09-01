@@ -50,8 +50,8 @@ Not every SDK that *can* run a model on a device is a good fit for shipping a re
 | Google AI Edge / LiteRT (MediaPipe) | LiteRT runtime; NNAPI/GPU delegates | Android, iOS, web | LLM + vision + classic ML | Apache 2.0 (open source) |
 | ONNX Runtime Mobile | ONNX graph execution; execution providers | C/C++, Swift, Kotlin, Python | CV, audio, NLP building blocks | MIT (open source) |
 | Apple MLX | Apple-silicon array framework | Swift, Python (Apple only) | LLM + more, research-oriented | MIT (open source) |
-| RunAnywhere | On-device runtime + hybrid cloud routing; OTA models | React Native, Flutter, Kotlin, Swift, Web | LLM, STT, TTS, VAD, vision | Mixed |
-| Cactus | On-device engine (proprietary `.cact` format) + cloud fallback | React Native, Flutter, Kotlin, Swift, Python, Rust | LLM, vision, STT, VAD, embeddings | Mixed |
+| RunAnywhere | On-device runtime + hybrid cloud routing; OTA models | React Native, Flutter, Kotlin, Swift, Web | LLM, STT, TTS, VAD, vision | Source-available (commercial cap) |
+| Cactus | On-device engine (proprietary `.cact` format) + cloud fallback | React Native, Flutter, Kotlin, Swift, Python, Rust | LLM, vision, STT, VAD, embeddings | Source-available (commercial cap) |
 
 ## The best AI SDKs for on-device inference
 
@@ -111,7 +111,7 @@ An SDK that pairs an on-device runtime with hybrid cloud routing, OTA model dist
 
 **Strengths:** cross-platform SDKs, hybrid on-device/cloud routing, and operational controls like model rollouts and observability.
 
-**Limitations:** cloud routing, over-the-air model updates, and telemetry run through RunAnywhere's own hosted backend, with no self-hosting option, so you're tied to their cloud for the operational side. It's also commercial rather than open source, under a custom licence.
+**Limitations:** cloud routing, over-the-air model updates, and telemetry run through RunAnywhere's own hosted backend, with no self-hosting option, so you're tied to their cloud for the operational side. Its licence isn't truly open source either: it's Apache 2.0 with a commercial-use cap, free only for individuals, non-profits, and organisations under **$1M in both funding and annual revenue**.
 
 ### 7. Cactus
 
@@ -119,7 +119,7 @@ Cactus is a hybrid inference engine for mobile and edge, with cross-platform SDK
 
 **Strengths:** low setup, straightforward integration, and real on-device NPU acceleration across major mobile chipsets (Apple, Snapdragon, Google, Exynos, MediaTek).
 
-**Limitations:** it uses its own proprietary `.cact` model format rather than GGUF, so models have to be converted with `cactus convert` first, hosted and while any Hugging Face model can in theory go through it, that path is still very experimental, so getting the model you actually want running on-device is far from guaranteed. Its hybrid cloud routing also runs through Cactus's own hosted backend with no self-hosting option, and the hybrid features sit behind a paid tier.
+**Limitations:** it uses its own proprietary `.cact` model format rather than GGUF, so models have to be converted with `cactus convert` first — and while any Hugging Face model can in theory go through it, that path is still very experimental, so getting the model you actually want running on-device is far from guaranteed. Its hybrid cloud routing also runs through Cactus's own hosted backend with no self-hosting option, and the hybrid features sit behind a paid tier. Its licence isn't truly open source either: it's source-available with a commercial-use cap, free only for individuals, non-profits, and organisations under **$2M in both funding and annual revenue**.
 
 ## Conclusion: NobodyWho is the best AI SDK for on-device inference
 
