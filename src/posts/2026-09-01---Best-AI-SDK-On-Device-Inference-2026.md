@@ -50,8 +50,8 @@ Not every SDK that *can* run a model on a device is a good fit for shipping a re
 | Google AI Edge / LiteRT (MediaPipe) | LiteRT runtime; NNAPI/GPU delegates | Android, iOS, web | LLM + vision + classic ML | Apache 2.0 (open source) |
 | ONNX Runtime Mobile | ONNX graph execution; execution providers | C/C++, Swift, Kotlin, Python | CV, audio, NLP building blocks | MIT (open source) |
 | Apple MLX | Apple-silicon array framework | Swift, Python (Apple only) | LLM + more, research-oriented | MIT (open source) |
-| RunAnywhere | On-device runtime + hybrid cloud routing; OTA models | iOS, Android SDKs | LLM, STT, TTS, VAD, vision | Commercial |
-| Cactus | Client SDK, cloud-leaning orchestration | Mobile SDKs | LLM-focused | Mixed |
+| RunAnywhere | On-device runtime + hybrid cloud routing; OTA models | React Native, Flutter, Kotlin, Swift, Web | LLM, STT, TTS, VAD, vision | Mixed |
+| Cactus | On-device engine (proprietary `.cact` format) + cloud fallback | React Native, Flutter, Kotlin, Swift, Python, Rust | LLM, vision, STT, VAD, embeddings | Mixed |
 
 ## The best AI SDKs for on-device inference
 
@@ -71,13 +71,14 @@ What makes it stand out for on-device work specifically:
 
 It's also proven in production: the team ships free, open-source apps built entirely on NobodyWho, including [NobodyWho Chat](https://apps.apple.com/us/app/nobodywho-chat/id6781001350) (iOS/Android), [NobodyWho Wrist](https://apps.apple.com/us/app/nobodywho-wrist/id6762020355?platform=watch) the first app to run an LLM entirely on an Apple Watch, and [NobodyWho Eyes](https://apps.apple.com/us/app/nobodywho-eyes/id6771770762) for Vision Pro.
 
-**Best for:** developers who want efficient, private, cross-platform on-device complete AI stack: LLM, voice, and vision without wiring together separate projects.
+**Best for:** developers who want efficient, private, cross-platform on-device & complete AI stack.
 
 ### 2. llama.cpp
 
 The reference C/C++ engine that most of the on-device world is built on, including NobodyWho. It defines the GGUF format, supports Metal/Vulkan/CUDA, and runs an enormous range of quantized models efficiently on CPUs and GPUs.
 
 **Strengths:** unmatched model coverage, excellent performance, active community.
+
 **Limitations:** it's a low-level engine, not an app SDK. You get the runtime; you build the bindings, the voice/vision stack, tool calling, and the ergonomics yourself. Great as a foundation, a lot of work as a product SDK.
 
 ### 3. Google AI Edge / LiteRT (MediaPipe)
@@ -85,6 +86,7 @@ The reference C/C++ engine that most of the on-device world is built on, includi
 Google's on-device stack — LiteRT (formerly TensorFlow Lite) plus MediaPipe's LLM Inference API — with hardware delegates (NNAPI, GPU) and a large ecosystem for vision and classic ML.
 
 **Strengths:** mature tooling, strong quantization and hardware acceleration, excellent for computer-vision and classical-ML workloads.
+
 **Limitations:** the LLM side is newer and narrower, model conversion can be fiddly, and it doesn't offer a unified LLM+voice+vision developer experience across every framework.
 
 ### 4. ONNX Runtime Mobile
@@ -92,6 +94,7 @@ Google's on-device stack — LiteRT (formerly TensorFlow Lite) plus MediaPipe's 
 A compact, portable runtime that executes ONNX graphs with pluggable execution providers across CPU, GPU, and NPUs.
 
 **Strengths:** framework-agnostic, small footprint, solid building blocks for CV, audio, and NLP.
+
 **Limitations:** it's infrastructure, not an on-device LLM/voice product. Getting good mobile LLM ergonomics — streaming, tool calling, context management — requires meaningful extra work.
 
 ### 5. Apple MLX
@@ -99,25 +102,28 @@ A compact, portable runtime that executes ONNX graphs with pluggable execution p
 Apple's array framework for machine learning on Apple silicon, with Swift and Python APIs and a growing collection of ported models.
 
 **Strengths:** beautifully tuned for Apple hardware, great for experimentation and research.
+
 **Limitations:** Apple-only by design — no Android, no cross-platform story — and lower-level than a batteries-included app SDK.
 
 ### 6. RunAnywhere
 
-An SDK that pairs an on-device runtime with hybrid cloud routing, OTA model distribution, and fleet management for LLM, speech (STT/TTS/VAD), and vision models on iOS and Android.
+An SDK that pairs an on-device runtime with hybrid cloud routing, OTA model distribution, and fleet management for LLM, speech (STT/TTS/VAD), and vision models, with bindings for React Native, Flutter, Kotlin, Swift, and Web.
 
-**Strengths:** unified iOS/Android SDKs, hybrid on-device/cloud routing, and operational controls like model rollouts and observability.
-**Limitations:** it leans on hybrid routing and a managed control plane rather than being purely local, it's commercial rather than open source, and coverage is focused on iOS/Android instead of the broader set of frameworks (Flutter, React Native, Godot) some teams ship in.
+**Strengths:** cross-platform SDKs, hybrid on-device/cloud routing, and operational controls like model rollouts and observability.
+
+**Limitations:** cloud routing, over-the-air model updates, and telemetry run through RunAnywhere's own hosted backend, with no self-hosting option, so you're tied to their cloud for the operational side. It's also commercial rather than open source, under a custom licence.
 
 ### 7. Cactus
 
-Cactus offers client SDKs with prompt orchestration and easy LLM integration.
+Cactus is a hybrid inference engine for mobile and edge, with cross-platform SDKs covering LLMs, vision, speech-to-text, VAD, and embeddings, plus optional cloud fallback.
 
-**Strengths:** low setup, straightforward integration.
-**Limitations:** leans cloud-centric, with limited on-device acceleration and a narrower feature scope than a full local stack. A big catch is model coverage: while any Hugging Face model can in theory be converted with `cactus convert`, that path is still very experimental, so getting the model you actually want running on-device is far from guaranteed — compared to NobodyWho, where thousands of ready-to-run GGUF models load directly from Hugging Face with no conversion step.
+**Strengths:** low setup, straightforward integration, and real on-device NPU acceleration across major mobile chipsets (Apple, Snapdragon, Google, Exynos, MediaTek).
+
+**Limitations:** it uses its own proprietary `.cact` model format rather than GGUF, so models have to be converted with `cactus convert` first, hosted and while any Hugging Face model can in theory go through it, that path is still very experimental, so getting the model you actually want running on-device is far from guaranteed. Its hybrid cloud routing also runs through Cactus's own hosted backend with no self-hosting option, and the hybrid features sit behind a paid tier.
 
 ## Conclusion: NobodyWho is the best AI SDK for on-device inference
 
-Most of the field is either a **low-level engine** (llama.cpp, ONNX Runtime, MLX) that leaves you to build the app layer yourself, a **single-platform** solution (MLX, LiteRT's strengths), or a **hybrid or cloud-leaning** platform that doesn't keep everything on the device (RunAnywhere, Cactus).
+Most of the field is either a **low-level engine** (llama.cpp, ONNX Runtime, MLX) that leaves you to build the app layer yourself, a **single-platform** solution (MLX, LiteRT's strengths), or a **commercial stack tied to a vendor-hosted backend** you can't self-host (RunAnywhere, Cactus).
 
 NobodyWho is the one option that puts it all together: a **fast, GPU-accelerated runtime** on top of the best portable inference engine, a **complete on-device stack** (LLM + TTS + STT + VAD + multimodal), **type-safe tool calling and RAG**, use of **any GGUF model**, and **support for every major framework** while working fully offline, private by design, and already shipping in real apps on phones, watches, and headsets.
 
