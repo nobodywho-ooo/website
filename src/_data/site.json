@@ -17,11 +17,6 @@
       "icon": "x"
     },
     {
-      "name": "Mastodon",
-      "url": "https://mastodon.gamedev.place/@nobodywho",
-      "icon": "mastodon"
-    },
-    {
       "name": "Bluesky",
       "url": "https://bsky.app/profile/nobodywhooo.bsky.social",
       "icon": "bluesky"
