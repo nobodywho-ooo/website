@@ -1,0 +1,72 @@
+[
+  {
+    "id": "python",
+    "name": "Python",
+    "language": "Python",
+    "packageManager": "pip",
+    "package": "nobodywho",
+    "install": "pip install nobodywho",
+    "docsUrl": "https://docs.nobodywho.ooo/python/",
+    "starterUrl": null
+  },
+  {
+    "id": "react-native",
+    "name": "React Native",
+    "language": "TypeScript / JavaScript",
+    "packageManager": "npm",
+    "package": "react-native-nobodywho",
+    "install": "npm install react-native-nobodywho",
+    "docsUrl": "https://docs.nobodywho.ooo/react-native/",
+    "starterUrl": "https://github.com/nobodywho-ooo/react-native-starter-example"
+  },
+  {
+    "id": "expo",
+    "name": "Expo",
+    "language": "TypeScript / JavaScript",
+    "packageManager": "npm",
+    "package": "react-native-nobodywho",
+    "install": "npx expo install react-native-nobodywho",
+    "docsUrl": "https://docs.nobodywho.ooo/react-native/",
+    "starterUrl": "https://github.com/nobodywho-ooo/expo-starter-example"
+  },
+  {
+    "id": "flutter",
+    "name": "Flutter",
+    "language": "Dart",
+    "packageManager": "pub",
+    "package": "nobodywho",
+    "install": "flutter pub add nobodywho",
+    "docsUrl": "https://docs.nobodywho.ooo/flutter/",
+    "starterUrl": "https://github.com/nobodywho-ooo/flutter-starter-example"
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "language": "Swift",
+    "packageManager": "Swift Package Manager",
+    "package": "nobodywho",
+    "install": null,
+    "docsUrl": "https://docs.nobodywho.ooo/swift/",
+    "starterUrl": "https://github.com/nobodywho-ooo/swift-starter-example"
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin / Android",
+    "language": "Kotlin",
+    "packageManager": "Gradle",
+    "package": "ai.nobodywho:nobodywho-android",
+    "install": "implementation(\"ai.nobodywho:nobodywho-android:2.2.0\")",
+    "docsUrl": "https://docs.nobodywho.ooo/kotlin/",
+    "starterUrl": null
+  },
+  {
+    "id": "godot",
+    "name": "Godot",
+    "language": "GDScript",
+    "packageManager": "Godot Asset Library",
+    "package": "nobodywho",
+    "install": null,
+    "docsUrl": "https://docs.nobodywho.ooo/godot/",
+    "starterUrl": null
+  }
+]

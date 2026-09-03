@@ -14,6 +14,7 @@ NobodyWho is a library to runs large language models fully on-device, with suppo
 - [Home]({{ site.url }}/): What NobodyWho is and the platforms it supports.
 - [Apps]({{ site.url }}/apps/): Apps built by NobodyWho.
 - [Model Selection]({{ site.url }}/models/): Recommended on-device models by size, device and capability.
+- [Developers]({{ site.url }}/developers/): SDK install commands per platform, quickstarts, the data API and agent resources.
 - [Starter Pack]({{ site.url }}/starter-pack/): Examples and starter projects for running AI locally.
 - [About]({{ site.url }}/about/): The team and project milestones.
 - [Blog]({{ site.url }}/posts/): News, tutorials and technical write-ups.
@@ -22,6 +23,15 @@ NobodyWho is a library to runs large language models fully on-device, with suppo
 {% for post in collections.posts | reverse %}
 - [{{ post.data.title | safe }}]({{ site.url }}{{ post.url }}){% if post.data.description %}: {{ post.data.description | safe }}{% endif %}
 {%- endfor %}
+
+## For agents & tools
+
+- [Full documentation for LLMs](https://docs.nobodywho.ooo/llms-full.txt): the complete NobodyWho docs as a single LLM-friendly text file (index at https://docs.nobodywho.ooo/llms.txt).
+- [OpenAPI spec]({{ site.url }}/openapi.json): OpenAPI 3.1 description of the public data API.
+- [Data API index]({{ site.url }}/api/index.json): discovery document listing all JSON endpoints.
+- [Models API]({{ site.url }}/api/models.json): the on-device model catalog as JSON.
+- [Platforms API]({{ site.url }}/api/platforms.json): supported SDKs and install commands as JSON.
+- WebMCP: in-page tools (search_models, get_install_command, list_platforms, list_blog_posts) are registered via document.modelContext on every page.
 
 ## More
 
