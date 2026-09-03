@@ -8,6 +8,7 @@ import lazyImagesPlugin from "eleventy-plugin-lazyimages";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import rssPlugin from "@11ty/eleventy-plugin-rss";
 import blogCategories from "./src/_data/blogCategories.js";
+import { flattenModels, pipelineLabels } from "./src/_lib/models.js";
 
 const isListedInBlog = (post) => !post.data.draft && !post.data.hideInBlog;
 
@@ -78,51 +79,11 @@ export default async function(eleventyConfig) {
   });
 
   // Map a model pipeline key to a human-readable label.
-  const pipelineLabels = {
-    textGeneration: "Text generation",
-    imageToImage: "Image to Image",
-    imageTextToText: "Image/Text to Text",
-    audioTextToText: "Audio/Text to Text",
-    imageAudioTextToText: "Image/Audio/Text to Text",
-    textToSpeech: "Text To Speech",
-    speechToText: "Speech To Text",
-    voiceActivityDetection: "Voice Activity Detection",
-    featureExtraction: "Feature extraction",
-    textRanking: "Text ranking",
-  };
   eleventyConfig.addFilter("pipelineLabel", (key) => pipelineLabels[key] || key);
 
   // Flatten every model across all labs/families into a single list,
   // annotated with its lab/family context and sorted newest-first by release date.
-  eleventyConfig.addFilter("allModels", (labs, families) => {
-    const list = [];
-    for (const lab of labs) {
-      for (const familyKey of lab.families || []) {
-        const family = families[familyKey];
-        if (!family) continue;
-        for (const model of family.models || []) {
-          list.push({
-            labName: lab.name,
-            familyName: family.name,
-            familyLogo: family.logo,
-            pipeline: family.pipeline,
-            languages: family.languages || [],
-            variant: model.variant,
-            idealDeviceDeployment: model.idealDeviceDeployment || "",
-            sizeGB: model.sizeGB,
-            parameterCountBillions: model.parameterCountBillions,
-            releaseDate: model.releaseDate || "",
-            tags: model.tags || [],
-            thinking: model.thinking || false,
-            recommended: model.recommended || false,
-            huggingface: model.huggingface,
-            downloadLinks: model.downloadLinks || [],
-          });
-        }
-      }
-    }
-    return list.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
-  });
+  eleventyConfig.addFilter("allModels", (labs, families) => flattenModels(labs, families));
 
   eleventyConfig.addCollection("page", function(collections) {
     return collections.getFilteredByTag("page")
@@ -135,6 +96,11 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addCollection("posts", (collection) => {
     return collection.getFilteredByGlob("./src/posts/*.md").filter(isListedInBlog);
+  });
+
+  // Every published post (drafts excluded) regardless of `hideInBlog`. Used by the JSON API (/api/posts.json) 
+  eleventyConfig.addCollection("allPosts", (collection) => {
+    return collection.getFilteredByGlob("./src/posts/*.md").filter((post) => !post.data.draft);
   });
 
   // Expose the slug helper to templates (used for category pill links in blog).

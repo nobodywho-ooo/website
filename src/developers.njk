@@ -1,0 +1,185 @@
+---
+layout: base
+title: Developers
+description: Developer portal for NobodyWho - install the on-device inference SDK for any platform, browse the model catalog, and access the public data API and OpenAPI spec.
+tags: pageHiddenInMenu
+permalink: "/developers/"
+---
+
+<div class="mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:px-8">
+
+    <!-- Hero -->
+    <div class="max-w-3xl">
+        <h1 class="text-4xl font-semibold text-neutral-900 sm:text-5xl dark:text-white">Developers</h1>
+        <p class="mt-6 text-lg text-pretty text-neutral-500 dark:text-neutral-400">
+            Everything you need to build with NobodyWho, the inference engine that runs LLMs fully
+            on-device. No servers, no API keys, no hidden fees &mdash; inference happens on the user's
+            hardware. This portal covers install commands for every platform, quickstarts, the model
+            catalog, and a public data API for tools and agents.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+            <a href="https://docs.nobodywho.ooo/" class="inline-flex items-center gap-x-1.5 rounded-full bg-neutral-950 px-4 py-2 text-sm font-semibold text-white hover:bg-neutral-700 dark:bg-white dark:text-black dark:hover:bg-neutral-200">Documentation</a>
+            <a href="{{ site.github_url }}" class="inline-flex items-center gap-x-1.5 rounded-full px-4 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-neutral-300 hover:bg-neutral-50 dark:text-white dark:ring-white/15 dark:hover:bg-white/5">{% svg "github", "size-4" %} GitHub</a>
+            <a href="/openapi.json" class="inline-flex items-center gap-x-1.5 rounded-full px-4 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-neutral-300 hover:bg-neutral-50 dark:text-white dark:ring-white/15 dark:hover:bg-white/5">OpenAPI spec</a>
+        </div>
+    </div>
+
+    <!-- Install by platform -->
+    <section class="mt-24">
+        <h2 class="text-3xl font-semibold text-neutral-900 sm:text-4xl dark:text-white">Install the SDK</h2>
+        <p class="mt-4 max-w-2xl text-lg text-neutral-500 dark:text-neutral-400">
+            NobodyWho ships as a native SDK for each platform. Pick yours and add it to your project.
+        </p>
+        <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for platform in platforms %}
+            <div class="flex flex-col rounded-2xl p-6 ring-1 ring-neutral-200 dark:ring-white/10">
+                <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">{{ platform.name }}</h3>
+                <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{{ platform.language }}</p>
+                {% if platform.install %}
+                <pre class="mt-4 overflow-x-auto rounded-lg bg-neutral-950 px-4 py-3 text-sm text-neutral-100 dark:bg-black"><code>{{ platform.install }}</code></pre>
+                {% else %}
+                <p class="mt-4 rounded-lg bg-neutral-100 px-4 py-3 text-sm text-neutral-600 dark:bg-white/5 dark:text-neutral-300">Add via {{ platform.packageManager }}.</p>
+                {% endif %}
+                <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                    <a href="{{ platform.docsUrl }}" class="font-medium text-primary hover:underline">Docs</a>
+                    {% if platform.starterUrl %}<a href="{{ platform.starterUrl }}" class="font-medium text-primary hover:underline">Starter project</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Quickstart -->
+    <section class="mt-24">
+        <h2 class="text-3xl font-semibold text-neutral-900 sm:text-4xl dark:text-white">Quickstart</h2>
+        <p class="mt-4 max-w-2xl text-lg text-neutral-500 dark:text-neutral-400">
+            Load a GGUF model and start chatting &mdash; here in Python. See the
+            <a href="https://docs.nobodywho.ooo/" class="text-primary hover:underline">docs</a> for every language.
+        </p>
+        <div class="mt-8 max-w-2xl">
+            {% include "partials/index/snippets/_python.njk" %}
+        </div>
+        <p class="mt-6 text-neutral-500 dark:text-neutral-400">
+            Need a model? Browse our <a href="/models/" class="text-primary hover:underline">recommended selection</a>
+            or query it programmatically below. These are just recommendations &mdash; NobodyWho runs
+            <strong>any</strong> compatible model: text generation in GGUF, and speech-to-text, text-to-speech
+            and voice activity detection in ONNX, loaded from Hugging Face or any URL.
+        </p>
+    </section>
+
+    <!-- Data API -->
+    <section class="mt-24">
+        <h2 class="text-3xl font-semibold text-neutral-900 sm:text-4xl dark:text-white">Data API</h2>
+        <p class="mt-4 max-w-2xl text-lg text-neutral-500 dark:text-neutral-400">
+            A public, read-only JSON API describing the model catalog, supported platforms and the blog.
+            No authentication, CORS enabled, safe for tools and agents. Described by an
+            <a href="/openapi.json" class="text-primary hover:underline">OpenAPI&nbsp;3.1 spec</a>.
+        </p>
+        <div class="mt-8 overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-white/10">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-neutral-50 text-neutral-500 dark:bg-white/5 dark:text-neutral-400">
+                    <tr>
+                        <th class="px-6 py-3 font-medium">Endpoint</th>
+                        <th class="px-6 py-3 font-medium">Description</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-white/10">
+                    <tr>
+                        <td class="px-6 py-3"><a href="/api/models.json" class="font-mono text-primary hover:underline">GET /api/models.json</a></td>
+                        <td class="px-6 py-3 text-neutral-600 dark:text-neutral-300">Recommended on-device model selection (NobodyWho runs any GGUF/ONNX model)</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3"><a href="/api/platforms.json" class="font-mono text-primary hover:underline">GET /api/platforms.json</a></td>
+                        <td class="px-6 py-3 text-neutral-600 dark:text-neutral-300">Supported SDK platforms &amp; install commands</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3"><a href="/api/posts.json" class="font-mono text-primary hover:underline">GET /api/posts.json</a></td>
+                        <td class="px-6 py-3 text-neutral-600 dark:text-neutral-300">Blog posts and tutorials</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3"><a href="/api/index.json" class="font-mono text-primary hover:underline">GET /api/index.json</a></td>
+                        <td class="px-6 py-3 text-neutral-600 dark:text-neutral-300">API discovery document</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Live model search. The toolname/tooldescription attributes expose this
+             form to browser-resident AI agents via WebMCP; it also works as a normal
+             client-side filter over /api/models.json. -->
+        <div class="mt-10" x-data="modelSearch()">
+            <form
+                toolname="search_models"
+                tooldescription="Search NobodyWho's recommended on-device model catalog by name, lab, capability or target device."
+                @submit.prevent="search()"
+                class="flex max-w-xl gap-3">
+                <label for="model-query" class="sr-only">Search the model catalog</label>
+                <input
+                    id="model-query"
+                    name="query"
+                    type="search"
+                    x-model="query"
+                    @input.debounce.200ms="search()"
+                    placeholder="Search models: gemma, smartphone, speech to text…"
+                    class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-neutral-900 placeholder:text-neutral-400 focus:border-primary focus:outline-none dark:border-white/15 dark:bg-neutral-900 dark:text-white"/>
+                <button type="submit" class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-500">Search</button>
+            </form>
+            <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-400" x-show="ready" x-text="results.length + ' model(s) match'"></p>
+            <ul class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2" x-show="ready">
+                <template x-for="m in results.slice(0, 12)" :key="m.family + m.variant">
+                    <li class="rounded-lg px-4 py-2 text-sm ring-1 ring-neutral-200 dark:ring-white/10">
+                        <span class="font-medium text-neutral-900 dark:text-white" x-text="m.family + ' ' + m.variant"></span>
+                        <span class="text-neutral-500 dark:text-neutral-400" x-text="' · ' + m.pipeline + ' · ' + m.idealDeviceDeployment"></span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </section>
+
+    <!-- For AI agents -->
+    <section class="mt-24">
+        <h2 class="text-3xl font-semibold text-neutral-900 sm:text-4xl dark:text-white">For AI agents</h2>
+        <p class="mt-4 max-w-2xl text-lg text-neutral-500 dark:text-neutral-400">
+            NobodyWho is built to be machine-readable. Agents can discover and integrate with this site through:
+        </p>
+        <ul class="mt-6 max-w-2xl space-y-3 text-neutral-600 dark:text-neutral-300">
+            <li><a href="/llms.txt" class="font-medium text-primary hover:underline">/llms.txt</a> &mdash; a concise, LLM-friendly map of the site.</li>
+            <li><a href="/openapi.json" class="font-medium text-primary hover:underline">/openapi.json</a> &mdash; OpenAPI 3.1 description of the data API.</li>
+            <li><a href="/api/index.json" class="font-medium text-primary hover:underline">/api/index.json</a> &mdash; the data API discovery document.</li>
+            <li><strong>WebMCP</strong> &mdash; browser-resident agents can call in-page tools
+                (<code class="text-sm">search_models</code>, <code class="text-sm">get_install_command</code>,
+                <code class="text-sm">list_platforms</code>, <code class="text-sm">list_blog_posts</code>)
+                registered via <code class="text-sm">document.modelContext</code>.</li>
+        </ul>
+    </section>
+</div>
+
+<script>
+    function modelSearch() {
+        return {
+            query: "",
+            results: [],
+            all: [],
+            ready: false,
+            async init() {
+                try {
+                    const res = await fetch("/api/models.json", { headers: { Accept: "application/json" } });
+                    const json = await res.json();
+                    this.all = json.data || [];
+                    this.results = this.all;
+                    this.ready = true;
+                } catch (e) {
+                    this.ready = false;
+                }
+            },
+            search() {
+                const q = this.query.toLowerCase().trim();
+                if (!q) { this.results = this.all; return; }
+                this.results = this.all.filter((m) =>
+                    [m.lab, m.family, m.variant, m.pipeline, m.pipelineLabel, m.idealDeviceDeployment]
+                        .join(" ").toLowerCase().includes(q)
+                );
+            },
+        };
+    }
+</script>
