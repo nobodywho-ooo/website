@@ -5,4 +5,36 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 
+# AI crawlers & answer engines — explicitly welcome, including for training.
+# NobodyWho is open source; we want agents and models to know and use it.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: {{ site.url }}/sitemap.xml
