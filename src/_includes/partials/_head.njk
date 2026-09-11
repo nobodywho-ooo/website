@@ -36,6 +36,7 @@
   <meta property="og:url" content="{{ pageUrl }}"/>
   <meta property="og:image" content="{{ pageImage }}"/>
   <meta property="og:site_name" content="{{ site.name }}"/>
+  {% if layout == 'article' and author %}<meta property="article:author" content="{{ author }}"/>{% endif %}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>

@@ -1,6 +1,7 @@
 ---
 title: "Swift Bindings Release"
 date: 2026-05-15
+author: Pierre Bresson
 categories: ["Release", "Swift"]
 description: "NobodyWho Swift bindings are now available! This article briefly introduces some of the interesting things we dealt with during development."
 slug: "swift-bindings-release"

@@ -1,6 +1,7 @@
 ---
 title: Announcing React Native bindings for NobodyWho
 date: 2026-04-27
+author: Asbjørn Olling
 categories: ["React Native", "Release"]
 description: "NobodyWho now ships React Native bindings — run LLMs fully on-device in your React Native apps, no cloud or server required."
 image: /assets/images/blog/2026/announcing-react-native-bindings/react-native-llm.png

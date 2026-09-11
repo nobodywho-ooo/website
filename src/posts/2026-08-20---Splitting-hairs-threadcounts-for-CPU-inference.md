@@ -1,6 +1,7 @@
 ---
 title: "Use fewer threads for CPU inference"
 date: 2026-08-20
+author: Asbjørn Olling
 categories: ["Technical"]
 description: "How many worker threads should you use for CPU inference? Not all of them."
 slug: "threadcounts-for-cpu-inference"

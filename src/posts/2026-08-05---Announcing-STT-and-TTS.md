@@ -1,6 +1,7 @@
 ---
 title: Announcing Speech To Text & Text To Speech
 date: 2026-08-05
+author: Martin Krebs
 categories: ["Feature", "Release"]
 description: "STT & TTS in NobodyWho — easily generate and transcribe audio!"
 image: /assets/images/blog/2026/announcing-stt-tts/nobodywho-text-to-speech.png

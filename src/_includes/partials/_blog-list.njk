@@ -32,6 +32,9 @@
                     <article class=" flex flex-col items-start justify-between">
                         <div class="flex items-center gap-x-4 text-xs">
                             <time datetime="{{ post.date | dateISO }}" class="text-neutral-500 dark:text-neutral-400">{{ post.date | dateFormating }}</time>
+                            {% if post.data.author %}
+                                <span class="text-neutral-500 dark:text-neutral-400">{{ post.data.author }}</span>
+                            {% endif %}
                             {% for category in post.data.categories %}
                                 <span class="relative z-10 rounded-full bg-neutral-50 px-3 py-1 font-medium text-neutral-600 dark:bg-neutral-800/60
                                     dark:text-neutral-300">{{ category }}</span>

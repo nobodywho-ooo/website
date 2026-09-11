@@ -1,6 +1,7 @@
 ---
 title: LLM, give me a JSON. Make no mistakes.
 date: 2026-06-01
+author: Marek Hradil
 description: "So how exactly do you make your LLM output a JSON? What happens under the hood? And how do you make it reliable and fast? Diving into constrained sampling."
 slug: "llm-give-me-a-json"
 categories: ["Technical"]
