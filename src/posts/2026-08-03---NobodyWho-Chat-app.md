@@ -1,6 +1,7 @@
 ---
 title: "NobodyWho Chat app"
 date: 2026-08-03
+author: Pierre Bresson
 categories: ["Apps", "React Native"]
 description: "NobodyWho Chat app is now available on mobile!"
 image: /assets/images/blog/2026/nobodywho-chat-app/nobodywho-chat-app-preview.png

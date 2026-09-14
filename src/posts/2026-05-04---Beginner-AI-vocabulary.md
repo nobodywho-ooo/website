@@ -1,6 +1,7 @@
 ---
 title: Beginner's Guide to Essential Terms in Artificial Intelligence
 date: 2026-05-04
+author: Pierre Bresson
 categories: ["Guide"]
 description: "This article provides a glossary covering essential AI vocabulary, definitions, and terminology"
 image: /assets/images/blog/2026/beginner-guide-to-essential-terms-in-ai/beginner-guide-in-essential-terms-in-ai.png

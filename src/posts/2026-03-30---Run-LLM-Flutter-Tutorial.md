@@ -1,6 +1,7 @@
 ---
 title: Run LLMs locally in Flutter apps
 date: 2026-03-30
+author: Pierre Bresson
 categories: ["Flutter", "Tutorial"]
 description: "Learn how to run LLMs directly on a user's device in Flutter — no cloud, no server, no cost. Build a chat interface with tool calling, sampling, and RAG."
 image: /assets/images/blog/2026/run-llm-flutter-guide/ai-llm-on-device-flutter.png

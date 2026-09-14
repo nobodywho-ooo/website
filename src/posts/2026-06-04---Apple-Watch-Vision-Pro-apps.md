@@ -1,6 +1,7 @@
 ---
 title: "Apple Watch & Vision Pro apps"
 date: 2026-06-04
+author: Pierre Bresson
 categories: ["Apps", "Swift"]
 description: "NobodyWho Swift bindings are now available! This article briefly introduces some of the interesting things we dealt with during development."
 image: /assets/images/blog/2026/apple-watch-vision-pro-apps/apple-watch-vision-pro-apps.png
