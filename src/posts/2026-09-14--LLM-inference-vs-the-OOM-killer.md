@@ -110,7 +110,7 @@ fn main() {
 
 Note that running a runloop is necessary for the notification to fire (hence the `UIApplication::main()` call in the example above).
 
-<video src="/assets/images/blog/2026/inference-oom/memory-warning.mp4" width="1280" height="1000" controls muted playsinline aria-label="Video of running the code in the iPhone Simulator, and simulating a memory warning.">
+<video src="/assets/videos/blog/2026/inference-oom/memory-warning.mp4" width="1280" height="1000" controls muted playsinline aria-label="Video of running the code in the iPhone Simulator, and simulating a memory warning.">
   Video of running the code in the iPhone Simulator, and simulating a memory warning.
 </video>
 
