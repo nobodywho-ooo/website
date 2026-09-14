@@ -1,6 +1,6 @@
 ---
 title: LLM inference vs. the OOM killer
-date: 2026-01-01
+date: 2026-09-14
 author: Mads Marquart
 categories: ["Rust", "Technical"]
 description: "TODO."
