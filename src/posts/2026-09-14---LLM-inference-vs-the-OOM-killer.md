@@ -131,7 +131,7 @@ struct App {
 }
 
 impl ApplicationHandler for App {
-    // ...
+    // ... the usual Winit event handling in here ...
 
     fn memory_warning(&mut self, event_loop: &ActiveEventLoop) {
         println!("got memory warning");
