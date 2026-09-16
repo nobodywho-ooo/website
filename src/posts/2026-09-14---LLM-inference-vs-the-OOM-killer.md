@@ -9,15 +9,19 @@ slug: "inference-oom"
 
 There's many... let's call them "fun challenges" with running LLM inference on mobile devices. A major one is the limited amount of RAM the device has, which of course restricts which models you can run (they're called _Large_ language models for a reason), but also influences how you'd design an application using them.
 
-The one I'll be looking at today is an issue that we're having in the [NobodyWho Chat](/apps/) app[^sponsored], our test app for the open-source Rust inference library we're building: It crashes after a while after you background the app, which is both a bad user- and developer-experience.
+The one I'll be looking at today is an issue that we're having in the [NobodyWho Chat](/apps/) app[^sponsored], our test app for the open-source Rust inference library we're building: It crashes sometimes after you background the app, which is quite the bad user-experience.
 
-![Video of crash on Android](todo)
+Investigating, I found that the culprit is the Out Of Memory deamon (coliquially OOM killers) that both Android and iOS have, which monitors the system and terminates background applications when the system needs free memory.[^swap]
 
-Investigating, I found that what's happening is that Android and iOS have Out Of Memory deamons (coliquially OOM killers) that monitor the system and terminate background applications when the system needs free memory.[^swap]
+For example, here's a 1GB model running on an Android emulator with `hw.ramSize=2G`, and you can see the app crash after I open another memory hungry application:[^miss]
+
+<video src="/assets/videos/blog/2026/inference-oom/android-lowmemorykiller.mp4" width="2060" height="1440" controls muted playsinline aria-label="Video of NobodyWho Chat crashing on Android when opening Chrome, and the log message from the lowmemorykiller.">
+  Video of NobodyWho Chat crashing on Android when opening Chrome, and the log message from the lowmemorykiller.
+</video>
 
 Luckily, both OSes also have signals that fire beforehand that the app can listen for, and respond accordingly:
 - iOS: [`applicationDidReceiveMemoryWarning:`](https://developer.apple.com/documentation/uikit/responding-to-memory-warnings). Sent twice before killing the app.
-- Android: [`ComponentCallbacks2.onTrimMemory`](https://developer.android.com/topic/performance/memory/manage-app-memory#release)
+- Android: [`ComponentCallbacks2.onTrimMemory`](https://developer.android.com/topic/performance/memory/manage-app-memory#release). `TRIM_MEMORY_UI_HIDDEN` is sent when going to the background, `TRIM_MEMORY_BACKGROUND` sent later.
 
 So I got to thinking: Could our library register for these signals, and automatically unload the model when they fire?
 
@@ -96,7 +100,7 @@ fn main() {
 
 Running this example in the iPhone Simulator, you'll see something like this:
 
-<video src="/assets/videos/blog/2026/inference-oom/memory-warning.mp4" width="1280" height="1000" controls muted playsinline aria-label="Video of running the code in the iPhone Simulator, and simulating a memory warning.">
+<video src="/assets/videos/blog/2026/inference-oom/memory-warning.mp4" width="2038" height="1592" controls muted playsinline aria-label="Video of running the code in the iPhone Simulator, and simulating a memory warning.">
   Video of running the code in the iPhone Simulator, and simulating a memory warning.
 </video>
 
@@ -154,6 +158,8 @@ Welp, I've been writing this blog post for long enough and procrastinating actua
 [^sponsored]: Don't @ me, I'm writing this on the clock, gotta wedge the company name in here somehow ;)
 
 [^swap]: From my testing, Android does have swap, but only foreground applications really get to use that (and it's terrible for performance, so you don't really want to, but hey), background applications are still killed if they use too much memory.
+
+[^miss]: Yes, I missed the gesture bar the first time, laugh all you want, it's not easy with a mouse pointer okay!
 
 [^tvos-visionos]: And tvOS and visionOS, Apple's OSes are pretty similar in this regard.
 
