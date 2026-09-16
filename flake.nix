@@ -20,7 +20,7 @@
             version = "1.0.0";
             src = ./.;
             nodejs = pkgs.nodejs_22;
-            npmDepsHash = "sha256-K/PoAux/zaAMIxKPAocTYiq3XZ/MX2H4cedd7MIuI5g=";
+            npmDepsHash = "sha256-igiUWz3M/Sa/v7fmcSO475j4T3egn+RWJMwOhFQVWgQ=";
             nativeBuildInputs = [ pkgs.pkg-config ];
             buildInputs = [ pkgs.vips ];
             buildPhase = ''

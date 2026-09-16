@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Install NobodyWho and run your first local language model in Python.">
+  <title>Getting started with Python | NobodyWho</title>
+  <style>
+    @font-face{font-family:Satoshi;src:url('../../src/assets/fonts/Satoshi-Regular.woff2') format('woff2');font-display:swap;font-weight:400}@font-face{font-family:Satoshi;src:url('../../src/assets/fonts/Satoshi-Bold.woff2') format('woff2');font-display:swap;font-weight:700}@font-face{font-family:DM;src:url('../../src/assets/fonts/dm-sans-400-normal.woff2') format('woff2');font-display:swap;font-weight:400}
+    :root{--ink:#f1f4ea;--muted:#9ea598;--paper:#11130f;--panel:#191c16;--line:#32372c;--accent:#b7f34c;--accent-ink:#182008;--code:#090b08;--radius:4px;color-scheme:dark}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 DM,system-ui,sans-serif}a{color:inherit}.skip{position:absolute;left:-999px}.skip:focus{left:10px;top:10px;z-index:20;background:var(--accent);color:var(--accent-ink);padding:10px 14px}.topbar{height:64px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:290px 1fr auto;align-items:center;padding:0 22px;position:sticky;top:0;background:rgba(17,19,15,.94);backdrop-filter:blur(16px);z-index:10}.brand{font:700 18px Satoshi,sans-serif;text-decoration:none;letter-spacing:-.04em}.brand span{color:var(--accent)}.platform-nav{display:flex;gap:26px;height:64px;align-items:center}.platform-nav a{text-decoration:none;color:var(--muted);font-size:14px}.platform-nav a.active{color:var(--ink);height:64px;display:grid;place-items:center;border-bottom:2px solid var(--accent)}.top-actions{display:flex;gap:9px;align-items:center}.search{width:190px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:8px 11px;color:var(--ink);font:13px DM}.github{font-size:13px;text-decoration:none;border:1px solid var(--line);padding:7px 10px;border-radius:var(--radius)}.docs-grid{display:grid;grid-template-columns:290px minmax(0,1fr) 220px;min-height:calc(100dvh - 64px)}.sidebar{border-right:1px solid var(--line);padding:24px 14px;position:sticky;top:64px;height:calc(100dvh - 64px);overflow:auto}.version label,.side-title{display:block;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font:10px ui-monospace,SFMono-Regular,Menlo,monospace;margin:0 8px 8px}.version select{width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:9px 10px;margin-bottom:20px}.side-nav{display:grid;gap:2px}.side-nav a{text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:var(--radius);font-size:14px;line-height:1.3}.side-nav a:hover{color:var(--ink);background:var(--panel)}.side-nav a.active{background:var(--accent);color:var(--accent-ink);font-weight:700}.content{width:min(820px,calc(100% - 48px));margin:0 auto;padding:34px 0 80px}.doc-tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:68px;color:var(--muted);font-size:13px}.doc-tools a{text-decoration:none}.copy-page{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:var(--radius);cursor:pointer}.crumbs{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);margin-bottom:16px}.badge{display:inline-block;background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:3px 8px;border-radius:var(--radius);font:11px ui-monospace,SFMono-Regular,Menlo,monospace}.content h1{font:700 clamp(48px,7vw,80px)/.95 Satoshi,sans-serif;letter-spacing:-.06em;margin:20px 0 56px}.content h2{font:700 34px/1.1 Satoshi,sans-serif;letter-spacing:-.04em;margin:54px 0 22px;scroll-margin-top:100px}.content p{margin:18px 0;color:#d4d9cf}.content p:last-of-type{color:var(--muted)}.content a:not(.next){text-decoration-color:var(--accent);text-underline-offset:4px}.content code:not(pre code){font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--panel);border:1px solid var(--line);padding:2px 6px;border-radius:var(--radius);color:var(--accent)}.code-block{background:var(--code);border:1px solid var(--line);border-radius:var(--radius);margin:18px 0 30px;overflow:hidden}.code-head{height:42px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 14px;color:var(--muted);font:11px ui-monospace,SFMono-Regular,Menlo,monospace}.copy{border:0;background:none;color:var(--muted);cursor:pointer;font:inherit}.copy:hover{color:var(--accent)}pre{margin:0;padding:24px;overflow:auto;color:#e7ebdf;font:13px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace}.kw,.fn{color:var(--accent)}.str{color:#f3c56b}.cm{color:#747e6d}.next{margin-top:70px;display:grid;grid-template-columns:1fr auto;align-items:center;text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:20px 22px;border-radius:var(--radius)}.next small{display:block;color:var(--muted);font:10px ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em}.toc{border-left:1px solid var(--line);padding:32px 20px;position:sticky;top:64px;height:calc(100dvh - 64px)}.toc strong{display:block;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font:10px ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:12px}.toc a{font-size:13px;text-decoration:none;color:var(--muted)}.toc a:hover{color:var(--accent)}.mobile-menu{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:var(--radius);padding:7px 10px}.mobile-drawer{display:none}.footer{grid-column:2/-1;border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:28px;font-size:12px}.footer a{text-underline-offset:3px}
+    @media(max-width:1040px){.topbar{grid-template-columns:1fr auto}.platform-nav,.search{display:none}.docs-grid{grid-template-columns:250px minmax(0,1fr)}.toc{display:none}.footer{grid-column:2}.content{width:min(780px,calc(100% - 40px))}}
+    @media(max-width:720px){.topbar{padding:0 14px}.github{display:none}.mobile-menu{display:block}.docs-grid{display:block}.sidebar{display:none;position:fixed;z-index:9;inset:64px 0 0;width:290px;background:var(--paper);height:auto}.sidebar.open{display:block}.content{width:calc(100% - 28px);padding-top:24px}.content h1{font-size:52px;margin-bottom:46px}.doc-tools{margin-bottom:45px}.footer{display:block}.next{margin-top:52px}.code-block{margin-inline:-1px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to main content</a>
+<header class="topbar">
+  <a class="brand" href="landing.html">NobodyWho<span>.</span></a>
+  <nav class="platform-nav" aria-label="Documentation platforms"><a href="#">Basics</a><a href="#">Kotlin</a><a class="active" href="#">Python</a><a href="#">Swift</a><a href="#">RN / Expo</a><a href="#">Flutter</a><a href="#">Godot</a></nav>
+  <div class="top-actions"><input class="search" type="search" placeholder="Search docs" aria-label="Search documentation"><a class="github" href="https://github.com/nobodywho-ooo/nobodywho">GitHub 1.1k</a><button class="mobile-menu" type="button" aria-expanded="false">Menu</button></div>
+</header>
+<div class="docs-grid">
+  <aside class="sidebar" aria-label="Python documentation">
+    <div class="version"><label for="version">Version</label><select id="version"><option>main</option><option selected>2.0.0</option><option>1.7.0</option><option>1.6.0</option><option>1.5.0</option><option>1.4.0</option></select></div>
+    <nav class="side-nav"><a class="active" href="#">Getting started</a><a href="#">Downloading models</a><a href="#">Chat</a><a href="#">Tool Calling</a><a href="#">Multimodal Models</a><a href="#">Speech to Text</a><a href="#">Text to Speech</a><a href="#">Voice Activity Detection</a><a href="#">Sampling</a><a href="#">Streaming &amp; Async API</a><a href="#">Embeddings &amp; RAG</a><a href="#">Logging and Troubleshooting</a></nav>
+  </aside>
+  <main class="content" id="content">
+    <div class="doc-tools"><a href="#">Downloading models →</a><button class="copy-page" type="button">Copy page</button></div>
+    <div class="crumbs">Python / Getting started</div>
+    <span class="badge">Version: 2.0.0</span>
+    <h1>Getting started</h1>
+    <h2 id="start">How do I get started?</h2>
+    <p>First, install <code>nobodywho</code>.</p>
+    <div class="code-block"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="pip install nobodywho">Copy</button></div><pre>pip <span class="fn">install</span> nobodywho</pre></div>
+    <p>Or preferably:</p>
+    <div class="code-block"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="uv add nobodywho">Copy</button></div><pre>uv <span class="fn">add</span> nobodywho</pre></div>
+    <p>Next, pick a model. NobodyWho can download GGUF models directly from Hugging Face, just pass a <code>huggingface:</code> path. See <a href="#">model selection</a> for recommendations.</p>
+    <p>Then make a <code>Chat</code> object and call <code>.ask()</code>!</p>
+    <div class="code-block"><div class="code-head"><span>Python</span><button class="copy" type="button" data-copy="from nobodywho import Chat\n\nchat = Chat('huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf')\nresponse = chat.ask('Is water wet?')\n\n# print each token as it is generated\nfor token in response:\n    print(token, end=\"\", flush=True)\n\n# ...or get the entire response as a single string\nfull_response = response.completed()\nprint(full_response)">Copy</button></div><pre><span class="kw">from</span> nobodywho <span class="kw">import</span> Chat
+
+chat = Chat(<span class="str">'huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf'</span>)
+response = chat.ask(<span class="str">'Is water wet?'</span>)
+
+<span class="cm"># print each token as it is generated</span>
+<span class="kw">for</span> token <span class="kw">in</span> response:
+    <span class="fn">print</span>(token, end=<span class="str">""</span>, flush=<span class="kw">True</span>)
+
+<span class="cm"># ...or get the entire response as a single string</span>
+full_response = response.completed()
+<span class="fn">print</span>(full_response)</pre></div>
+    <p>This is a super simple example, but we believe that examples which do simple things, should be simple!</p>
+    <p>To get a full overview of the functionality provided by NobodyWho, simply keep reading.</p>
+    <a class="next" href="#"><span><small>Next</small>Downloading models</span><span aria-hidden="true">→</span></a>
+  </main>
+  <aside class="toc" aria-label="On this page"><strong>On this page</strong><a href="#start">How do I get started?</a></aside>
+  <footer class="footer"><a href="landing.html">NobodyWho.ai</a> - EUPL-1.2 - <a href="https://docs.nobodywho.ooo/llms.txt">llms.txt</a> · <a href="https://docs.nobodywho.ooo/llms-full.txt">llms-full.txt</a></footer>
+</div>
+<script>
+  const menu = document.querySelector('.mobile-menu');
+  menu.addEventListener('click', () => { const sidebar = document.querySelector('.sidebar'); const open = sidebar.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
+  document.querySelectorAll('.copy').forEach(button => button.addEventListener('click', async () => { await navigator.clipboard.writeText(button.dataset.copy); button.textContent = 'Copied'; setTimeout(() => button.textContent = 'Copy', 1400); }));
+  document.querySelector('.copy-page').addEventListener('click', async event => { await navigator.clipboard.writeText(document.querySelector('main').innerText); event.currentTarget.textContent = 'Copied'; setTimeout(() => event.currentTarget.textContent = 'Copy page', 1400); });
+</script>
+</body>
+</html>

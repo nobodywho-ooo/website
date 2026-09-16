@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Run open models inside your app with NobodyWho. Private, offline, and built for every major platform.">
+  <title>NobodyWho | Local AI, inside your app</title>
+  <style>
+    @font-face{font-family:Satoshi;src:url('../../src/assets/fonts/Satoshi-Regular.woff2') format('woff2');font-display:swap;font-weight:400}
+    @font-face{font-family:Satoshi;src:url('../../src/assets/fonts/Satoshi-Bold.woff2') format('woff2');font-display:swap;font-weight:700}
+    @font-face{font-family:DM;src:url('../../src/assets/fonts/dm-sans-400-normal.woff2') format('woff2');font-display:swap;font-weight:400}
+    :root{--ink:#f1f4ea;--muted:#a7aca2;--paper:#11130f;--panel:#191c16;--line:#32372c;--accent:#b7f34c;--accent-ink:#182008;--code:#0a0c09;--radius:4px;color-scheme:dark}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:DM,system-ui,sans-serif;font-size:16px;line-height:1.55}button,a{font:inherit}a{color:inherit}button{color:inherit}.skip{position:absolute;left:-999px;top:8px}.skip:focus{left:8px;z-index:20;background:var(--accent);color:var(--accent-ink);padding:10px 14px}.shell{width:min(1440px,calc(100% - 40px));margin:auto}.nav{height:72px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid var(--line);position:relative;z-index:5}.brand{font-family:Satoshi,sans-serif;font-weight:700;text-decoration:none;font-size:18px;letter-spacing:-.04em}.brand span{color:var(--accent)}.links{display:flex;gap:30px}.links a{text-decoration:none;color:var(--muted);font-size:14px}.links a:hover,.links a:focus-visible{color:var(--ink)}.nav-actions{display:flex;justify-content:flex-end;gap:10px}.mini-link,.button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--line);min-height:42px;padding:0 17px;border-radius:var(--radius);white-space:nowrap;transition:transform .2s ease,background .2s ease,color .2s ease}.mini-link{font-size:14px}.button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}.button:hover,.mini-link:hover{transform:translateY(-2px)}.button:active,.mini-link:active{transform:translateY(0)}
+    .hero{min-height:calc(100dvh - 72px);display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:6vw;padding:56px 0}.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-size:12px;margin:0 0 20px}.hero h1{font-family:Satoshi,sans-serif;font-weight:700;font-size:clamp(54px,7.3vw,112px);letter-spacing:-.075em;line-height:.86;margin:0;max-width:760px}.hero .lede{font-size:clamp(18px,1.7vw,24px);color:var(--muted);max-width:510px;margin:30px 0 0}.hero-actions{display:flex;gap:12px;margin-top:34px}.hero-visual{position:relative;min-height:660px;display:flex;align-items:center;justify-content:center}.image-frame{position:relative;width:min(92%,610px);height:600px;background:#d7ff96;overflow:hidden;border-radius:var(--radius);transform:rotate(2deg);box-shadow:24px 24px 0 #262c20}.image-frame img{width:100%;height:100%;object-fit:cover;object-position:27% center;filter:saturate(.82) contrast(1.05)}.image-frame:after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,transparent 45%,rgba(183,243,76,.32));mix-blend-mode:color}.model-note{position:absolute;left:-4%;bottom:8%;background:var(--code);border:1px solid var(--line);padding:16px 18px;width:220px;border-radius:var(--radius);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;transform:rotate(-3deg);box-shadow:12px 12px 0 rgba(0,0,0,.25)}.model-note b{display:block;color:var(--accent);font-size:22px;margin-bottom:6px}.model-note span{color:var(--muted)}
+    .ticker{border-block:1px solid var(--line);overflow:hidden;padding:17px 0}.ticker-track{display:flex;width:max-content;gap:48px;animation:travel 30s linear infinite;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}.ticker strong{color:var(--ink);font-weight:400}.section{padding:132px 0}.section h2{font:700 clamp(40px,5vw,72px)/.96 Satoshi,sans-serif;letter-spacing:-.06em;margin:0;max-width:850px}.section-intro{font-size:19px;color:var(--muted);max-width:590px;margin:26px 0 0}.workbench{display:grid;grid-template-columns:.84fr 1.16fr;gap:5vw;align-items:start}.sticky{position:sticky;top:110px}.code-wrap{background:var(--code);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.code-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--muted);font:12px ui-monospace,SFMono-Regular,Menlo,monospace}.copy{border:0;background:transparent;color:var(--muted);cursor:pointer}.copy:hover{color:var(--accent)}pre{margin:0;padding:28px;overflow:auto;font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#e9eee2}.kw{color:#b7f34c}.str{color:#f3c56b}.cm{color:#6c7566}.steps{display:grid;gap:0;margin-top:60px}.step{display:grid;grid-template-columns:80px 1fr;gap:26px;padding:30px 0;border-bottom:1px solid var(--line)}.step:first-child{border-top:1px solid var(--line)}.step-num{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent)}.step h3{font:700 28px/1 Satoshi,sans-serif;letter-spacing:-.035em;margin:0 0 10px}.step p{color:var(--muted);margin:0;max-width:480px}
+    .capabilities{display:grid;grid-template-columns:1.25fr .75fr;grid-template-rows:auto auto;gap:14px;margin-top:60px}.cap{min-height:290px;border:1px solid var(--line);padding:34px;border-radius:var(--radius);display:flex;flex-direction:column;justify-content:space-between;background:var(--panel)}.cap:first-child{grid-row:span 2;min-height:594px;background:var(--accent);color:var(--accent-ink)}.cap h3{font:700 clamp(30px,3vw,52px)/1 Satoshi,sans-serif;letter-spacing:-.05em;margin:0}.cap p{margin:18px 0 0;max-width:420px}.cap:not(:first-child) p{color:var(--muted)}.cap-code{font:12px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;border-top:1px solid rgba(24,32,8,.25);padding-top:24px;white-space:pre-wrap}.platforms{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);margin-top:56px}.platform{padding:38px 10px;text-align:center;border-right:1px solid var(--line);font:700 18px Satoshi,sans-serif}.platform:last-child{border-right:0}.platform small{display:block;font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);margin-top:9px}.closing{padding:100px 0 42px}.closing-box{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;background:var(--accent);color:var(--accent-ink);padding:clamp(34px,6vw,86px);border-radius:var(--radius)}.closing h2{font:700 clamp(45px,7vw,92px)/.9 Satoshi,sans-serif;letter-spacing:-.07em;margin:0;max-width:800px}.closing .button{background:var(--accent-ink);color:var(--accent);border-color:var(--accent-ink)}footer{display:flex;justify-content:space-between;padding:26px 0 40px;color:var(--muted);font-size:13px}.footer-links{display:flex;gap:22px}.footer-links a{text-decoration:none}.menu-button{display:none;background:none;border:1px solid var(--line);border-radius:var(--radius);padding:9px 12px}
+    [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}[data-reveal].visible{opacity:1;transform:none}
+    @keyframes travel{to{transform:translateX(-50%)}}
+    @media(max-width:900px){.shell{width:min(100% - 28px,720px)}.nav{grid-template-columns:1fr auto}.links,.nav-actions{display:none}.menu-button{display:block}.nav.open{height:auto;padding:20px 0;align-items:start}.nav.open .links{display:flex;grid-column:1/-1;flex-direction:column;padding:28px 0 10px}.hero{grid-template-columns:1fr;padding:64px 0 90px}.hero h1{font-size:clamp(52px,16vw,82px)}.hero-visual{min-height:530px}.image-frame{height:500px;box-shadow:14px 14px 0 #262c20}.model-note{left:0}.workbench{grid-template-columns:1fr}.sticky{position:static}.capabilities{grid-template-columns:1fr;grid-template-rows:auto}.cap:first-child{grid-row:auto;min-height:440px}.platforms{grid-template-columns:repeat(2,1fr)}.platform:nth-child(2n){border-right:0}.platform{border-bottom:1px solid var(--line)}.closing-box{grid-template-columns:1fr;align-items:start}footer{flex-direction:column;gap:18px}.section{padding:90px 0}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track{animation:none}[data-reveal]{opacity:1;transform:none;transition:none}.button,.mini-link{transition:none}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="#">NobodyWho<span>.</span></a>
+    <div class="links"><a href="#how">How it works</a><a href="#features">Features</a><a href="docs.html">Docs</a><a href="https://github.com/nobodywho-ooo/nobodywho">GitHub</a></div>
+    <div class="nav-actions"><a class="mini-link" href="docs.html">Read Python docs</a></div>
+    <button class="menu-button" type="button" aria-expanded="false">Menu</button>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero shell">
+    <div data-reveal>
+      <p class="eyebrow">Open-source local inference</p>
+      <h1>Your model. Your device.</h1>
+      <p class="lede">Run text, vision, and speech models inside your app. No API key. No server bill.</p>
+      <div class="hero-actions"><a class="button primary" href="docs.html">Start in Python</a><a class="button" href="https://github.com/nobodywho-ooo/nobodywho">View source</a></div>
+    </div>
+    <div class="hero-visual" data-reveal>
+      <div class="image-frame"><img src="../../src/assets/images/apps/nobodywho-chat-app.png" alt="NobodyWho chat running locally on a desktop"></div>
+      <div class="model-note"><b>Offline.</b><span>Prompts stay in local memory.</span></div>
+    </div>
+  </section>
+  <div class="ticker"><div class="ticker-track"><span><strong>LLM</strong> chat</span><span><strong>STT</strong> hearing</span><span><strong>TTS</strong> speaking</span><span><strong>RAG</strong> retrieval</span><span><strong>VLM</strong> vision</span><span><strong>GGUF</strong> models</span><span><strong>LLM</strong> chat</span><span><strong>STT</strong> hearing</span><span><strong>TTS</strong> speaking</span><span><strong>RAG</strong> retrieval</span><span><strong>VLM</strong> vision</span><span><strong>GGUF</strong> models</span></div></div>
+  <section class="section shell workbench" id="how">
+    <div class="sticky" data-reveal><h2>Three lines to local inference.</h2><p class="section-intro">Install the library, point it at a model, ask a question. The model runs where your software runs.</p></div>
+    <div>
+      <div class="code-wrap" data-reveal><div class="code-bar"><span>quickstart.py</span><button class="copy" type="button" data-copy="from nobodywho import Chat\n\nchat = Chat('huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf')\nprint(chat.ask('Is water wet?').completed())">Copy</button></div><pre><span class="kw">from</span> nobodywho <span class="kw">import</span> Chat
+
+chat = Chat(<span class="str">'huggingface:NobodyWho/
+Qwen_Qwen3-0.6B-GGUF/
+Qwen_Qwen3-0.6B-Q4_K_M.gguf'</span>)
+
+response = chat.ask(<span class="str">'Is water wet?'</span>)
+<span class="kw">print</span>(response.completed())</pre></div>
+      <div class="steps"><div class="step" data-reveal><div class="step-num">01</div><div><h3>Install</h3><p>Use <code>uv add nobodywho</code> or install from PyPI.</p></div></div><div class="step" data-reveal><div class="step-num">02</div><div><h3>Pick a model</h3><p>Load GGUF models directly from Hugging Face with a single path.</p></div></div><div class="step" data-reveal><div class="step-num">03</div><div><h3>Ship offline</h3><p>Run on Metal, CUDA, Vulkan, integrated graphics, or a mobile chip.</p></div></div></div>
+    </div>
+  </section>
+  <section class="section shell" id="features">
+    <h2 data-reveal>One engine. More than chat.</h2>
+    <p class="section-intro" data-reveal>Build private AI features across text, audio, vision, and retrieval without maintaining inference infrastructure.</p>
+    <div class="capabilities">
+      <article class="cap" data-reveal><div><h3>Runs with the internet off.</h3><p>Your inputs and outputs stay on the device. Useful on a flight, in a lab, or anywhere cloud logging is off-limits.</p></div><div class="cap-code">network: not required
+api_key: not required
+usage_fee: 0
+license: EUPL-1.2</div></article>
+      <article class="cap" data-reveal><div><h3>Listen and speak.</h3><p>Speech to text, text to speech, and voice activity detection use the same local runtime.</p></div></article>
+      <article class="cap" data-reveal><div><h3>See and retrieve.</h3><p>Add multimodal input, embeddings, reranking, and RAG without changing the privacy model.</p></div></article>
+    </div>
+  </section>
+  <section class="section shell">
+    <h2 data-reveal>Native where you build.</h2>
+    <div class="platforms" data-reveal><div class="platform">Kotlin<small>JVM + Android</small></div><div class="platform">Python<small>Desktop + server</small></div><div class="platform">Swift<small>Apple platforms</small></div><div class="platform">RN / Expo<small>Cross-platform</small></div><div class="platform">Flutter<small>Mobile + desktop</small></div><div class="platform">Godot<small>Games + worlds</small></div></div>
+  </section>
+  <section class="closing shell"><div class="closing-box" data-reveal><h2>Keep the model close.</h2><a class="button" href="docs.html">Read the docs</a></div></section>
+</main>
+<footer class="shell"><span>NobodyWho, European open-source AI.</span><div class="footer-links"><a href="https://github.com/nobodywho-ooo/nobodywho">GitHub</a><a href="https://discord.gg/qhaMc2qCYB">Discord</a><a href="https://www.nobodywho.ai/privacy/">Privacy</a></div></footer>
+<script>
+  const menu = document.querySelector('.menu-button');
+  menu.addEventListener('click', () => { const nav = document.querySelector('.nav'); const open = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
+  document.querySelectorAll('.copy').forEach(button => button.addEventListener('click', async () => { await navigator.clipboard.writeText(button.dataset.copy); button.textContent = 'Copied'; setTimeout(() => button.textContent = 'Copy', 1400); }));
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), {threshold:.14});
+  document.querySelectorAll('[data-reveal]').forEach(element => observer.observe(element));
+</script>
+</body>
+</html>

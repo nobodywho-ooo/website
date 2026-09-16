@@ -24,8 +24,16 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/js");
+  eleventyConfig.addPassthroughCopy("prototypes.html");
+  eleventyConfig.addPassthroughCopy("prototypes-glm");
+  eleventyConfig.addPassthroughCopy("prototypes-sol");
+  eleventyConfig.addPassthroughCopy({
+    "src/assets/fonts": "src/assets/fonts",
+    "src/assets/images": "src/assets/images",
+  });
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
+  eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
 
   // Reload the website if changes are made to tailwind.css

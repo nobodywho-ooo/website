@@ -15,16 +15,19 @@ jobs:
       - uses: cachix/install-nix-action@v31
       - run: nix build && cp -rL result _site
 
+      - name: Install Netlify function dependencies
+        run: npm ci --omit=dev --ignore-scripts
+
       - name: Deploy to production
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npx netlify-cli deploy --dir=_site --prod --no-build
+        run: npx netlify-cli deploy --dir=_site --functions=netlify/functions --skip-functions-cache --prod --no-build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Deploy PR preview
         if: github.event_name == 'pull_request'
-        run: npx netlify-cli deploy --dir=_site --alias=pr-${{ github.event.pull_request.number }} --no-build
+        run: npx netlify-cli deploy --dir=_site --functions=netlify/functions --skip-functions-cache --alias=pr-${{ github.event.pull_request.number }} --no-build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
