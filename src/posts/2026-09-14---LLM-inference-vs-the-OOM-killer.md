@@ -150,7 +150,7 @@ fn main() {
 }
 ```
 
-For our library, this will probably amount to some sort of internal state-machine and a set of `Chat.unload` and `Chat.load` methods, perhaps with all other methods implicitly loading the model if it's unloaded?
+For our library, to make this easy to do will probably mean we need some sort of internal state-machine and a set of `Chat.unload` and `Chat.load` methods, perhaps with all other methods implicitly loading the model if it's unloaded?
 
 Welp, I've been writing this blog post for long enough and procrastinating actually doing ^, gotta get back to it, cya next time!
 
