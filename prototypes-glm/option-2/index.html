@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NobodyWho - Run any AI model on any device</title>
+<meta name="description" content="NobodyWho is an open-source inference engine that lets you run LLMs locally on any device. Text, vision and speech, no cloud required."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   NobodyWho prototype - option 2 - "swiss mirror"
+   Shape system: all sharp, radius 0 everywhere.
+   ============================================================ */
+:root {
+  --paper: #f2f1ec;
+  --paper-dim: #e9e8e1;
+  --ink: #191918;
+  --ink-soft: #4a4a46;
+  --ink-faint: #8b8b84;
+  --accent: #e5482c;
+  --accent-deep: #c73a22;
+  --paper-on-ink: #f2f1ec;
+  --sans: "Archivo", sans-serif;
+  --display: "Archivo Black", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+::selection { background: var(--accent); color: var(--paper); }
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.nav-inner {
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+}
+.wordmark {
+  font-family: var(--display);
+  font-size: 19px; letter-spacing: 0.01em;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.wordmark .sub {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 400;
+  color: var(--ink-faint); letter-spacing: 0.06em;
+}
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links a {
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  color: var(--ink-soft);
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: 13.5px; font-weight: 600;
+  padding: 12px 22px;
+  cursor: pointer; border: 2px solid var(--ink);
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+.btn-sm { padding: 9px 16px; font-size: 12.5px; }
+.btn-on-ink { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.btn-on-ink:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+/* ---------- hero ---------- */
+.hero { padding: 88px 0 0; overflow: hidden; }
+.release-line {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12.5px;
+  color: var(--accent-deep);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+  margin-bottom: 34px;
+  transition: color 0.15s;
+}
+.release-line:hover { color: var(--ink); }
+.hero-head { max-width: 1100px; }
+h1 {
+  font-family: var(--display);
+  font-size: clamp(44px, 7.2vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+h1 .row { display: block; }
+h1 .accent { color: var(--accent); }
+.mirror-wrap { position: relative; }
+.mirror {
+  display: block;
+  transform: scaleY(-1);
+  color: var(--ink);
+  opacity: 0.13;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 55%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 55%);
+  user-select: none; pointer-events: none;
+  margin-top: 6px;
+}
+.hero-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: end;
+  margin-top: 40px;
+  padding-bottom: 64px;
+}
+.hero-sub {
+  font-size: 18px; color: var(--ink-soft);
+  max-width: 52ch;
+}
+.hero-sub strong { color: var(--ink); font-weight: 600; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+
+/* ---------- terminal card ---------- */
+.term {
+  background: var(--ink);
+  color: var(--paper-on-ink);
+  border: 2px solid var(--ink);
+}
+.term-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(242, 241, 236, 0.18);
+  font-family: var(--mono); font-size: 11px; color: rgba(242, 241, 236, 0.55);
+}
+.term-dots { display: flex; gap: 7px; }
+.term-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(242, 241, 236, 0.25); }
+.term-body {
+  padding: 18px 20px 22px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.75;
+  overflow-x: auto;
+}
+.t-prompt { color: var(--accent); user-select: none; }
+.t-cmd { color: var(--paper-on-ink); }
+.t-out { color: rgba(242, 241, 236, 0.55); }
+.t-str { color: #d9b8a8; }
+.t-comment { color: rgba(242, 241, 236, 0.42); font-style: italic; }
+.t-kw { color: var(--accent); }
+
+/* ---------- marquee platform strip ---------- */
+.strip {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+  padding: 18px 0;
+  background: var(--paper);
+}
+.marquee {
+  display: flex; gap: 0;
+  width: max-content;
+  animation: slide 32s linear infinite;
+}
+.strip:hover .marquee { animation-play-state: paused; }
+.marquee-group { display: flex; align-items: center; gap: 44px; padding-right: 44px; }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  color: var(--ink-soft); white-space: nowrap;
+}
+.marquee-item img { width: 20px; height: 20px; }
+.marquee-item .bar { width: 9px; height: 9px; background: var(--accent); }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------- front page feature grid ---------- */
+.features { padding: 96px 0; }
+.section-head { margin-bottom: 44px; }
+h2 {
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+.section-sub { font-size: 17px; color: var(--ink-soft); max-width: 54ch; margin-top: 14px; }
+.frontpage {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  gap: 2px;
+}
+.fp-cell {
+  background: var(--paper);
+  padding: 26px 26px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.fp-cell h3 {
+  font-family: var(--display);
+  font-size: clamp(19px, 1.8vw, 25px);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+}
+.fp-cell h3 .index {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  color: var(--accent-deep);
+  letter-spacing: 0.06em;
+}
+.fp-cell p { font-size: 14.5px; color: var(--ink-soft); max-width: 44ch; }
+.fp-a { grid-column: span 7; }
+.fp-b { grid-column: span 5; }
+.fp-c { grid-column: span 4; }
+.fp-d { grid-column: span 4; }
+.fp-e { grid-column: span 4; }
+.fp-accent { background: var(--accent); }
+.fp-accent h3, .fp-accent p { color: var(--paper); }
+.fp-accent h3 .index { color: var(--paper); opacity: 0.75; }
+.fp-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 14px; }
+.fp-tag {
+  font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  border: 1.5px solid var(--ink);
+  padding: 3px 10px;
+}
+.fp-accent .fp-tag { border-color: var(--paper); color: var(--paper); }
+.fp-snippet {
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.7;
+  background: var(--ink); color: rgba(242, 241, 236, 0.82);
+  padding: 12px 14px;
+  margin-top: auto;
+}
+
+/* ---------- code band (ink) ---------- */
+.band { background: var(--ink); color: var(--paper-on-ink); padding: 96px 0; }
+.band h2 { color: var(--paper-on-ink); }
+.band .section-sub { color: rgba(242, 241, 236, 0.62); }
+.lang-tabs { display: flex; flex-wrap: wrap; gap: 2px; margin: 36px 0 0; border: 1.5px solid rgba(242, 241, 236, 0.35); border-bottom: none; }
+.lang-tab {
+  font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+  color: rgba(242, 241, 236, 0.6);
+  background: transparent; border: none; cursor: pointer;
+  padding: 11px 18px;
+  border-right: 1.5px solid rgba(242, 241, 236, 0.35);
+  transition: color 0.15s, background 0.15s;
+}
+.lang-tab:last-child { border-right: none; }
+.lang-tab:hover { color: var(--paper-on-ink); }
+.lang-tab.active { color: var(--ink); background: var(--paper-on-ink); }
+.lang-panel-wrap { border: 1.5px solid rgba(242, 241, 236, 0.35); border-top: 2px solid var(--accent); }
+.lang-panel { display: none; padding: 22px 26px; overflow-x: auto; }
+.lang-panel.active { display: block; }
+.lang-panel pre { font-family: var(--mono); font-size: 13px; line-height: 1.75; }
+.lang-panel .t-kw { color: var(--accent); }
+.lang-panel .t-str { color: #d9b8a8; }
+.lang-panel .t-comment { color: rgba(242, 241, 236, 0.42); font-style: italic; }
+.lang-panel .t-fn { color: #e3cf9e; }
+
+/* ---------- speech ---------- */
+.speech { padding: 96px 0; }
+.speech-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  border: 2px solid var(--ink);
+}
+.speech-col { padding: 30px 32px 34px; min-width: 0; }
+.speech-col + .speech-col { border-left: 2px solid var(--ink); }
+.speech-col h3 {
+  font-family: var(--display); font-size: 21px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+}
+.speech-col h3 .sq { width: 12px; height: 12px; background: var(--accent); display: inline-block; }
+.speech-col .desc { font-size: 14.5px; color: var(--ink-soft); margin-bottom: 18px; max-width: 44ch; }
+.speech-col pre {
+  background: var(--ink); color: rgba(242, 241, 236, 0.88);
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.75;
+  padding: 16px 18px; overflow-x: auto;
+}
+.speech-col .t-kw { color: var(--accent); }
+.speech-col .t-str { color: #d9b8a8; }
+.speech-col .t-comment { color: rgba(242, 241, 236, 0.42); font-style: italic; }
+
+/* ---------- outro ---------- */
+.outro { border-top: 2px solid var(--ink); padding: 110px 0 100px; text-align: center; }
+.outro h2 { font-size: clamp(34px, 5.4vw, 68px); margin-bottom: 18px; }
+.outro p { color: var(--ink-soft); font-size: 17px; margin-bottom: 34px; }
+.outro .hero-ctas { justify-content: center; margin-top: 0; }
+
+/* ---------- footer ---------- */
+footer { background: var(--ink); color: var(--paper-on-ink); padding: 56px 0 36px; }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(242, 241, 236, 0.2);
+}
+.footer-brand { font-family: var(--display); font-size: 26px; text-transform: uppercase; }
+.footer-brand .mirror-mini { display: block; transform: scaleY(-1); opacity: 0.25; -webkit-mask-image: linear-gradient(to bottom, black, transparent 70%); mask-image: linear-gradient(to bottom, black, transparent 70%); user-select: none; }
+.footer-note { font-family: var(--mono); font-size: 12px; color: rgba(242, 241, 236, 0.55); margin-top: 14px; max-width: 34ch; }
+.footer-col h4 {
+  font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+  color: rgba(242, 241, 236, 0.5); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.footer-col a { display: block; font-size: 14px; color: rgba(242, 241, 236, 0.8); padding: 3px 0; transition: color 0.15s; }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center; gap: 18px;
+  flex-wrap: wrap; padding-top: 26px;
+  font-family: var(--mono); font-size: 12px; color: rgba(242, 241, 236, 0.55);
+}
+.socials { display: flex; gap: 18px; }
+.socials a { opacity: 0.75; transition: opacity 0.15s; }
+.socials a:hover { opacity: 1; }
+.socials img { width: 18px; height: 18px; }
+
+/* ---------- reveal ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee { animation: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .hero-foot { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .fp-a, .fp-b { grid-column: span 12; }
+  .fp-c, .fp-d, .fp-e { grid-column: span 6; }
+  .speech-cols { grid-template-columns: minmax(0, 1fr); }
+  .speech-col + .speech-col { border-left: none; border-top: 2px solid var(--ink); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 640px) {
+  .fp-c, .fp-d, .fp-e { grid-column: span 12; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .nav-cta .btn-ghost span { display: none; }
+  .wordmark .sub { display: none; }
+  .nav-inner { gap: 12px; }
+  .nav-cta { gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="wordmark" href="#">NobodyWho<span class="sub">local inference</span></a>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Apps</a>
+      <a href="#">Blog</a>
+      <a href="docs.html">Docs</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/nobodywho-ooo/nobodywho">
+        <img src="https://cdn.simpleicons.org/github/191918" alt="" style="width:16px;height:16px;"/>
+        <span>GitHub</span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="docs.html">Try in 5 minutes</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <a class="release-line" href="https://www.nobodywho.ai/posts/">
+      NEW: EXPO SUPPORT
+      <span aria-hidden="true">&#8594;</span>
+    </a>
+    <div class="hero-head">
+      <h1 class="mirror-wrap">
+        <span class="row">Run any model</span>
+        <span class="row">on <span class="accent">any device</span>.</span>
+        <span class="row mirror" aria-hidden="true">on any device.</span>
+      </h1>
+    </div>
+    <div class="hero-foot">
+      <div>
+        <p class="hero-sub">
+          The cloud, mirrored onto your machine. Text, vision and speech inference that runs entirely <strong>where you are</strong>. Open source, free, EUPL 1.2.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="docs.html">Try in 5 minutes</a>
+          <a class="btn btn-ghost" href="https://github.com/nobodywho-ooo/nobodywho">
+            <img src="https://cdn.simpleicons.org/github/191918" alt="" style="width:16px;height:16px;"/>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+      <div class="term" role="img" aria-label="Terminal showing NobodyWho running a model locally">
+        <div class="term-bar">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <span>localhost - 0 remote calls</span>
+        </div>
+        <div class="term-body">
+<div><span class="t-prompt">$</span> <span class="t-cmd">uv add nobodywho</span></div>
+<div><span class="t-prompt">$</span> <span class="t-cmd">python</span></div>
+<div><span class="t-prompt">&gt;&gt;&gt;</span> <span class="t-kw">from</span> nobodywho <span class="t-kw">import</span> Chat</div>
+<div><span class="t-prompt">&gt;&gt;&gt;</span> chat = Chat(<span class="t-str">"hf://NobodyWho/Qwen_Qwen3-0.6B-GGUF"</span>)</div>
+<div><span class="t-prompt">&gt;&gt;&gt;</span> chat.ask(<span class="t-str">"Is water wet?"</span>).completed()</div>
+<div><span class="t-out">'Yes. In everyday use, water is wet.'</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-label="Supported platforms">
+  <div class="marquee">
+    <div class="marquee-group">
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/react/4a4a46" alt=""/>React Native / Expo</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/flutter/4a4a46" alt=""/>Flutter</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/kotlin/4a4a46" alt=""/>Kotlin</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/swift/4a4a46" alt=""/>Swift</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/python/4a4a46" alt=""/>Python</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/godotengine/4a4a46" alt=""/>Godot</span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/react/4a4a46" alt=""/>React Native / Expo</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/flutter/4a4a46" alt=""/>Flutter</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/kotlin/4a4a46" alt=""/>Kotlin</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/swift/4a4a46" alt=""/>Swift</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/python/4a4a46" alt=""/>Python</span>
+      <span class="marquee-item"><span class="bar"></span><img src="https://cdn.simpleicons.org/godotengine/4a4a46" alt=""/>Godot</span>
+    </div>
+  </div>
+</div>
+
+<section class="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Local by default</h2>
+      <p class="section-sub">No API keys, no cloud round-trips, no surprise invoices. The whole engine lives inside your app.</p>
+    </div>
+    <div class="frontpage reveal">
+      <div class="fp-cell fp-a">
+        <h3><span class="index">A</span>Fast on any hardware</h3>
+        <p>Optimized kernels for the big three graphics APIs, tuned to run well even on integrated graphics and mobile chips.</p>
+        <div class="fp-tags">
+          <span class="fp-tag">Metal</span>
+          <span class="fp-tag">CUDA</span>
+          <span class="fp-tag">Vulkan</span>
+        </div>
+      </div>
+      <div class="fp-cell fp-b">
+        <h3><span class="index">B</span>Private by design</h3>
+        <p>Everything stays on your machine. No cloud logging, no exceptions. Prompts never leave local memory.</p>
+        <div class="fp-snippet"><span class="t-prompt">$</span> remote requests: 0</div>
+      </div>
+      <div class="fp-cell fp-c">
+        <h3><span class="index">C</span>Works offline</h3>
+        <p>Run models in flight, in secure environments, or anywhere the network cannot be trusted.</p>
+      </div>
+      <div class="fp-cell fp-d">
+        <h3><span class="index">D</span>Any GGUF model</h3>
+        <p>Thousands of open models on Hugging Face, downloaded with a single path string.</p>
+        <div class="fp-snippet">Chat(<span class="t-str">"hf://owner/model"</span>)</div>
+      </div>
+      <div class="fp-cell fp-e fp-accent">
+        <h3><span class="index">E</span>Free and open source</h3>
+        <p>Licensed under EUPL 1.2, free for individuals and companies alike. No usage fees, ever.</p>
+        <div class="fp-tags">
+          <span class="fp-tag">EUPL 1.2</span>
+          <span class="fp-tag">$0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>One API, six languages</h2>
+      <p class="section-sub">Load a model, ask a question, stream the answer. The same three steps everywhere.</p>
+    </div>
+    <div class="reveal">
+      <div class="lang-tabs" role="tablist" aria-label="Programming language examples">
+        <button class="lang-tab active" role="tab" aria-selected="true" data-lang="python">python</button>
+        <button class="lang-tab" role="tab" aria-selected="false" data-lang="kotlin">kotlin</button>
+        <button class="lang-tab" role="tab" aria-selected="false" data-lang="swift">swift</button>
+        <button class="lang-tab" role="tab" aria-selected="false" data-lang="react">react native</button>
+        <button class="lang-tab" role="tab" aria-selected="false" data-lang="flutter">flutter</button>
+        <button class="lang-tab" role="tab" aria-selected="false" data-lang="godot">godot</button>
+      </div>
+      <div class="lang-panel-wrap">
+        <div class="lang-panel active" data-lang="python" role="tabpanel">
+<pre><span class="t-kw">from</span> nobodywho <span class="t-kw">import</span> Chat
+
+chat = Chat(<span class="t-str">"hf://NobodyWho/Qwen_Qwen3-0.6B-GGUF"</span>)
+response = chat.ask(<span class="t-str">"What is the capital of Denmark?"</span>)
+
+<span class="t-comment"># print each token as it is generated</span>
+<span class="t-kw">for</span> token <span class="t-kw">in</span> response:
+    <span class="t-fn">print</span>(token, end=<span class="t-str">""</span>, flush=<span class="t-kw">True</span>)
+
+<span class="t-comment"># or get the entire response as a single string</span>
+full_response = response.<span class="t-fn">completed</span>()</pre>
+        </div>
+        <div class="lang-panel" data-lang="kotlin" role="tabpanel">
+<pre><span class="t-kw">import</span> ai.nobodywho.Chat
+<span class="t-kw">import</span> kotlinx.coroutines.runBlocking
+
+<span class="t-kw">val</span> chat = runBlocking { Chat.fromPath(modelPath = <span class="t-str">"./model.gguf"</span>) }
+<span class="t-kw">val</span> response = runBlocking {
+    chat.ask(<span class="t-str">"What is the capital of Denmark?"</span>).completed()
+}
+<span class="t-comment">// The capital of Denmark is Copenhagen.</span></pre>
+        </div>
+        <div class="lang-panel" data-lang="swift" role="tabpanel">
+<pre><span class="t-kw">import</span> NobodyWho
+
+<span class="t-kw">let</span> chat = <span class="t-kw">try await</span> Chat.fromPath(modelPath: <span class="t-str">"./model.gguf"</span>)
+<span class="t-kw">let</span> response = <span class="t-kw">try await</span> chat.ask(<span class="t-str">"What is the capital of Denmark?"</span>).completed()
+<span class="t-comment">// The capital of Denmark is Copenhagen.</span></pre>
+        </div>
+        <div class="lang-panel" data-lang="react" role="tabpanel">
+<pre><span class="t-kw">import</span> { Chat } <span class="t-kw">from</span> <span class="t-str">"react-native-nobodywho"</span>;
+
+<span class="t-kw">const</span> chat = <span class="t-kw">await</span> Chat.fromPath({ modelPath: <span class="t-str">"./model.gguf"</span> });
+<span class="t-kw">const</span> response = <span class="t-kw">await</span> chat
+  .ask(<span class="t-str">"What is the capital of Denmark?"</span>)
+  .completed();
+<span class="t-comment">// The capital of Denmark is Copenhagen.</span></pre>
+        </div>
+        <div class="lang-panel" data-lang="flutter" role="tabpanel">
+<pre><span class="t-kw">import</span> <span class="t-str">'dart:io'</span>;
+
+<span class="t-kw">final</span> chat = <span class="t-kw">await</span> nobodywho.Chat.fromPath(modelPath: <span class="t-str">'./model.gguf'</span>);
+<span class="t-kw">final</span> response = <span class="t-kw">await</span> chat
+    .ask(<span class="t-str">'What is the capital of Denmark?'</span>)
+    .completed();
+<span class="t-comment">// The capital of Denmark is Copenhagen.</span></pre>
+        </div>
+        <div class="lang-panel" data-lang="godot" role="tabpanel">
+<pre><span class="t-kw">extends</span> NobodyWhoChat
+
+<span class="t-kw">func</span> _ready():
+    self.model_node = get_node(<span class="t-str">"../ChatModel"</span>)
+    self.response_updated.connect(_on_response_updated)
+    self.response_finished.connect(_on_response_finished)
+    self.start_worker()
+    self.ask(<span class="t-str">"What is the capital of Denmark?"</span>)
+
+<span class="t-kw">func</span> _on_response_finished(response):
+    <span class="t-fn">print</span>(response)
+<span class="t-comment"># The capital of Denmark is Copenhagen.</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="speech">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>It listens. It speaks.</h2>
+      <p class="section-sub">Speech-to-text and text-to-speech ship with the engine. Same local guarantee.</p>
+    </div>
+    <div class="speech-cols reveal">
+      <div class="speech-col">
+        <h3><span class="sq"></span>Speech to text</h3>
+        <p class="desc">Whisper models in ONNX format, straight from Hugging Face.</p>
+<pre><span class="t-kw">from</span> nobodywho <span class="t-kw">import</span> SpeechToText
+
+stt = SpeechToText(source=<span class="t-str">"hf://onnx-community/whisper-base"</span>)
+text = stt.transcribe_file(<span class="t-str">"recording.mp3"</span>).completed()
+
+<span class="t-comment"># buffers work too, mono i16 PCM at any sample rate</span>
+text = stt.transcribe_pcm(samples, sample_rate=<span class="t-kw">16000</span>).completed()</pre>
+      </div>
+      <div class="speech-col">
+        <h3><span class="sq"></span>Text to speech</h3>
+        <p class="desc">Kokoro, Pocket TTS, or Supertonic. WAV bytes, ready to play.</p>
+<pre><span class="t-kw">from</span> nobodywho <span class="t-kw">import</span> TextToSpeech
+
+tts = TextToSpeech(
+    source=<span class="t-str">"hf://NobodyWho/Kokoro-82M"</span>,
+    voice=<span class="t-str">"bf_emma"</span>,
+    language=<span class="t-str">"en-gb"</span>,
+)
+wav = tts.synthesize(<span class="t-str">"Hello from NobodyWho!"</span>)</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="outro">
+  <div class="container reveal">
+    <h2>Your machine<br/>is the datacenter.</h2>
+    <p>Install the package, pick a model, ask it a question. That is the whole tutorial.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="docs.html">Try in 5 minutes</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">NobodyWho<span class="mirror-mini" aria-hidden="true">NobodyWho</span></div>
+        <p class="footer-note">Open-source inference for text, vision and speech. EUPL 1.2.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="#">About</a>
+        <a href="#">Apps</a>
+        <a href="#">Blog</a>
+        <a href="docs.html">Documentation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platforms</h4>
+        <a href="#">React Native / Expo</a>
+        <a href="#">Flutter</a>
+        <a href="#">Kotlin</a>
+        <a href="#">Swift</a>
+        <a href="#">Python</a>
+        <a href="#">Godot</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="https://github.com/nobodywho-ooo/nobodywho">Source code</a>
+        <a href="https://huggingface.co/NobodyWho">Models on Hugging Face</a>
+        <a href="https://www.nobodywho.ai/privacy/">Privacy policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>NobodyWho 2025</span>
+      <div class="socials">
+        <a href="https://github.com/nobodywho-ooo/nobodywho" aria-label="GitHub"><img src="https://cdn.simpleicons.org/github/f2f1ec" alt="GitHub"/></a>
+        <a href="https://x.com/nobodywho_ai" aria-label="X"><img src="https://cdn.simpleicons.org/x/f2f1ec" alt="X"/></a>
+        <a href="https://bsky.app/profile/nobodywhooo.bsky.social" aria-label="Bluesky"><img src="https://cdn.simpleicons.org/bluesky/f2f1ec" alt="Bluesky"/></a>
+        <a href="https://www.linkedin.com/company/nobodywho/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://huggingface.co/NobodyWho" aria-label="Hugging Face"><img src="https://cdn.simpleicons.org/huggingface/f2f1ec" alt="Hugging Face"/></a>
+        <a href="https://discord.gg/qhaMc2qCYB" aria-label="Discord"><img src="https://cdn.simpleicons.org/discord/f2f1ec" alt="Discord"/></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// language tabs
+const langTabs = document.querySelectorAll('.lang-tab');
+langTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    langTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+    tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
+    document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.lang-panel[data-lang="${tab.dataset.lang}"]`).classList.add('active');
+  });
+});
+
+// scroll reveal
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduce && 'IntersectionObserver' in window) {
+  const ob = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); ob.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => ob.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+}
+</script>
+</body>
+</html>
