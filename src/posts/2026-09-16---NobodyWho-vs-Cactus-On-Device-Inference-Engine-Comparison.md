@@ -27,7 +27,7 @@ NobodyWho takes a hardware-aware approach to acceleration, using Vulkan and Meta
 
 ## **Installation and first call**
 
-NobodyWho installs through each ecosystem's own package manager: pip install nobodywho for Python, flutter pub add nobodywho for Flutter, npm install react-native-nobodywho for React Native, ai.nobodywho:nobodywho from Maven Central for Kotlin, Swift Package Manager for Swift, and the in-editor asset library for Godot. Each binding is a thin wrapper over one shared Rust core.
+NobodyWho installs through each ecosystem's own package manager: *pip install nobodywho* for Python, *flutter pub add nobodywho* for Flutter, *npm install react-native-nobodywho* for React Native, *ai.nobodywho:nobodywho* from Maven Central for Kotlin, Swift Package Manager for Swift, and the in-editor asset library for Godot. Each binding is a thin wrapper over one shared Rust core.
 
 Cactus installs its engine by cloning the repository and running a setup script, then building the binding and downloading a model bundle:
 
