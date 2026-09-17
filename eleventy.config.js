@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import fs from "node:fs";
 import { execSync } from "child_process";
 import markdownIt from "markdown-it";
+import markdownItFootnote from "markdown-it-footnote";
 import svg from "./src/_includes/shortcodes/svg.js";
 import button from "./src/_includes/shortcodes/button.js";
 import lazyImagesPlugin from "eleventy-plugin-lazyimages";
@@ -21,6 +22,7 @@ const slugify = (value) =>
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
+  eleventyConfig.addPassthroughCopy("src/assets/videos");
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/js");
@@ -47,11 +49,14 @@ export default async function(eleventyConfig) {
   });
 
 
+  // Enable footnote support ([^1] syntax) in the markdown files.
+  eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(markdownItFootnote));
+
   const md = new markdownIt({
     html: true,
     breaks: true,
     linkify: true,
-  });
+  }).use(markdownItFootnote);
 
   eleventyConfig.addPairedShortcode("markdown", (content) => {
     return md.render(content);

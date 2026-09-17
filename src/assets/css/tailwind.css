@@ -149,4 +149,10 @@
         background-color: var(--color-neutral-200);
         color: var(--color-gray-800);
     }
+
+    /* Prism marks TOML table headers with `class="token table"`, which collides
+       with Tailwind's `.table` (display: table) utility, breaking the line. */
+    pre .token.table {
+        display: inline;
+    }
 }
