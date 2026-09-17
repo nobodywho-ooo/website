@@ -1,6 +1,6 @@
 ---
 title: LLM inference vs. the OOM killer
-date: 2026-09-16
+date: 2026-09-17
 author: Mads Marquart
 categories: ["Rust", "Technical"]
 description: "Mobile memory warnings and handling them in Rust."
