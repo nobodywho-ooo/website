@@ -80,10 +80,10 @@ There. That’s Jev.
 
 Yeah, we know.
 
-- We don't call it a System One decision model.
+- We don't call it a [System One decision model](https://typesafe.ai/blog/introducing-system-one-models-and-jev).
 - We didn’t call an API.
 - We didn't create a bunch of synthetic data.
-- We didn't train a model with Reinforcement Learning for Calibrated Decisions (RLCD) to calibrate the decisions and probabilities (even though they are not always correct).
+- We didn't train a model with [Reinforcement Learning for Calibrated Decisions (RLCD)](https://typesafe.ai/blog/introducing-system-one-models-and-jev) to calibrate the decisions and probabilities (even though they are [not always correct](https://arcturus-labs.com/blog/2026/09/16/typesafes-jev-trades-text-generation-for-instant-calibrated-decisions/)).
 
 ## But yes. This is Jev.
 
