@@ -10,7 +10,7 @@ slug: "jev-in-25-lines"
 
 ![My name is Jev](/assets/images/blog/2026/jev-in-25-lines/jev.png)
 
-Everyone and their mom is talking about Jev. Jev this, Jev that. Everyone on Twitter is all over Jev, how it's the next frontier of large language models and the AI paradigm. We don’t really think so. So here's Jev in 25 lines of Python.
+Everyone and their mom is talking about [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev). Jev this, Jev that. Everyone on Twitter is all over Jev, how it's the next frontier of large language models and the AI paradigm. We don’t really think so. So here's Jev in 25 lines of Python.
 
 Load the model.
 
@@ -94,4 +94,4 @@ Yeah, we know.
 
 And we like not sending your data anywhere else. Check out [NobodyWho](https://github.com/nobodywho-ooo/nobodywho).
 
-*(note: this is a parody blog post, see these links for better/more complete open implementations of Jev: OpenJev, openjev-sglang, and OpenJev on DiffusionGemma.)*
+*(note: this is a parody blog post, see these links for better/more complete open implementations of Jev: [OpenJev](https://openjev.com/), [openjev-sglang](https://github.com/ekzhang/openjev-sglang), and [OpenJev on DiffusionGemma](https://github.com/razorback16/openjev).)*
