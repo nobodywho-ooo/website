@@ -3,7 +3,7 @@ title: Jev in 25 lines of Python
 date: 2026-09-22
 author: Duarte O.Carmo
 categories: ["Technical"]
-description: "Everyone is talking about Jev, here's the whole thing in 25 lines of Python"
+description: "Everyone is talking about Jev - here it is in 25 lines of Python."
 image: /assets/images/blog/2026/jev-in-25-lines/jev.png
 slug: "jev-in-25-lines"
 ---
