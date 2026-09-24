@@ -29,6 +29,8 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
+  // New standalone one-page homepage: copied as-is (not processed as a template). The old 11ty homepage lives in src/index-old.njk.
+  eleventyConfig.addPassthroughCopy("src/index.html");
 
   // Reload the website if changes are made to tailwind.css
   eleventyConfig.addWatchTarget("./src/assets/css/tailwind.css");
