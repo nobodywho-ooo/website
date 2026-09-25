@@ -22,7 +22,6 @@ const slugify = (value) =>
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
-  eleventyConfig.addPassthroughCopy("src/assets/icons");
   eleventyConfig.addPassthroughCopy("src/assets/videos");
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
@@ -30,8 +29,6 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
-  eleventyConfig.addPassthroughCopy("src/assets/css/brand-fonts.css");
-  eleventyConfig.addPassthroughCopy("src/assets/css/blog-refresh.css");
   // New standalone one-page homepage: copied as-is (not processed as a template). The old 11ty homepage lives in src/index-old.njk.
   eleventyConfig.addPassthroughCopy("src/index.html");
 
@@ -44,7 +41,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.setServerOptions({
     watch: ["./src/assets/css/tailwind-dist.css"],
   });
-  eleventyConfig.addPlugin(lazyImagesPlugin, { imgSelector: 'img:not([fetchpriority="high"])' });
+  eleventyConfig.addPlugin(lazyImagesPlugin);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
 
   eleventyConfig.addPlugin(rssPlugin);
