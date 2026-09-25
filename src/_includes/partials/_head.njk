@@ -2,18 +2,29 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  {% if blogTheme %}
+  <meta name="color-scheme" content="dark"/>
+  <meta name="theme-color" content="#2a0709"/>
+  {% else %}
   <meta name="color-scheme" content="light dark"/>
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff"/>
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171717"/>
+  {% endif %}
   <!-- https://favicon.io/ -->
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon/apple-touch-icon.png' | url }}"/>
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon/favicon-32x32.png' | url }}"/>
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon/favicon-16x16.png' | url }}"/>
   <link rel="manifest" href="{{ '/assets/favicon/site.webmanifest' | url }}"/>
+  {% if blogTheme %}
+  <link rel="preload" href="{{ '/assets/fonts/InterTight-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin/>
+  <link rel="stylesheet" href="{{ '/assets/css/brand-fonts.css' | url }}"/>
+  <link rel="stylesheet" href="{{ '/assets/css/blog-refresh.css' | url }}"/>
+  {% else %}
   <link rel="preload" href="{{ '/assets/css/tailwind-dist.css' | url }}" as="style"/>
   <link rel="preload" href="{{ '/assets/fonts/Satoshi-Medium.woff2' | url }}" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="{{ '/assets/fonts/dm-sans-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin/>
   <link rel="stylesheet" href="{{ '/assets/css/tailwind-dist.css' | url }}">
+  {% endif %}
   <title>{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
   <meta
     name="description"

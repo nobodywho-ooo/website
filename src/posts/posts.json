@@ -1,5 +1,6 @@
 {
   "layout": "article",
+  "blogTheme": true,
   "tags": "posts",
   "permalink": "posts/{{ slug }}/",
   "draft": false,
