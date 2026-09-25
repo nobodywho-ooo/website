@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="{% if not blogTheme %}bg-white dark:bg-neutral-900{% endif %}">
+<html lang="en" class="bg-white dark:bg-neutral-900">
     {% include "partials/_head.njk" %}
-    <body{% if blogTheme %} class="blog-theme"{% endif %}>
-        <a href="#main-content" class="{% if blogTheme %}skip-link{% else %}sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-neutral-900 focus:shadow focus:outline-2 focus:outline-primary dark:focus:bg-neutral-900 dark:focus:text-white{% endif %}">Skip to main content</a>
+    <body>
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-neutral-900 focus:shadow focus:outline-2 focus:outline-primary dark:focus:bg-neutral-900 dark:focus:text-white">Skip to main content</a>
         {% include "partials/_menu.njk" %}
         <main id="main-content" tabindex="-1" class="font-sans leading-normal tracking-normal">
             {% block content %}
@@ -10,29 +10,7 @@
             {% endblock %}
             {% include "partials/_footer.njk" %}
         </main>
-        {% if not blogTheme %}
         <script defer src="/js/alpine.js?v=3.15.8"></script>
         <script defer src="{{ '/assets/js/webmcp.js' | url }}"></script>
-        {% else %}
-        <script defer src="{{ '/assets/js/github-stars.js' | url }}"></script>
-        <script>
-            (() => {
-                const button = document.getElementById('blog-burger');
-                const drawer = document.getElementById('blog-drawer');
-                const setOpen = (open) => {
-                    drawer.hidden = !open;
-                    button.setAttribute('aria-expanded', String(open));
-                    button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-                    document.body.classList.toggle('blog-menu-open', open);
-                };
-                button.addEventListener('click', () => setOpen(drawer.hidden));
-                drawer.addEventListener('click', (event) => { if (event.target.closest('a')) setOpen(false); });
-                window.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && !drawer.hidden) { setOpen(false); button.focus(); }
-                });
-                window.addEventListener('resize', () => { if (innerWidth > 960 && !drawer.hidden) setOpen(false); });
-            })();
-        </script>
-        {% endif %}
     </body>
 </html>
