@@ -1,0 +1,280 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/code/**",
+              "components/core/**",
+              "sprint-deck/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Inter))/i]",
+        "message": "Font not provided by the design system. Available: Inter."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|style|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: children, tone, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:neutral|navy|steel)$/]",
+        "message": "<Badge> tone must be one of 'neutral' | 'navy' | 'steel'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|href|disabled|style|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, href, disabled, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|padded|style|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: children, padded, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CodePanel'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|children|style|key|ref|className|style|children)$/]",
+        "message": "<CodePanel> doesn't accept that prop. Declared props: label, children, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Divider'] > JSXAttribute > JSXIdentifier[name!=/^(?:width|style|key|ref|className|style|children)$/]",
+        "message": "<Divider> doesn't accept that prop. Declared props: width, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Eyebrow'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|style|key|ref|className|style|children)$/]",
+        "message": "<Eyebrow> doesn't accept that prop. Declared props: children, tone, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Eyebrow'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:muted|steel)$/]",
+        "message": "<Eyebrow> tone must be one of 'muted' | 'steel'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Stat'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|label|align|style|key|ref|className|style|children)$/]",
+        "message": "<Stat> doesn't accept that prop. Declared props: value, label, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Stat'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center)$/]",
+        "message": "<Stat> align must be one of 'left' | 'center'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "CodePanel": {
+        "replaces": []
+      },
+      "Divider": {
+        "replaces": []
+      },
+      "Eyebrow": {
+        "replaces": []
+      },
+      "Stat": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--action-bg",
+      "--action-fg",
+      "--border-divider",
+      "--border-hairline",
+      "--border-width",
+      "--code-comment",
+      "--code-punctuation",
+      "--code-string",
+      "--code-text",
+      "--font-code",
+      "--font-sans",
+      "--leading-normal",
+      "--leading-snug",
+      "--leading-tight",
+      "--logo-size",
+      "--logo-x",
+      "--logo-y",
+      "--nw-black",
+      "--nw-body",
+      "--nw-code-bar",
+      "--nw-code-bg",
+      "--nw-code-muted",
+      "--nw-code-yellow",
+      "--nw-cta-blue",
+      "--nw-divider",
+      "--nw-muted",
+      "--nw-navy",
+      "--nw-steel",
+      "--nw-white",
+      "--radius-md",
+      "--radius-none",
+      "--radius-pill",
+      "--radius-sm",
+      "--size-body",
+      "--size-display",
+      "--size-h1",
+      "--size-h2",
+      "--size-h3",
+      "--size-label",
+      "--size-lead",
+      "--size-small",
+      "--slide-h",
+      "--slide-margin-x",
+      "--slide-margin-y",
+      "--slide-w",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--surface-code",
+      "--surface-code-bar",
+      "--surface-page",
+      "--text-accent",
+      "--text-accent-2",
+      "--text-body",
+      "--text-default",
+      "--text-heading",
+      "--text-muted",
+      "--text-on-dark",
+      "--tracking-label",
+      "--tracking-normal",
+      "--tracking-tight",
+      "--type-body-family",
+      "--type-code-family",
+      "--type-eyebrow-size",
+      "--type-eyebrow-spacing",
+      "--type-heading-family",
+      "--weight-regular"
+    ],
+    "tokenKinds": {
+      "--nw-black": "color",
+      "--nw-navy": "color",
+      "--nw-steel": "color",
+      "--nw-body": "color",
+      "--nw-muted": "color",
+      "--nw-divider": "color",
+      "--nw-white": "color",
+      "--nw-code-bg": "color",
+      "--nw-code-bar": "color",
+      "--nw-code-muted": "color",
+      "--nw-code-yellow": "color",
+      "--nw-cta-blue": "color",
+      "--text-heading": "font",
+      "--text-body": "font",
+      "--text-default": "font",
+      "--text-accent": "font",
+      "--text-accent-2": "font",
+      "--text-muted": "font",
+      "--text-on-dark": "font",
+      "--surface-page": "color",
+      "--surface-code": "color",
+      "--surface-code-bar": "color",
+      "--border-divider": "color",
+      "--action-bg": "color",
+      "--action-fg": "color",
+      "--code-text": "font",
+      "--code-punctuation": "color",
+      "--code-comment": "color",
+      "--code-string": "color",
+      "--font-sans": "font",
+      "--font-code": "font",
+      "--weight-regular": "font",
+      "--size-display": "spacing",
+      "--size-h1": "spacing",
+      "--size-h2": "spacing",
+      "--size-h3": "spacing",
+      "--size-lead": "spacing",
+      "--size-body": "spacing",
+      "--size-small": "spacing",
+      "--size-label": "spacing",
+      "--leading-tight": "font",
+      "--leading-snug": "font",
+      "--leading-normal": "font",
+      "--tracking-label": "font",
+      "--tracking-tight": "font",
+      "--tracking-normal": "font",
+      "--type-eyebrow-size": "font",
+      "--type-eyebrow-spacing": "font",
+      "--type-heading-family": "font",
+      "--type-body-family": "font",
+      "--type-code-family": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--radius-none": "radius",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-pill": "radius",
+      "--border-width": "spacing",
+      "--border-hairline": "color",
+      "--slide-w": "spacing",
+      "--slide-h": "spacing",
+      "--slide-margin-x": "spacing",
+      "--slide-margin-y": "spacing",
+      "--logo-size": "spacing",
+      "--logo-x": "spacing",
+      "--logo-y": "spacing"
+    },
+    "fontFamilies": [
+      "Inter"
+    ]
+  }
+}

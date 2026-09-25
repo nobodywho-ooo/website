@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #F7F4EE; font-family: "Manrope", system-ui, sans-serif; color: #0A0A0A; }
+  a { color: #2952A3; text-decoration: none; }
+  a:hover { color: #0A0A0A; }
+  h1, h2, h3, h4, p { margin: 0; }
+</style>
+</helmet>
+
+<div style="max-width: 1440px; margin: 0 auto; background: #F7F4EE;">
+
+  <!-- Nav -->
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding: 24px 56px; border-bottom: 1px solid rgb(10 10 10 / 14%);">
+    <a href="NobodyWho%20Homepage.dc.html" style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #0A0A0A;">NobodyWho</a>
+    <div style="display: flex; gap: 30px; font-size: 13px;">
+      <a href="NobodyWho%20Homepage.dc.html" style="color: #628395;">About</a>
+      <a href="NobodyWho%20Enterprise%20Solution.dc.html" style="color: #628395;">Enterprise solution</a>
+      <a href="NobodyWho%20Blog.dc.html" style="color: #0A0A0A; font-weight: 700;">Blog</a>
+      <a href="NobodyWho%20Contact.dc.html" style="color: #628395;">Contact</a>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <span style="display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 13px; font-weight: 600; color: #0A0A0A; background: transparent; border: 1px solid rgb(10 10 10 / 22%); padding: 10px 18px; border-radius: 3px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        Book a meeting
+      </span>
+      <span style="display: inline-flex; align-items: center; white-space: nowrap; font-size: 13px; font-weight: 600; color: #F7F4EE; background: #0A0A0A; padding: 10px 18px; border-radius: 3px;">Join the waitlist</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div style="padding: 80px 56px 48px; max-width: 780px;">
+    <span style="font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #628395;">Blog</span>
+    <h1 style="font-family: 'Instrument Serif', serif; font-size: clamp(44px, 5.7vw, 68px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400; margin-top: 16px;">News from NobodyWho.</h1>
+    <p style="font-size: 17px; line-height: 1.7; color: #3D3D3D; margin-top: 24px;">Read product updates and research notes from the team building NobodyWho.</p>
+  </div>
+
+  <!-- Featured post -->
+  <div style="margin: 0 56px 24px; border: 1px solid rgb(10 10 10 / 14%); border-radius: 8px; padding: 36px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; align-items: center;">
+    <div>
+      <span style="display: inline-flex; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #628395; border: 1px solid rgb(10 10 10 / 18%); border-radius: 20px; padding: 5px 14px;">Company</span>
+      <h3 style="font-size: 26px; font-weight: 700; margin-top: 18px;">[Featured post title]</h3>
+      <p style="font-size: 15px; color: #3D3D3D; line-height: 1.7; margin-top: 12px;">[One or two sentences summarising the post — placeholder copy.]</p>
+      <div style="font-size: 13px; color: #628395; margin-top: 16px;">[Month] 2026 &nbsp;·&nbsp; [X] min read</div>
+      <a href="#" style="display: inline-block; font-size: 14px; font-weight: 700; color: #0A0A0A; margin-top: 16px;">Read more →</a>
+    </div>
+    <div style="height: 220px; border-radius: 3px; background-image: url('images/shadows.jpg'); background-size: cover; background-position: center 55%; border: 1px solid rgb(10 10 10 / 10%);"></div>
+  </div>
+
+  <!-- Post grid -->
+  <div style="margin: 0 56px 56px; border: 1px solid rgb(10 10 10 / 14%); border-radius: 8px; padding: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;">
+    <div>
+      <div style="height: 140px; border-radius: 3px; background-image: url('images/canvas.jpg'); background-size: cover; background-position: 30% 50%; border: 1px solid rgb(10 10 10 / 10%); margin-bottom: 18px;"></div>
+      <span style="display: inline-flex; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #628395; border: 1px solid rgb(10 10 10 / 18%); border-radius: 20px; padding: 5px 14px;">Product update</span>
+      <h4 style="font-size: 18px; font-weight: 700; margin-top: 14px;">[Post title]</h4>
+      <p style="font-size: 14px; color: #3D3D3D; margin-top: 8px;">[Placeholder excerpt copy.]</p>
+      <div style="font-size: 13px; color: #628395; margin-top: 12px;">[Month] 2026</div>
+    </div>
+    <div>
+      <div style="height: 140px; border-radius: 3px; background-image: url('images/waves.jpg'); background-size: cover; background-position: center; border: 1px solid rgb(10 10 10 / 10%); margin-bottom: 18px;"></div>
+      <span style="display: inline-flex; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #628395; border: 1px solid rgb(10 10 10 / 18%); border-radius: 20px; padding: 5px 14px;">Research</span>
+      <h4 style="font-size: 18px; font-weight: 700; margin-top: 14px;">[Post title]</h4>
+      <p style="font-size: 14px; color: #3D3D3D; margin-top: 8px;">[Placeholder excerpt copy.]</p>
+      <div style="font-size: 13px; color: #628395; margin-top: 12px;">[Month] 2026</div>
+    </div>
+    <div>
+      <div style="height: 140px; border-radius: 3px; background-image: url('images/swirl-blue.jpg'); background-size: cover; background-position: center; border: 1px solid rgb(10 10 10 / 10%); margin-bottom: 18px;"></div>
+      <span style="display: inline-flex; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #628395; border: 1px solid rgb(10 10 10 / 18%); border-radius: 20px; padding: 5px 14px;">Company news</span>
+      <h4 style="font-size: 18px; font-weight: 700; margin-top: 14px;">[Post title]</h4>
+      <p style="font-size: 14px; color: #3D3D3D; margin-top: 8px;">[Placeholder excerpt copy.]</p>
+      <div style="font-size: 13px; color: #628395; margin-top: 12px;">[Month] 2026</div>
+    </div>
+  </div>
+
+  <!-- For enterprise teaser -->
+  <div style="margin: 0 56px 56px; padding: 36px 40px; background: #EFEAE0; border-radius: 3px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+    <div style="max-width: 640px;">
+      <span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #628395;">For enterprise</span>
+      <h3 style="font-size: 22px; font-weight: 700; margin-top: 10px;">NobodyWho for Business</h3>
+      <p style="font-size: 15px; color: #3D3D3D; line-height: 1.7; margin-top: 10px;">A managed offering for large organisations: fleet observability, fine-tuning, and upskilling support layered on top of the open-source engine. Not yet generally available.</p>
+    </div>
+    <span style="display: inline-flex; align-items: center; white-space: nowrap; font-size: 14px; font-weight: 600; color: #F7F4EE; background: #0A0A0A; padding: 13px 22px; border-radius: 3px;">Join the waitlist</span>
+  </div>
+
+  <!-- Footer -->
+  <div style="display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 24px 56px 40px; border-top: 1px solid rgb(10 10 10 / 14%); font-size: 12px; color: #628395;">
+    <span>NobodyWho. Copenhagen, Denmark.</span>
+    <span>Open source on GitHub · Last updated September 2026.</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

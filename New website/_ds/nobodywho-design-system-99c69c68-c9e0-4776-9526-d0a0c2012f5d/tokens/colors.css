@@ -1,0 +1,51 @@
+/* NobodyWho — Colour tokens
+ * Source: NobodyWho_Template.pptx master (user-edited, June 2026).
+ * British English ("colour") in prose; CSS keeps the conventional spelling.
+ *
+ * Rules baked into the system:
+ *  - No bold anywhere. Accent is achieved with COLOUR, never weight.
+ *  - No decorative bars or stripes. The only rule is the heading DIVIDER.
+ */
+:root {
+  /* ---- Base palette (raw brand values) ---- */
+  --nw-black:        #0A0A0A; /* headings, default body text */
+  --nw-navy:         #2952A3; /* primary accent words, stat numbers, heading accents */
+  --nw-steel:        #628395; /* secondary accent words, eyebrow, logo tint */
+  --nw-body:         #3D3D3D; /* body copy */
+  --nw-muted:        #A3A3A3; /* section labels, stat labels, page numbers */
+  --nw-divider:      #E0E0E0; /* horizontal rule under headings */
+  --nw-white:        #FFFFFF; /* slide background, CTA text, code punctuation */
+
+  /* ---- Code panel palette ---- */
+  --nw-code-bg:      #0A0A0A; /* code panel background */
+  --nw-code-bar:     #1A1A1A; /* code panel top bar */
+  --nw-code-muted:   #A3A3A3; /* code comments */
+  --nw-code-yellow:  #FFD21E; /* code string literals */
+
+  /* ---- Calls to action ---- */
+  --nw-cta-blue:     #1C3D80; /* CTA button fill */
+
+  /* ---- Semantic aliases (use these in components) ---- */
+  --text-heading:    var(--nw-black);
+  --text-body:       var(--nw-body);
+  --text-default:    var(--nw-black);
+  --text-accent:     var(--nw-navy);      /* primary accent words, stat numbers */
+  --text-accent-2:   var(--nw-steel);     /* secondary accent words, eyebrow */
+  --text-muted:      var(--nw-muted);     /* labels, page numbers */
+  --text-on-dark:    var(--nw-white);
+
+  --surface-page:    var(--nw-white);
+  --surface-code:    var(--nw-code-bg);
+  --surface-code-bar:var(--nw-code-bar);
+
+  --border-divider:  var(--nw-divider);
+
+  --action-bg:       var(--nw-cta-blue);
+  --action-fg:       var(--nw-white);
+
+  /* ---- Code syntax aliases ---- */
+  --code-text:       var(--nw-white);
+  --code-punctuation:var(--nw-white);
+  --code-comment:    var(--nw-code-muted);
+  --code-string:     var(--nw-code-yellow);
+}

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NobodyWho runs open AI models inside your software, on your hardware, with less cloud and more control.">
+  <meta name="theme-color" content="#f8f9f9">
+  <link rel="icon" href="../../src/assets/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="alternate" type="text/plain" href="https://docs.nobodywho.ooo/llms.txt" title="NobodyWho documentation index">
+  <link rel="alternate" type="text/plain" href="https://docs.nobodywho.ooo/llms-full.txt" title="NobodyWho full documentation">
+  <link rel="stylesheet" href="site.css">
+  <script>document.documentElement.classList.add("js")</script>
+  <title>NobodyWho | Less cloud. More control.</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="landing.html" aria-current="page">NobodyWho</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="docs.html">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <a class="icon-link" href="https://github.com/nobodywho-ooo/nobodywho" aria-label="NobodyWho on GitHub"><img src="assets/icons/github.svg" alt="" width="17" height="17"></a>
+        <a class="icon-link" href="https://discord.gg/qhaMc2qCYB" aria-label="NobodyWho on Discord"><img src="assets/icons/discord.svg" alt="" width="17" height="17"></a>
+        <a class="button primary" href="https://docs.nobodywho.ooo/">Open docs</a>
+      </div>
+      <button class="menu-button" type="button" aria-expanded="false">Menu</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow">Built in Europe. Run it yourself.</p>
+        <h1><canvas class="hero-title-canvas" aria-hidden="true"></canvas><span class="mask"><span class="line">Less cloud.</span></span><span class="mask"><span class="line accent">More control.</span></span></h1>
+        <p class="hero-copy">Run open models inside your product, on your hardware, without sending prompts to somebody else's server.</p>
+        <div class="actions">
+          <a class="button primary" href="https://docs.nobodywho.ooo/">Open docs</a>
+          <a class="button" href="https://github.com/nobodywho-ooo/nobodywho"><img src="assets/icons/github.svg" alt="" width="17" height="17">View on GitHub</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="assets/images/nobodywho-chat.webp" alt="NobodyWho Chat running open models on iPhones" width="1400" height="1050" fetchpriority="high">
+        <figcaption>The model and the conversation stay on the device.</figcaption>
+      </figure>
+    </section>
+
+    <section class="promise-strip container" aria-label="Product principles">
+      <div class="promise"><strong>No required server</strong><span>Inference runs where your software runs.</span></div>
+      <div class="promise"><strong>No API key</strong><span>Core features work without a hosted account.</span></div>
+      <div class="promise"><strong>No token meter</strong><span>Your hardware does the work.</span></div>
+    </section>
+
+    <section class="section" id="quickstart">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>One library. A few lines of code.</h2>
+          <p>The same local runtime works across mobile, desktop, server, and game engines. Pick the binding that fits your product.</p>
+        </div>
+
+        <div class="binding-layout reveal">
+          <div class="binding-tabs" role="tablist" aria-label="Binding examples">
+            <button class="binding-tab" id="tab-python" role="tab" aria-selected="true" aria-controls="panel-python"><img src="assets/icons/python.svg" alt="" width="20" height="20">Python</button>
+            <button class="binding-tab" id="tab-swift" role="tab" aria-selected="false" aria-controls="panel-swift" tabindex="-1"><img src="assets/icons/swift.svg" alt="" width="20" height="20">Swift</button>
+            <button class="binding-tab" id="tab-kotlin" role="tab" aria-selected="false" aria-controls="panel-kotlin" tabindex="-1"><img src="assets/icons/kotlin.svg" alt="" width="20" height="20">Kotlin</button>
+            <button class="binding-tab" id="tab-react" role="tab" aria-selected="false" aria-controls="panel-react" tabindex="-1"><img src="assets/icons/react.svg" alt="" width="20" height="20">RN / Expo</button>
+            <button class="binding-tab" id="tab-flutter" role="tab" aria-selected="false" aria-controls="panel-flutter" tabindex="-1"><img src="assets/icons/flutter.svg" alt="" width="20" height="20">Flutter</button>
+            <button class="binding-tab" id="tab-godot" role="tab" aria-selected="false" aria-controls="panel-godot" tabindex="-1"><img src="assets/icons/godotengine.svg" alt="" width="20" height="20">Godot</button>
+          </div>
+
+          <div class="binding-panel" id="panel-python" role="tabpanel" aria-labelledby="tab-python">
+            <div class="code-head"><span>Python</span><button class="copy-button" type="button" data-copy="uv add nobodywho&#10;&#10;from nobodywho import Chat&#10;&#10;chat = Chat('./model.gguf')&#10;answer = chat.ask('Why is the sky blue?').completed()">Copy</button></div>
+            <pre tabindex="0"><span class="token-comment"># uv add nobodywho</span>
+<span class="token-key">from</span> nobodywho <span class="token-key">import</span> Chat
+
+chat = Chat(<span class="token-string">"./model.gguf"</span>)
+answer = chat.ask(
+    <span class="token-string">"Why is the sky blue?"</span>
+).completed()</pre>
+            <div class="binding-links"><span>Desktop and server</span><a href="https://docs.nobodywho.ooo/python/">Python docs</a></div>
+          </div>
+
+          <div class="binding-panel" id="panel-swift" role="tabpanel" aria-labelledby="tab-swift" hidden>
+            <div class="code-head"><span>Swift</span><button class="copy-button" type="button" data-copy="import NobodyWho&#10;&#10;let chat = try await Chat.fromPath(modelPath: &quot;./model.gguf&quot;)&#10;let answer = try await chat.ask(&quot;Why is the sky blue?&quot;).completed()">Copy</button></div>
+            <pre tabindex="0"><span class="token-key">import</span> NobodyWho
+
+<span class="token-key">let</span> chat = <span class="token-key">try await</span> Chat.fromPath(
+    modelPath: <span class="token-string">"./model.gguf"</span>
+)
+<span class="token-key">let</span> answer = <span class="token-key">try await</span> chat.ask(
+    <span class="token-string">"Why is the sky blue?"</span>
+).completed()</pre>
+            <div class="binding-links"><span>Apple platforms</span><a href="https://docs.nobodywho.ooo/swift/">Swift docs</a></div>
+          </div>
+
+          <div class="binding-panel" id="panel-kotlin" role="tabpanel" aria-labelledby="tab-kotlin" hidden>
+            <div class="code-head"><span>Kotlin</span><button class="copy-button" type="button" data-copy="val chat = Chat.fromPath(modelPath = &quot;./model.gguf&quot;)&#10;val answer = chat.ask(&quot;Why is the sky blue?&quot;).completed()">Copy</button></div>
+            <pre tabindex="0"><span class="token-key">val</span> chat = Chat.fromPath(
+    modelPath = <span class="token-string">"./model.gguf"</span>
+)
+<span class="token-key">val</span> answer = chat.ask(
+    <span class="token-string">"Why is the sky blue?"</span>
+).completed()</pre>
+            <div class="binding-links"><span>JVM and Android</span><a href="https://docs.nobodywho.ooo/kotlin/">Kotlin docs</a></div>
+          </div>
+
+          <div class="binding-panel" id="panel-react" role="tabpanel" aria-labelledby="tab-react" hidden>
+            <div class="code-head"><span>React Native / Expo</span><button class="copy-button" type="button" data-copy="import { Chat } from &quot;react-native-nobodywho&quot;;&#10;&#10;const chat = await Chat.fromPath({ modelPath: &quot;./model.gguf&quot; });&#10;const answer = await chat.ask(&quot;Why is the sky blue?&quot;).completed();">Copy</button></div>
+            <pre tabindex="0"><span class="token-key">import</span> { Chat } <span class="token-key">from</span>
+  <span class="token-string">"react-native-nobodywho"</span>;
+
+<span class="token-key">const</span> chat = <span class="token-key">await</span> Chat.fromPath({
+  modelPath: <span class="token-string">"./model.gguf"</span>
+});
+<span class="token-key">const</span> answer = <span class="token-key">await</span> chat
+  .ask(<span class="token-string">"Why is the sky blue?"</span>)
+  .completed();</pre>
+            <div class="binding-links"><span>Cross-platform apps</span><a href="https://docs.nobodywho.ooo/react-native/">React Native docs</a></div>
+          </div>
+
+          <div class="binding-panel" id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden>
+            <div class="code-head"><span>Flutter</span><button class="copy-button" type="button" data-copy="final chat = await nobodywho.Chat.fromPath(modelPath: &quot;./model.gguf&quot;);&#10;final answer = await chat.ask(&quot;Why is the sky blue?&quot;).completed();">Copy</button></div>
+            <pre tabindex="0"><span class="token-key">final</span> chat = <span class="token-key">await</span>
+  nobodywho.Chat.fromPath(
+    modelPath: <span class="token-string">"./model.gguf"</span>
+  );
+<span class="token-key">final</span> answer = <span class="token-key">await</span> chat.ask(
+  <span class="token-string">"Why is the sky blue?"</span>
+).completed();</pre>
+            <div class="binding-links"><span>Mobile and desktop</span><a href="https://docs.nobodywho.ooo/flutter/">Flutter docs</a></div>
+          </div>
+
+          <div class="binding-panel" id="panel-godot" role="tabpanel" aria-labelledby="tab-godot" hidden>
+            <div class="code-head"><span>Godot</span><button class="copy-button" type="button" data-copy="extends NobodyWhoChat&#10;&#10;func _ready():&#10;    self.start_worker()&#10;    self.ask(&quot;Why is the sky blue?&quot;)&#10;&#10;func _on_response_finished(response):&#10;    print(response)">Copy</button></div>
+            <pre tabindex="0"><span class="token-key">extends</span> NobodyWhoChat
+
+<span class="token-key">func</span> _ready():
+    self.start_worker()
+    self.ask(<span class="token-string">"Why is the sky blue?"</span>)
+
+<span class="token-key">func</span> _on_response_finished(response):
+    print(response)</pre>
+            <div class="binding-links"><span>Games and interactive worlds</span><a href="https://docs.nobodywho.ooo/godot/">Godot docs</a></div>
+          </div>
+        </div>
+
+        <div class="agent-install reveal">
+          <div>
+            <h3>Give your coding agent the full docs</h3>
+            <p>Install the NobodyWho skill, then ask your agent to add local inference to the project.</p>
+          </div>
+          <div class="command">
+            <code tabindex="0">npx skills add https://github.com/nobodywho-ooo/nobodywho --skill nobodywho</code>
+            <button class="copy-button" type="button" data-copy="npx skills add https://github.com/nobodywho-ooo/nobodywho --skill nobodywho">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container architecture">
+        <div class="split-copy reveal">
+          <h2>Private by architecture.</h2>
+          <p>The application talks to a model in the same environment. Turn off the network and core inference still works.</p>
+        </div>
+        <div class="route-demo reveal">
+          <div class="route-toolbar"><span>Request path</span><button class="route-toggle" type="button" aria-pressed="false">Disconnect network</button></div>
+          <div class="routes">
+            <div class="route cloud"><strong>Your product</strong><span class="route-arrow" aria-hidden="true">→</span><strong>Remote API</strong></div>
+            <div class="route local"><strong>Your product</strong><span class="route-arrow" aria-hidden="true">→</span><strong>Local model</strong></div>
+          </div>
+          <p class="route-status" aria-live="polite">Both routes are available. NobodyWho stays on the device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container origin">
+        <img class="reveal" src="assets/images/copenhagen.webp" alt="Nyhavn waterfront in Copenhagen" width="900" height="1350" loading="lazy">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Copenhagen, Denmark</p>
+          <h2>Built in Europe. Open to inspect.</h2>
+          <p>NobodyWho is open source under EUPL-1.2. Run it on a device, at the edge, or inside your own infrastructure.</p>
+          <div class="origin-points">
+            <div><strong>Open source</strong><span>Read the code and keep control of your stack.</span></div>
+            <div><strong>Offline capable</strong><span>Keep useful features available without a network.</span></div>
+            <div><strong>Broad model support</strong><span>Text, vision, speech, embeddings, and reranking.</span></div>
+            <div><strong>Native bindings</strong><span>Use the language your product already uses.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container closing-inner reveal">
+        <h2>Put the model where the product runs.</h2>
+        <a class="button primary" href="https://docs.nobodywho.ooo/">Open docs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand"><a class="brand" href="landing.html">NobodyWho</a><p>Open-source local inference, built in Copenhagen.</p></div>
+      <div class="footer-group"><strong>Explore</strong><div class="footer-links"><a href="about.html">About</a><a href="pricing.html">Pricing</a><a href="docs.html">Docs</a><a href="https://github.com/nobodywho-ooo/nobodywho">GitHub</a></div></div>
+      <div class="footer-group"><strong>Machine-readable</strong><div class="footer-links"><a href="https://docs.nobodywho.ooo/llms.txt">llms.txt</a><a href="https://docs.nobodywho.ooo/llms-full.txt">llms-full.txt</a><a href="https://www.nobodywho.ai/api/platforms.json">platforms.json</a></div></div>
+    </div>
+    <div class="container footer-bottom">
+      <span>EUPL-1.2. Copenhagen, Denmark.</span>
+      <div class="social-links"><a href="https://github.com/nobodywho-ooo/nobodywho"><img src="assets/icons/github.svg" alt="" width="15" height="15">GitHub</a><a href="https://discord.gg/qhaMc2qCYB"><img src="assets/icons/discord.svg" alt="" width="15" height="15">Discord</a></div>
+    </div>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>

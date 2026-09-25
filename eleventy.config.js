@@ -25,6 +25,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy("prototypes.html");
+  eleventyConfig.addPassthroughCopy("prototype-pages.css");
   eleventyConfig.addPassthroughCopy("prototypes-glm");
   eleventyConfig.addPassthroughCopy("prototypes-sol");
   eleventyConfig.addPassthroughCopy({

@@ -1,0 +1,41 @@
+/* NobodyWho — Typography tokens
+ *
+ * Single weight only. Inter 400 for everything text/UI, Courier New 400 for code.
+ * NEVER use DM Sans, Calibri, or Aptos (they reflow on import to Google Slides).
+ * NEVER apply font-weight > 400. Hierarchy comes from SIZE and COLOUR, not weight.
+ */
+:root {
+  /* ---- Families ---- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-code: 'Courier New', 'Courier', monospace;
+
+  /* ---- The one and only weight ---- */
+  --weight-regular: 400;
+
+  /* ---- Type scale (px) ---- */
+  --size-display:   72px;  /* hero / title slide headline */
+  --size-h1:        48px;  /* slide headline */
+  --size-h2:        34px;  /* sub-headline / large stat */
+  --size-h3:        24px;  /* card title, sub-section */
+  --size-lead:      20px;  /* lead paragraph */
+  --size-body:      17px;  /* body copy */
+  --size-small:     14px;  /* captions, code */
+  --size-label:     12px;  /* eyebrow, section labels, page numbers */
+
+  /* ---- Line heights ---- */
+  --leading-tight:  1.1;   /* large display headings */
+  --leading-snug:   1.25;  /* headings */
+  --leading-normal: 1.55;  /* body copy */
+
+  /* ---- Letter spacing ---- */
+  --tracking-label: 0.14em;  /* uppercase eyebrows / section labels */
+  --tracking-tight: -0.01em; /* large display sizes */
+  --tracking-normal: 0;
+
+  /* ---- Semantic roles ---- */
+  --type-eyebrow-size:    var(--size-label);
+  --type-eyebrow-spacing: var(--tracking-label);
+  --type-heading-family:  var(--font-sans);
+  --type-body-family:     var(--font-sans);
+  --type-code-family:     var(--font-code);
+}

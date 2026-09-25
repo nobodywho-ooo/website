@@ -1,0 +1,8 @@
+/* NobodyWho fonts
+ * Body / UI: Inter (regular 400 only — no bold anywhere in the brand)
+ * Code:      Courier New (system font, no @font-face needed)
+ *
+ * Inter is loaded from Google Fonts at weight 400 only. The brand spec
+ * forbids bold; do not request 600/700 weights.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');

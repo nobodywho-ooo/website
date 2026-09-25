@@ -1,0 +1,40 @@
+/* NobodyWho — Spacing, radii, layout tokens
+ *
+ * Calm, generous, rectangular. The brand uses almost no rounding and no
+ * shadows on document/slide surfaces. Restraint is the system.
+ */
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+
+  /* ---- Radii ---- *
+   * Mostly square. Buttons and code panels take a small radius only. */
+  --radius-none: 0px;
+  --radius-sm:   4px;   /* buttons, inputs, badges */
+  --radius-md:   8px;   /* code panel, cards */
+  --radius-pill: 999px; /* tags / chips only */
+
+  /* ---- Borders ---- */
+  --border-width: 1px;
+  --border-hairline: 1px solid var(--border-divider);
+
+  /* ---- Slide geometry (16:9, matches the PPTX master) ---- */
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-margin-x: 96px;
+  --slide-margin-y: 72px;
+
+  /* ---- Logo placement (from PPTX master, scaled to 1280x720 slide) ---- *
+   * PPTX: x:9.550" y:0.100" w:0.320" h:0.320" on a 10x5.63" slide. */
+  --logo-size: 41px;
+  --logo-x: 1222px;
+  --logo-y: 13px;
+}
