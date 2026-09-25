@@ -1,6 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Nobodywho runs AI models on your devices and servers. Open-source SDKs for Python, Kotlin, Swift, Flutter, React Native and Godot.">
+<meta name="theme-color" content="#2a0709">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
 <title>Nobodywho Local AI</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="preload" href="/assets/fonts/InterTight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/brand-fonts.css">
 <style>
   :root { --ground: #4e1411; --ground-deep: #2a0709; --ground-glow: #72281a; color-scheme: dark; }
   html { scroll-behavior: smooth; }
@@ -11,12 +18,18 @@
       radial-gradient(90% 75% at 38% 80%, var(--ground-glow), transparent 72%),
       radial-gradient(60% 55% at 88% 68%, rgba(110,40,22,0.55), transparent 70%),
       linear-gradient(180deg, var(--ground-deep) 0%, #3e0f0e 38%, var(--ground) 65%, #56180f 100%); }
-  #stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
-  .hero-space { height: 100vh; height: 100svh; }
+  #stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; background-image: url('/assets/images/hero-still.webp'); background-size: cover; background-position: center; }
+  #stage.is-rendering { background-image: none; }
+  .hero-space { min-height: 100svh; }
   canvas { display: block; width: 100%; height: 100%; }
+  @media (max-width: 960px) { #stage { background-position: 56% center; } }
+  @media (prefers-reduced-motion: reduce) {
+    #stage canvas { display: none; }
+    #stage.is-rendering { background-image: url('/assets/images/hero-still.webp'); }
+  }
 
   /* ---------- menubar ---------- */
-  :root { --ink: #f4ede6; --ink-dim: rgba(244,237,230,0.72); --accent: #f2a02e; --nav-h: 96px; }
+  :root { --ink: #f4ede6; --ink-dim: rgba(244,237,230,0.72); --accent: #f2a02e; --nav-h: 76px; }
   .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 10; height: var(--nav-h);
     padding: env(safe-area-inset-top, 0px) clamp(16px, 3.6vw, 72px) 0;
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
@@ -35,8 +48,25 @@
     border: 1.5px solid var(--accent); padding: 10px 16px; background: rgba(28,6,8,0.55);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background .2s ease, color .2s ease; }
   .gh:hover, .gh:focus-visible { background: var(--accent); color: #2a0709; }
-  .gh svg { width: 18px; height: 18px; fill: currentColor; }
-  .burger { width: 34px; height: 22px; background: none; border: 0; padding: 0; cursor: pointer; display: grid; gap: 6px; align-content: center; }
+  .right .linkedin { display: inline-flex; align-items: center; justify-content: center; color: var(--ink); width: 38px; height: 38px; }
+  .right .linkedin:hover { color: var(--accent); }
+  .nav.scrolled .right .linkedin { color: var(--sec-ink); }
+  .nav.scrolled .right .linkedin:hover { color: var(--accent-text); }
+  .social-icon { display: inline-block; width: 18px; height: 18px; flex: none; background: currentColor; mask: var(--icon) center / contain no-repeat; }
+  .icon-github { --icon: url('/assets/icons/brand-github.svg'); }
+  .icon-linkedin { --icon: url('/assets/icons/brand-linkedin.svg'); }
+  .icon-calendar-event { --icon: url('/assets/icons/calendar-event.svg'); }
+  .icon-mail { --icon: url('/assets/icons/mail.svg'); }
+  .icon-star { --icon: url('/assets/icons/star.svg'); }
+  .github-stars { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font: 500 12px 'IBM Plex Mono', monospace; letter-spacing: 0; }
+  .github-stars[hidden] { display: none !important; }
+  .github-stars .social-icon { width: 14px; height: 14px; }
+  .gh .github-stars { padding-left: 10px; border-left: 1px solid currentColor; }
+  .drawer .github-stars { margin-left: 12px; font-size: 16px; vertical-align: middle; }
+  .social-links { display: inline-flex; align-items: center; gap: 8px; }
+  .social-links a { display: inline-flex; align-items: center; gap: 7px; color: inherit; text-decoration: none; }
+  .social-links a:hover { color: var(--accent-text, var(--accent)); }
+  .burger { display: none; width: 34px; height: 22px; background: none; border: 0; padding: 0; cursor: pointer; gap: 6px; align-content: center; }
   .burger span { display: block; height: 2px; background: var(--ink); transition: transform .25s ease, opacity .2s ease; }
   .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -50,11 +80,19 @@
   .drawer a { display: block; color: var(--ink); text-decoration: none; text-transform: uppercase; font-weight: 600;
     font-size: clamp(28px, 7vw, 44px); letter-spacing: -0.01em; padding: 10px 0; border-bottom: 1px solid rgba(244,237,230,0.15); }
   .drawer a[aria-current="page"] { color: var(--accent); }
+  .drawer a .social-icon { margin-right: 8px; vertical-align: -3px; }
+  @media (min-width: 961px) and (max-width: 1200px) {
+    .nav { grid-template-columns: auto 1fr auto; gap: 18px; }
+    .menu { gap: 16px; }
+    .right { gap: 16px; }
+    .gh { gap: 6px; padding: 9px 10px; }
+  }
   @media (max-width: 960px) {
-    :root { --nav-h: 76px; }
+    :root { --nav-h: 72px; }
     .nav { grid-template-columns: 1fr auto; }
-    .menu { display: none; }
-    .gh .label { display: none; }
+    .nav > nav { display: none; }
+    .burger { display: grid; }
+    .gh .label, .gh .github-stars { display: none !important; }
     .gh { padding: 9px 10px; }
   }
   @media (prefers-reduced-motion: reduce) { .menu a::after, .gh, .burger span { transition: none; } }
@@ -70,7 +108,15 @@
     opacity: 0; transform: translateY(0.35em); transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.22,.61,.36,1); }
   .tagline .rotor span.is-in  { opacity: 1; transform: translateY(0); transition-delay: .4s; }
   .tagline .rotor span.is-out { opacity: 0; transform: translateY(-0.3em); transition-duration: .35s, .9s; transition-timing-function: ease-out, cubic-bezier(.22,.61,.36,1); }
-  @media (max-width: 960px) { .tagline { font-size: clamp(34px, 7.6vw, 96px); } }
+  .hero-details { display: none; }
+  @media (max-width: 960px) {
+    .tagline { top: 51svh; bottom: auto; font-size: clamp(42px, 11vw, 60px); line-height: 0.96; }
+    .tagline .rotor { height: 1em; }
+    .tagline .rotor span { white-space: normal; }
+    .hero-details { display: block; position: fixed; z-index: 5; left: 16px; right: 16px;
+      top: calc(51svh + clamp(84px, 22vw, 120px) + 34px); color: var(--ink); font-family: 'Inter Tight', sans-serif; }
+    .hero-details p { margin: 0; font-size: 17px; line-height: 1.4; }
+  }
   @media (prefers-reduced-motion: reduce) { .tagline .rotor span { transition: opacity .3s ease; transform: none !important; } }
 
   /* =====================================================================
@@ -151,6 +197,7 @@
   .stats .v small { font-size: 0.28em; letter-spacing: 0.02em; }
   .stats .c { font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(14px, 1.05vw, 16px); line-height: 1.45; color: var(--sec-ink); max-width: 30ch; }
   .t-amber .stats .v { color: #2a0709; }
+  @media (min-width: 961px) { .stats .k { line-height: 1.25; min-height: 2.5em; } }
   @media (max-width: 960px) { .stats { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
   /* key properties: mono bullets in two columns */
@@ -182,10 +229,16 @@
   .display .net .hub .halo { fill: none; stroke: #f2a02e; stroke-width: 1.5; stroke-opacity: .7; }
   .display .net .hub .halo2 { fill: none; stroke: #f2a02e; stroke-width: 1; stroke-opacity: .3; }
   .display .net .hub text { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .14em; fill: var(--sec-ink); fill-opacity: .7; }
+  .display .net .signal { fill: #f2a02e; opacity: 0; offset-path: path('M 180 285 L 560 180 L 930 70'); offset-rotate: 0deg; }
   @keyframes halo { 0%,100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.18); opacity: .25; } }
+  @keyframes signal-flow { 0% { offset-distance: 0%; opacity: 0; } 12% { opacity: 1; } 82% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+  @keyframes spine-flow { to { stroke-dashoffset: -28; } }
   @media (prefers-reduced-motion: no-preference) {
-    .display .net .hub .halo { animation: halo 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-    .display .net .hub:nth-of-type(2) .halo { animation-delay: 1.2s; } .display .net .hub:nth-of-type(3) .halo { animation-delay: 2.4s; }
+    .display.is-active .net .hub .halo { animation: halo 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .display.is-active .net .hub:nth-of-type(2) .halo { animation-delay: 1.2s; } .display.is-active .net .hub:nth-of-type(3) .halo { animation-delay: 2.4s; }
+    .display.is-active .net .spine line { animation: spine-flow 1.8s linear infinite; }
+    .display.is-active .net .signal { animation: signal-flow 4.8s linear infinite; }
+    .display.is-active .net .signal:nth-child(2) { animation-delay: -2.4s; }
   }
 
 
@@ -222,14 +275,17 @@
   .foot-brand { display: grid; gap: 6px; }
   .foot-brand b { color: var(--sec-ink); font-weight: 600; letter-spacing: -0.03em; font-size: 18px; }
   .foot-links { display: flex; flex-wrap: wrap; gap: 6px 22px; justify-content: center; }
-  .foot-links a { color: var(--sec-ink); text-decoration: none; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; opacity: .8; }
+  .foot-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--sec-ink); text-decoration: none; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; opacity: .8; }
+  .foot-links .social-icon { width: 16px; height: 16px; }
   .foot-links a:hover { opacity: 1; color: var(--sec-accent); }
   .t-amber .foot-links a:hover { color: #2a0709; }
   .foot-meta { display: grid; gap: 6px; text-align: right; }
   @media (max-width: 860px) { .foot { grid-template-columns: 1fr; } .foot-links { justify-content: flex-start; } .foot-meta { text-align: left; } }
 
   @media (max-width: 760px) {
-    .cols, .row, .spec, .props-head, .props, .values, .cta { grid-template-columns: 1fr; }
+    .cols, .row, .spec, .props-head, .props, .values, .cta { grid-template-columns: minmax(0, 1fr); }
+    .cta h2 { max-width: 100%; }
+    .cta .links { min-width: 0; }
     .cols .push { grid-column: auto; }
     .props li { max-width: none; }
     .display .bars { width: 80%; }
@@ -251,7 +307,7 @@
   .subpage { display: none; position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
     font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
   .subpage * { box-sizing: border-box; }
-  body.on-product .page, body.on-product .tagline, body.on-product #stage { display: none; }
+  body.on-product .page, body.on-product .tagline, body.on-product .hero-details, body.on-product #stage { display: none; }
   body.on-product .subpage { display: block; }
   .sub-hero { padding-top: calc(var(--nav-h) + clamp(48px, 8vw, 128px)); }
   .sub-hero h1 { margin: 0; font-weight: 600; font-size: clamp(38px, 6.4vw, 104px); line-height: 0.96; letter-spacing: -0.035em; max-width: 14ch; text-wrap: balance; }
@@ -297,81 +353,14 @@
   @media (max-width: 960px) { .pricing { grid-template-columns: 1fr; } }
   @media (max-width: 760px) { .prod { grid-template-columns: 1fr; } .prod ul.props { grid-template-columns: 1fr; } }
 
-  /* =====================================================================
-     SUBPAGE: DOCS  (URL hash #docs or #docs-<page>)
-     ===================================================================== */
-  .docs { display: none; position: relative; z-index: 6; background: #e9e2d8; color: #22181a;
-    --sec-bg: #e9e2d8; --sec-ink: #22181a; --sec-muted: rgba(34,24,26,0.64); --sec-rule: rgba(34,24,26,0.22); --sec-accent: #f2a02e;
-    font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; min-height: 100vh; }
-  .docs * { box-sizing: border-box; }
-  body.on-docs .page, body.on-docs .tagline, body.on-docs #stage, body.on-docs .subpage { display: none; }
-  body.on-docs .docs { display: block; }
-  .docs-wrap { display: grid; max-width: 1480px; margin: 0 auto; grid-template-columns: 260px minmax(0, 1fr); gap: clamp(24px, 4vw, 72px);
-    padding: calc(var(--nav-h) + 40px) clamp(16px, 3.6vw, 72px) clamp(64px, 8vw, 128px); }
-  .docs-side-in { position: sticky; top: calc(var(--nav-h) + 24px); display: grid; gap: 22px; align-content: start; }
-  .docs-home { font-weight: 600; font-size: 20px; letter-spacing: -0.02em; color: var(--sec-ink); text-decoration: none; padding-bottom: 14px; border-bottom: 1px solid var(--sec-rule); }
-  .docs-side h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sec-muted); font-weight: 500; }
-  .docs-side ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-  .docs-side a { display: block; padding: 6px 10px; margin-left: -10px; color: var(--sec-ink); text-decoration: none; font-size: 15px; border-left: 2px solid transparent; }
-  .docs-side a:hover { color: var(--sec-accent); }
-  .docs-side a[aria-current="page"] { border-left-color: var(--sec-accent); color: var(--sec-accent); font-weight: 500; }
-  .docs-ext { font-size: 14px; color: var(--sec-muted); text-decoration: none; }
-  .docs-ext:hover { color: var(--sec-accent); }
-  .doc { max-width: 76ch; }
-  .doc h1 { margin: 0 0 22px; font-weight: 600; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -0.03em; text-wrap: balance; }
-  .doc h2 { margin: 44px 0 12px; font-weight: 600; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.15; letter-spacing: -0.02em; padding-top: 22px; border-top: 1px solid var(--sec-rule); }
-  .doc h3 { margin: 26px 0 8px; font-weight: 600; font-size: clamp(17px, 1.4vw, 21px); letter-spacing: -0.01em; }
-  .doc p, .doc li { font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; }
-  .doc p { margin: 0 0 1em; }
-  .doc .lead { font-size: clamp(18px, 1.5vw, 23px); line-height: 1.4; color: var(--sec-muted); }
-  .doc .dim { color: var(--sec-muted); font-size: 0.95em; }
-  .doc ul, .doc ol { padding-left: 1.3em; margin: 0 0 1.2em; }
-  .doc li { margin: 4px 0; }
-  .doc a { color: var(--sec-accent); text-decoration: none; border-bottom: 1px solid rgba(242,160,46,0.35); }
-  .doc a:hover { border-bottom-color: var(--sec-accent); }
-  .doc .btn { color: #2a0709; border-bottom: 1.5px solid #f2a02e; }
-  .doc .btn:hover, .doc .btn:focus-visible { color: #f2a02e; border-bottom-color: #f2a02e; }
-  .doc .btn.ghost { color: #f2a02e; }
-  .doc .btn.ghost:hover, .doc .btn.ghost:focus-visible { color: #2a0709; }
-  .doc code { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; background: rgba(34,24,26,0.07); padding: 1px 6px; border-radius: 3px; }
-  .doc pre.code { position: relative; margin: 14px 0 22px; padding: 20px 20px 18px; background: #2a080a; color: #f4ede6; overflow-x: auto; font-size: 14.5px; line-height: 1.55; }
-  .doc pre.code code { background: none; padding: 0; font-size: inherit; color: inherit; }
-  .doc pre.code::before { content: attr(data-lang); position: absolute; top: 8px; right: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(244,237,230,0.45); }
-  .doc table { width: 100%; border-collapse: collapse; margin: 12px 0 22px; font-size: clamp(15px, 1.05vw, 17px); }
-  .doc th, .doc td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--sec-rule); vertical-align: top; }
-  .doc th { font-weight: 500; color: var(--sec-muted); font-size: 0.9em; letter-spacing: 0.04em; text-transform: uppercase; }
-  .doc td:first-child { font-family: 'IBM Plex Mono', monospace; font-size: 0.92em; white-space: nowrap; }
-  .lang-grid { list-style: none; padding: 0 !important; margin: 0 0 8px !important; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  .lang-grid li { margin: 0 !important; }
-  .lang-grid a { display: grid; gap: 4px; padding: 16px 18px; border: 1px solid var(--sec-rule); color: var(--sec-ink); text-decoration: none; transition: border-color .2s ease, background .2s ease; }
-  .lang-grid a:hover { border-color: var(--sec-accent); background: rgba(242,160,46,0.06); }
-  .lang-grid b { font-weight: 600; letter-spacing: -0.01em; }
-  .lang-grid span { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--sec-muted); }
   .link-boxes { list-style: none; padding: 0 !important; margin: 18px 0 8px !important; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .link-boxes li { margin: 0 !important; display: grid; }
-  .link-boxes a { height: 100%; align-content: start; }
-  .link-boxes a { display: grid; gap: 4px; padding: 18px 20px; border: 1.5px solid var(--sec-accent); color: var(--sec-ink); text-decoration: none; transition: background .2s ease, color .2s ease; }
+  .link-boxes a { display: grid; gap: 4px; height: 100%; align-content: start; padding: 18px 20px; border: 1.5px solid var(--sec-accent); color: var(--sec-ink); text-decoration: none; transition: background .2s ease, color .2s ease; }
   .link-boxes a:hover { background: var(--sec-accent); color: #2a0709; }
   .link-boxes a:hover span { color: rgba(42,7,9,0.75); }
   .link-boxes b { font-weight: 600; letter-spacing: -0.01em; }
   .link-boxes span { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--sec-muted); }
-  @media (max-width: 560px) { .link-boxes { grid-template-columns: 1fr; } }
-  .doc .licence { color: var(--sec-muted); border-left: 2px solid var(--sec-accent); padding-left: 16px; margin-top: 1.4em; }
-  .more-in { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--sec-rule); }
-  .more-in h3 { margin: 0 0 4px; }
-  .more-in ul { list-style: none; padding: 0 !important; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 24px; }
-  .more-in a { display: block; padding: 6px 0; border-bottom: 1px solid var(--sec-rule); color: var(--sec-ink); }
-  .more-in a::after { content: " \2197"; color: var(--sec-muted); font-size: 0.85em; }
-  .more-in a:hover { color: var(--sec-accent); }
-  @media (max-width: 960px) {
-    .docs-wrap { grid-template-columns: 1fr; }
-    .docs-side-in { position: static; }
-    .docs-side ul { display: flex; flex-wrap: wrap; gap: 4px 14px; }
-    .docs-side a { margin-left: 0; padding: 4px 0; border-left: 0; border-bottom: 2px solid transparent; }
-    .docs-side a[aria-current="page"] { border-bottom-color: var(--sec-accent); }
-    .lang-grid, .more-in ul { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 560px) { .lang-grid, .more-in ul { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .link-boxes, .cta .link-boxes { grid-template-columns: minmax(0, 1fr); } }
 
   /* =====================================================================
      SUBPAGE: ABOUT  (URL hash #about)
@@ -379,18 +368,9 @@
   .about { display: none; position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
     font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
   .about * { box-sizing: border-box; }
-  body.on-about .page, body.on-about .tagline, body.on-about #stage, body.on-about .subpage, body.on-about .docs { display: none; }
+  body.on-about .page, body.on-about .tagline, body.on-about .hero-details, body.on-about #stage, body.on-about .subpage { display: none; }
   body.on-about .about { display: block; }
   .about .cols p { color: var(--sec-ink); }
-  .posts { display: grid; }
-  .post { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: clamp(16px, 3vw, 48px); padding: 22px 0 26px; border-top: 1px solid var(--sec-rule); text-decoration: none; color: inherit; }
-  .post:last-child { border-bottom: 1px solid var(--sec-rule); }
-  .post .meta { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: var(--sec-muted); display: grid; gap: 4px; align-content: start; }
-  .post .meta b { font-weight: 500; color: var(--sec-accent); letter-spacing: 0.06em; text-transform: uppercase; font-size: 11.5px; }
-  .post h3 { margin: 0 0 6px; font-weight: 600; font-size: clamp(19px, 1.8vw, 26px); line-height: 1.15; letter-spacing: -0.015em; transition: color .2s ease; }
-  .post p { margin: 0; font-size: clamp(15px, 1.15vw, 18px); line-height: 1.45; color: var(--sec-muted); max-width: 64ch; }
-  .post:hover h3, .post:focus-visible h3 { color: var(--sec-accent); }
-  .post h3::after { content: " \2197"; font-size: 0.7em; color: var(--sec-muted); }
   .faq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
   .faq .qa { border-top: 1px solid var(--sec-rule); }
   .faq details { border-bottom: 1px solid var(--sec-rule); }
@@ -400,54 +380,25 @@
   .faq details[open] summary::after { transform: rotate(45deg); }
   .faq details p { margin: 0 0 22px; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.5; max-width: 60ch; color: var(--sec-muted); }
   .faq details p a { color: var(--sec-accent); text-decoration: none; }
-  .about-links { margin-top: clamp(28px, 4vw, 48px) !important; max-width: 720px; }
-  .about-links a:hover { color: #2a0709; }
-  .about-links a:hover span { color: rgba(42,7,9,0.75); }
-  @media (max-width: 760px) { .post, .faq { grid-template-columns: 1fr; } }
+  .about-actions { scroll-margin-top: calc(var(--nav-h) + 24px); }
+  .about-actions .btn { min-height: 50px; }
+  .about-actions .social-icon { width: 18px; height: 18px; }
+  .about-location { display: flex; align-items: baseline; gap: 18px; margin-top: clamp(36px, 5vw, 64px); padding-top: 18px;
+    border-top: 1px solid var(--sec-rule); font-size: clamp(17px, 1.45vw, 22px); }
+  .about-location .k { font: 500 12px 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--sec-muted); }
+  @media (max-width: 760px) { .faq { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .about-location { display: grid; gap: 7px; } }
 
-  /* =====================================================================
-     SUBPAGE: CONTACT  (URL hash #contact)
-     ===================================================================== */
-  .contact { display: none; position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
-    font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-  .contact * { box-sizing: border-box; }
-  body.on-contact .page, body.on-contact .tagline, body.on-contact #stage, body.on-contact .subpage, body.on-contact .docs, body.on-contact .about { display: none; }
-  body.on-contact .contact { display: block; }
-  .cgrid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 96px); align-items: start; }
-  .cform { display: grid; gap: 20px; }
-  .cform label { display: grid; gap: 8px; font-size: 15px; font-weight: 500; letter-spacing: -0.005em; }
-  .cform input, .cform select, .cform textarea { width: 100%; font: inherit; font-size: 16px; color: var(--sec-ink);
-    background: rgba(255,255,255,0.45); border: 1px solid rgba(34,24,26,0.28); padding: 14px 16px; border-radius: 0; outline: none; transition: border-color .2s ease, background .2s ease; }
-  .cform input::placeholder, .cform textarea::placeholder { color: rgba(34,24,26,0.42); }
-  .cform input:focus, .cform select:focus, .cform textarea:focus { border-color: var(--sec-accent); background: rgba(255,255,255,0.7); }
-  .cform textarea { min-height: 160px; resize: vertical; }
-  .cform select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--sec-ink) 50%), linear-gradient(-45deg, transparent 50%, var(--sec-ink) 50%);
-    background-position: calc(100% - 22px) 55%, calc(100% - 16px) 55%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 44px; }
-  .cform .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  /* Shared actions */
   .btn { display: inline-flex; align-items: center; gap: 10px; justify-self: start; padding: 14px 22px; font: inherit; font-size: 15px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
     background: #f2a02e; color: #2a0709; border: 1.5px solid #f2a02e; cursor: pointer; text-decoration: none; transition: background .2s ease, color .2s ease; }
   .btn:hover, .btn:focus-visible { background: transparent; color: #f2a02e; }
   .btn.ghost { background: transparent; color: #f2a02e; }
   .btn.ghost:hover { background: #f2a02e; color: #2a0709; }
-  .cform .sent { display: none; padding: 18px 20px; border: 1.5px solid var(--sec-accent); font-size: 16px; line-height: 1.5; }
-  .cform.is-sent .sent { display: block; } .cform.is-sent .fields { display: none; }
-  .cside { display: grid; gap: 0; }
-  .ccard { border: 1.5px solid var(--sec-accent); padding: clamp(22px, 2.6vw, 34px); display: grid; gap: 14px; margin-bottom: 28px; }
-  .ccard h3 { margin: 0; font-weight: 600; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.1; letter-spacing: -0.02em; }
-  .ccard p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--sec-muted); }
-  .cinfo { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--sec-rule); }
-  .cinfo li { display: grid; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--sec-rule); }
-  .cinfo .k { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sec-muted); }
-  .cinfo .v, .cinfo a { font-size: clamp(17px, 1.3vw, 20px); color: var(--sec-ink); text-decoration: none; letter-spacing: -0.01em; }
-  .cinfo a { color: #f2a02e; }
-  .cinfo a:hover { text-decoration: underline; }
-  @media (max-width: 900px) { .cgrid { grid-template-columns: 1fr; } .cform .row2 { grid-template-columns: 1fr; } }
 
   /* ---- polish ---- */
-  .row, .prod, .post, .link-boxes a, .ccard { transition: border-color .25s ease; }
-  .row:hover, .prod:hover, .post:hover { border-top-color: var(--sec-accent); }
-  .post h3::after { transition: transform .25s ease; display: inline-block; }
-  .post:hover h3::after { transform: translate(3px, -3px); }
+  .row, .prod, .link-boxes a { transition: border-color .25s ease; }
+  .row:hover, .prod:hover { border-top-color: var(--sec-accent); }
   .more::after, .plan a::after { transition: transform .2s ease; display: inline-block; }
   .more:hover::after, .plan a:hover::after { transform: translateX(4px); }
   .faq summary:hover { color: var(--sec-accent); }
@@ -456,50 +407,36 @@
   .plan .price { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
   .eyebrow::before { content: ""; display: inline-block; width: 18px; height: 1px; background: currentColor; margin-right: 10px; vertical-align: middle; opacity: .7; }
   .sec-sub { text-wrap: pretty; }
-  .doc pre.code { border-left: 3px solid #f2a02e; }
-  .cform input, .cform select, .cform textarea, .lang-grid a, .link-boxes a, .ccard { border-radius: 2px; }
+  .link-boxes a { border-radius: 2px; }
   ::selection { background: #f2a02e; color: #2a0709; }
 
   /* ---- text pass: readable amber on light grounds, slightly larger small labels ---- */
   :root { --accent-text: #f2a02e; }
-  .t-paper, .t-white, .t-stone, .docs, .t-amber { --accent-text: #c26a12; }
+  .t-paper, .t-white, .t-stone, .t-amber { --accent-text: #97410d; }
   .t-garnet, .t-garnet-deep, .t-ink { --accent-text: #f2a02e; }
-  .prod .feat h4, .prod .idx, .post .meta b, .plan .n, .cinfo .k, .stats .k, .facts .k, .docs-side h4 { letter-spacing: .09em; }
+  .prod .feat h4, .prod .idx, .plan .n, .stats .k, .facts .k { letter-spacing: .09em; }
   .prod .feat h4 { font-size: 14px; color: var(--accent-text); }
   .prod .idx { font-size: 14px; color: var(--accent-text); }
-  .post .meta b { font-size: 12.5px; color: var(--accent-text); }
-  .post .meta { font-size: 13.5px; }
   .eyebrow { font-size: 14px; }
   .stats .k, .facts .k { font-size: 13px; }
-  .cinfo .k, .docs-side h4 { font-size: 12.5px; }
-  .cinfo a { color: var(--accent-text); }
-  .doc a { color: var(--accent-text); border-bottom-color: rgba(194,106,18,0.35); }
-  .doc a:hover { border-bottom-color: var(--accent-text); }
-  .docs-side a:hover, .docs-side a[aria-current="page"] { color: var(--accent-text); }
-  .docs-side a[aria-current="page"] { border-left-color: #f2a02e; }
-  .more-in a:hover, .lang-grid a:hover b, .foot-links a:hover, .row .more:hover, .row .more:focus-visible, .faq summary:hover { color: var(--accent-text); }
-  .doc .licence { border-left-color: #f2a02e; }
-  .doc .btn { color: #2a0709; } .doc .btn.ghost { color: var(--accent-text); border-color: #f2a02e; }
-  .doc .btn.ghost:hover { color: #2a0709; }
+  .foot-links a:hover, .row .more:hover, .row .more:focus-visible, .faq summary:hover { color: var(--accent-text); }
   .btn.ghost { color: var(--accent-text); }
   .t-garnet .btn.ghost, .t-garnet-deep .btn.ghost { color: #f2a02e; }
   .t-amber .btn.ghost { color: #2a0709; }
   .link-boxes b { font-size: 17px; }
   .link-boxes span { font-size: 13px; }
-  .lang-grid span { font-size: 13px; }
-  .doc pre.code { font-size: 15px; }
-  .doc code { font-size: 0.9em; }
   .props li, .prod .feat p { font-size: clamp(15.5px, 1.15vw, 18px); }
   .row .sub, .prod .sub { color: var(--sec-muted); }
-  .sec-sub, .doc .lead, .sub-hero .lead { color: var(--sec-muted); }
+  .sec-sub, .sub-hero .lead { color: var(--sec-muted); }
   .t-paper .sec-sub, .t-white .sec-sub { color: rgba(34,24,26,0.78); }
-  .t-paper .row .sub, .t-paper .prod .sub, .t-paper .prod .feat p, .t-paper .post p { color: rgba(34,24,26,0.86); }
+  .t-paper .row .sub, .t-paper .prod .sub, .t-paper .prod .feat p { color: rgba(34,24,26,0.86); }
   .t-paper .stats .c, .t-amber .stats .c { color: inherit; }
   .t-amber .plan p, .t-amber .plan .tiers li, .t-amber .plan ul.inc { color: #2a0709; }
   .t-amber .stats .k, .t-amber .facts .k, .t-amber .eyebrow, .t-amber .plan .n { color: rgba(42,7,9,0.8); }
   .t-garnet .eyebrow, .t-garnet-deep .eyebrow { color: rgba(244,237,230,0.78); }
   .faq details p { color: rgba(244,237,230,0.82); }
 </style>
+</head><body>
 
 <span id="top"></span>
 <div id="stage"><canvas id="c"></canvas></div>
@@ -508,18 +445,18 @@
   <a class="logo" href="#top" aria-label="Nobodywho, front page">nobodywho</a>
   <nav aria-label="Primary">
     <ul class="menu">
-      <li><a href="#top" data-route="home" aria-current="page">Local AI</a></li>
       <li><a href="#product" data-route="product">Product</a></li>
-      <li><a href="#docs" data-route="docs">Docs</a></li>
+      <li><a href="https://docs.nobodywho.ooo/">Docs</a></li>
+      <li><a href="/posts/">Blog</a></li>
       <li><a href="#about" data-route="about">About</a></li>
-      <li><a href="#contact" data-route="contact">Contact</a></li>
     </ul>
   </nav>
   <div class="right">
-    <a class="gh" href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-      <span class="label">GitHub</span>
+    <a class="gh" href="https://github.com/nobodywho-ooo/nobodywho" aria-label="Nobodywho on GitHub" target="_blank" rel="noopener">
+      <span class="social-icon icon-github" aria-hidden="true"></span><span class="label">GitHub</span>
+      <span class="github-stars" data-github-stars hidden aria-hidden="true"><span class="social-icon icon-star"></span><span data-star-count></span></span>
     </a>
+    <a class="linkedin" href="https://www.linkedin.com/company/nobodywho/" aria-label="Nobodywho on LinkedIn" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -532,6 +469,7 @@
     <span>Built in EU</span>
   </span>
 </h1>
+<div class="hero-details"><p>Run models on your own hardware.</p></div>
 
 <main class="page">
   <div class="hero-space" aria-hidden="true"></div>
@@ -615,6 +553,7 @@
       <svg class="net" viewBox="0 0 1100 360" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
         <g class="e"><line x1="180" y1="285" x2="152" y2="240"/><line x1="180" y1="285" x2="222" y2="323"/><line x1="560" y1="180" x2="496" y2="173"/><line x1="560" y1="180" x2="589" y2="224"/><line x1="930" y1="70" x2="899" y2="113"/><line x1="930" y1="70" x2="914" y2="108"/><line x1="63" y1="307" x2="56" y2="281"/><line x1="63" y1="307" x2="86" y2="225"/><line x1="283" y1="253" x2="266" y2="320"/><line x1="283" y1="253" x2="327" y2="275"/><line x1="283" y1="253" x2="360" y2="240"/><line x1="56" y1="281" x2="86" y2="225"/><line x1="228" y1="346" x2="266" y2="320"/><line x1="228" y1="346" x2="222" y2="323"/><line x1="86" y1="225" x2="108" y2="222"/><line x1="266" y1="320" x2="297" y2="330"/><line x1="266" y1="320" x2="222" y2="323"/><line x1="297" y1="330" x2="327" y2="275"/><line x1="152" y1="240" x2="108" y2="222"/><line x1="327" y1="275" x2="360" y2="240"/><line x1="496" y1="173" x2="458" y2="173"/><line x1="496" y1="173" x2="482" y2="193"/><line x1="589" y1="224" x2="651" y2="190"/><line x1="651" y1="190" x2="720" y2="140"/><line x1="455" y1="205" x2="456" y2="180"/><line x1="455" y1="205" x2="430" y2="205"/><line x1="458" y1="173" x2="456" y2="180"/><line x1="458" y1="173" x2="482" y2="193"/><line x1="456" y1="180" x2="482" y2="193"/><line x1="456" y1="180" x2="430" y2="205"/><line x1="1050" y1="69" x2="987" y2="16"/><line x1="1050" y1="69" x2="980" y2="27"/><line x1="987" y1="16" x2="939" y2="17"/><line x1="987" y1="16" x2="980" y2="27"/><line x1="899" y1="113" x2="914" y2="108"/><line x1="899" y1="113" x2="800" y2="100"/><line x1="939" y1="17" x2="980" y2="27"/><line x1="720" y1="140" x2="800" y2="100"/></g>
         <g class="spine"><line x1="180" y1="285" x2="560" y2="180"/><line x1="560" y1="180" x2="930" y2="70"/></g>
+        <g class="signals"><circle class="signal" r="9"/><circle class="signal" r="9"/></g>
         <g class="nodes"><circle cx="63" cy="307" r="4" class="n"/><circle cx="283" cy="253" r="4" class="n"/><circle cx="56" cy="281" r="4" class="n"/><circle cx="228" cy="346" r="4" class="n"/><circle cx="86" cy="225" r="4" class="n"/><circle cx="266" cy="320" r="6" class="n"/><circle cx="297" cy="330" r="6" class="n"/><circle cx="152" cy="240" r="6" class="n"/><circle cx="327" cy="275" r="6" class="n"/><circle cx="108" cy="222" r="4" class="n"/><circle cx="222" cy="323" r="4" class="n"/><circle cx="496" cy="173" r="5" class="n"/><circle cx="589" cy="224" r="5" class="n"/><circle cx="651" cy="190" r="4" class="n"/><circle cx="455" cy="205" r="5" class="n"/><circle cx="458" cy="173" r="5" class="n"/><circle cx="456" cy="180" r="4" class="n"/><circle cx="482" cy="193" r="6" class="n"/><circle cx="1050" cy="69" r="4" class="n"/><circle cx="987" cy="16" r="4" class="n"/><circle cx="899" cy="113" r="4" class="n"/><circle cx="914" cy="108" r="4" class="n"/><circle cx="939" cy="17" r="4" class="n"/><circle cx="980" cy="27" r="4" class="n"/><circle cx="360" cy="240" r="6" class="n"/><circle cx="430" cy="205" r="6" class="n"/><circle cx="720" cy="140" r="4" class="n"/><circle cx="800" cy="100" r="4" class="n"/></g>
         <g class="hub"><circle cx="180" cy="285" r="34" class="halo2"/><circle cx="180" cy="285" r="22" class="halo"/><circle cx="180" cy="285" r="9" class="core"/><text x="224" y="290">EDGE</text></g>
         <g class="hub"><circle cx="560" cy="180" r="34" class="halo2"/><circle cx="560" cy="180" r="22" class="halo"/><circle cx="560" cy="180" r="9" class="core"/><text x="604" y="185">ON-PREM</text></g>
@@ -627,10 +566,10 @@
       <p class="eyebrow">Open Source</p>
       <div class="values">
         <ol role="tablist" aria-label="Why open source">
-          <li><button role="tab" aria-selected="true" aria-controls="v1" id="t1"><span class="n">01</span> Auditable by design</button></li>
-          <li><button role="tab" aria-selected="false" aria-controls="v2" id="t2"><span class="n">02</span> No lock-in</button></li>
-          <li><button role="tab" aria-selected="false" aria-controls="v3" id="t3"><span class="n">03</span> European licence</button></li>
-          <li><button role="tab" aria-selected="false" aria-controls="v4" id="t4"><span class="n">04</span> Built in the open</button></li>
+          <li role="presentation"><button role="tab" aria-selected="true" aria-controls="v1" id="t1"><span class="n">01</span> Auditable by design</button></li>
+          <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v2" id="t2"><span class="n">02</span> No lock-in</button></li>
+          <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v3" id="t3"><span class="n">03</span> European licence</button></li>
+          <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v4" id="t4"><span class="n">04</span> Built in the open</button></li>
         </ol>
         <div>
           <p class="panel" id="v1" role="tabpanel" aria-labelledby="t1">You can read every line of the engine that runs your models. For regulated industries and public institutions, that is not a nice-to-have, it is the precondition for trust.</p>
@@ -645,9 +584,9 @@
       <div class="cta">
         <h2>Local AI, built in Europe. Start with the docs or write and say hello.</h2>
         <div class="links">
-          <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write us</a></div>
+          <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
           <ul class="link-boxes">
-            <li><a href="#docs"><b>Read the documentation</b><span>Guides for Python, Kotlin, Swift, Flutter, React Native and Godot</span></a></li>
+            <li><a href="https://docs.nobodywho.ooo/"><b>Read the documentation</b><span>Guides for Python, Kotlin, Swift, Flutter, React Native and Godot</span></a></li>
             <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><b>Star the repo on GitHub</b><span>github.com/nobodywho-ooo/nobodywho</span></a></li>
           </ul>
         </div>
@@ -656,11 +595,11 @@
         <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
         <nav class="foot-links" aria-label="Footer">
           <a href="#product" data-route="product">Product</a>
-          <a href="#docs" data-route="docs">Docs</a>
+          <a href="https://docs.nobodywho.ooo/">Docs</a>
           <a href="#about" data-route="about">About</a>
           <a href="#contact" data-route="contact">Contact</a>
-          <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
+          <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
         </nav>
         <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
       </footer>
@@ -671,13 +610,13 @@
 
 
 
-<div class="subpage" id="product" aria-label="Product">
+<main class="subpage" id="product" aria-label="Product">
 
   <section class="sec sub-hero t-garnet">
     <p class="eyebrow">Enterprise</p>
     <h1>Managed local AI, for your enterprise</h1>
     <p class="lead">Run AI on your own servers or directly on your devices, with the Nobodywho inference engine at the core. Our Assurance Layer keeps models fast, accurate and up to date, and our team is with you from first setup to daily operation. <b>We make switching to local AI seamless.</b></p>
-    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write us</a></div>
+    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
   </section>
 
   <section class="sec t-paper" id="our-product">
@@ -767,404 +706,40 @@
       </article>
     </div>
     <p class="sec-sub" style="margin: clamp(40px,5vw,72px) 0 0; max-width: 46ch">Not sure which plan fits? A short call is usually enough to tell.</p>
-    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write us</a></div>
+    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
     <footer class="foot">
       <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
       <nav class="foot-links" aria-label="Footer">
         <a href="#product" data-route="product">Product</a>
-        <a href="#docs" data-route="docs">Docs</a>
+        <a href="https://docs.nobodywho.ooo/">Docs</a>
         <a href="#about" data-route="about">About</a>
         <a href="#contact" data-route="contact">Contact</a>
-        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
+        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
       </nav>
       <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
     </footer>
   </section>
 
-</div>
+</main>
 
 
-<div class="docs" id="docsroot" aria-label="Documentation">
-  <div class="docs-wrap">
-    <aside class="docs-side">
-      <div class="docs-side-in">
-        <a class="docs-home" href="#docs">Documentation</a>
-        <div class="grp"><h4>Basics</h4><ul><li><a href="#docs" data-doc="docs">Overview</a></li><li><a href="#docs-llm-basics" data-doc="docs-llm-basics">LLM Basics</a></li><li><a href="#docs-model-selection" data-doc="docs-model-selection">Model Selection</a></li></ul></div><div class="grp"><h4>Bindings</h4><ul><li><a href="#docs-python" data-doc="docs-python">Python</a></li><li><a href="#docs-kotlin" data-doc="docs-kotlin">Kotlin</a></li><li><a href="#docs-swift" data-doc="docs-swift">Swift</a></li><li><a href="#docs-react-native" data-doc="docs-react-native">React Native / Expo</a></li><li><a href="#docs-flutter" data-doc="docs-flutter">Flutter</a></li><li><a href="#docs-godot" data-doc="docs-godot">Godot</a></li></ul></div>
-        <a class="docs-ext" href="https://docs.nobodywho.ooo" target="_blank" rel="noopener">Full docs ›</a>
-        <a class="docs-ext" href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub ›</a>
-      </div>
-    </aside>
-    <main class="docs-main"><article class="doc" id="page-docs" hidden>
-<p class="eyebrow">Documentation</p>
-<h1>Run open-weight language models directly inside your software</h1>
-<p class="lead">Nobodywho is a local-first inference engine for language models, with the same API across seven languages and frameworks. Streaming chat, tool calling, structured output, embeddings, text-to-speech, speech-to-text and RAG — entirely offline, GPU-accelerated, built on llama.cpp.</p>
-<ul class="link-boxes">
-  <li><a href="https://docs.nobodywho.ooo" target="_blank" rel="noopener"><b>Full documentation</b><span>docs.nobodywho.ooo</span></a></li>
-  <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><b>Source code on GitHub</b><span>github.com/nobodywho-ooo/nobodywho</span></a></li>
-</ul>
-<p class="dim">This page is a mirror of the essentials. The complete, always-current documentation lives at <a href="https://docs.nobodywho.ooo" target="_blank" rel="noopener">docs.nobodywho.ooo</a>, and the code at <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2>What is Nobodywho's open source inference engine and SDK?</h2>
-<p>Nobodywho is a lightweight, open-source inference engine for running open-weights LLMs inside your software. We provide a simple, efficient, offline and privacy-forward way of interacting with LLMs. No infrastructure needed!</p>
-<p>In short, if you want to run an LLM, integrate it with <a href="#docs-llm-basics">tools</a>, configure its output, enable real-time streaming of tokens, create embeddings, or synthesize speech, Nobodywho makes it easy.</p>
-<p>All of this is enabled by <a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener">llama.cpp</a>, while having a nice, simple API.</p>
-<p>No need to mess around with docker containers, GPU servers, API keys, etc. We make it easy to run local models in Kotlin, Swift, Python, Flutter, React Native, Expo and Godot!</p>
-<p class="licence"><i>The runtime is free under EUPL 1.2, for proprietary and commercial projects alike. Open source and open weights mean no vendor lock-in: the capability stays with you, beyond any contract.</i></p>
-<h2>Pick your language</h2>
-<ul class="lang-grid">
-  <li><a href="#docs-python"><b>Python</b><span>pip install nobodywho</span></a></li>
-  <li><a href="#docs-kotlin"><b>Kotlin</b><span>Android &amp; desktop JVM</span></a></li>
-  <li><a href="#docs-swift"><b>Swift</b><span>iOS, macOS, visionOS, watchOS</span></a></li>
-  <li><a href="#docs-react-native"><b>React Native / Expo</b><span>npm install react-native-nobodywho</span></a></li>
-  <li><a href="#docs-flutter"><b>Flutter</b><span>flutter pub add nobodywho</span></a></li>
-  <li><a href="#docs-godot"><b>Godot</b><span>Asset Library plugin</span></a></li>
-</ul>
-<h2>New to local LLMs?</h2>
-<p>Start with the two foundational guides: <a href="#docs-llm-basics">LLM Basics</a> explains tokens, context, samplers and tools; <a href="#docs-model-selection">Model Selection</a> helps you choose a model that fits your hardware.</p>
-<h2>Running this in an organisation?</h2>
-<p>We deploy and look after Nobodywho for enterprises – on your servers or your devices.</p>
-<div class="cta-row" style="margin-top:8px"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write us</a></div>
-</article><article class="doc" id="page-docs-llm-basics" hidden>
-<p class="eyebrow">Basics</p>
-<h1>LLM Basics</h1>
-<p class="lead">Our goal with Nobodywho is to make it easy to run local LLMs. For this reason we have made it possible to use Nobodywho with minimal knowledge of how LLMs work. However you still need to know some basic concepts, so for these we provide some brief explanations. The concepts covered are tokens, context, samplers, tools, and thinking/reasoning.</p>
-<h2>Tokens</h2>
-<p>Tokens are the fundamental units a language model processes. A single token is typically a word, a word fragment or a punctuation mark: "hello" is one token, whereas "understanding" may split into "understand" and "ing". Each model has its own token vocabulary, fixed during training.</p>
-<p>The model generates text sequentially, one token at a time. That is why Nobodywho's default response streams tokens and lets you read the reply as it is produced.</p>
-<h2>Context</h2>
-<p>Context is all the text the model can see while generating a response: earlier messages in the conversation, the current user prompt and the system instructions. It works as the model's memory of the conversation; once a chat is initialised, most interaction is context manipulation.</p>
-<h3>Context size</h3>
-<p>Models have a maximum context size (context window or context length), measured in tokens and typically between 2,048 and 128,000. When it fills up you must start a new conversation, remove old messages or summarise earlier content. Nobodywho handles this automatically by removing older messages. Larger contexts allow longer conversations but reduce response speed.</p>
-<h2>CPU threads</h2>
-<p>During CPU inference, work is distributed across a thread pool. Because all threads synchronise at barriers, performance is bounded by the slowest thread: hyperthreads add no compute, and efficiency cores run slower than performance cores. Nobodywho defaults to performance cores only. On a 12-core Mac (8 P-cores, 4 E-cores), 8 threads is roughly twice as fast as all 12:</p>
-<table><thead><tr><th>threads</th><th>prompt processing</th><th>generation</th></tr></thead>
-<tbody><tr><td>8 (performance cores)</td><td>435 tok/s</td><td>90 tok/s</td></tr><tr><td>12 (all logical CPUs)</td><td>327 tok/s</td><td>48 tok/s</td></tr></tbody></table>
-<p>Adjusting this is rarely necessary, except to keep CPU free for other work or to correct a misdetected topology.</p>
-<h2>Samplers</h2>
-<p>A language model does not output text directly; it produces a probability distribution over possible next tokens. Samplers decide which token is chosen, in two steps: shifting the distribution and sampling from it.</p>
-<h3>Shifting the distribution</h3>
-<ul><li><b>Temperature</b> — higher values increase creativity, lower values increase focus.</li><li><b>Top-k / Top-p</b> — filter out unlikely tokens.</li><li><b>Penalties</b> — reduce the probability of tokens already present in the context.</li></ul>
-<p>These steps can be chained.</p>
-<h3>Sampling the distribution</h3>
-<ul><li><b>Dist</b> — random sampling.</li><li><b>Greedy</b> — always pick the highest-probability token.</li><li><b>Mirostat</b> — an advanced technique from <a href="https://arxiv.org/abs/1904.09751" target="_blank" rel="noopener">this paper</a>.</li></ul>
-<p>These cannot be chained, since each directly selects the next token. Nobodywho also supports advanced configurations such as JSON Schema following.</p>
-<h2>Speculative decoding (MTP)</h2>
-<p>Speculative decoding speeds up inference without changing the model's output: a draft proposes tokens and the target model verifies them together. Nobodywho implements MTP (Multi-Token Prediction) from Gemma 4, which uses trained "heads" rather than a separate draft model. Download the MTP heads as a companion <code>.gguf</code> (e.g. <code>mtp-gemma-4-E2B-it.gguf</code>), pass it as the draft model path when loading, and enable it when constructing the chat.</p>
-<p>Structured output (code, JSON, maths, tool calls) shows a substantial speed-up; prose shows modest to neutral gains. MTP adds roughly 5% VRAM and is off by default. Results vary by hardware — unified-memory systems may see little or negative change.</p>
-<h2>Tools</h2>
-<p>Tools (function calling) let the model request external actions instead of only generating text: database searches, calculations, API calls, custom code. You define the available tools; the model decides when to use them based on the conversation. After a tool runs, you hand its result back so the dialogue can continue.</p>
-<h2>Thinking / reasoning</h2>
-<p>Some models are trained to reason step by step before answering. Check the model's Hugging Face page for thinking support. Reasoning appears between model-specific tags in the raw output:</p>
-<pre class="code" data-lang="text"><code>&lt;think&gt;
-...reasoning steps...
-&lt;/think&gt;
-...final answer...</code></pre>
-<ul><li>Qwen3: <code>&lt;think&gt;...&lt;/think&gt;</code></li><li>Gemma 4: <code>&lt;|channel&gt;thought ...&lt;channel|&gt;</code></li><li>Ministral: <code>[THINK]…[/THINK]</code></li></ul>
-<p>Tags vary by model and template, so consult the model's chat template for parsing.</p>
-</article><article class="doc" id="page-docs-model-selection" hidden>
-<p class="eyebrow">Basics</p>
-<h1>Model Selection</h1>
-<h2>Quick start</h2>
-<p>A well-balanced ~2 GB chat model:</p>
-<pre class="code" data-lang="text"><code>huggingface:NobodyWho/Qwen_Qwen3-4B-GGUF/Qwen_Qwen3-4B-Q4_K_M.gguf</code></pre>
-<p>A smaller, faster alternative:</p>
-<pre class="code" data-lang="text"><code>huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf</code></pre>
-<p>Or pass <code>auto</code> and let Nobodywho pick a model based on available memory.</p>
-<h2>Ways to specify a model</h2>
-<ul>
-<li><b>Hugging Face paths</b> — <code>huggingface:owner/repo/filename.gguf</code> (shorthand <code>hf:</code>)</li>
-<li><b>Direct URLs</b> — any <code>https://</code> link to a hosted model</li>
-<li><b>llama.cpp format</b> — <code>owner/repo:quantization</code></li>
-<li><b>Local files</b> — an ordinary file path</li>
-</ul>
-<p>Models download once and are cached locally for offline use.</p>
-<h2>Reading a model name</h2>
-<p>A filename like <code>Qwen_Qwen3-0.6B-Q4_K_M.gguf</code> breaks down as:</p>
-<ul><li><b>Qwen</b> — organisation / developer</li><li><b>Qwen3</b> — model release</li><li><b>0.6B</b> — parameter count (600 million)</li><li><b>Q4</b> — quantisation level (bits per parameter)</li><li><b>K_M</b> — quantisation variant (S = faster, L = slower, M = balanced)</li></ul>
-<h2>Key concepts</h2>
-<p><b>Quantisation</b> reduces bits per weight to shrink the model and speed it up with minimal accuracy loss; Q4–Q5 generally works well.</p>
-<p><b>Memory estimate</b> is roughly parameter count × quantisation level: 2B @ Q8 ≈ 2 GB, 14B @ Q4 ≈ 7 GB.</p>
-<p><b>Requirements for chat</b>: the model must be instruction-tuned and carry a Jinja2 chat template in its metadata.</p>
-<h2>Resources</h2>
-<ul>
-<li><a href="https://huggingface.co/Nobodywho" target="_blank" rel="noopener">Nobodywho on Hugging Face</a> — official model collection</li>
-<li><a href="https://www.nobodywho.ai/models/" target="_blank" rel="noopener">nobodywho.ai/models</a> — model selection tool</li>
-<li><a href="https://llm-stats.com/" target="_blank" rel="noopener">LLM-Stats</a> and <a href="https://huggingface.co/spaces/OpenEvals/find-a-leaderboard" target="_blank" rel="noopener">OpenEvals</a> — benchmarks</li>
-<li><a href="https://discord.gg/qhaMc2qCYB" target="_blank" rel="noopener">Discord</a> — community support</li>
-</ul>
-</article><article class="doc" id="page-docs-python" hidden>
-<p class="eyebrow">Python</p>
-<h1>Getting started</h1>
-<p>First, install <code>nobodywho</code>:</p>
-<pre class="code" data-lang="bash"><code>pip install nobodywho</code></pre>
-<p>Or preferably:</p>
-<pre class="code" data-lang="bash"><code>uv add nobodywho</code></pre>
-<p>Next, pick a model. Nobodywho can download GGUF models directly from Hugging Face — just pass a <code>huggingface:</code> path. See <a href="#docs-model-selection">model selection</a> for recommendations.</p>
-<p>Then make a <code>Chat</code> object and call <code>.ask()</code>:</p>
-<pre class="code" data-lang="python"><code>from nobodywho import Chat
-
-chat = Chat(&#x27;huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf&#x27;)
-
-response = chat.ask(&#x27;Is water wet?&#x27;)
-
-# print each token as it is generated
-for token in response:
-    print(token, end=&quot;&quot;, flush=True)
-
-# ...or get the entire response as a single string
-full_response = response.completed()
-
-print(full_response)</code></pre>
-<p>This is a super simple example, but we believe that examples which do simple things should be simple.</p>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/python/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/python/chat" target="_blank" rel="noopener">Chat</a></li><li><a href="https://docs.nobodywho.ooo/python/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/python/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/python/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/python/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/python/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/python/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/python/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li><li><a href="https://docs.nobodywho.ooo/python/streaming-and-async-api" target="_blank" rel="noopener">Streaming & Async API</a></li><li><a href="https://docs.nobodywho.ooo/python/logging-and-troubleshooting" target="_blank" rel="noopener">Logging and Troubleshooting</a></li></ul></section>
-</article><article class="doc" id="page-docs-kotlin" hidden>
-<p class="eyebrow">Kotlin</p>
-<h1>Getting started</h1>
-<p>First, add Nobodywho to your <code>build.gradle.kts</code>:</p>
-<pre class="code" data-lang="kotlin"><code>// Android
-implementation(&quot;ai.nobodywho:nobodywho-android:2.2.0&quot;)
-
-// Desktop JVM (Linux, macOS, Windows)
-implementation(&quot;ai.nobodywho:nobodywho:2.2.0&quot;)</code></pre>
-<p>Next, pick a model. Nobodywho can download GGUF models directly from Hugging Face — just pass an <code>hf://</code> path. See <a href="#docs-model-selection">model selection</a> for recommendations.</p>
-<p>Then create a <code>Chat</code> and call <code>.ask</code>:</p>
-<pre class="code" data-lang="kotlin"><code>import ai.nobodywho.Chat
-import kotlinx.coroutines.runBlocking
-
-fun main() = runBlocking {
-    val chat = Chat.fromPath(
-        modelPath = &quot;hf://NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf&quot;
-    )
-
-    // stream tokens as they are generated
-    chat.ask(&quot;Is water wet?&quot;).asFlow().collect { token -&gt;
-        print(token)
-    }
-
-    // ...or get the entire response as a single string
-    val response = chat.ask(&quot;Is water wet?&quot;).completed()
-    println(response)
-}</code></pre>
-<p>On Android, use <code>lifecycleScope</code> or <code>viewModelScope</code> instead of <code>runBlocking</code>.</p>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/kotlin/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/chat" target="_blank" rel="noopener">Chat</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/kotlin/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li></ul></section>
-</article><article class="doc" id="page-docs-swift" hidden>
-<p class="eyebrow">Swift</p>
-<h1>Getting started</h1>
-<p>Add Nobodywho with Swift Package Manager. In Xcode, go to <b>File → Add Package Dependencies</b> and enter:</p>
-<pre class="code" data-lang="text"><code>https://github.com/nobodywho-ooo/nobodywho-swift.git</code></pre>
-<p>Or add it to your <code>Package.swift</code>:</p>
-<pre class="code" data-lang="swift"><code>dependencies: [
-    .package(url: &quot;https://github.com/nobodywho-ooo/nobodywho-swift.git&quot;, from: &quot;2.1.0&quot;)
-]</code></pre>
-<p>Models can be loaded from a local file, a Hugging Face repository using <code>hf://</code>, or any <code>https://</code> URL. Read more about <a href="#docs-model-selection">model selection</a>.</p>
-<pre class="code" data-lang="swift"><code>import NobodyWho
-
-// From a Hugging Face repository
-let chat = try await Chat.fromPath(
-    modelPath: &quot;hf://NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf&quot;
-)
-
-// From an HTTPS URL
-let chat = try await Chat.fromPath(
-    modelPath: &quot;https://huggingface.co/NobodyWho/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf&quot;
-)
-
-// From a local file
-let chat = try await Chat.fromPath(modelPath: &quot;/path/to/model.gguf&quot;)</code></pre>
-<p>Once you have a <code>Chat</code>, call <code>.ask</code> to get a response:</p>
-<pre class="code" data-lang="swift"><code>let response = try await chat.ask(&quot;Is water wet?&quot;).completed()
-print(response) // Yes, indeed, water is wet!</code></pre>
-<h2>Platform requirements</h2>
-<ul>
-<li><b>iOS</b> — iPhone 11 or newer with at least 4 GB RAM. iOS 15+.</li>
-<li><b>macOS</b> — Apple Silicon or Intel Mac with at least 8 GB RAM. macOS 13+.</li>
-<li><b>visionOS</b> — Apple Vision Pro. visionOS 1.0+.</li>
-<li><b>watchOS</b> — watchOS 10+. CPU-only (Metal is not available); only very small models are practical.</li>
-</ul>
-<p>GPU acceleration is enabled by default using Metal on all Apple platforms.</p>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/swift/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/swift/chat" target="_blank" rel="noopener">Chat</a></li><li><a href="https://docs.nobodywho.ooo/swift/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/swift/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/swift/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/swift/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/swift/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/swift/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/swift/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li></ul></section>
-</article><article class="doc" id="page-docs-react-native" hidden>
-<p class="eyebrow">React Native / Expo</p>
-<h1>Getting started</h1>
-<h2>Installation</h2>
-<pre class="code" data-lang="bash"><code># React Native
-npm install react-native-nobodywho
-
-# Expo
-npx expo install react-native-nobodywho</code></pre>
-<h2>Setup</h2>
-<h3>React Native</h3>
-<p>No additional initialisation step is required — the native module is loaded automatically when you first import from the package.</p>
-<h3>Expo</h3>
-<p>Nobodywho contains native code and cannot run in Expo Go; you need a development build.</p>
-<p><b>CNG projects</b> — for the first build, run the platform command:</p>
-<pre class="code" data-lang="bash"><code>npx expo run:ios
-# or
-npx expo run:android</code></pre>
-<p>After upgrading Nobodywho, regenerate the native folders:</p>
-<pre class="code" data-lang="bash"><code>npx expo prebuild --clean
-npx expo run:ios</code></pre>
-<p><b>Bare projects</b> — native folders are committed; autolinking registers the module on the next <code>expo run:*</code> build.</p>
-<h2>First chat</h2>
-<pre class="code" data-lang="typescript"><code>import { Chat } from &quot;react-native-nobodywho&quot;;
-
-const chat = await Chat.fromPath({
-  modelPath: &quot;huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf&quot;,
-});
-
-const response = await chat.ask(&quot;Is water wet?&quot;).completed();
-console.log(response);</code></pre>
-<h2>Requirements</h2>
-<p>For x86_64 Android emulators set <code>minSdkVersion</code> to 31 or higher; ARM64 devices support any <code>minSdkVersion</code>.</p>
-<ul><li><b>iOS</b> — iPhone 11+ with 4 GB RAM minimum</li><li><b>Android</b> — Snapdragon 855 / Adreno 640 with 6 GB RAM or better</li></ul>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/react-native/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/react-native/chat" target="_blank" rel="noopener">Chat</a></li><li><a href="https://docs.nobodywho.ooo/react-native/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/react-native/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/react-native/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/react-native/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/react-native/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/react-native/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/react-native/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li></ul></section>
-</article><article class="doc" id="page-docs-flutter" hidden>
-<p class="eyebrow">Flutter</p>
-<h1>Getting started</h1>
-<p>First, install <code>nobodywho</code>:</p>
-<pre class="code" data-lang="bash"><code>flutter pub add nobodywho</code></pre>
-<p>Import it under the <code>nobodywho</code> namespace, which avoids clashes with generic names like <code>Model</code> and <code>Chat</code>:</p>
-<pre class="code" data-lang="dart"><code>import &#x27;package:nobodywho/nobodywho.dart&#x27; as nobodywho;</code></pre>
-<p>Initialise the package exactly once, as early as possible:</p>
-<pre class="code" data-lang="dart"><code>await nobodywho.NobodyWho.init();</code></pre>
-<p>Any Nobodywho call before <code>.init()</code> results in an error — and so does a second call to <code>.init()</code>.</p>
-<p>Select a model and create a <code>Chat</code>:</p>
-<pre class="code" data-lang="dart"><code>final chat = await nobodywho.Chat.fromPath(
-  modelPath: &#x27;huggingface:NobodyWho/Qwen_Qwen3-0.6B-GGUF/Qwen_Qwen3-0.6B-Q4_K_M.gguf&#x27;,
-);
-
-final msg = await chat.ask(&#x27;Is water wet?&#x27;).completed();
-
-print(msg); // Yes, indeed, water is wet!</code></pre>
-<h2>Minimum recommended specs</h2>
-<ul><li><b>iOS</b> — iPhone 11 or newer with at least 4 GB RAM</li><li><b>Android</b> — Snapdragon 855 / Adreno 640 / 6 GB RAM or better</li></ul>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/flutter/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/flutter/chat" target="_blank" rel="noopener">Chat</a></li><li><a href="https://docs.nobodywho.ooo/flutter/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/flutter/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/flutter/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/flutter/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/flutter/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/flutter/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/flutter/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li></ul></section>
-</article><article class="doc" id="page-docs-godot" hidden>
-<p class="eyebrow">Godot</p>
-<h1>Installation &amp; getting started</h1>
-<h2>Via Asset Library</h2>
-<ol>
-<li>Open Godot 4.5 (or any newer 4.x release) and switch to the <b>Asset Library</b> tab.</li>
-<li>Search for <b>Nobodywho</b> and select the entry.</li>
-<li>Click <b>Download</b>, tick <b>Ignore asset root</b>, then <b>Install</b>.</li>
-<li>Godot puts the plugin in <code>res://addons/nobodywho</code>. Open <i>Create Node</i> and you should see <code>NobodyWhoChat</code>. If it is missing, restart Godot.</li>
-</ol>
-<h2>Via GitHub</h2>
-<ol>
-<li>Download the latest ZIP from the <a href="https://github.com/nobodywho-ooo/nobodywho/releases" target="_blank" rel="noopener">GitHub releases</a>.</li>
-<li>In Godot, open <b>AssetLib ▸ Import</b> and pick the ZIP.</li>
-<li>Tick <b>Ignore asset root</b> and finish the import.</li>
-</ol>
-<h2>Key terminology</h2>
-<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
-<tr><td>Model (GGUF)</td><td>A <code>*.gguf</code> file containing the model weights</td></tr>
-<tr><td>System prompt</td><td>Text establishing the ground rules for the model's behaviour</td></tr>
-<tr><td>Token</td><td>Smallest unit of text emitted by the model</td></tr>
-<tr><td>Chat</td><td>Node managing context, user input and conversation state</td></tr>
-<tr><td>Context</td><td>Message history and metadata sent to the model each turn</td></tr>
-<tr><td>Worker</td><td>Background task handling model readiness and communication</td></tr>
-</tbody></table>
-<h2>Your first chat</h2>
-<p>Download a model — "Qwen3 0.6B Q4_K_M" is a lightweight, fast starting point. Add a <code>NobodyWhoModel</code> node and set its <code>model_path</code> (local path, Hugging Face reference or HTTPS URL). Then add a <code>NobodyWhoChat</code> node with a script:</p>
-<pre class="code" data-lang="gdscript"><code>extends NobodyWhoChat
-
-func _ready():
-    # configure the node (feel free to do this in the UI)
-    self.system_prompt = &quot;You are an evil wizard.&quot;
-    self.model_node = get_node(&quot;../ChatModel&quot;)
-
-    # connect signals to signal handlers
-    self.response_updated.connect(_on_response_updated)
-    self.response_finished.connect(_on_response_finished)
-
-    # Start the worker. Not required, but recommended early so the model
-    # is ready when the user prompts the first time. ask() calls it too.
-    self.start_worker()
-
-    self.ask(&quot;How are you?&quot;)
-
-func _on_response_updated(token):
-    # this will print every time a new token is generated
-    print(token)
-
-func _on_response_finished(response):
-    # this will print when the entire response is finished
-    print(response)</code></pre>
-<p>You can also call <code>ask()</code> straight away — prompts issued before the worker is ready are queued and dispatched as soon as loading completes.</p>
-<pre class="code" data-lang="gdscript"><code>chat.worker_started.connect(func():
-    print(&quot;Ready to chat!&quot;)
-)
-chat.worker_failed.connect(func(err):
-    push_error(&quot;Model load failed: &quot; + err)
-)
-chat.start_worker()</code></pre>
-<p>When you run the scene, tokens should appear in the console as the model generates its response.</p>
-<section class="more-in"><h3>More in this section</h3><p class="dim">These guides open on docs.nobodywho.ooo.</p><ul><li><a href="https://docs.nobodywho.ooo/godot/downloading-models" target="_blank" rel="noopener">Downloading models</a></li><li><a href="https://docs.nobodywho.ooo/godot/chat" target="_blank" rel="noopener">Simple Chat</a></li><li><a href="https://docs.nobodywho.ooo/godot/structured-output" target="_blank" rel="noopener">Structured Output</a></li><li><a href="https://docs.nobodywho.ooo/godot/tool-calling" target="_blank" rel="noopener">Tool Calling</a></li><li><a href="https://docs.nobodywho.ooo/godot/vision" target="_blank" rel="noopener">Multimodal Models</a></li><li><a href="https://docs.nobodywho.ooo/godot/speech-to-text" target="_blank" rel="noopener">Speech to Text</a></li><li><a href="https://docs.nobodywho.ooo/godot/text-to-speech" target="_blank" rel="noopener">Text to Speech</a></li><li><a href="https://docs.nobodywho.ooo/godot/voice-activity-detection" target="_blank" rel="noopener">Voice Activity Detection</a></li><li><a href="https://docs.nobodywho.ooo/godot/sampling" target="_blank" rel="noopener">Sampling</a></li><li><a href="https://docs.nobodywho.ooo/godot/embeddings-and-rag" target="_blank" rel="noopener">Embeddings & RAG</a></li><li><a href="https://docs.nobodywho.ooo/godot/faq" target="_blank" rel="noopener">FAQ</a></li></ul></section>
-</article></main>
-  </div>
-</div>
-
-
-<div class="about" id="about-page" aria-label="About">
+<main class="about" id="about-page" aria-label="About">
 
   <section class="sec sub-hero t-garnet">
     <p class="eyebrow">About</p>
     <h1>Local AI, built in Europe</h1>
     <div class="cols" style="margin-top: clamp(28px, 4vw, 56px)">
-      <p>Nobodywho is a Copenhagen-based company building local AI infrastructure: an open-source inference engine that runs large language models directly on devices and on organisations' own servers, so AI can be used without sending data outside the infrastructure you control.</p>
-      <p>The engine is free under the EUPL 1.2 licence and used across Kotlin, Swift, Python, Flutter, React Native, Expo and Godot. For organisations that want it deployed and kept in shape, we offer managed Edge and On-Prem deployments with an Assurance Layer of onboarding, model selection, monitoring, optimisation and support.</p>
+      <p>Nobodywho is a Copenhagen-based company building open-source local AI. Our inference engine runs models on devices and on organisations' own servers, keeping data inside the infrastructure they control.</p>
+      <p>For teams that want help deploying and operating it, we offer managed Edge and On-Prem AI with onboarding, model selection, monitoring and support.</p>
     </div>
-    <ul class="link-boxes about-links">
-      <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><b>GitHub</b><span>github.com/nobodywho-ooo/nobodywho</span></a></li>
-      <li><a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><b>LinkedIn</b><span>linkedin.com/company/nobodywho</span></a></li>
-    </ul>
-  </section>
-
-  <section class="sec t-paper" id="blog">
-    <h2 class="sec-title">Blog posts</h2>
-    <p class="sec-sub">Notes from the team – releases, comparisons and the technical details of running models on small hardware. Posts open on nobodywho.ai.</p>
-    <div class="posts">
-      <a class="post" href="/posts/jev-in-25-lines/">
-        <div class="meta"><b>Technical</b><span>Sep 22, 2026</span></div>
-        <div><h3>Jev in 25 lines of Python</h3><p>Everyone is talking about Jev – here it is in 25 lines of Python.</p></div>
-      </a>
-      <a class="post" href="/posts/inference-oom/">
-        <div class="meta"><b>Technical</b><span>Sep 17, 2026</span></div>
-        <div><h3>LLM inference vs. the OOM killer</h3><p>Mobile memory warnings and handling them in Rust.</p></div>
-      </a>
-      <a class="post" href="/posts/nobodywho-vs-cactus/">
-        <div class="meta"><b>Comparison</b><span>Sep 16, 2026</span></div>
-        <div><h3>Nobodywho vs Cactus: On-Device Inference Engine Comparison</h3><p>Engine design, model format, hardware, platforms, cloud and licensing, side by side.</p></div>
-      </a>
-      <a class="post" href="/posts/announcing-expo-support/">
-        <div class="meta"><b>Release</b><span>Aug 27, 2026</span></div>
-        <div><h3>Announcing Expo support for Nobodywho</h3><p>Nobodywho now works with Expo – run on-device LLMs in your Expo apps.</p></div>
-      </a>
-      <a class="post" href="/posts/announcing-vad/">
-        <div class="meta"><b>Feature release</b><span>Aug 25, 2026</span></div>
-        <div><h3>Announcing Voice Activity Detection</h3><p>Detect when someone starts and stops speaking, on-device.</p></div>
-      </a>
-      <a class="post" href="/posts/threadcounts-for-cpu-inference/">
-        <div class="meta"><b>Technical</b><span>Aug 20, 2026</span></div>
-        <div><h3>Use fewer threads for CPU inference</h3><p>How many worker threads should you use for CPU inference? Not all of them.</p></div>
-      </a>
-      <a class="post" href="/posts/announcing-stt-tts/">
-        <div class="meta"><b>Feature release</b><span>Aug 5, 2026</span></div>
-        <div><h3>Announcing Speech To Text &amp; Text To Speech</h3><p>STT and TTS in Nobodywho – easily generate and transcribe audio.</p></div>
-      </a>
-      <a class="post" href="/posts/nobodywho-chat-app/">
-        <div class="meta"><b>Apps</b><span>Aug 3, 2026</span></div>
-        <div><h3>Nobodywho Chat app</h3><p>The Nobodywho Chat app is now available on mobile.</p></div>
-      </a>
-      <a class="post" href="/posts/apple-watch-vision-pro-apps/">
-        <div class="meta"><b>Apps</b><span>Jun 4, 2026</span></div>
-        <div><h3>Apple Watch &amp; Vision Pro apps</h3><p>Swift bindings and the development challenges of Apple Watch and Vision Pro.</p></div>
-      </a>
-      <a class="post" href="/posts/announcing-kotlin-bindings/">
-        <div class="meta"><b>Release</b><span>Jun 3, 2026</span></div>
-        <div><h3>Announcing Kotlin bindings for Nobodywho</h3><p>Run LLMs fully on-device in your Android and JVM apps.</p></div>
-      </a>
+    <div class="cta-row about-actions" id="about-actions">
+      <a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener"><span class="social-icon icon-calendar-event" aria-hidden="true"></span>Book a meeting</a>
+      <a class="btn ghost" href="mailto:info@nobodywho.ooo"><span class="social-icon icon-mail" aria-hidden="true"></span>Email us</a>
+      <a class="btn ghost" href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
     </div>
+    <p class="about-location"><span class="k">Location</span>Copenhagen, Denmark</p>
   </section>
 
   <section class="sec t-garnet-deep" id="faq">
@@ -1179,272 +754,54 @@ chat.start_worker()</code></pre>
         <details><summary>Does the EU AI Act require on-premises deployment?</summary><p>No. The EU AI Act does not legally mandate on-premises deployment. Nobodywho recommends it for control and simplicity, not as a compliance requirement.</p></details>
         <details><summary>Where is Nobodywho based?</summary><p>Nobodywho is based in Copenhagen, Denmark, and operates within the EU.</p></details>
         <details><summary>What's the difference between Edge and Prem?</summary><p>Edge runs on-device, optimised for specific hardware, and is priced per device. Prem is a shared on-premises deployment for your organisation, priced per GPU server.</p></details>
-        <details><summary>How is Nobodywho's enterprise solution priced?</summary><p>Edge, Prem, and Assurance are all priced on request, based on your deployment. <a href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a> to get a quote.</p></details>
+        <details><summary>How is Nobodywho's enterprise solution priced?</summary><p>Edge, Prem, and Assurance are all priced on request, based on your deployment.</p></details>
         <details><summary>What does the Assurance Layer include?</summary><p>Guided onboarding, 24/7 support, model selection and optimisation, and bespoke tooling, layered on top of either Edge or Prem.</p></details>
-        <details><summary>Can I try Nobodywho without talking to sales?</summary><p>Yes. The open-source SDK is free to run yourself, on-edge or on-prem, with no enterprise engagement required. Start with the <a href="#docs">docs</a>.</p></details>
+        <details><summary>Can I try Nobodywho without talking to sales?</summary><p>Yes. The open-source SDK is free to run yourself, on-edge or on-prem, with no enterprise engagement required. Start with the <a href="https://docs.nobodywho.ooo/">docs</a>.</p></details>
       </div>
     </div>
-    <p class="sec-sub" style="margin: clamp(40px,5vw,72px) 0 0; max-width: 46ch">Something we did not answer? We are happy to talk.</p>
-    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write us</a></div>
     <footer class="foot">
       <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
       <nav class="foot-links" aria-label="Footer">
         <a href="#product" data-route="product">Product</a>
-        <a href="#docs" data-route="docs">Docs</a>
+        <a href="https://docs.nobodywho.ooo/">Docs</a>
         <a href="#about" data-route="about">About</a>
         <a href="#contact" data-route="contact">Contact</a>
-        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
+        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
       </nav>
       <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
     </footer>
   </section>
 
-</div>
+</main>
 
-
-<div class="contact" id="contact-page" aria-label="Contact">
-
-  <section class="sec sub-hero t-garnet">
-    <p class="eyebrow">Contact</p>
-    <h1>Let's talk about local AI</h1>
-    <p class="lead">Tell us what you are building and where it needs to run. We usually reply within a working day.</p>
-  </section>
-
-  <section class="sec t-paper">
-    <div class="cgrid">
-      <form class="cform" id="cform" novalidate>
-        <div class="fields" style="display:grid; gap:20px">
-          <div class="row2">
-            <label>Name<input type="text" id="c-name" name="name" placeholder="Jane Doe" autocomplete="name" required></label>
-            <label>Work email<input type="email" id="c-email" name="email" placeholder="jane@company.com" autocomplete="email" required></label>
-          </div>
-          <label>Company<input type="text" id="c-company" name="company" placeholder="Company name" autocomplete="organization"></label>
-          <label>What are you exploring?
-            <select id="c-topic" name="topic">
-              <option value="">Choose one</option>
-              <option>Edge AI – on devices</option>
-              <option>On-Prem AI – on our servers</option>
-              <option>Assurance Layer</option>
-              <option>Open-source SDK</option>
-              <option>Not sure yet</option>
-            </select>
-          </label>
-          <label>Message<textarea id="c-msg" name="message" placeholder="Tell us a bit about what you're building."></textarea></label>
-          <button class="btn" type="submit">Send message</button>
-          <p class="dim" style="margin:0; font-size:14px; color:var(--sec-muted)">Prefer email? Write to <b style="font-weight:500; color:var(--sec-ink)">info@nobodywho.ooo</b>.</p>
-        </div>
-        <div class="sent" role="status">Thank you – your message is on its way. We'll reply to <b id="c-sent-to"></b> shortly.</div>
-      </form>
-
-      <aside class="cside">
-        <div class="ccard">
-          <h3>Want to get things moving?</h3>
-          <p>Book an intro call directly, no form needed.</p>
-          <a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener" id="book-link">Book a meeting</a>
-        </div>
-        <ul class="cinfo">
-          <li><span class="k">Email</span><a href="mailto:info@nobodywho.ooo">info@nobodywho.ooo</a></li>
-          <li><span class="k">Location</span><span class="v">Copenhagen, Denmark</span></li>
-          <li><span class="k">GitHub</span><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">github.com/nobodywho-ooo/nobodywho</a></li>
-          <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener">linkedin.com/company/nobodywho</a></li>
-        </ul>
-      </aside>
-    </div>
-    <footer class="foot">
-      <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
-      <nav class="foot-links" aria-label="Footer">
-        <a href="#product" data-route="product">Product</a>
-        <a href="#docs" data-route="docs">Docs</a>
-        <a href="#about" data-route="about">About</a>
-        <a href="#contact" data-route="contact">Contact</a>
-        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener">LinkedIn</a>
-      </nav>
-      <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
-    </footer>
-  </section>
-
-</div>
 
 <div class="drawer" id="drawer" hidden>
   <ul>
-    <li><a href="#top" data-route="home" aria-current="page">Local AI</a></li>
     <li><a href="#product" data-route="product">Product</a></li>
-    <li><a href="#docs" data-route="docs">Docs</a></li>
+    <li><a href="https://docs.nobodywho.ooo/">Docs</a></li>
+    <li><a href="/posts/">Blog</a></li>
     <li><a href="#about" data-route="about">About</a></li>
-    <li><a href="#contact" data-route="contact">Contact</a></li>
-    <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub<span class="github-stars" data-github-stars hidden aria-hidden="true"><span class="social-icon icon-star"></span><span data-star-count></span></span></a></li>
+    <li><a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a></li>
   </ul>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-(function () {
-  const canvas = document.getElementById('c');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, premultipliedAlpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.82;
-  renderer.physicallyCorrectLights = true;
-
-  const scene = new THREE.Scene();
-  renderer.setClearColor(0x000000, 0);
-
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-
-  // --- Procedural environment: a warm studio with one broad soft light band -----
-  function makeEnv() {
-    const w = 1024, h = 512;
-    const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-    const g = cv.getContext('2d');
-    const sky = g.createLinearGradient(0, 0, 0, h);
-    sky.addColorStop(0.00, '#22080a');
-    sky.addColorStop(0.30, '#7a2412');
-    sky.addColorStop(0.50, '#d98a2c');
-    sky.addColorStop(0.62, '#8a2210');
-    sky.addColorStop(1.00, '#140405');
-    g.fillStyle = sky; g.fillRect(0, 0, w, h);
-    // key softbox, upper right
-    let sb = g.createRadialGradient(w * 0.68, h * 0.30, 10, w * 0.68, h * 0.30, 260);
-    sb.addColorStop(0, 'rgba(255,232,180,1)');
-    sb.addColorStop(0.35, 'rgba(255,196,110,0.9)');
-    sb.addColorStop(1, 'rgba(240,140,60,0)');
-    g.fillStyle = sb; g.fillRect(0, 0, w, h);
-    // long thin strip light (gives the crisp edge highlight)
-    g.fillStyle = 'rgba(255,224,160,0.95)';
-    g.fillRect(w * 0.15, h * 0.18, w * 0.55, 14);
-    // cool-ish fill on the far left, low
-    sb = g.createRadialGradient(w * 0.12, h * 0.70, 10, w * 0.12, h * 0.70, 300);
-    sb.addColorStop(0, 'rgba(200,50,40,0.7)');
-    sb.addColorStop(1, 'rgba(200,50,40,0)');
-    g.fillStyle = sb; g.fillRect(0, 0, w, h);
-    const tex = new THREE.CanvasTexture(cv);
-    tex.mapping = THREE.EquirectangularReflectionMapping;
-    tex.encoding = THREE.sRGBEncoding;
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    pmrem.compileEquirectangularShader();
-    const env = pmrem.fromEquirectangular(tex).texture;
-    tex.dispose(); pmrem.dispose();
-    return env;
-  }
-  scene.environment = makeEnv();
-
-  // --- Lights: soft overhead key, warm hemisphere, faint red rim -----------------
-  const key = new THREE.DirectionalLight('#ffc774', 1.9);
-  key.position.set(1.5, 8, 2.5);
-  scene.add(key);
-  const rim = new THREE.DirectionalLight('#d8402a', 1.0);
-  rim.position.set(-6, 1, -4);
-  scene.add(rim);
-  scene.add(new THREE.HemisphereLight('#ffa848', '#2a0806', 0.75));
-  scene.add(new THREE.AmbientLight('#6a1410', 0.5));
-
-  // --- Matte burnt-orange material: colour comes from a vertical vertex gradient
-  //     (bright amber on the top faces, orange at the top of the walls, fading to
-  //     dark burnt umber at the foot), lit softly from above.
-  const copper = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#ffffff'),
-    vertexColors: true,
-    metalness: 0.12,
-    roughness: 0.78,
-    envMapIntensity: 0.45,
-  });
-  const C_TOP   = new THREE.Color('#f2a02e');  // amber top edge
-  const C_HIGH  = new THREE.Color('#e27426');  // upper wall
-  const C_MID   = new THREE.Color('#b44618');  // mid wall
-  const C_LOW   = new THREE.Color('#5a1a08');  // foot, burnt umber
-  function paintGradient(geo, height) {
-    const pos = geo.attributes.position, nrm = geo.attributes.normal;
-    const col = new Float32Array(pos.count * 3);
-    const c = new THREE.Color();
-    for (let i = 0; i < pos.count; i++) {
-      const y = pos.getY(i), ny = nrm.getY(i);
-      const t = THREE.MathUtils.clamp((y + height / 2) / height, 0, 1); // 0 foot → 1 top
-      if (ny > 0.85) c.copy(C_TOP);
-      else if (t > 0.6) c.copy(C_MID).lerp(C_HIGH, (t - 0.6) / 0.4);
-      else c.copy(C_LOW).lerp(C_MID, Math.pow(t / 0.6, 0.8));
-      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
-    }
-    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-  }
-
-  // --- Ring segments: arc slabs with rectangular section, cut radially at the ends
-  function arcSlab(rIn, rOut, spanDeg, height) {
-    const span = THREE.MathUtils.degToRad(spanDeg);
-    const a0 = -span / 2, a1 = span / 2;
-    const shape = new THREE.Shape();
-    shape.absarc(0, 0, rOut, a0, a1, false);
-    shape.absarc(0, 0, rIn, a1, a0, true);
-    shape.closePath();
-    const geo = new THREE.ExtrudeGeometry(shape, {
-      depth: height, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 2, curveSegments: 96,
-    });
-    geo.rotateX(-Math.PI / 2);          // extrusion now runs along +Y
-    geo.translate(0, -height / 2, 0);   // centred vertically
-    geo.computeVertexNormals();
-    paintGradient(geo, height);
-    return geo;
-  }
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  // inner → outer: tighter arc, wider sweep as radius grows; staggered starting angles
-  const specs = [
-    { rIn: 1.55, rOut: 1.95, span: 84,  h: 1.55, start: 0.70 },
-    { rIn: 2.45, rOut: 2.85, span: 104, h: 1.55, start: 0.42 },
-    { rIn: 3.35, rOut: 3.75, span: 128, h: 1.55, start: 0.12 },
-  ];
-  const rings = specs.map(s => {
-    const m = new THREE.Mesh(arcSlab(s.rIn, s.rOut, s.span, s.h), copper);
-    m.rotation.y = s.start;
-    group.add(m);
-    return { mesh: m, base: s.start };
-  });
-
-  // --- Camera framing: low, close, looking across the arcs ---------------------
-  group.position.set(-0.9, 0, 1.6);
-  const camBase = new THREE.Vector3(0.9, 1.75, 4.3);
-  const target = new THREE.Vector3(-0.6, 0.05, 0.9);
-
-  function resize() {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio())) {
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-  }
-
-  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const start = performance.now();
-
-  function frame(now) {
-    resize();
-    const t = reduced ? 0 : (now - start) / 1000;
-
-    // slow, continuous revolve — each arc at its own pace so the composition keeps changing
-    rings[0].mesh.rotation.y = rings[0].base + t * 0.085;
-    rings[1].mesh.rotation.y = rings[1].base + t * 0.060;
-    rings[2].mesh.rotation.y = rings[2].base + t * 0.045;
-    group.rotation.y = Math.sin(t * 0.09) * 0.10;
-    group.rotation.z = Math.sin(t * 0.07 + 1.0) * 0.035;
-
-    // gentle camera drift / breathing
-    camera.position.set(
-      camBase.x + Math.sin(t * 0.13) * 0.25,
-      camBase.y + Math.sin(t * 0.11 + 0.7) * 0.12,
-      camBase.z + Math.cos(t * 0.10) * 0.25
-    );
-    camera.lookAt(target);
-
-    renderer.render(scene, camera);
-    if (!reduced) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-  window.addEventListener('resize', resize);
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const start = () => {
+    const library = document.createElement('script');
+    library.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    library.onload = () => {
+      const scene = document.createElement('script');
+      scene.src = '/assets/js/hero-scene.js';
+      document.body.append(scene);
+    };
+    document.body.append(library);
+  };
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+  else window.addEventListener('load', start, { once: true });
 })();
 </script>
 <script>
@@ -1459,7 +816,7 @@ chat.start_worker()</code></pre>
 <script>
   (function () {
     const lines = Array.from(document.querySelectorAll('#rotor > span'));
-    if (lines.length < 2) return;
+    if (lines.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     // Timing: ~1.1 s for the swap (0.35 s out, 0.4 s pause, 0.7 s in) + ~2.8 s fully readable.
     // Short 2–3 word lines are read in well under a second; ~2.5–3 s of dwell is the usual
     // comfortable rate for rotating hero text — long enough to register, short enough to
@@ -1480,22 +837,42 @@ chat.start_worker()</code></pre>
 </script>
 <script>
   (function () {
-    const nav = document.querySelector('.nav'), tag = document.getElementById('tagline');
-    const root = document.documentElement;
+    const nav = document.querySelector('.nav'), tag = document.getElementById('tagline'), details = document.querySelector('.hero-details');
     function onScroll() {
       const y = window.scrollY || 0, vh = window.innerHeight || 1;
-      nav.classList.toggle('scrolled', document.body.classList.contains('on-product') || document.body.classList.contains('on-docs') || document.body.classList.contains('on-about') || document.body.classList.contains('on-contact') || y > vh - 120);
+      nav.classList.toggle('scrolled', document.body.classList.contains('on-product') || document.body.classList.contains('on-about') || y > vh - 120);
       const f = Math.max(0, 1 - y / (vh * 0.45));
       tag.style.opacity = f; tag.style.transform = 'translateY(' + (y * 0.15) + 'px)';
       tag.style.visibility = f <= 0 ? 'hidden' : 'visible';
+      details.style.opacity = f; details.style.visibility = f <= 0 ? 'hidden' : 'visible';
     }
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+    const network = document.getElementById('display');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      new IntersectionObserver(([entry]) => network.classList.toggle('is-active', entry.isIntersecting)).observe(network);
+    }
+
     // "why open source" tabs
-    const tabs = document.querySelectorAll('.values [role="tab"]');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(o => { o.setAttribute('aria-selected', String(o === t)); document.getElementById(o.getAttribute('aria-controls')).hidden = o !== t; });
-    }));
+    const tabs = [...document.querySelectorAll('.values [role="tab"]')];
+    function selectTab(tab) {
+      tabs.forEach(other => {
+        const selected = other === tab;
+        other.setAttribute('aria-selected', String(selected));
+        other.tabIndex = selected ? 0 : -1;
+        document.getElementById(other.getAttribute('aria-controls')).hidden = !selected;
+      });
+    }
+    tabs.forEach((tab, index) => {
+      tab.tabIndex = index === 0 ? 0 : -1;
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        selectTab(tabs[next]); tabs[next].focus();
+      });
+    });
   })();
 </script>
 
@@ -1503,34 +880,25 @@ chat.start_worker()</code></pre>
   (function () {
     const nav = document.querySelector('.nav');
     const links = document.querySelectorAll('.menu a, .drawer a');
-    const docPages = Array.from(document.querySelectorAll('.doc'));
-    const docLinks = document.querySelectorAll('.docs-side a[data-doc]');
     function route() {
       const h = location.hash || '#top';
       const id = h.slice(1);
+      if (id === 'docs' || id.startsWith('docs-')) { location.replace('https://docs.nobodywho.ooo/'); return; }
+      if (id === 'blog') { location.replace('/posts/'); return; }
       const onProduct = id === 'product' || id.startsWith('product-');
-      const onDocs = id === 'docs' || id.startsWith('docs-');
-      const onAbout = h === '#about';
-      const onContact = h === '#contact';
+      const onAbout = h === '#about' || h === '#contact';
       document.body.classList.toggle('on-product', onProduct);
       document.body.classList.toggle('on-about', onAbout);
-      document.body.classList.toggle('on-contact', onContact);
-      document.body.classList.toggle('on-docs', onDocs);
       links.forEach(a => {
         const r = a.dataset.route;
         if (!r) return;
-        const cur = (r === 'product' && onProduct) || (r === 'docs' && onDocs) || (r === 'about' && onAbout) || (r === 'contact' && onContact) || (r === 'home' && !onProduct && !onDocs && !onAbout && !onContact);
+        const cur = (r === 'product' && onProduct) || (r === 'about' && onAbout) || (r === 'home' && !onProduct && !onAbout);
         if (cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
       });
-      if (onDocs) {
-        const want = document.getElementById('page-' + id) ? id : 'docs';
-        docPages.forEach(d => { d.hidden = d.id !== 'page-' + want; });
-        docLinks.forEach(a => { if (a.dataset.doc === want) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-        window.scrollTo(0, 0); nav.classList.add('scrolled');
-      } else if (onProduct || onAbout || onContact) {
+      if (onProduct || onAbout) {
         nav.classList.add('scrolled');
-        const target = onProduct && id !== 'product' ? document.getElementById(id) : null;
-        if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+        const target = onProduct && id !== 'product' ? document.getElementById(id) : id === 'contact' ? document.getElementById('about-actions') : null;
+        if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }));
         else window.scrollTo(0, 0);
       } else {
         const el = id && id !== 'top' ? document.getElementById(id) : null;
@@ -1543,17 +911,6 @@ chat.start_worker()</code></pre>
     route();
   })();
 </script>
-<script>
-  (function () {
-    const f = document.getElementById('cform'); if (!f) return;
-    f.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = document.getElementById('c-email');
-      if (!f.checkValidity()) { f.reportValidity(); return; }
-      document.getElementById('c-sent-to').textContent = email.value;
-      f.classList.add('is-sent');
-    });
-  })();
-</script>
+<script defer src="/assets/js/github-stars.js"></script>
 
 </body></html>

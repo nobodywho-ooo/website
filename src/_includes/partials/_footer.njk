@@ -1,3 +1,13 @@
+{% if blogTheme %}
+<footer class="blog-footer">
+    <span>© NobodyWho</span>
+    <nav aria-label="Footer links"><a href="/posts/">Blog</a><a href="https://docs.nobodywho.ooo/">Docs</a><a href="/privacy/">Privacy</a></nav>
+    <div class="blog-social">
+        <a href="{{ site.github_url }}" aria-label="GitHub"><span class="social-icon icon-github" aria-hidden="true"></span></a>
+        <a href="https://www.linkedin.com/company/nobodywho/" aria-label="LinkedIn"><span class="social-icon icon-linkedin" aria-hidden="true"></span></a>
+    </div>
+</footer>
+{% else %}
 <footer>
     <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
         <nav aria-label="Footer" class="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6">
@@ -24,3 +34,4 @@
         </a>
     </div>
 </footer>
+{% endif %}
