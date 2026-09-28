@@ -8,7 +8,7 @@ image: /assets/images/blog/2026/jev-in-25-lines/jev.png
 slug: "jev-in-25-lines"
 ---
 
-<img src="/assets/images/blog/2026/jev-in-25-lines/jev.webp" alt="My name is Jev" width="500" height="500" fetchpriority="high" loading="eager" decoding="async">
+![My name is Jev](/assets/images/blog/2026/jev-in-25-lines/jev.png)
 
 Everyone and their mom is talking about [Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev). Jev this, Jev that. Everyone on Twitter is all over Jev, how it's the next frontier of large language models and the AI paradigm. We don’t really think so. So here's Jev in 25 lines of Python.
 
