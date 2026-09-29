@@ -4,7 +4,7 @@ date: 2026-08-25
 author: Pierre Bresson
 categories: ["Feature", "Release"]
 description: "Detect when someone starts and stops speaking, on-device."
-image: /assets/images/blog/2026/announcing-vad/nobodywho-voice-activity-detection.png
+image: /assets/images/blog/2026/announcing-vad/nobodywho-vad.png
 slug: "announcing-vad"
 ---
 

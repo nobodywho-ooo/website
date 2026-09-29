@@ -1,32 +1,29 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Nobodywho runs AI models on your devices and servers. Open-source SDKs for Python, Kotlin, Swift, Flutter, React Native and Godot.">
+<meta name="description" content="Nobodywho runs AI on devices and servers. Open-source SDKs for Rust, Python, Kotlin, Swift, Flutter, React Native and Godot.">
 <meta name="theme-color" content="#2a0709">
 <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
-<title>Nobodywho Local AI</title>
+<title>NobodyWho | On-device and on-premises AI</title>
+<link rel="canonical" href="https://www.nobodywho.ai/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.nobodywho.ai/#organization","name":"NobodyWho","url":"https://www.nobodywho.ai/","logo":{"@type":"ImageObject","url":"https://www.nobodywho.ai/assets/favicon/android-chrome-512x512.png"},"sameAs":["https://github.com/nobodywho-ooo/nobodywho","https://x.com/nobodywho_ai","https://bsky.app/profile/nobodywhooo.bsky.social","https://www.linkedin.com/company/nobodywho/","https://huggingface.co/NobodyWho"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.nobodywho.ai/#website","name":"NobodyWho","url":"https://www.nobodywho.ai/","publisher":{"@id":"https://www.nobodywho.ai/#organization"}}</script>
 <link rel="preload" href="/assets/fonts/InterTight-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/brand-fonts.css">
 <style>
   :root { --ground: #4e1411; --ground-deep: #2a0709; --ground-glow: #72281a; color-scheme: dark; }
   html { scroll-behavior: smooth; }
   body { margin: 0; min-height: 100%; overflow-x: hidden; background: var(--ground); }
-  /* backdrop painted behind the transparent WebGL canvas: dark at the top,
-     a warm red-brown glow low and centre-left, as in the reference */
   #stage { background:
       radial-gradient(90% 75% at 38% 80%, var(--ground-glow), transparent 72%),
       radial-gradient(60% 55% at 88% 68%, rgba(110,40,22,0.55), transparent 70%),
       linear-gradient(180deg, var(--ground-deep) 0%, #3e0f0e 38%, var(--ground) 65%, #56180f 100%); }
   #stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; background-image: url('/assets/images/hero-still.webp'); background-size: cover; background-position: center; }
   #stage.is-rendering { background-image: none; }
+  #stage canvas { display: block; width: 100%; height: 100%; }
   .hero-space { min-height: 100svh; }
-  canvas { display: block; width: 100%; height: 100%; }
   @media (max-width: 960px) { #stage { background-position: 56% center; } }
-  @media (prefers-reduced-motion: reduce) {
-    #stage canvas { display: none; }
-    #stage.is-rendering { background-image: url('/assets/images/hero-still.webp'); }
-  }
 
   /* ---------- menubar ---------- */
   :root { --ink: #f4ede6; --ink-dim: rgba(244,237,230,0.72); --accent: #f2a02e; --nav-h: 76px; }
@@ -42,19 +39,28 @@
   .menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink);
     transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
   .menu a:hover::after, .menu a:focus-visible::after, .menu a[aria-current="page"]::after { transform: scaleX(1); }
-  .right { justify-self: end; display: flex; align-items: center; gap: clamp(20px, 3.2vw, 64px); }
+  .right { justify-self: end; display: flex; align-items: center; gap: 12px; }
+  .right .linkedin { margin-left: 8px; }
+  .docs-btn { display: inline-flex; align-items: center; padding: 11px 13px; border: 1.5px solid currentColor; background: rgba(28,6,8,0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--ink); font-size: 15px; font-weight: 500; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+  .docs-btn:hover { color: var(--accent); }
+  .nav.scrolled .docs-btn { color: var(--sec-ink); background: rgba(28,6,8,0.55); }
+  .nav.scrolled .docs-btn:hover { color: var(--sec-accent); }
   .gh { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; text-transform: uppercase;
     font-weight: 500; font-size: clamp(13px, 1.05vw, 17px); letter-spacing: 0.01em; color: var(--accent);
     border: 1.5px solid var(--accent); padding: 10px 16px; background: rgba(28,6,8,0.55);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background .2s ease, color .2s ease; }
   .gh:hover, .gh:focus-visible { background: var(--accent); color: #2a0709; }
   .right .linkedin { display: inline-flex; align-items: center; justify-content: center; color: var(--ink); width: 38px; height: 38px; }
+  .right .linkedin .social-icon { width: 25px; height: 25px; }
   .right .linkedin:hover { color: var(--accent); }
   .nav.scrolled .right .linkedin { color: var(--sec-ink); }
   .nav.scrolled .right .linkedin:hover { color: var(--accent-text); }
   .social-icon { display: inline-block; width: 18px; height: 18px; flex: none; background: currentColor; mask: var(--icon) center / contain no-repeat; }
   .icon-github { --icon: url('/assets/icons/brand-github.svg'); }
   .icon-linkedin { --icon: url('/assets/icons/brand-linkedin.svg'); }
+  .icon-x { --icon: url('/assets/icons/brand-x.svg'); }
+  .icon-bluesky { --icon: url('/assets/icons/brand-bluesky.svg'); }
+  .icon-huggingface { --icon: url('/assets/icons/brand-huggingface.svg'); }
   .icon-calendar-event { --icon: url('/assets/icons/calendar-event.svg'); }
   .icon-mail { --icon: url('/assets/icons/mail.svg'); }
   .icon-star { --icon: url('/assets/icons/star.svg'); }
@@ -89,6 +95,7 @@
   }
   @media (max-width: 960px) {
     :root { --nav-h: 72px; }
+    .right .docs-btn { display: none; }
     .nav { grid-template-columns: 1fr auto; }
     .nav > nav { display: none; }
     .burger { display: grid; }
@@ -142,16 +149,12 @@
   .sec > * { max-width: 1480px; margin-left: auto; margin-right: auto; }
   .sec.alt { background: var(--sec-bg-2); }
   .sec.dots { background-image: radial-gradient(var(--sec-dot) 1.2px, transparent 1.3px); background-size: 52px 52px; background-position: 26px 26px; }
-  /* edge tick marks, as on the reference */
-  .sec::before, .sec::after { content: ""; position: absolute; top: 0; bottom: 0; width: 22px; pointer-events: none; opacity: .7;
-    background-image: repeating-linear-gradient(180deg, var(--sec-rule) 0 1px, transparent 1px 96px); background-size: 22px 96px; background-repeat: repeat-y; }
-  .sec::before { left: 10px; } .sec::after { right: 10px; }
-  @media (max-width: 960px) { .sec::before, .sec::after { display: none; } }
 
   .sec-title + .sec-sub { margin: calc(-1 * clamp(28px, 4vw, 56px) + 18px) 0 clamp(32px, 4.5vw, 64px); }
   .sec-sub { margin: 0; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.3; letter-spacing: -0.01em; color: var(--sec-muted); max-width: 40ch; }
   .sec-title { margin: 0 0 clamp(28px, 4vw, 56px); font-weight: 600; text-transform: uppercase; letter-spacing: -0.02em;
     font-size: clamp(30px, 3.6vw, 56px); line-height: 1; }
+  #product, #pricing, #contact, #faq, .prod { scroll-margin-top: var(--nav-h); }
   .eyebrow { margin: 0 0 18px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sec-muted); }
   .mono { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
 
@@ -167,6 +170,10 @@
   .rows { display: grid; gap: 0; }
   .row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px);
     padding: 28px 0 clamp(48px, 6vw, 96px); border-top: 1px solid var(--sec-rule); }
+  .product-icon { display: block; width: 34px; height: 34px; margin-bottom: 20px; background: var(--accent-text); mask: var(--icon) center / contain no-repeat; }
+  .icon-device { --icon: url('/assets/icons/device-mobile.svg'); }
+  .icon-server { --icon: url('/assets/icons/server.svg'); }
+  .icon-shield { --icon: url('/assets/icons/shield-check.svg'); }
   .row h3 { margin: 0; font-weight: 600; font-size: clamp(20px, 2.1vw, 32px); line-height: 1.1; letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance; }
   .row p { margin: 0; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; max-width: 62ch; }
   .row .sub { margin-top: 10px; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.35; color: var(--sec-muted); max-width: 28ch; }
@@ -257,14 +264,41 @@
   .t-amber .link-boxes a:hover { background: #2a0709; color: #f4ede6; }
   .t-amber .link-boxes a:hover span { color: rgba(244,237,230,0.75); }
 
-  /* Product page: three clearly separate products */
+  /* The Assurance Layer supports either deployment above it. */
+  .product-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 22px auto 16px; }
+  .product-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 192px; padding: 22px; border: 1px solid var(--sec-rule); background: transparent; color: var(--sec-ink); font: inherit; text-align: left; cursor: pointer; }
+  .product-tabs button:hover, .product-tabs button[aria-selected="true"] { background: #f8f5f0; border-color: var(--sec-ink); }
+  .product-tabs .product-icon { margin: 0 0 6px; }
+  .product-tabs strong { font-size: clamp(19px, 2vw, 28px); font-weight: 600; line-height: 1.1; text-transform: uppercase; }
+  .product-tabs small { font-size: 15px; line-height: 1.3; color: var(--sec-muted); }
+  .product-tab-number { font: 500 12px 'IBM Plex Mono', monospace; color: var(--accent-text); }
+  .product-tabs .product-foundation { grid-column: 1 / -1; display: grid; grid-template-columns: 34px auto minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; gap: 4px 16px; min-height: 108px; border-top: 3px solid var(--accent-text); background: rgba(151,65,13,0.06); }
+  .product-tabs .product-foundation .product-icon { grid-column: 1; grid-row: 1 / 3; margin: 0; }
+  .product-tabs .product-foundation .product-tab-number { grid-column: 2; grid-row: 1; }
+  .product-tabs .product-foundation strong { grid-column: 2; grid-row: 2; }
+  .product-tabs .product-foundation small { grid-column: 3; grid-row: 1 / 3; justify-self: end; max-width: 36ch; text-align: right; }
+  @media (min-width: 761px) {
+    .product-tabs button:nth-child(-n+2) { position: relative; }
+    .product-tabs button:nth-child(-n+2)::after { content: ""; position: absolute; bottom: -13px; left: 50%; height: 12px; width: 1px; background: var(--sec-rule); }
+  }
+  @media (max-width: 760px) {
+    .product-tabs { grid-template-columns: 1fr; gap: 8px; }
+    .product-tabs button, .product-tabs .product-foundation { display: grid; grid-template-columns: 28px minmax(0, 1fr); grid-template-rows: auto; gap: 2px 12px; min-height: 0; padding: 12px 16px; }
+    .product-tabs .product-icon, .product-tabs .product-foundation .product-icon { grid-column: 1; grid-row: 1 / 4; width: 26px; height: 26px; margin: 0; align-self: center; }
+    .product-tabs .product-tab-number, .product-tabs strong, .product-tabs small { grid-column: 2; margin: 0; }
+    .product-tabs .product-foundation small { grid-column: 2; grid-row: 3; justify-self: start; max-width: none; text-align: left; }
+  }
+  .prod[hidden] { display: none; }
   .prod { border-top: 2px solid var(--sec-ink); padding-top: 30px; padding-bottom: clamp(56px, 7vw, 112px); row-gap: 0; }
   .prod + .prod { margin-top: 0; }
   .prod .idx { display: block; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .12em; color: #f2a02e; margin-bottom: 14px; }
   .prod h3 { font-size: clamp(26px, 2.8vw, 42px); }
   .prod .feat { border-top: 0; background: rgba(34,24,26,0.045); padding: clamp(22px, 2.6vw, 36px); border-radius: 2px; margin-top: clamp(28px, 3vw, 44px); }
+  .prod .feat > div { border-top: 1px solid var(--sec-rule); padding-top: 18px; }
+  .prod .feat > div::before { content: counter(feature, decimal-leading-zero); counter-increment: feature; display: block; margin-bottom: 16px; font: 500 22px 'IBM Plex Mono', monospace; color: var(--accent-text); }
+  .prod .feat { counter-reset: feature; }
   .t-garnet .prod .feat, .t-garnet-deep .prod .feat { background: rgba(244,237,230,0.06); }
-  .prod .feat h4 { color: #f2a02e; }
+  .prod .feat h3 { color: #f2a02e; }
   .prod .note { grid-column: 1 / -1; }
   .prod:hover { border-top-color: var(--sec-ink); }
   /* CTA / footer */
@@ -278,6 +312,10 @@
   .foot-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--sec-ink); text-decoration: none; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; opacity: .8; }
   .foot-links .social-icon { width: 16px; height: 16px; }
   .foot-links a:hover { opacity: 1; color: var(--sec-accent); }
+  .foot-social { grid-column: 1 / -1; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 18px; }
+  .foot-social a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--sec-ink); text-decoration: none; }
+  .foot-social a:hover { color: var(--sec-accent); }
+  .foot-social .social-icon { width: 23px; height: 23px; }
   .t-amber .foot-links a:hover { color: #2a0709; }
   .foot-meta { display: grid; gap: 6px; text-align: right; }
   @media (max-width: 860px) { .foot { grid-template-columns: 1fr; } .foot-links { justify-content: flex-start; } .foot-meta { text-align: left; } }
@@ -301,20 +339,15 @@
   .nav.scrolled .gh:hover, .nav.scrolled .gh:focus-visible { background: var(--sec-accent); color: var(--sec-bg); }
 
 
-  /* =====================================================================
-     SUBPAGE: PRODUCT  (shown when the URL hash is #product)
-     ===================================================================== */
-  .subpage { display: none; position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
+  /* Product details */
+  .subpage { position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
     font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
   .subpage * { box-sizing: border-box; }
-  body.on-product .page, body.on-product .tagline, body.on-product .hero-details, body.on-product #stage { display: none; }
-  body.on-product .subpage { display: block; }
-  .sub-hero { padding-top: calc(var(--nav-h) + clamp(48px, 8vw, 128px)); }
+  .sub-hero { padding-top: clamp(56px, 8vw, 128px); }
   .sub-hero h1 { margin: 0; font-weight: 600; font-size: clamp(38px, 6.4vw, 104px); line-height: 0.96; letter-spacing: -0.035em; max-width: 14ch; text-wrap: balance; }
   .sub-hero .lead { margin: clamp(24px, 3vw, 44px) 0 0; max-width: 46ch; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.35; color: var(--sec-muted); }
   .sub-hero .lead b { color: var(--sec-ink); font-weight: 500; }
-  .prod { scroll-margin-top: calc(var(--nav-h) + 16px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px);
-    padding: 28px 0 clamp(48px, 6vw, 96px); border-top: 1px solid var(--sec-rule); }
+  .prod { scroll-margin-top: calc(var(--nav-h) + 16px); padding: 0; border-top: 0; }
   .prod h3 { margin: 0; font-weight: 600; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; }
   .prod .sub { margin: 10px 0 0; font-size: clamp(16px, 1.25vw, 20px); color: var(--sec-muted); max-width: 28ch; }
   .prod p { margin: 0 0 1em; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; max-width: 62ch; }
@@ -325,10 +358,10 @@
   .prod ul.props li span { color: var(--sec-muted); font-size: 0.92em; }
 
   /* feature grid under a product row (Product subpage) */
-  .prod .feat { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3.5vw, 56px) clamp(24px, 3vw, 48px);
-    margin-top: clamp(20px, 2.5vw, 40px); padding-top: clamp(20px, 2.5vw, 36px); border-top: 1px dashed var(--sec-rule); }
+  .prod .feat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.5vw, 36px) clamp(24px, 3vw, 48px);
+    margin-top: 0; padding: clamp(20px, 2.5vw, 36px) 22px; }
   .prod .feat.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .prod .feat h4 { margin: 0 0 10px; font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500;
+  .prod .feat h3 { margin: 0 0 10px; font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500;
     font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sec-accent); }
   .prod .feat p { margin: 0; font-size: clamp(15px, 1.1vw, 18px); line-height: 1.5; max-width: 44ch; }
   .prod .note { grid-column: 1 / -1; margin: clamp(20px, 2.5vw, 36px) 0 0; font-style: italic; font-size: clamp(15px, 1.1vw, 18px); line-height: 1.5; color: var(--sec-muted); max-width: 90ch; }
@@ -362,14 +395,10 @@
   .link-boxes span { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--sec-muted); }
   @media (max-width: 560px) { .link-boxes, .cta .link-boxes { grid-template-columns: minmax(0, 1fr); } }
 
-  /* =====================================================================
-     SUBPAGE: ABOUT  (URL hash #about)
-     ===================================================================== */
-  .about { display: none; position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
+  /* Contact and FAQ */
+  .about { position: relative; z-index: 6; background: var(--sec-bg); color: var(--sec-ink);
     font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
   .about * { box-sizing: border-box; }
-  body.on-about .page, body.on-about .tagline, body.on-about .hero-details, body.on-about #stage, body.on-about .subpage { display: none; }
-  body.on-about .about { display: block; }
   .about .cols p { color: var(--sec-ink); }
   .faq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
   .faq .qa { border-top: 1px solid var(--sec-rule); }
@@ -405,7 +434,6 @@
   .values button { transition: color .2s ease, transform .2s ease; }
   .values button[aria-selected="true"] { transform: translateX(6px); }
   .plan .price { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
-  .eyebrow::before { content: ""; display: inline-block; width: 18px; height: 1px; background: currentColor; margin-right: 10px; vertical-align: middle; opacity: .7; }
   .sec-sub { text-wrap: pretty; }
   .link-boxes a { border-radius: 2px; }
   ::selection { background: #f2a02e; color: #2a0709; }
@@ -414,8 +442,8 @@
   :root { --accent-text: #f2a02e; }
   .t-paper, .t-white, .t-stone, .t-amber { --accent-text: #97410d; }
   .t-garnet, .t-garnet-deep, .t-ink { --accent-text: #f2a02e; }
-  .prod .feat h4, .prod .idx, .plan .n, .stats .k, .facts .k { letter-spacing: .09em; }
-  .prod .feat h4 { font-size: 14px; color: var(--accent-text); }
+  .prod .feat h3, .prod .idx, .plan .n, .stats .k, .facts .k { letter-spacing: .09em; }
+  .prod .feat h3 { font-size: 14px; color: var(--accent-text); }
   .prod .idx { font-size: 14px; color: var(--accent-text); }
   .eyebrow { font-size: 14px; }
   .stats .k, .facts .k { font-size: 13px; }
@@ -428,6 +456,8 @@
   .props li, .prod .feat p { font-size: clamp(15.5px, 1.15vw, 18px); }
   .row .sub, .prod .sub { color: var(--sec-muted); }
   .sec-sub, .sub-hero .lead { color: var(--sec-muted); }
+  .sec > .sec-title, .sec > .eyebrow { margin-left: auto; margin-right: auto; }
+  .sec > .sec-sub, .sec > .statement { margin-left: max(0px, calc((100% - 1480px) / 2)); margin-right: 0; }
   .t-paper .sec-sub, .t-white .sec-sub { color: rgba(34,24,26,0.78); }
   .t-paper .row .sub, .t-paper .prod .sub, .t-paper .prod .feat p { color: rgba(34,24,26,0.86); }
   .t-paper .stats .c, .t-amber .stats .c { color: inherit; }
@@ -439,19 +469,20 @@
 </head><body>
 
 <span id="top"></span>
-<div id="stage"><canvas id="c"></canvas></div>
+<div id="stage" aria-hidden="true"><canvas id="c"></canvas></div>
 
 <header class="nav">
   <a class="logo" href="#top" aria-label="Nobodywho, front page">nobodywho</a>
   <nav aria-label="Primary">
     <ul class="menu">
       <li><a href="#product" data-route="product">Product</a></li>
-      <li><a href="https://docs.nobodywho.ooo/">Docs</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="/posts/">Blog</a></li>
-      <li><a href="#about" data-route="about">About</a></li>
     </ul>
   </nav>
   <div class="right">
+    <a class="docs-btn" href="https://docs.nobodywho.ooo/">Docs</a>
     <a class="gh" href="https://github.com/nobodywho-ooo/nobodywho" aria-label="Nobodywho on GitHub" target="_blank" rel="noopener">
       <span class="social-icon icon-github" aria-hidden="true"></span><span class="label">GitHub</span>
       <span class="github-stars" data-github-stars hidden aria-hidden="true"><span class="social-icon icon-star"></span><span data-star-count></span></span>
@@ -477,56 +508,57 @@
   <div class="lower" id="lower">
 
     <section class="sec t-garnet" id="mission">
-      <p class="eyebrow">Local AI</p>
-      <h2 class="statement">AI that runs locally on your devices or servers – keeping your data out of the cloud and under your control.</h2>
+      <p class="eyebrow">Nobodywho</p>
+      <h2 class="statement">Managed local AI for enterprise</h2>
       <div class="cols">
-        <p class="push">Nobodywho builds local AI infrastructure that enables LLMs to run fully offline, both on-premises and directly on edge devices. Run AI whilst maintaining full control of your data and lowering costs.</p>
+        <p class="push">The Nobodywho inference engine runs AI on devices and on your own servers. Our Assurance Layer helps keep it fast, accurate and up to date, with support from setup through daily operation.</p>
       </div>
     </section>
 
-    <section class="sec alt t-paper" id="enterprise">
-      <h2 class="sec-title">Product</h2>
-      <p class="sec-sub">Run AI on your own servers or directly on your devices, kept fast and up to date by our Assurance Layer.</p>
-      <div class="rows">
-        <article class="row">
-          <div>
-            <h3>Edge AI</h3>
-            <p class="sub">Run AI on your devices</p>
-          </div>
-          <div>
-            <p>Run more than 10,000 open-source models directly on desktops, phones, smartwatches, industrial machines, cars, drones and robots – offline, with no internet connection required.</p>
-            <a class="more" href="#product-edge">Learn more</a>
-          </div>
-        </article>
-        <article class="row" id="on-prem">
-          <div>
-            <h3>On-Prem AI</h3>
-            <p class="sub">Run AI on your servers</p>
-          </div>
-          <div>
-            <p>Deploy AI on your own or leased GPU servers, with multi-user access, predictable costs and no per-token fees.</p>
-            <a class="more" href="#product-on-prem">Learn more</a>
-          </div>
-        </article>
-        <article class="row">
-          <div>
-            <h3>Assurance Layer</h3>
-            <p class="sub">Keep your local AI performing at its best</p>
-          </div>
-          <div>
-            <p>Manage, monitor, re-train and optimise AI across edge devices and on-premises servers through a single control layer.</p>
-            <a class="more" href="#product-assurance">Learn more</a>
-          </div>
-        </article>
-      </div>
-    </section>
+  <section class="sec t-paper" id="product">
+    <h2 class="sec-title">Nobodywho products</h2>
+    <p class="sec-sub">Choose on-device or on-premises AI. The Assurance Layer supports either deployment.</p>
+    <div class="product-tabs" role="tablist" aria-label="Nobodywho products">
+      <button type="button" role="tab" id="tab-device" aria-controls="product-edge" aria-selected="true"><span class="product-icon icon-device" aria-hidden="true"></span><span class="product-tab-number">01</span><strong>On-device AI</strong><small>Embed Nobodywho with native SDKs. Run 10,000+ models offline on phones, laptops and machines.</small></button>
+      <button type="button" role="tab" id="tab-prem" aria-controls="product-on-prem" aria-selected="false" tabindex="-1"><span class="product-icon icon-server" aria-hidden="true"></span><span class="product-tab-number">02</span><strong>On-premises AI</strong><small>Shared AI on owned or leased GPU servers, without per-token fees.</small></button>
+      <button class="product-foundation" type="button" role="tab" id="tab-assurance" aria-controls="product-assurance" aria-selected="false" tabindex="-1"><span class="product-icon icon-shield" aria-hidden="true"></span><span class="product-tab-number">03 · Works with either</span><strong>Assurance Layer</strong><small>Monitor and improve model quality across devices and servers.</small></button>
+    </div>
+    <div class="rows">
+      <article class="prod" id="product-edge" role="tabpanel" aria-labelledby="tab-device">
+        <div class="feat">
+          <div><h3>One SDK</h3><p>Text, vision, speech and search, built on llama.cpp and ONNX.</p></div>
+          <div><h3>Reliable tool calling</h3><p>Check arguments against each function's schema.</p></div>
+          <div><h3>Automatic setup</h3><p>Pick a model and hardware configuration for each device.</p></div>
+          <div><h3>Seven native languages</h3><p>Rust, Kotlin, Swift, Python, Dart, TypeScript and GDScript.</p></div>
+        </div>
+      </article>
+      <article class="prod" id="product-on-prem" role="tabpanel" aria-labelledby="tab-prem" hidden>
+        <div class="feat">
+          <div><h3>Configured for your hardware</h3><p>Benchmark models and serving setups for your workload.</p></div>
+          <div><h3>Connected to your tools</h3><p>Integrate Slack, email, CRM and internal systems.</p></div>
+          <div><h3>Governed agents</h3><p>Set permissions, approvals and audit trails.</p></div>
+          <div><h3>OpenAI-compatible API</h3><p>Connect existing systems through vLLM.</p></div>
+        </div>
+      </article>
+      <article class="prod" id="product-assurance" role="tabpanel" aria-labelledby="tab-assurance" hidden>
+        <div class="feat">
+          <div><h3>Evaluation and monitoring</h3><p>Measure quality and performance against real data.</p></div>
+          <div><h3>Model management</h3><p>Select, tune, fine-tune and retrain models as needs change.</p></div>
+          <div><h3>Hybrid routing</h3><p>Route work between devices, servers and the cloud when needed.</p></div>
+          <div><h3>Support and tooling</h3><p>Bespoke tools, 24/7 support and training for your team.</p></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
 
     <section class="sec dots t-amber" id="specs">
       <div class="numbers">
         <h2 class="lead">The numbers that matter when the model runs locally.</h2>
         <ul class="stats mono">
-          <li><span class="k">Data leaving your infrastructure</span><span class="v">0<small>bytes</small></span><span class="c">Not a byte of prompts or outputs leaves your infrastructure. Sovereignty is structural, not contractual.</span></li>
-          <li><span class="k">Cost per token</span><span class="v">&euro;0</span><span class="c">Flat pricing by infrastructure or seat: a line item finance can forecast.</span></li>
+          <li><span class="k">Data leaving your infrastructure</span><span class="v">0<small>bytes</small></span><span class="c">With local deployment, prompts and outputs stay on your hardware.</span></li>
+          <li><span class="k">Cost per token</span><span class="v">&euro;0</span><span class="c">No per-token API fee. You still pay for hardware and any managed service you choose.</span></li>
           <li><span class="k">Open models</span><span class="v">10,000<small>+</small></span><span class="c">Deployable on your hardware without vendor lock-in. Any GGUF from Hugging Face.</span></li>
           <li><span class="k">Language SDKs</span><span class="v">7</span><span class="c">Rust, Kotlin, Swift, Python, Dart, TypeScript, GDScript. Same features in each.</span></li>
         </ul>
@@ -540,7 +572,7 @@
           <li>Open-source inference engine, EUPL 1.2 licensed</li>
           <li>On-device SDK for apps, games and embedded systems</li>
           <li>On-prem inference on hardware you control</li>
-          <li>Orchestration across device, edge and data centre</li>
+          <li>Orchestration across devices and servers</li>
           <li>Works without an internet connection</li>
           <li>No per-token costs, no vendor lock-in</li>
           <li>Built and maintained in Europe</li>
@@ -572,102 +604,13 @@
           <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v4" id="t4"><span class="n">04</span> Built in the open</button></li>
         </ol>
         <div>
-          <p class="panel" id="v1" role="tabpanel" aria-labelledby="t1">You can read every line of the engine that runs your models. For regulated industries and public institutions, that is not a nice-to-have, it is the precondition for trust.</p>
-          <p class="panel" id="v2" role="tabpanel" aria-labelledby="t2" hidden>The engine is yours to run, fork and extend. If we disappear tomorrow, your deployment keeps working exactly as it did today.</p>
+          <p class="panel" id="v1" role="tabpanel" aria-labelledby="t1">You can read every line of the engine that runs your models. Your team can inspect the code before deploying it.</p>
+          <p class="panel" id="v2" role="tabpanel" aria-labelledby="t2" hidden>The engine is yours to run, fork and extend. Your deployment can keep running without our service.</p>
           <p class="panel" id="v3" role="tabpanel" aria-labelledby="t3" hidden>Nobodywho is released under the EUPL 1.2, the European Union's own open-source licence, written for European law and compatible with the licences you already use.</p>
           <p class="panel" id="v4" role="tabpanel" aria-labelledby="t4" hidden>Development happens on GitHub, in public. Issues, roadmap and releases are visible to everyone who depends on them.</p>
         </div>
       </div>
     </section>
-
-    <section class="sec t-amber" id="hello">
-      <div class="cta">
-        <h2>Local AI, built in Europe. Start with the docs or write and say hello.</h2>
-        <div class="links">
-          <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
-          <ul class="link-boxes">
-            <li><a href="https://docs.nobodywho.ooo/"><b>Read the documentation</b><span>Guides for Python, Kotlin, Swift, Flutter, React Native and Godot</span></a></li>
-            <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><b>Star the repo on GitHub</b><span>github.com/nobodywho-ooo/nobodywho</span></a></li>
-          </ul>
-        </div>
-      </div>
-      <footer class="foot">
-        <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
-        <nav class="foot-links" aria-label="Footer">
-          <a href="#product" data-route="product">Product</a>
-          <a href="https://docs.nobodywho.ooo/">Docs</a>
-          <a href="#about" data-route="about">About</a>
-          <a href="#contact" data-route="contact">Contact</a>
-          <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
-          <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
-        </nav>
-        <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
-      </footer>
-    </section>
-
-  </div>
-</main>
-
-
-
-<main class="subpage" id="product" aria-label="Product">
-
-  <section class="sec sub-hero t-garnet">
-    <p class="eyebrow">Enterprise</p>
-    <h1>Managed local AI, for your enterprise</h1>
-    <p class="lead">Run AI on your own servers or directly on your devices, with the Nobodywho inference engine at the core. Our Assurance Layer keeps models fast, accurate and up to date, and our team is with you from first setup to daily operation. <b>We make switching to local AI seamless.</b></p>
-    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
-  </section>
-
-  <section class="sec t-paper" id="our-product">
-    <h2 class="sec-title">Our Product</h2>
-    <div class="rows">
-      <article class="prod" id="product-edge">
-        <div><span class="idx">01</span><h3>Edge AI</h3><p class="sub">Run AI on your devices.</p></div>
-        <div>
-          <p>With our inference engine you can run more than 10,000 open-source models directly on desktops, phones, smartwatches, industrial machines, cars, drones and robots – even offline, with no internet connection required.</p>
-          <p>Our inference runtime embeds directly into your application, using each device's hardware to accelerate AI. No server required, wherever your software runs.</p>
-        </div>
-        <div class="feat">
-          <div><h4>All modalities</h4><p>LLM/VLM inference, speech-to-text, text-to-speech, voice activity detection, embeddings and reranking in one SDK.</p></div>
-          <div><h4>Type-checked tool calling</h4><p>Nobodywho detects tool calls and automatically triggers schema-constrained generation derived from the function signature. This ensures every call uses the expected argument names and value types.</p></div>
-          <div><h4>Self-configuring deployment</h4><p>Hugging Face download and cache, memory-based model selection, automatic CPU/GPU selection and memory-aware layer offloading.</p></div>
-          <div><h4>Automatic context shifting</h4><p>Turn-aware context shifting removes complete old exchanges while preserving system instructions, recent turns and tool-call structure.</p></div>
-          <div><h4>7 native languages</h4><p>All features are available across Rust, Kotlin, Swift, Python, Dart, TypeScript and GDScript.</p></div>
-          <div><h4>Powered by llama.cpp &amp; ONNX</h4><p>Architecture-specific CPU instructions and GPU kernels with support for Metal, Vulkan, CUDA and numerous other backends. Supports quantized models, which reduce model size and memory requirements.</p></div>
-        </div>
-      </article>
-      <article class="prod" id="product-on-prem">
-        <div><span class="idx">02</span><h3>On-Prem AI</h3><p class="sub">Run AI on your servers.</p></div>
-        <div>
-          <p>Deploy AI on your own or leased GPU servers, with multi-user access, predictable costs and no per-token fees.</p>
-          <p>Enterprise inference on infrastructure you control, built for regulated and classified environments with strict data residency requirements.</p>
-        </div>
-        <div class="feat two">
-          <div><h4>Smart deployment &amp; inference configuration</h4><p>Nobodywho benchmarks models and serving configurations for your hardware and GPU topology, then deploys the best-fit setup for your workload and desired balance of model quality, latency and throughput. Priority-aware routing and scheduling keep user requests responsive while background agents use otherwise available capacity.</p></div>
-          <div><h4>Enterprise integrations</h4><p>Nobodywho connects to common enterprise software such as Slack, email and CRM through ready-to-use integrations. For internal or specialized systems, we can build a custom integration, or your team can connect it directly through our API.</p></div>
-          <div><h4>Governed agent runtime</h4><p>Nobodywho agents connect to enterprise integrations in both directions: employees can invoke them from tools such as Slack, while agents can use connected systems to complete work. They can also run scheduled or event-driven workflows in the background, with permissions, approval gates and full auditability.</p></div>
-          <div><h4>Powered by vLLM</h4><p>vLLM is a high-performance open-source engine with rapid support for new models. It exposes an OpenAI-compatible API, which allows existing systems and integrations to use the local deployment with minimal integration changes.</p></div>
-        </div>
-      </article>
-      <article class="prod" id="product-assurance">
-        <div><span class="idx">03</span><h3>Assurance Layer</h3><p class="sub">Keep your local AI performing at its best.</p></div>
-        <div>
-          <p>Manage, monitor, re-train and optimise AI across edge devices and on-premises servers through a single control layer.</p>
-        </div>
-        <div class="feat two">
-          <div><h4>Evaluation and observability</h4><p>Measure model quality against your own data and monitor performance in production. Visibility into inference activity, usage patterns and anomalies across your deployment.</p></div>
-          <div><h4>Model management</h4><p>Model selection based on your domain use cases and hardware, evaluated against your own data. We update the models as better ones become available, your hardware changes or your requirements evolve.</p></div>
-          <div><h4>Hardware optimisation</h4><p>Tune inference performance for your devices and servers: the right quantisation, GPU backend and serving configuration for the hardware you actually run on.</p></div>
-          <div><h4>Fine-tuning and re-training</h4><p>Adapt models to your domain, terminology and tasks using your own data. We fine-tune and evaluate models against your use cases, then re-train as your data and requirements evolve to maintain quality over time.</p></div>
-          <div><h4>Routing and integrations</h4><p>Our hybrid setup automatically routes each task to the right model – running it on your edge device when the local model is capable, or sending it to a larger model on your servers or in the cloud when needed. Ready-made connections to tools such as Slack, email and CRM; custom integrations for internal systems, or direct access through the API.</p></div>
-          <div><h4>Agentic workflows</h4><p>Run AI agents that carry out tasks across your tools and systems, on demand, on a schedule or in response to events. We optimise deployments for these workflows, with permissions, approval steps and audit trails that keep your team in control.</p></div>
-          <div><h4>Bespoke tooling</h4><p>Extend your local AI setup with tools built around the way your organisation works. We develop custom interfaces, internal applications and deployment utilities tailored to your infrastructure, giving your team practical ways to use and manage AI.</p></div>
-          <div><h4>Ongoing support</h4><p>Keep deployments available and up to date, backed by 24/7 support. Training and enablement that leaves your team owning the capability, beyond the contract rather than dependent on it.</p></div>
-        </div>
-      </article>
-    </div>
-  </section>
 
 
   <section class="sec t-amber" id="pricing">
@@ -701,39 +644,19 @@
         <span class="n">03</span>
         <h3>Leased hardware</h3>
         <p class="price">On request</p>
-        <p>Lease GPU servers from us and run On-Prem AI without buying hardware. Price depends on the type of GPUs.</p>
+        <p>Lease GPU servers from us and run on-premises AI without buying hardware. Price depends on the type of GPUs.</p>
         <a href="#contact" data-route="home">Request a quote</a>
       </article>
     </div>
-    <p class="sec-sub" style="margin: clamp(40px,5vw,72px) 0 0; max-width: 46ch">Not sure which plan fits? A short call is usually enough to tell.</p>
-    <div class="cta-row"><a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener">Book a meeting</a><a class="btn ghost" href="#contact">Write to us</a></div>
-    <footer class="foot">
-      <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
-      <nav class="foot-links" aria-label="Footer">
-        <a href="#product" data-route="product">Product</a>
-        <a href="https://docs.nobodywho.ooo/">Docs</a>
-        <a href="#about" data-route="about">About</a>
-        <a href="#contact" data-route="contact">Contact</a>
-        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
-        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
-      </nav>
-      <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
-    </footer>
   </section>
 
-</main>
-
-
-<main class="about" id="about-page" aria-label="About">
-
-  <section class="sec sub-hero t-garnet">
-    <p class="eyebrow">About</p>
-    <h1>Local AI, built in Europe</h1>
+  <section class="sec sub-hero t-garnet" id="contact">
+    <h2 class="sec-title">Contact Nobodywho</h2>
     <div class="cols" style="margin-top: clamp(28px, 4vw, 56px)">
       <p>Nobodywho is a Copenhagen-based company building open-source local AI. Our inference engine runs models on devices and on organisations' own servers, keeping data inside the infrastructure they control.</p>
-      <p>For teams that want help deploying and operating it, we offer managed Edge and On-Prem AI with onboarding, model selection, monitoring and support.</p>
+      <p>For teams that need help deploying and operating Nobodywho, we offer onboarding, model selection, monitoring and support for on-device and on-premises deployments.</p>
     </div>
-    <div class="cta-row about-actions" id="about-actions">
+    <div class="cta-row about-actions">
       <a class="btn" href="https://calendly.com/om-nobodywho/nobodywho-introduction" target="_blank" rel="noopener"><span class="social-icon icon-calendar-event" aria-hidden="true"></span>Book a meeting</a>
       <a class="btn ghost" href="mailto:info@nobodywho.ooo"><span class="social-icon icon-mail" aria-hidden="true"></span>Email us</a>
       <a class="btn ghost" href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
@@ -753,35 +676,43 @@
         <details><summary>Is Nobodywho open source?</summary><p>Yes. The core engine is open source under the EUPL 1.2 licence and available on <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener">GitHub</a>.</p></details>
         <details><summary>Does the EU AI Act require on-premises deployment?</summary><p>No. The EU AI Act does not legally mandate on-premises deployment. Nobodywho recommends it for control and simplicity, not as a compliance requirement.</p></details>
         <details><summary>Where is Nobodywho based?</summary><p>Nobodywho is based in Copenhagen, Denmark, and operates within the EU.</p></details>
-        <details><summary>What's the difference between Edge and Prem?</summary><p>Edge runs on-device, optimised for specific hardware, and is priced per device. Prem is a shared on-premises deployment for your organisation, priced per GPU server.</p></details>
-        <details><summary>How is Nobodywho's enterprise solution priced?</summary><p>Edge, Prem, and Assurance are all priced on request, based on your deployment.</p></details>
-        <details><summary>What does the Assurance Layer include?</summary><p>Guided onboarding, 24/7 support, model selection and optimisation, and bespoke tooling, layered on top of either Edge or Prem.</p></details>
-        <details><summary>Can I try Nobodywho without talking to sales?</summary><p>Yes. The open-source SDK is free to run yourself, on-edge or on-prem, with no enterprise engagement required. Start with the <a href="https://docs.nobodywho.ooo/">docs</a>.</p></details>
+        <details><summary>What's the difference between on-device and on-premises AI?</summary><p>On-device AI runs in your application on individual devices. On-premises AI runs on shared servers controlled by your organisation.</p></details>
+        <details><summary>How is Nobodywho's enterprise solution priced?</summary><p>The self-hosted SDK is free. Assurance Layer plans start at the rates in our <a href="#pricing">pricing section</a>; leased hardware is quoted for your deployment.</p></details>
+        <details><summary>What does the Assurance Layer include?</summary><p>Onboarding, support, model selection and optimisation, and bespoke tooling for on-device or on-premises deployments.</p></details>
+        <details><summary>Can I try Nobodywho without talking to sales?</summary><p>Yes. The open-source SDK is free to run yourself, on-device or on-premises, with no enterprise engagement required. Start with the <a href="https://docs.nobodywho.ooo/">docs</a>.</p></details>
       </div>
     </div>
-    <footer class="foot">
-      <div class="foot-brand"><b>nobodywho</b><span>Local AI, built in Europe</span></div>
-      <nav class="foot-links" aria-label="Footer">
-        <a href="#product" data-route="product">Product</a>
-        <a href="https://docs.nobodywho.ooo/">Docs</a>
-        <a href="#about" data-route="about">About</a>
-        <a href="#contact" data-route="contact">Contact</a>
-        <a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub</a>
-        <a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a>
-      </nav>
-      <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
-    </footer>
   </section>
 
-</main>
+    <footer class="sec t-amber" id="hello">
+      <div class="foot" style="margin-top:0">
+        <div class="foot-brand"><b>Nobodywho</b><span>Local AI, built in Europe</span></div>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="#product">Product</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a><a href="/posts/">Blog</a>
+          <a href="https://docs.nobodywho.ooo/">Docs</a><a href="/privacy/">Privacy</a>
+        </nav>
+        <div class="foot-meta"><span>Copenhagen, Denmark</span><span>Open source under EUPL 1.2</span></div>
+        <div class="foot-social" aria-label="Social media">
+          <a href="https://github.com/nobodywho-ooo/nobodywho" aria-label="GitHub" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span></a>
+          <a href="https://www.linkedin.com/company/nobodywho/" aria-label="LinkedIn" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span></a>
+          <a href="https://x.com/nobodywho_ai" aria-label="X" target="_blank" rel="noopener"><span class="social-icon icon-x" aria-hidden="true"></span></a>
+          <a href="https://bsky.app/profile/nobodywhooo.bsky.social" aria-label="Bluesky" target="_blank" rel="noopener"><span class="social-icon icon-bluesky" aria-hidden="true"></span></a>
+          <a href="https://huggingface.co/NobodyWho" aria-label="Hugging Face" target="_blank" rel="noopener"><span class="social-icon icon-huggingface" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    </footer>
 
+
+  </div>
+</main>
 
 <div class="drawer" id="drawer" hidden>
   <ul>
     <li><a href="#product" data-route="product">Product</a></li>
-    <li><a href="https://docs.nobodywho.ooo/">Docs</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="/posts/">Blog</a></li>
-    <li><a href="#about" data-route="about">About</a></li>
+    <li><a href="https://docs.nobodywho.ooo/">Docs</a></li>
     <li><a href="https://github.com/nobodywho-ooo/nobodywho" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub<span class="github-stars" data-github-stars hidden aria-hidden="true"><span class="social-icon icon-star"></span><span data-star-count></span></span></a></li>
     <li><a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a></li>
   </ul>
@@ -789,8 +720,8 @@
 
 <script>
 (() => {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const start = () => {
+  if (matchMedia('(prefers-reduced-motion: reduce), (max-width: 960px)').matches) return;
+  const loadScene = () => {
     const library = document.createElement('script');
     library.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
     library.onload = () => {
@@ -800,8 +731,8 @@
     };
     document.body.append(library);
   };
-  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
-  else window.addEventListener('load', start, { once: true });
+  if ('requestIdleCallback' in window) requestIdleCallback(loadScene, { timeout: 1500 });
+  else window.addEventListener('load', loadScene, { once: true });
 })();
 </script>
 <script>
@@ -817,10 +748,7 @@
   (function () {
     const lines = Array.from(document.querySelectorAll('#rotor > span'));
     if (lines.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Timing: ~1.1 s for the swap (0.35 s out, 0.4 s pause, 0.7 s in) + ~2.8 s fully readable.
-    // Short 2–3 word lines are read in well under a second; ~2.5–3 s of dwell is the usual
-    // comfortable rate for rotating hero text — long enough to register, short enough to
-    // feel alive. The first line gets a little longer while the visitor orients.
+    // Keep the first line visible longer while the visitor orients.
     const SWAP = 1100, DWELL = 2800, FIRST = 4200;
     let i = 0;
     function next() {
@@ -838,77 +766,54 @@
 <script>
   (function () {
     const nav = document.querySelector('.nav'), tag = document.getElementById('tagline'), details = document.querySelector('.hero-details');
-    function onScroll() {
-      const y = window.scrollY || 0, vh = window.innerHeight || 1;
-      nav.classList.toggle('scrolled', document.body.classList.contains('on-product') || document.body.classList.contains('on-about') || y > vh - 120);
-      const f = Math.max(0, 1 - y / (vh * 0.45));
-      tag.style.opacity = f; tag.style.transform = 'translateY(' + (y * 0.15) + 'px)';
-      tag.style.visibility = f <= 0 ? 'hidden' : 'visible';
-      details.style.opacity = f; details.style.visibility = f <= 0 ? 'hidden' : 'visible';
-    }
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    new IntersectionObserver(([entry]) => {
+      nav.classList.toggle('scrolled', !entry.isIntersecting);
+      tag.style.visibility = entry.isIntersecting ? 'visible' : 'hidden';
+      details.style.visibility = entry.isIntersecting ? 'visible' : 'hidden';
+    }, { rootMargin: '-75px 0px 0px 0px' }).observe(document.querySelector('.hero-space'));
 
     const network = document.getElementById('display');
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       new IntersectionObserver(([entry]) => network.classList.toggle('is-active', entry.isIntersecting)).observe(network);
     }
 
-    // "why open source" tabs
-    const tabs = [...document.querySelectorAll('.values [role="tab"]')];
-    function selectTab(tab) {
-      tabs.forEach(other => {
-        const selected = other === tab;
-        other.setAttribute('aria-selected', String(selected));
-        other.tabIndex = selected ? 0 : -1;
-        document.getElementById(other.getAttribute('aria-controls')).hidden = !selected;
+    function initTabs(selector) {
+      const tabs = [...document.querySelectorAll(selector)];
+      function selectTab(tab) {
+        tabs.forEach(other => {
+          const selected = other === tab;
+          other.setAttribute('aria-selected', String(selected));
+          other.tabIndex = selected ? 0 : -1;
+          document.getElementById(other.getAttribute('aria-controls')).hidden = !selected;
+        });
+      }
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', event => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+          selectTab(tabs[next]); tabs[next].focus();
+        });
       });
+      return selectTab;
     }
-    tabs.forEach((tab, index) => {
-      tab.tabIndex = index === 0 ? 0 : -1;
-      tab.addEventListener('click', () => selectTab(tab));
-      tab.addEventListener('keydown', event => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-        selectTab(tabs[next]); tabs[next].focus();
-      });
-    });
+    initTabs('.values [role="tab"]');
+    const selectProduct = initTabs('.product-tabs [role="tab"]');
+    function selectProductFromHash() {
+      const tab = [...document.querySelectorAll('.product-tabs [role="tab"]')].find(item => item.getAttribute('aria-controls') === location.hash.slice(1));
+      if (tab) { selectProduct(tab); requestAnimationFrame(() => document.getElementById(tab.getAttribute('aria-controls')).scrollIntoView()); }
+    }
+    window.addEventListener('hashchange', selectProductFromHash);
+    selectProductFromHash();
   })();
 </script>
 
 <script>
   (function () {
-    const nav = document.querySelector('.nav');
-    const links = document.querySelectorAll('.menu a, .drawer a');
-    function route() {
-      const h = location.hash || '#top';
-      const id = h.slice(1);
-      if (id === 'docs' || id.startsWith('docs-')) { location.replace('https://docs.nobodywho.ooo/'); return; }
-      if (id === 'blog') { location.replace('/posts/'); return; }
-      const onProduct = id === 'product' || id.startsWith('product-');
-      const onAbout = h === '#about' || h === '#contact';
-      document.body.classList.toggle('on-product', onProduct);
-      document.body.classList.toggle('on-about', onAbout);
-      links.forEach(a => {
-        const r = a.dataset.route;
-        if (!r) return;
-        const cur = (r === 'product' && onProduct) || (r === 'about' && onAbout) || (r === 'home' && !onProduct && !onAbout);
-        if (cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-      });
-      if (onProduct || onAbout) {
-        nav.classList.add('scrolled');
-        const target = onProduct && id !== 'product' ? document.getElementById(id) : id === 'contact' ? document.getElementById('about-actions') : null;
-        if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }));
-        else window.scrollTo(0, 0);
-      } else {
-        const el = id && id !== 'top' ? document.getElementById(id) : null;
-        if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }));
-        else if (id === 'top') window.scrollTo(0, 0);
-        window.dispatchEvent(new Event('scroll'));
-      }
-    }
-    window.addEventListener('hashchange', route);
-    route();
+    if (location.hash === '#about') location.replace('/#contact');
+    if (location.hash === '#blog') location.replace('/posts/');
+    if (location.hash === '#docs') location.replace('https://docs.nobodywho.ooo/');
   })();
 </script>
 <script defer src="/assets/js/github-stars.js"></script>

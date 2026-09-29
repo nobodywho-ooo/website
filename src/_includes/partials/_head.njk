@@ -3,8 +3,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   {% if blogTheme %}
-  <meta name="color-scheme" content="dark"/>
-  <meta name="theme-color" content="#2a0709"/>
+  <meta name="color-scheme" content="light"/>
+  <meta name="theme-color" content="#e9e2d8"/>
   {% else %}
   <meta name="color-scheme" content="light dark"/>
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff"/>
@@ -34,8 +34,8 @@
 
   {% set pageTitle %}{% if title %}{{ title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}{% endset %}
   {% set pageDescription %}{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}{% endset %}
-  {% set pageUrl %}{{ site.url }}{{ page.url }}{% endset %}
-  {% set pageImage %}{% if image %}{{ site.url }}{{ image }}{% else %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endif %}{% endset %}
+  {% set pageUrl %}{{ page.url | absoluteUrl(site.url) }}{% endset %}
+  {% set pageImage %}{% if image %}{{ image | absoluteUrl(site.url) }}{% else %}{{ '/assets/favicon/android-chrome-512x512.png' | absoluteUrl(site.url) }}{% endif %}{% endset %}
 
   <link rel="canonical" href="{{ pageUrl }}"/>
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="{{ '/feed.xml' | url }}"/>
@@ -56,25 +56,28 @@
   <meta name="twitter:image" content="{{ pageImage }}"/>
 
   <!-- Structured data (JSON-LD) -->
-  {% set orgLogo %}{{ site.url }}/assets/favicon/android-chrome-512x512.png{% endset %}
+  {% set orgLogo %}{{ '/assets/favicon/android-chrome-512x512.png' | absoluteUrl(site.url) }}{% endset %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "{{ site.name }}",
-    "url": "{{ site.url }}",
-    "logo": "{{ orgLogo }}",
-    "description": "{{ site.description }}",
-    "sameAs": {{ site.footer | socialUrls | dump | safe }}
+    "@id": {{ (site.url ~ '/#organization') | jsonLd | safe }},
+    "name": {{ site.name | jsonLd | safe }},
+    "url": {{ site.url | jsonLd | safe }},
+    "logo": { "@type": "ImageObject", "url": {{ orgLogo | jsonLd | safe }} },
+    "description": {{ site.description | jsonLd | safe }},
+    "sameAs": {{ site.footer | socialUrls | jsonLd | safe }}
   }
   </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "{{ site.name }}",
-    "url": "{{ site.url }}",
-    "description": "{{ site.description }}"
+    "@id": {{ (site.url ~ '/#website') | jsonLd | safe }},
+    "name": {{ site.name | jsonLd | safe }},
+    "url": {{ site.url | jsonLd | safe }},
+    "description": {{ site.description | jsonLd | safe }},
+    "publisher": { "@id": {{ (site.url ~ '/#organization') | jsonLd | safe }} }
   }
   </script>
   {% if layout == "article" %}
@@ -82,29 +85,21 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": {{ title | dump | safe }},
-    "description": {{ (description or site.description) | dump | safe }},
-    "image": "{{ pageImage }}",
-    "datePublished": "{{ date | dateISO }}",
-    "dateModified": "{{ date | dateISO }}",
+    "headline": {{ title | jsonLd | safe }},
+    "description": {{ (description or site.description) | jsonLd | safe }},
+    "image": {{ pageImage | jsonLd | safe }},
+    "datePublished": {{ date | dateISO | jsonLd | safe }},
+    "dateModified": {{ (updated or date) | dateISO | jsonLd | safe }},
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "{{ pageUrl }}"
     },
     "author": {
-      "@type": "Organization",
-      "name": "{{ site.name }}",
-      "url": "{{ site.url }}"
+      "@type": {% if author and author != site.name %}"Person"{% else %}"Organization"{% endif %},
+      "name": {{ (author or site.author) | jsonLd | safe }}
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "{{ site.name }}",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{ orgLogo }}"
-      }
-    }{% if categories %},
-    "keywords": {{ categories | dump | safe }}{% endif %}
+    "publisher": { "@id": {{ (site.url ~ '/#organization') | jsonLd | safe }} }{% if categories %},
+    "keywords": {{ categories | jsonLd | safe }}{% endif %}
   }
   </script>
   {% endif %}

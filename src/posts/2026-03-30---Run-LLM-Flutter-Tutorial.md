@@ -61,7 +61,7 @@ void main() async {
 
 ### Picking a Model
 
-We'll use **LFM2**, a new generation of hybrid models developed by Liquid AI, specifically designed for edge AI and on-device deployment. Models must be in `.gguf` format; most will work with NobodyWho, though some may fail due to chat template formatting issues. See the [model selection guide](https://docs.nobodywho.ooo/model-selection/) for more details.
+We'll use **LFM2**, a new generation of hybrid models developed by Liquid AI, specifically designed for on-device AI. Models must be in `.gguf` format; most will work with NobodyWho, though some may fail due to chat template formatting issues. See the [model selection guide](https://docs.nobodywho.ooo/model-selection/) for more details.
 
 ### Getting the Model onto the Device
 
