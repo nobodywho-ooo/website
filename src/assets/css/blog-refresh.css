@@ -1,5 +1,5 @@
-:root { color-scheme: dark; --blog-ground: #2a0709; --blog-panel: #3d0f11; --blog-cream: #f4ede6; --blog-muted: rgba(244,237,230,.68); --blog-amber: #f2a02e; --blog-rule: rgba(244,237,230,.3); }
-body.blog-theme { margin: 0; background: var(--blog-ground); color: var(--blog-cream); font-family: 'Inter Tight', sans-serif; }
+:root { --blog-ground: #e9e2d8; --blog-panel: #f8f5f0; --blog-cream: #22181a; --blog-muted: #554c4d; --blog-amber: #97410d; --blog-rule: rgba(34,24,26,.25); }
+body.blog-theme { color-scheme: light; margin: 0; background: var(--blog-ground); color: var(--blog-cream); font-family: 'Inter Tight', sans-serif; }
 body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-theme main { font: inherit; line-height:normal; letter-spacing:normal; }
 .blog-theme *, .blog-theme *::before, .blog-theme *::after { box-sizing: border-box; }
@@ -13,29 +13,37 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-menu a { position:relative; padding:6px 0; text-decoration:none; text-transform:uppercase; font-size:clamp(14px,1.15vw,19px); font-weight:500; white-space:nowrap; }
 .blog-menu a::after { content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:currentColor; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
 .blog-menu a:hover::after,.blog-menu a:focus-visible::after,.blog-menu a[aria-current=page]::after { transform:scaleX(1); }
-.blog-right { justify-self:end; display:flex; align-items:center; gap:clamp(20px,3.2vw,64px); }
-.blog-gh { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border:1.5px solid var(--blog-amber); color:var(--blog-amber)!important; background:rgba(28,6,8,.55); font-size:clamp(13px,1.05vw,17px); font-weight:500; letter-spacing:.01em; text-decoration:none; text-transform:uppercase; transition:background .2s ease,color .2s ease; }
-.blog-gh:hover,.blog-gh:focus-visible { background:var(--blog-amber); color:var(--blog-ground)!important; }
+.blog-right { justify-self:end; display:flex; align-items:center; gap:12px; }
+.blog-gh { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border:1.5px solid var(--blog-amber); color:var(--blog-amber)!important; background:transparent; font-size:clamp(13px,1.05vw,17px); font-weight:500; letter-spacing:.01em; text-decoration:none; text-transform:uppercase; transition:background .2s ease,color .2s ease; }
+.blog-gh:hover,.blog-gh:focus-visible { background:var(--blog-amber); color:#e9e2d8!important; }
+.blog-docs { padding:11px 13px; border:1.5px solid currentColor; background:rgba(248,245,240,.65); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); color:var(--blog-cream); font-size:15px; font-weight:500; text-transform:uppercase; text-decoration:none; white-space:nowrap; }
+.blog-docs:hover { color:var(--blog-amber); }
 .blog-linkedin { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; }
+.blog-linkedin .social-icon { width:25px; height:25px; }
 .blog-linkedin:hover { color:var(--blog-amber); }
 .blog-burger { display:none; width:34px; height:22px; padding:0; border:0; background:none; cursor:pointer; gap:6px; align-content:center; }
 .blog-burger span { display:block; height:2px; background:var(--blog-cream); transition:transform .25s ease,opacity .2s ease; }
 .blog-burger[aria-expanded=true] span:nth-child(1) { transform:translateY(8px) rotate(45deg); }
 .blog-burger[aria-expanded=true] span:nth-child(2) { opacity:0; }
 .blog-burger[aria-expanded=true] span:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
-.blog-drawer { position:fixed; z-index:9; inset:0; padding:calc(76px + env(safe-area-inset-top,0px) + 24px) 24px 24px; overflow-y:auto; background:rgba(28,6,8,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+.blog-drawer { position:fixed; z-index:9; inset:0; padding:calc(76px + env(safe-area-inset-top,0px) + 24px) 24px 24px; overflow-y:auto; background:rgba(233,226,216,.96); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .blog-drawer[hidden] { display:none; }
 .blog-drawer ul { list-style:none; margin:0; padding:0; display:grid; gap:4px; }
-.blog-drawer a { display:block; padding:10px 0; border-bottom:1px solid rgba(244,237,230,.15); color:var(--blog-cream); font-size:clamp(28px,7vw,44px); font-weight:600; letter-spacing:-.01em; text-decoration:none; text-transform:uppercase; }
+.blog-drawer a { display:block; padding:10px 0; border-bottom:1px solid var(--blog-rule); color:var(--blog-cream); font-size:clamp(28px,7vw,44px); font-weight:600; letter-spacing:-.01em; text-decoration:none; text-transform:uppercase; }
 .blog-drawer a[aria-current=page] { color:var(--blog-amber); }
 .blog-drawer a > .social-icon { display:inline-block; width:18px; height:18px; margin-right:8px; vertical-align:-3px; }
 .blog-drawer .github-stars { margin-left:12px; font-size:16px; vertical-align:middle; }
 .blog-social { display:flex; gap:12px; align-items:center; }
-.blog-social a { display:inline-flex; align-items:center; padding:7px; color:var(--blog-cream); text-decoration:none; }
+.blog-social a { display:inline-flex; align-items:center; padding:7px; color:var(--blog-cream); text-decoration:none; white-space:nowrap; }
+.blog-social .social-icon { width:23px; height:23px; }
 .social-icon { width:19px; height:19px; display:block; background:currentColor; mask:var(--icon) center/contain no-repeat; }
 .blog-nav .social-icon { width:18px; height:18px; }
+.blog-nav .blog-linkedin .social-icon { width:25px; height:25px; }
 .icon-github { --icon:url('/assets/icons/brand-github.svg'); }
 .icon-linkedin { --icon:url('/assets/icons/brand-linkedin.svg'); }
+.icon-x { --icon:url('/assets/icons/brand-x.svg'); }
+.icon-bluesky { --icon:url('/assets/icons/brand-bluesky.svg'); }
+.icon-huggingface { --icon:url('/assets/icons/brand-huggingface.svg'); }
 .icon-star { --icon:url('/assets/icons/star.svg'); }
 .github-stars { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; font:500 12px 'IBM Plex Mono',monospace; }
 .github-stars[hidden] { display:none!important; }
@@ -70,11 +78,11 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-prose h3 { font-size:28px; }
 .blog-prose a { color:var(--blog-amber); text-underline-offset:3px; }
 .blog-prose img,.blog-prose video { max-width:100%; height:auto; }
-.blog-prose pre { overflow:auto; padding:20px 22px; background:#180607; border:1px solid var(--blog-rule); color:var(--blog-cream); font:14px/1.65 'IBM Plex Mono',ui-monospace,monospace; tab-size:4; }
+.blog-prose pre { overflow:auto; padding:20px 22px; background:#22181a; border:1px solid var(--blog-rule); color:#f4ede6; font:14px/1.65 'IBM Plex Mono',ui-monospace,monospace; tab-size:4; }
 .blog-prose pre:focus-visible { outline:2px solid var(--blog-amber); outline-offset:3px; }
 .blog-prose pre code { font:inherit; color:inherit; }
-.blog-prose :not(pre)>code { padding:.1em .3em; background:rgba(244,237,230,.12); font: .88em 'IBM Plex Mono',ui-monospace,monospace; }
-.blog-prose pre .token.comment,.blog-prose pre .token.prolog,.blog-prose pre .token.doctype { color:#bcaeae; }
+.blog-prose :not(pre)>code { padding:.1em .3em; background:rgba(34,24,26,.08); font: .88em 'IBM Plex Mono',ui-monospace,monospace; }
+.blog-prose pre .token.comment,.blog-prose pre .token.prolog,.blog-prose pre .token.doctype { color:#c9bebe; }
 .blog-prose pre .token.keyword,.blog-prose pre .token.operator,.blog-prose pre .token.atrule,.blog-prose pre .token.selector { color:#f3bd79; }
 .blog-prose pre .token.string,.blog-prose pre .token.attr-value,.blog-prose pre .token.inserted { color:#b6d4aa; }
 .blog-prose pre .token.number,.blog-prose pre .token.boolean,.blog-prose pre .token.constant { color:#f3d496; }
@@ -84,9 +92,12 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-prose blockquote { margin:1.5em 0; padding-left:20px; border-left:2px solid var(--blog-amber); color:var(--blog-muted); }
 .blog-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
 .blog-tags span { padding:7px 10px; border:1px solid var(--blog-rule); font-size:13px; }
-.blog-footer { padding:32px clamp(18px,4vw,64px); border-top:1px solid var(--blog-rule); display:flex; justify-content:space-between; gap:20px; color:var(--blog-muted); font-size:14px; }
+.blog-footer { padding:32px clamp(18px,4vw,64px); border-top:1px solid var(--blog-rule); display:flex; flex-direction:column; align-items:center; gap:20px; color:var(--blog-muted); font-size:14px; }
 .blog-footer a { text-decoration:none; }
-.blog-footer nav { display:flex; flex-wrap:wrap; gap:16px; }
+.blog-footer nav { display:flex; justify-content:center; flex-wrap:wrap; gap:16px; }
+.blog-footer .blog-social { justify-content:center; padding-top:16px; border-top:1px solid var(--blog-rule); }
+.blog-social a { color:var(--blog-cream); }
+.blog-social a:hover { color:var(--blog-amber); }
 @media(min-width:961px) and (max-width:1200px) {
  .blog-nav { grid-template-columns:auto 1fr auto; gap:18px; }
  .blog-nav nav { justify-self:center; }
@@ -99,6 +110,7 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
  .blog-nav > nav { display:none; }
  .blog-burger { display:grid; }
  .blog-gh { padding:9px 10px; }
+ .blog-docs { display:none; }
  .blog-gh .label,.blog-gh .github-stars { display:none!important; }
  .blog-drawer { padding-top:calc(72px + env(safe-area-inset-top,0px) + 24px); }
  .blog-social .github-stars { display:none!important; }
@@ -108,10 +120,9 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
  .blog-post { grid-template-columns:1fr; gap:12px; }
  .blog-post-cats { display:inline; margin-left:10px; }
  .blog-prose pre { padding:16px 14px; }
- .blog-footer { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:14px 8px; padding:28px 20px; }
- .blog-footer > span { grid-column:1/-1; }
- .blog-footer nav { gap:12px; white-space:nowrap; }
- .blog-footer .blog-social { gap:4px; justify-self:end; }
+ .blog-footer { gap:14px; padding:28px 20px; }
+ .blog-footer nav { gap:12px; }
+ .blog-footer .blog-social { gap:4px; flex-wrap:wrap; }
  .blog-footer .blog-social a { padding:4px; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }

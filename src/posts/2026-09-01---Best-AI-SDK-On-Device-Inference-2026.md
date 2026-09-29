@@ -4,7 +4,7 @@ date: 2026-09-01
 author: Pierre Bresson
 categories: ["Guide", "Comparison"]
 description: "A practical comparison of the best AI SDKs for running LLMs, speech, and vision models on-device in 2026"
-image: /assets/images/blog/2026/best-ai-sdk-on-device-inference/best-ai-sdk-on-device-inference.png
+image: /assets/images/blog/2026/best-ai-sdk-for-on-device-inference/on-device-ai-landscape.png
 slug: "best-ai-sdk-for-on-device-inference"
 hideInBlog: true
 ---
