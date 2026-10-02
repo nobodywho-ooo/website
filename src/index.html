@@ -295,8 +295,6 @@
   .prod h3 { font-size: clamp(26px, 2.8vw, 42px); }
   .prod .feat { border-top: 0; background: rgba(34,24,26,0.045); padding: clamp(22px, 2.6vw, 36px); border-radius: 2px; margin-top: clamp(28px, 3vw, 44px); }
   .prod .feat > div { border-top: 1px solid var(--sec-rule); padding-top: 18px; }
-  .prod .feat > div::before { content: counter(feature, decimal-leading-zero); counter-increment: feature; display: block; margin-bottom: 16px; font: 500 22px 'IBM Plex Mono', monospace; color: var(--accent-text); }
-  .prod .feat { counter-reset: feature; }
   .t-garnet .prod .feat, .t-garnet-deep .prod .feat { background: rgba(244,237,230,0.06); }
   .prod .feat h3 { color: #f2a02e; }
   .prod .note { grid-column: 1 / -1; }
@@ -526,10 +524,10 @@
     <div class="rows">
       <article class="prod" id="product-edge" role="tabpanel" aria-labelledby="tab-device">
         <div class="feat">
-          <div><h3>One SDK</h3><p>Text, vision, speech and search, built on llama.cpp and ONNX.</p></div>
-          <div><h3>Reliable tool calling</h3><p>Check arguments against each function's schema.</p></div>
-          <div><h3>Automatic setup</h3><p>Pick a model and hardware configuration for each device.</p></div>
-          <div><h3>Seven native languages</h3><p>Rust, Kotlin, Swift, Python, Dart, TypeScript and GDScript.</p></div>
+          <div><h3>Hardware aware</h3><p>Runs well on whatever it's deployed to, from phones to desktops to machines. The right model and settings are picked for each device and task.</p></div>
+          <div><h3>Access full feature set, locally</h3><p>Chat, image, audio, speech-to-text, text-to-speech, search and tool calling, all running locally. Products keep the experience users expect from Claude and other cloud AI, but running on the device itself.</p></div>
+          <div><h3>Fast and precise</h3><p>The model runs inside the app, so requests never travel to an external server and back. Long conversations keep their instructions intact.</p></div>
+          <div><h3>Works offline, stays private</h3><p>No connection, no API keys, no outages. Data never leaves the device, which makes compliance simpler from day one.</p></div>
         </div>
       </article>
       <article class="prod" id="product-on-prem" role="tabpanel" aria-labelledby="tab-prem" hidden>
