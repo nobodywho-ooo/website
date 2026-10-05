@@ -9,7 +9,7 @@ slug: "swift-bindings-release"
 
 Today, we are excited to announce the release of our Swift bindings!
 These have been in the works for some time now and are a part of our ongoing effort of making NobodyWho available
-wherever you need it. In this post, we will briefly cover some of the interesting things we dealt with during development. For the full docs please check out [docs.nobodywho.ooo](https://docs.nobodywho.ooo).
+wherever you need it. In this post, we will briefly cover some of the interesting things we dealt with during development. For the full docs please check out [docs.nobodywho.ai](https://docs.nobodywho.ai).
 
 
 ### UniFFI Bindings
@@ -99,6 +99,6 @@ With this in mind, we will soon be releasing an example app for WatchOS running 
 With this post we hope to have given you some insight into our new Swift bindings and some of the interesting work that went into creating them.
 We hope that you will find them useful and that you will stay tuned for when we release Kotlin bindings very soon!
 
-In the meantime, go try out NobodyWho in Swift: https://docs.nobodywho.ooo/swift and, if you'd like, give us a star on GitHub: https://github.com/nobodywho-ooo/nobodywho
+In the meantime, go try out NobodyWho in Swift: https://docs.nobodywho.ai/swift and, if you'd like, give us a star on GitHub: https://github.com/nobodywho-ooo/nobodywho
 
 *This post was written entirely by a human. No words were made up by the machine*

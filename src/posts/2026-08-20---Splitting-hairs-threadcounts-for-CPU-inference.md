@@ -74,7 +74,7 @@ But how do you detect how occupied the fast cores are? As you can see, we haven'
 
 ## Manual control
 
-We support the [n_threads](https://docs.nobodywho.ooo/python/chat/#cpu-threads) argument when instantiating a new LLM Chat on CPU. It defaults to the performance-core-counting logic described above.
+We support the [n_threads](https://docs.nobodywho.ai/python/chat/#cpu-threads) argument when instantiating a new LLM Chat on CPU. It defaults to the performance-core-counting logic described above.
 
 You could sweep across a range of thread counts with some workload and measure which is fastest, but that's too heavy to do on every startup for my taste.
 

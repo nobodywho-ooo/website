@@ -12,7 +12,7 @@ slug: "announcing-expo-support"
 
 NobodyWho now works with [Expo](https://expo.dev/). You can add `react-native-nobodywho` to an Expo project and ship an LLM that runs entirely on your users' phones. No API keys, no servers to babysit, no per-token bill at the end of the month, just a `.gguf` model to download.
 
-To help you get up and running quickly, we've also published a full [Expo starter example](https://github.com/nobodywho-ooo/expo-starter-example) that wires up every feature in an Expo app you can run within minutes. You can also have a look to the [docs](https://docs.nobodywho.ooo/react-native/) or give your agent everything it needs with `npx skills add https://github.com/nobodywho-ooo/nobodywho --skill nobodywho`.
+To help you get up and running quickly, we've also published a full [Expo starter example](https://github.com/nobodywho-ooo/expo-starter-example) that wires up every feature in an Expo app you can run within minutes. You can also have a look to the [docs](https://docs.nobodywho.ai/react-native/) or give your agent everything it needs with `npx skills add https://github.com/nobodywho-ooo/nobodywho --skill nobodywho`.
 
 ## Why on-device?
 

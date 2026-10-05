@@ -59,7 +59,7 @@ chat.ask("Is water wet?").asFlow().collect { token ->
 }
 ```
 
-For the full setup — picking a model, getting the `.gguf` onto the device, wiring up a streaming chat UI — see the [Kotlin documentation](https://docs.nobodywho.ooo/kotlin/).
+For the full setup — picking a model, getting the `.gguf` onto the device, wiring up a streaming chat UI — see the [Kotlin documentation](https://docs.nobodywho.ai/kotlin/).
 
 ## Tool calling with reflection
 

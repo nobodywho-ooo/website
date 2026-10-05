@@ -22,7 +22,7 @@ Ask anything, brainstorm, write, code, or research, and get answers from some of
 
 The app also supports **vision and hearing**: give it an image or an audio clip alongside your question, and multimodal models can make sense of it, all still fully offline. And thanks to NobodyWho's tool calling support, models can reach out to custom functions, like checking the weather or looking up a fact, without ever touching the cloud for your data.
 
-NobodyWho Chat is built with **React Native**, and it's fully **open-source**. The code is on GitHub for anyone curious about how a local LLM chat app comes together, or looking to build their own with [NobodyWho's React Native bindings](https://docs.nobodywho.ooo/react-native/).
+NobodyWho Chat is built with **React Native**, and it's fully **open-source**. The code is on GitHub for anyone curious about how a local LLM chat app comes together, or looking to build their own with [NobodyWho's React Native bindings](https://docs.nobodywho.ai/react-native/).
 
 ### Why NobodyWho Chat:
 - Works offline, no account required

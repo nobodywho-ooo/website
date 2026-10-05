@@ -69,7 +69,7 @@ Both snippets are each project's own documented quick-start.
 
 Cactus targets mobile and embedded. Its C and C++ core runs on wearables, smart-home devices, robots, and Raspberry Pi, with bindings for Flutter, React Native, Kotlin Multiplatform, Swift, Python, and Rust.
 
-NobodyWho targets mobile, desktop (Linux, macOS, Windows), Python, and the JVM, and ships a binding for the [Godot game engine](https://docs.nobodywho.ooo/godot/).
+NobodyWho targets mobile, desktop (Linux, macOS, Windows), Python, and the JVM, and ships a binding for the [Godot game engine](https://docs.nobodywho.ai/godot/).
 
 Both engines cover phones and wearables, and Cactus reaches further into embedded hardware like robots and Raspberry Pi. Cactus also supports desktop deployment on macOS and ARM Linux. NobodyWho ships a Godot binding and targets desktop app runtimes across Linux, macOS, and Windows through its JVM and Python bindings. Cactus has no game-engine binding. Neither ships a browser or WebAssembly target. NobodyWho has an open GitHub issue tracking WASM export, and Cactus does not target the browser.
 
