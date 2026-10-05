@@ -61,7 +61,7 @@ void main() async {
 
 ### Picking a Model
 
-We'll use **LFM2**, a new generation of hybrid models developed by Liquid AI, specifically designed for on-device AI. Models must be in `.gguf` format; most will work with NobodyWho, though some may fail due to chat template formatting issues. See the [model selection guide](https://docs.nobodywho.ooo/model-selection/) for more details.
+We'll use **LFM2**, a new generation of hybrid models developed by Liquid AI, specifically designed for on-device AI. Models must be in `.gguf` format; most will work with NobodyWho, though some may fail due to chat template formatting issues. See the [model selection guide](https://docs.nobodywho.ai/model-selection/) for more details.
 
 ### Getting the Model onto the Device
 
@@ -173,7 +173,7 @@ class MainApp extends StatelessWidget {
 }
 ```
 
-For customization options like system prompts and context size, see the [Chat documentation](https://docs.nobodywho.ooo/flutter/chat/).
+For customization options like system prompts and context size, see the [Chat documentation](https://docs.nobodywho.ai/flutter/chat/).
 
 ---
 
@@ -295,7 +295,7 @@ print(response);
 
 The model reads each tool's `description` to decide when to call it, so writing clear, specific descriptions matters.
 
-See the [Tool Calling documentation](https://docs.nobodywho.ooo/flutter/tool-calling/) for more.
+See the [Tool Calling documentation](https://docs.nobodywho.ai/flutter/tool-calling/) for more.
 
 ---
 
@@ -316,7 +316,7 @@ final chat = await nobodywho.Chat.fromPath(
 );
 ```
 
-See the [Sampling documentation](https://docs.nobodywho.ooo/flutter/sampling/) for more.
+See the [Sampling documentation](https://docs.nobodywho.ai/flutter/sampling/) for more.
 
 ---
 
@@ -369,7 +369,7 @@ Future<void> main() async {
 }
 ```
 
-See the [Embeddings & RAG documentation](https://docs.nobodywho.ooo/flutter/embeddings-and-rag/) for more.
+See the [Embeddings & RAG documentation](https://docs.nobodywho.ai/flutter/embeddings-and-rag/) for more.
 
 ---
 
@@ -383,4 +383,4 @@ You now have a complete foundation for building on-device AI features in Flutter
 - Control output style with sampling
 - Ground responses in a knowledge base with RAG
 
-From here, you can explore the full [NobodyWho documentation](https://docs.nobodywho.ooo/) or dig into the [example app](https://github.com/nobodywho-ooo/flutter-starter-example) to see everything working end to end.
+From here, you can explore the full [NobodyWho documentation](https://docs.nobodywho.ai/) or dig into the [example app](https://github.com/nobodywho-ooo/flutter-starter-example) to see everything working end to end.

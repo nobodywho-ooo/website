@@ -63,7 +63,7 @@ Not every SDK that *can* run a model on a device is a good fit for shipping a re
 What makes it stand out for on-device work specifically:
 
 - **Runs fully offline and free** — no API keys, no servers, no hidden fees
-- **A complete on-device stack, not just an LLM** — [text-to-speech](https://docs.nobodywho.ooo) (Kokoro, Pocket-tts, Supertonic), [speech-to-text](https://docs.nobodywho.ooo) (Whisper), and [voice activity detection](https://docs.nobodywho.ooo) (Silero VAD) are first-class, so you can build a full local voice assistant without gluing five libraries together.
+- **A complete on-device stack, not just an LLM** — [text-to-speech](https://docs.nobodywho.ai) (Kokoro, Pocket-tts, Supertonic), [speech-to-text](https://docs.nobodywho.ai) (Whisper), and [voice activity detection](https://docs.nobodywho.ai) (Silero VAD) are first-class, so you can build a full local voice assistant without gluing five libraries together.
 - **Multimodal input** — feed images and audio to your model.
 - **Type-safe tool calling** — it generates structured grammars from your function signatures automatically, so you never hand-write a JSON schema.
 - **Fast and efficient** — GPU-accelerated inference via **Metal and Vulkan**, with conversation-aware preemptive context shifting so you keep full conversation memory without message-length limits.
@@ -133,7 +133,7 @@ If you're building an AI feature that has to be private, work offline, cost noth
 ## Get started
 
 - **[GitHub](https://github.com/nobodywho-ooo/nobodywho)** — star the repo, open an issue, or start a discussion.
-- **[Documentation](https://docs.nobodywho.ooo)** — pick your framework and ship your first on-device model.
+- **[Documentation](https://docs.nobodywho.ai)** — pick your framework and ship your first on-device model.
 - **[Discord](https://discord.gg/qhaMc2qCYB)** — ask questions, share what you're building, and chat with the team and other NobodyWho users.
 
 Happy hacking!

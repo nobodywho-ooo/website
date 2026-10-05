@@ -54,7 +54,7 @@ for await (const token of chat.ask("Is water wet?")) {
 }
 ```
 
-For the full setup — picking a model, getting the `.gguf` onto the device, wiring up a streaming chat UI — see the [React Native documentation](https://docs.nobodywho.ooo/react-native/) and the [starter example app](https://github.com/nobodywho-ooo/react-native-starter-example) on GitHub.
+For the full setup — picking a model, getting the `.gguf` onto the device, wiring up a streaming chat UI — see the [React Native documentation](https://docs.nobodywho.ai/react-native/) and the [starter example app](https://github.com/nobodywho-ooo/react-native-starter-example) on GitHub.
 
 ## One core, many languages
 
