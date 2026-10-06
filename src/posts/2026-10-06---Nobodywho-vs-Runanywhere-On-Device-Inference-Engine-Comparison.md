@@ -164,7 +164,11 @@ RunAnywhere's large backlog suggests its maintainers are struggling to keep up, 
 | Schema-constrained structured output | NobodyWho |
 | Project health | NobodyWho |
 
+<br>
+
 Unless your project requires a console for model management, **NobodyWho is the best solution** for on-device AI, thanks to its reliable and fast inference engine.
+
+<br>
 
 *Info*
 
