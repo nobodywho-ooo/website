@@ -33,7 +33,7 @@ In practice, NobodyWho stays free no matter how much funding your company raises
 
 ## Technical comparison
 
-For this comparison, NobodyWho was added to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app). You can [check out the modified app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to verify every claim below. The focus is on significant performance and behaviour gaps that make a real difference in an app.
+For this comparison, NobodyWho was added to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app). You can [check out the modified app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to verify every claim below. These claims are highlighted thanks to the React Native SDK, but none of them are specific to this SDK: they are present in all the bindings. The focus is on significant performance and behaviour gaps that make a real difference in an app.
 
 Unfortunately, the RunAnywhere starter app does not build out of the box on macOS, so it had to be fixed to run on the latest macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions).
 
