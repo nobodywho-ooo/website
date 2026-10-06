@@ -202,7 +202,7 @@
   .stats .k { font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sec-muted); }
   .stats .v { display: flex; align-items: baseline; gap: 6px; font-size: clamp(48px, 5.4vw, 96px); line-height: 0.9; letter-spacing: -0.04em; color: var(--sec-accent); font-weight: 400; margin: 6px 0 10px; }
   .stats .v small { font-size: 0.28em; letter-spacing: 0.02em; }
-  .stats .c { font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(14px, 1.05vw, 16px); line-height: 1.45; color: var(--sec-ink); max-width: 30ch; }
+  .stats .c { font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(14px, 1.05vw, 18px); line-height: 1.45; color: var(--sec-ink); max-width: 30ch; }
   .t-amber .stats .v { color: #2a0709; }
   @media (min-width: 961px) { .stats .k { line-height: 1.25; min-height: 2.5em; } }
   @media (max-width: 960px) { .stats { grid-template-columns: 1fr 1fr; } }
@@ -321,10 +321,10 @@
   .plan .price { margin: 6px 0 4px; font-size: clamp(30px, 3vw, 48px); line-height: 1; letter-spacing: -0.02em; color: var(--sec-accent); }
   .plan .price small { font-size: 0.4em; letter-spacing: 0; margin-left: 6px; }
   .plan .tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; border-top: 1px solid var(--sec-rule); }
-  .plan .tiers li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0 0; font-size: clamp(15px, 1.1vw, 18px); }
+  .plan .tiers li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0 0; font-size: clamp(15px, 1.1vw, 20px); }
   .plan .tiers li + li { border-top: 1px solid var(--sec-rule); }
   .plan .tiers .v { color: var(--sec-accent); white-space: nowrap; }
-  .plan p { margin: 0; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.45; color: var(--sec-ink); }
+  .plan p { margin: 0; font-size: clamp(15px, 1.15vw, 20px); line-height: 1.45; color: var(--sec-ink); }
   .plan ul.inc { margin: 0; padding: 0 0 0 18px; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.5; }
   .plan a { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 15px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
     color: var(--sec-accent); text-decoration: none; }
@@ -410,21 +410,21 @@
   .t-garnet .eyebrow, .t-garnet-deep .eyebrow { color: rgba(244,237,230,0.78); }
   .faq details p { color: rgba(244,237,230,0.82); }
   /* Section headings: main titles match the menu; sub-titles introduce each part */
-  :root { --card-title: clamp(18px, 1.5vw, 22px); }
-  .plan h3, .values button { font-size: var(--card-title); }
+  :root { --card-title: clamp(19px, 1.7vw, 30px); }
+  .plan h3 { font-size: var(--card-title); }
   .statement { text-transform: uppercase; letter-spacing: -0.025em; }
-  .sub-title { margin: 0 0 clamp(28px, 3.4vw, 48px); max-width: 30ch; font-weight: 600; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+  .sub-title { margin: 0 0 clamp(28px, 3.4vw, 48px); max-width: 30ch; font-weight: 600; font-size: clamp(24px, 2.9vw, 48px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
   .sec > .sub-title { margin-left: max(0px, calc((100% - 1480px) / 2)); }
   #assurance .sub-title { margin-bottom: 0; }
 
   /* Deployment options table */
   .deploy { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .deploy th, .deploy td { text-align: left; vertical-align: top; padding: 18px 20px 20px 0; border-top: 1px solid var(--sec-rule); font-size: clamp(15.5px, 1.15vw, 18px); line-height: 1.45; }
+  .deploy th, .deploy td { text-align: left; vertical-align: top; padding: 18px 20px 20px 0; border-top: 1px solid var(--sec-rule); font-size: clamp(15.5px, 1.15vw, 20px); line-height: 1.45; }
   .deploy thead td, .deploy thead th { border-top: 0; }
-  .deploy thead th { padding-bottom: 22px; font-weight: 600; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.1; letter-spacing: -0.015em; text-transform: uppercase; }
+  .deploy thead th { padding-bottom: 22px; font-weight: 600; font-size: clamp(18px, 1.6vw, 28px); line-height: 1.1; letter-spacing: -0.015em; text-transform: uppercase; }
   .deploy thead .product-icon { margin-bottom: 16px; }
   .deploy tbody tr:last-child > * { border-bottom: 1px solid var(--sec-rule); }
-  .deploy tbody th { width: 22%; font: 500 13px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-text); padding-top: 21px; }
+  .deploy tbody th { width: 22%; font: 500 clamp(13px, 0.9vw, 14px) 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-text); padding-top: 21px; }
   .deploy td + td, .deploy th + th { padding-left: 20px; border-left: 1px solid var(--sec-rule); }
   .deploy thead th + th { border-left-color: transparent; }
   .deploy-note { margin: clamp(24px, 3vw, 40px) auto 0; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; color: rgba(34,24,26,0.86); }
@@ -451,7 +451,7 @@
   .assure > div { border-top: 1px solid var(--sec-rule); padding-top: 22px; }
   .assure .product-icon { width: 30px; height: 30px; margin-bottom: 18px; }
   .assure h3 { margin: 0 0 10px; font-weight: 600; font-size: var(--card-title); line-height: 1.2; letter-spacing: -0.01em; }
-  .assure p { margin: 0; font-size: clamp(15.5px, 1.15vw, 18px); line-height: 1.5; color: rgba(244,237,230,0.82); max-width: 40ch; }
+  .assure p { margin: 0; font-size: clamp(15.5px, 1.15vw, 20px); line-height: 1.5; color: rgba(244,237,230,0.82); max-width: 40ch; }
   #assurance .cta-row { margin-top: clamp(40px, 5vw, 64px); }
   .icon-list-check { --icon: url('/assets/icons/list-check.svg'); }
   .icon-lifebuoy { --icon: url('/assets/icons/lifebuoy.svg'); }
