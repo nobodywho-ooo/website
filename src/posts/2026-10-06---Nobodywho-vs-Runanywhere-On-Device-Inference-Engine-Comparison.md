@@ -3,59 +3,63 @@ title:  "NobodyWho vs RunAnywhere: On-Device Inference Engine Comparison"
 date: 2026-10-06
 author: Pierre Bresson
 categories: ["Technical","Comparison"]
-description: "NobodyWho vs RunAnywhere compared on performances, features, platforms support and licensing."
+description: "NobodyWho vs RunAnywhere compared on performance, features, platform support and licensing."
 slug: "nobodywho-vs-runanywhere"
 ---
 
-NobodyWho and RunAnywhere are both inference engines that lets you run LLMs locally, with multiple languages and frameworks support. This comparison is a deep dive into technical features and performances, platform coverage and licensing.
+NobodyWho and RunAnywhere are both inference engines that let you run LLMs locally, with bindings for many languages and frameworks. This comparison takes a close look at their features, performance, platform coverage and licensing.
 
-### Engine, model format and features
+## Engine, model format and features
 
-[NobodyWho](https://github.com/nobodywho-ooo/nobodywho) runs any GGUF model through llama.cpp, straight from Hugging Face, a URL, or a local path, with no conversion step.
+[NobodyWho](https://github.com/nobodywho-ooo/nobodywho) runs any GGUF model through llama.cpp, loaded straight from Hugging Face, a URL or a local path, with no conversion step.
 
-[RunAnywhere](https://github.com/RunanywhereAI/runanywhere-sdks) also used llama.cpp and offers to register MLX/QHexRT backends, but registrering them hasn't changed the following results.
+[RunAnywhere](https://github.com/RunanywhereAI/runanywhere-sdks) also uses llama.cpp, and can additionally register MLX and QHexRT (Qualcomm Hexagon NPU) backends. Registering them did not change any of the results below.
 
-The two libraries have hardware acceleration and similar features: text generation, multimodal input, embeddings, RAG, speech-to-text, text-to-speech, structured output, voice activity dectection and tool calling.
+Both libraries offer hardware acceleration and a similar feature set: text generation, multimodal input, embeddings, RAG, speech-to-text, text-to-speech, structured output, voice activity detection and tool calling.
 
-### Platform support
+## Platform support
 
-NobodyWho & RunAnywhere support Kotlin, Swift, Python, Flutter, React Native and Expo. Runanywhere also has support for Electron and WebAssembly, while NobodyWho has [started to work](https://github.com/nobodywho-ooo/nobodywho/pull/755) on WebAssembly which will be available soon, and ships on Godot, and runs on [Apple Vision Pro](https://apps.apple.com/us/app/nobodywho-eyes/id6771770762) and [Apple Watch](https://apps.apple.com/us/app/nobodywho-wrist/id6762020355?platform=watch).
+NobodyWho and RunAnywhere both support Kotlin, Swift, Python, Flutter, React Native and Expo.
 
-### Licensing
+RunAnywhere also supports Electron and WebAssembly. NobodyWho has [started work](https://github.com/nobodywho-ooo/nobodywho/pull/755) on WebAssembly, which will be available soon. NobodyWho also ships for Godot, and runs on [Apple Vision Pro](https://apps.apple.com/us/app/nobodywho-eyes/id6771770762) and [Apple Watch](https://apps.apple.com/us/app/nobodywho-wrist/id6762020355?platform=watch).
 
-NobodyWho uses [EUPL-1.2](https://github.com/nobodywho-ooo/nobodywho/blob/main/LICENSE), an OSI-approved open-source licence. Its repository says proprietary and commercial projects are allowed free of charge. If a modified version of NobodyWho itself is distributed, those engine changes must be open sourced.
+## Licensing
 
-RunAnywhere describes its licence as ["RunAnywhere License (Apache 2.0 based, with additional commercial-use terms)."](https://github.com/RunanywhereAI/runanywhere-sdks/blob/main/LICENSE) Its published licence says the free grant applies to organizations with both "Less than $1,000,000 USD in total funding" and "Less than $1,000,000 USD in gross annual revenue." For organizations outside the listed criteria, it says they "must obtain a separate commercial license." If either threshold is later exceeded, the licence says "a commercial license must be obtained within thirty (30) days."
+NobodyWho uses [EUPL-1.2](https://github.com/nobodywho-ooo/nobodywho/blob/main/LICENSE), an OSI-approved open-source licence, allowing proprietary and commercial projects to use the engine free of charge. However, if you distribute a modified version of NobodyWho itself, those engine changes must be open sourced.
 
-This means that NobodyWho stays free no matter how much funding your company raises or revenue it earns, because its EUPL-1.2 licence sets no funding or revenue ceiling. RunAnywhere is free only while your organization stays under "$1,000,000 in total funding" and "$1,000,000 in gross annual revenue", and once it passes either figure it requires a paid commercial licence.
+RunAnywhere describes its licence as ["RunAnywhere License (Apache 2.0 based, with additional commercial-use terms)."](https://github.com/RunanywhereAI/runanywhere-sdks/blob/main/LICENSE) For companies, the free grant only applies to organizations with both "Less than $1,000,000 USD in total funding" and "Less than $1,000,000 USD in gross annual revenue." Organizations outside the listed criteria "must obtain a separate commercial license." If either threshold is exceeded later on, "a commercial license must be obtained within thirty (30) days."
+
+In practice, NobodyWho stays free no matter how much funding your company raises or how much revenue it earns. RunAnywhere is free for a company only while it stays under $1M in total funding and $1M in annual revenue. Once it passes either figure, a paid commercial licence is required.
 
 ## Technical comparison
 
-To do this comparison, the [Runanywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) has been used and NobodyWho library added. Feel free to checkout the repo and run the app on your machine to verify all the claims. The focus is on significant performance & optimization gaps, that makes a big difference at the end of the day, not on a few ms performance differences.
+For this comparison, NobodyWho was added to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app). You can [check out the modified app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to verify every claim below. The focus is on significant performance and behaviour gaps that make a real difference in an app.
 
-Unfortunately, Runanywhere starter app isn’t working out of the box unfortunately on macOS, so it had to be fixed to work on latest macOS 27. Both the app and the latest Runanywhere library are using outdated versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63) instead of current [0.87](https://reactnative.dev/versions)).
+Unfortunately, the RunAnywhere starter app does not build out of the box on macOS, so it had to be fixed to run on the latest macOS 27. Both the starter app and the latest RunAnywhere SDK library use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions).
 
 ### NobodyWho is faster
 
-The speed test was done with llama.cpp on backend both librairies and has been conducted on an iPhone Air and Samsung S25 with Qwen3 0.6B model with same configuration.
+The speed tests were done on an iPhone Air with the Qwen3 0.6B model and using the same configuration.
 
-The difference is minimal on the first prompt, and invisible for a human eye:
-- RunAnywhere reaches 71 tokens per second (tok/sec) and time to first token (TTFT) at 217 ms.
-- NobodyWho performs better, with 74.5 tok/sec and TTFT at 46 ms
+On a single prompt, generation speed is almost identical, and both answers start in under a quarter of a second:
+- RunAnywhere generates 71.2 tokens per second (tok/s), with a time to first token (TTFT) of 217 ms.
+- NobodyWho generates 74.5 tok/s, with a TTFT of 46 ms.
 
 ![Single-turn speed test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn-speed.png)
 
-However, the big problem is that the **TTFT grow linearly over time for Runanywhere** as you can see below on the screenshot.
+The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over a 20-turn conversation, it climbs from 147 ms to 471 ms (3.2× slower), while NobodyWho stays between 33 ms and 60 ms.
 
 ![Multi-turn speed test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn-ttft.png)
 
-This happens because on every turn, Runanywhere starts from an empty cache and re-reads system prompt, the entire chat history and the new message. It means that **the longer the conversation, the slower the response**.
+This happens because on every turn, RunAnywhere starts from an empty cache and re-processes the system prompt, the entire chat history and the new message. NobodyWho keeps the conversation in its KV cache and only processes the new message. With RunAnywhere, **the longer the conversation, the slower the response**.
 
-### Half-baked multimodal support
+To be fair, NobodyWho currently shows the same growing TTFT with hybrid models like Qwen3.5, whose cache can't yet be reused between turns in the same way. A [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is in progress.
 
-Multimodal LLM like Gemma 4 can consume image and and/or audio files with a prompt. Let’s see how it’s done on both librairies.
+### Limited multimodal support
 
-With Runanywhere, you cannot analyze an audio file you can analyze **only one image** at the time:
+Multimodal LLMs like Gemma 4 can take images and/or audio files along with a prompt. Let's see how each library handles them.
+
+With RunAnywhere, you cannot send an audio file to the model, and you can only send **one image at a time**:
 
 ```ts
 // node_modules/@runanywhere/core/src/Public/Api/Vlm.ts
@@ -65,24 +69,25 @@ export const vlm = {
     image: ImageInput,
     prompt: string,
     options?: LlmOptions
-  ): Promise<GenerationResult> { ... }
+  ): Promise<GenerationResult> { ... },
 
   generateStream(
     image: ImageInput,
     prompt: string,
     options?: LlmOptions
-  ): AsyncIterable<GenerationEvent> { … }}
+  ): AsyncIterable<GenerationEvent> { ... },
+};
 ```
 
-As you can see in `generate` and `generateStream`, the image is not optional, so every time the user wants to ask something about the image, the image needs to be analyzed again and again, instead of continuing the conversation in a natural way.
+In both `generate` and `generateStream`, the image is a required argument. Every follow-up question about the same image means sending it again and having the model process it again, instead of continuing the conversation naturally.
 
-It is also **not possible to interleave** image and audio files in a prompt, which can be done with NobodyWho:
+It is also **not possible to interleave** several images and audio files in a single prompt, which NobodyWho allows:
 
 ```ts
 const response = await chat
   .ask(
     new Prompt([
-      Prompt.Text("Tell me what you see in the image and what you hear in the audio."),
+      Prompt.Text("Tell me what you see in the images and what you hear in the audio."),
       Prompt.Image("/path/to/dog.png"),
       Prompt.Image("/path/to/cat.png"),
       Prompt.Audio("/path/to/sound.mp3"),
@@ -91,17 +96,19 @@ const response = await chat
   .completed();
 ```
 
-### Tool calling messages are dropped
+### Tool calls are dropped from the history
 
-Tool calling allow your LLM to call predefined functions when needed. Let’s say you want to know, the weather, then if the LLM get passed a `get_weather` function, it will call it whenever the user if asking for the weather.
+Tool calling lets your LLM call predefined functions when needed. For example, if you give the LLM a `get_weather` function, it will call it whenever the user asks about the weather.
 
-Both librairies are doing this well, but Runanywhere is not capable to reading any previous tool calling previously made. This lead to incoherent answers.
+Both libraries handle properly a tool call, but RunAnywhere does not keep previous tool calls and their results in the conversation history, meaning that a follow-up questions get answered incorrectly.
 
 ![Tool-calling test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/tool-calling.png)
 
-### Structured Output
+The screenshot above compares the official NobodyWho and RunAnywhere apps, both running Qwen3 4B. After a `get_weather` call, NobodyWho answers "What is the humidity?" from the earlier result, while RunAnywhere has forgotten it and asks for the location again.
 
-In some use cases it might be useful to let the LLM generate JSON output. Here the problem is that RunAnywhere makes optional keys mandatory and sorts alphabetically.
+### Structured output
+
+Some use cases need the LLM to produce JSON that follows a given schema. NobodyWho turns the JSON schema into a grammar and constrains generation to it, so the output always matches the schema. RunAnywhere [generates freely and validates afterwards](https://github.com/RunanywhereAI/runanywhere-sdks/blob/main/bindings/react-native/packages/core/src/Public/Api/Llm.ts). In practice, RunAnywhere filled in an optional key and sorted the keys alphabetically.
 
 ```ts
 const SCHEMA = JSON.stringify({
@@ -110,57 +117,56 @@ const SCHEMA = JSON.stringify({
     name: { type: 'string' },
     age: { type: 'integer', minimum: 0, maximum: 130 },
     nickname: { type: 'string' },
-    tags: { 
-      type: 'array', 
-      items: { type: 'string' }, 
-      minItems: 1 
+    tags: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1
     },
   },
   required: ['name', 'age', 'tags'],
 });
 
 const result = await RunAnywhere.llm.generateStructured(
-'Give me a short JSON profile of Ada Lovelace. Only include a nickname if she had a well-known one.', 
-SCHEMA, 
-{ temperature: 0.1 },
-'validationOnly'
+  'Give me a short JSON profile of Ada Lovelace. Only include a nickname if she had a well-known one.',
+  SCHEMA,
+  { temperature: 0.1 },
+  'validationOnly'
 );
 ```
 
-As you can see below, the result is innacurate, and you can also check by yourself in the Structured Output section of the app:
+Here is the result, which you can reproduce in the Structured Output section of the app:
 
 ```json
 {
- "age": 84, // automatic sorting: should not be first
- "name": "Ada Lovelace", // should not have been defined
- "nickname": "The Lady of the Lumberjack's Hat", 
- "tags": ["computer scientist", "inventor", "mathematician"]
+  "age": 84, // automatic sorting: should not be first
+  "name": "Ada Lovelace",
+  "nickname": "The Lady of the Lumberjack's Hat", // should not have been defined
+  "tags": ["computer scientist", "inventor", "mathematician"]
 }
 ```
 
-### Project Health
+### Project health
 
-The Runanywhere SDK on Github has 83 issues and 61 open pull-requests while NobodyWho has 6 issues and 9 open pull-requests opened. Both librairies shares similar total numbers of download across the different bindings: 35k for NobodyWho and 39k for Runanywhere (data gathered from [npm](https://www.npmjs.com)/[pub.dev](https://pub.dev/) and others package registries). The stars number is not a valid metric comparison here, as Runanywhere has been spotted buying [fake stars and spamming the Github community](https://news.ycombinator.com/item?id=47163885).
+The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been [reported to scrape GitHub activity to send unsolicited marketing emails](https://news.ycombinator.com/item?id=47163885) to developers, which makes star counts an unreliable signal.
 
-The growing backlog from Runanywhere suggests that the maintainers are struggling to keep up with issues, while NobodyWho small backlog reflects a well maintained project where bugs are solved quickly rather than left to accumulate.
+RunAnywhere's growing backlog suggests its maintainers are struggling to keep up, while NobodyWho's small backlog reflects a project where bugs get fixed quickly rather than left to accumulate.
 
-### **Choosing between NobodyWho and RunAnywhere**
+## Choosing between NobodyWho and RunAnywhere
 
 | Requirement | Engine |
 | :---- | :---- |
-| OSI open-source licence with no revenue ceiling  | NobodyWho |
-| Optional Console for model management  | RunAnywhere |
-| Wide platform & language support  | Both |
-| Fast inference  | NobodyWho |
-| Multimodal support  | NobodyWho |
-| Tool calling  | NobodyWho |
-| Structured Output  | NobodyWho |
-| Project Health  | NobodyWho |
+| OSI open-source licence with no revenue ceiling | NobodyWho |
+| Optional console for model management | RunAnywhere |
+| Wide platform and language support | Both |
+| Fast multi-turn conversations | NobodyWho |
+| Multimodal support | NobodyWho |
+| Tool calling | NobodyWho |
+| Schema-constrained structured output | NobodyWho |
+| Project health | NobodyWho |
 
-Unless your project requires a console for model management, NobodyWho is the best solution for on-device AI, thanks to a reliable and fast inference engine.
+Unless your project requires a console for model management, NobodyWho is the best solution for on-device AI, thanks to its reliable and fast inference engine.
 
-*Disclamers*
+*Disclaimers*
 
-- This article was written the 6th of October and the results might have changed depending when you are reading this article, on both NobodyWho and Runanywhere sides.
-- NobodyWho also has this linear growth problem in multi-turn TTFT for hybrid models like Qwen3.5, but a [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is being implemented.
-- `@runanywhere` dependencies in `package.json` are set to v0.20.19, but [updating them](https://github.com/pielouNW/runanywhere-react-native-starter-app/tree/feat/ra-v0.20.27) to latest v0.20.27 also didn’t change the results
+- This article was written on October 6, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
+- The `@runanywhere` dependencies in `package.json` are set to v0.20.19. [Updating them](https://github.com/pielouNW/runanywhere-react-native-starter-app/tree/feat/ra-v0.20.27) to the latest published version, v0.20.27, did not change the results.
