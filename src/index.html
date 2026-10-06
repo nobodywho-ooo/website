@@ -154,13 +154,13 @@
   .sec-sub { margin: 0; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.3; letter-spacing: -0.01em; color: var(--sec-muted); max-width: 40ch; }
   .sec-title { margin: 0 0 clamp(28px, 4vw, 56px); font-weight: 600; text-transform: uppercase; letter-spacing: -0.02em;
     font-size: clamp(30px, 3.6vw, 56px); line-height: 1; }
-  #product, #pricing, #contact, #faq, .prod { scroll-margin-top: var(--nav-h); }
+  #product, #pricing, #contact, #faq { scroll-margin-top: var(--nav-h); }
   .eyebrow { margin: 0 0 18px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sec-muted); }
   .mono { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
 
   /* mission: eyebrow + large statement, then image-less two column */
   .statement { margin: 0; max-width: 24ch; font-weight: 600; font-size: clamp(30px, 4.6vw, 68px); line-height: 1.02; letter-spacing: -0.03em; text-wrap: balance; }
-  .statement + .cols { margin-top: clamp(32px, 5vw, 72px); }
+  .statement + .cols { margin-top: clamp(28px, 3.4vw, 48px); }
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
   .cols p { margin: 0 0 1em; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; color: var(--sec-ink); max-width: 60ch; }
   .cols p:last-child { margin-bottom: 0; }
@@ -230,22 +230,25 @@
   .display .w.r { text-align: right; margin-top: clamp(24px, 6vw, 96px); }
   .display .net { display: block; width: min(92vw, 1180px); height: auto; margin: calc(-0.55em) auto 0 auto; overflow: visible; }
   .display .net .e line { stroke: var(--sec-ink); stroke-opacity: .22; stroke-width: 1; }
-  .display .net .spine line { stroke: #f2a02e; stroke-opacity: .55; stroke-width: 1.6; stroke-dasharray: 6 8; }
+  .display .net .spine line, .display .net .spine path { fill: none; stroke: #f2a02e; stroke-opacity: .55; stroke-width: 1.6; stroke-dasharray: 6 8; }
   .display .net .n { fill: var(--sec-bg); stroke: var(--sec-ink); stroke-width: 1.4; }
   .display .net .hub .core { fill: #f2a02e; }
   .display .net .hub .halo { fill: none; stroke: #f2a02e; stroke-width: 1.5; stroke-opacity: .7; }
   .display .net .hub .halo2 { fill: none; stroke: #f2a02e; stroke-width: 1; stroke-opacity: .3; }
   .display .net .hub text { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .14em; fill: var(--sec-ink); fill-opacity: .7; }
-  .display .net .signal { fill: #f2a02e; opacity: 0; offset-path: path('M 180 285 L 560 180 L 930 70'); offset-rotate: 0deg; }
+  .display .net .signal { fill: #f2a02e; opacity: 0; offset-path: path('M 560 150 L 200 280'); offset-rotate: 0deg; }
+  .display .net .signal:nth-child(2) { offset-path: path('M 560 150 L 900 280'); }
+  .display .net .signal:nth-child(3) { offset-path: path('M 200 280 Q 550 360 900 280'); }
   @keyframes halo { 0%,100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.18); opacity: .25; } }
   @keyframes signal-flow { 0% { offset-distance: 0%; opacity: 0; } 12% { opacity: 1; } 82% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
   @keyframes spine-flow { to { stroke-dashoffset: -28; } }
   @media (prefers-reduced-motion: no-preference) {
     .display.is-active .net .hub .halo { animation: halo 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
     .display.is-active .net .hub:nth-of-type(2) .halo { animation-delay: 1.2s; } .display.is-active .net .hub:nth-of-type(3) .halo { animation-delay: 2.4s; }
-    .display.is-active .net .spine line { animation: spine-flow 1.8s linear infinite; }
+    .display.is-active .net .spine line, .display.is-active .net .spine path { animation: spine-flow 1.8s linear infinite; }
     .display.is-active .net .signal { animation: signal-flow 4.8s linear infinite; }
     .display.is-active .net .signal:nth-child(2) { animation-delay: -2.4s; }
+    .display.is-active .net .signal:nth-child(3) { animation-delay: -1.2s; }
   }
 
 
@@ -264,41 +267,6 @@
   .t-amber .link-boxes a:hover { background: #2a0709; color: #f4ede6; }
   .t-amber .link-boxes a:hover span { color: rgba(244,237,230,0.75); }
 
-  /* The Assurance Layer supports either deployment above it. */
-  .product-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 22px auto 16px; }
-  .product-tabs button { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 192px; padding: 22px; border: 1px solid var(--sec-rule); background: transparent; color: var(--sec-ink); font: inherit; text-align: left; cursor: pointer; }
-  .product-tabs button:hover, .product-tabs button[aria-selected="true"] { background: #f8f5f0; border-color: var(--sec-ink); }
-  .product-tabs .product-icon { margin: 0 0 6px; }
-  .product-tabs strong { font-size: clamp(19px, 2vw, 28px); font-weight: 600; line-height: 1.1; text-transform: uppercase; }
-  .product-tabs small { font-size: 15px; line-height: 1.3; color: var(--sec-muted); }
-  .product-tab-number { font: 500 12px 'IBM Plex Mono', monospace; color: var(--accent-text); }
-  .product-tabs .product-foundation { grid-column: 1 / -1; display: grid; grid-template-columns: 34px auto minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; gap: 4px 16px; min-height: 108px; border-top: 3px solid var(--accent-text); background: rgba(151,65,13,0.06); }
-  .product-tabs .product-foundation .product-icon { grid-column: 1; grid-row: 1 / 3; margin: 0; }
-  .product-tabs .product-foundation .product-tab-number { grid-column: 2; grid-row: 1; }
-  .product-tabs .product-foundation strong { grid-column: 2; grid-row: 2; }
-  .product-tabs .product-foundation small { grid-column: 3; grid-row: 1 / 3; justify-self: end; max-width: 36ch; text-align: right; }
-  @media (min-width: 761px) {
-    .product-tabs button:nth-child(-n+2) { position: relative; }
-    .product-tabs button:nth-child(-n+2)::after { content: ""; position: absolute; bottom: -13px; left: 50%; height: 12px; width: 1px; background: var(--sec-rule); }
-  }
-  @media (max-width: 760px) {
-    .product-tabs { grid-template-columns: 1fr; gap: 8px; }
-    .product-tabs button, .product-tabs .product-foundation { display: grid; grid-template-columns: 28px minmax(0, 1fr); grid-template-rows: auto; gap: 2px 12px; min-height: 0; padding: 12px 16px; }
-    .product-tabs .product-icon, .product-tabs .product-foundation .product-icon { grid-column: 1; grid-row: 1 / 4; width: 26px; height: 26px; margin: 0; align-self: center; }
-    .product-tabs .product-tab-number, .product-tabs strong, .product-tabs small { grid-column: 2; margin: 0; }
-    .product-tabs .product-foundation small { grid-column: 2; grid-row: 3; justify-self: start; max-width: none; text-align: left; }
-  }
-  .prod[hidden] { display: none; }
-  .prod { border-top: 2px solid var(--sec-ink); padding-top: 30px; padding-bottom: clamp(56px, 7vw, 112px); row-gap: 0; }
-  .prod + .prod { margin-top: 0; }
-  .prod .idx { display: block; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .12em; color: #f2a02e; margin-bottom: 14px; }
-  .prod h3 { font-size: clamp(26px, 2.8vw, 42px); }
-  .prod .feat { border-top: 0; background: rgba(34,24,26,0.045); padding: clamp(22px, 2.6vw, 36px); border-radius: 2px; margin-top: clamp(28px, 3vw, 44px); }
-  .prod .feat > div { border-top: 1px solid var(--sec-rule); padding-top: 18px; }
-  .t-garnet .prod .feat, .t-garnet-deep .prod .feat { background: rgba(244,237,230,0.06); }
-  .prod .feat h3 { color: #f2a02e; }
-  .prod .note { grid-column: 1 / -1; }
-  .prod:hover { border-top-color: var(--sec-ink); }
   /* CTA / footer */
   .cta { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; }
   .cta h2 { margin: 0; font-weight: 600; font-size: clamp(28px, 4vw, 60px); line-height: 1.02; letter-spacing: -0.03em; max-width: 18ch; text-wrap: balance; }
@@ -345,26 +313,7 @@
   .sub-hero h1 { margin: 0; font-weight: 600; font-size: clamp(38px, 6.4vw, 104px); line-height: 0.96; letter-spacing: -0.035em; max-width: 14ch; text-wrap: balance; }
   .sub-hero .lead { margin: clamp(24px, 3vw, 44px) 0 0; max-width: 46ch; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.35; color: var(--sec-muted); }
   .sub-hero .lead b { color: var(--sec-ink); font-weight: 500; }
-  .prod { scroll-margin-top: calc(var(--nav-h) + 16px); padding: 0; border-top: 0; }
-  .prod h3 { margin: 0; font-weight: 600; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; }
-  .prod .sub { margin: 10px 0 0; font-size: clamp(16px, 1.25vw, 20px); color: var(--sec-muted); max-width: 28ch; }
-  .prod p { margin: 0 0 1em; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; max-width: 62ch; }
-  .prod p:last-child { margin-bottom: 0; }
-  .prod ul.props { margin-top: 26px; grid-template-columns: 1fr 1fr; gap: 18px clamp(24px, 3vw, 48px); }
-  .prod ul.props li { max-width: none; }
-  .prod ul.props li b { display: block; font-weight: 500; font-family: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.01em; margin-bottom: 2px; }
-  .prod ul.props li span { color: var(--sec-muted); font-size: 0.92em; }
 
-  /* feature grid under a product row (Product subpage) */
-  .prod .feat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.5vw, 36px) clamp(24px, 3vw, 48px);
-    margin-top: 0; padding: clamp(20px, 2.5vw, 36px) 22px; }
-  .prod .feat.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .prod .feat h3 { margin: 0 0 10px; font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500;
-    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sec-accent); }
-  .prod .feat p { margin: 0; font-size: clamp(15px, 1.1vw, 18px); line-height: 1.5; max-width: 44ch; }
-  .prod .note { grid-column: 1 / -1; margin: clamp(20px, 2.5vw, 36px) 0 0; font-style: italic; font-size: clamp(15px, 1.1vw, 18px); line-height: 1.5; color: var(--sec-muted); max-width: 90ch; }
-  @media (max-width: 960px) { .prod .feat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 640px) { .prod .feat, .prod .feat.two { grid-template-columns: 1fr; } }
   .pricing { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); margin-top: clamp(32px, 4vw, 56px); }
   .plan { border-top: 1px solid var(--sec-rule); padding-top: 22px; display: grid; gap: 14px; align-content: start; }
   .plan .n { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sec-muted); }
@@ -382,7 +331,6 @@
   .plan a::after { content: "\203A"; font-size: 1.5em; line-height: 0; transform: translateY(-1px); }
   .t-amber .plan a, .t-amber .plan .price, .t-amber .plan .tiers .v { color: var(--sec-ink); }
   @media (max-width: 960px) { .pricing { grid-template-columns: 1fr; } }
-  @media (max-width: 760px) { .prod { grid-template-columns: 1fr; } .prod ul.props { grid-template-columns: 1fr; } }
 
   .link-boxes { list-style: none; padding: 0 !important; margin: 18px 0 8px !important; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .link-boxes li { margin: 0 !important; display: grid; }
@@ -424,8 +372,8 @@
   .btn.ghost:hover { background: #f2a02e; color: #2a0709; }
 
   /* ---- polish ---- */
-  .row, .prod, .link-boxes a { transition: border-color .25s ease; }
-  .row:hover, .prod:hover { border-top-color: var(--sec-accent); }
+  .row, .link-boxes a { transition: border-color .25s ease; }
+  .row:hover { border-top-color: var(--sec-accent); }
   .more::after, .plan a::after { transition: transform .2s ease; display: inline-block; }
   .more:hover::after, .plan a:hover::after { transform: translateX(4px); }
   .faq summary:hover { color: var(--sec-accent); }
@@ -440,9 +388,7 @@
   :root { --accent-text: #f2a02e; }
   .t-paper, .t-white, .t-stone, .t-amber { --accent-text: #97410d; }
   .t-garnet, .t-garnet-deep, .t-ink { --accent-text: #f2a02e; }
-  .prod .feat h3, .prod .idx, .plan .n, .stats .k, .facts .k { letter-spacing: .09em; }
-  .prod .feat h3 { font-size: 14px; color: var(--accent-text); }
-  .prod .idx { font-size: 14px; color: var(--accent-text); }
+  .plan .n, .stats .k, .facts .k { letter-spacing: .09em; }
   .eyebrow { font-size: 14px; }
   .stats .k, .facts .k { font-size: 13px; }
   .foot-links a:hover, .row .more:hover, .row .more:focus-visible, .faq summary:hover { color: var(--accent-text); }
@@ -451,18 +397,85 @@
   .t-amber .btn.ghost { color: #2a0709; }
   .link-boxes b { font-size: 17px; }
   .link-boxes span { font-size: 13px; }
-  .props li, .prod .feat p { font-size: clamp(15.5px, 1.15vw, 18px); }
-  .row .sub, .prod .sub { color: var(--sec-muted); }
+  .props li { font-size: clamp(15.5px, 1.15vw, 18px); }
+  .row .sub { color: var(--sec-muted); }
   .sec-sub, .sub-hero .lead { color: var(--sec-muted); }
   .sec > .sec-title, .sec > .eyebrow { margin-left: auto; margin-right: auto; }
   .sec > .sec-sub, .sec > .statement { margin-left: max(0px, calc((100% - 1480px) / 2)); margin-right: 0; }
   .t-paper .sec-sub, .t-white .sec-sub { color: rgba(34,24,26,0.78); }
-  .t-paper .row .sub, .t-paper .prod .sub, .t-paper .prod .feat p { color: rgba(34,24,26,0.86); }
+  .t-paper .row .sub { color: rgba(34,24,26,0.86); }
   .t-paper .stats .c, .t-amber .stats .c { color: inherit; }
   .t-amber .plan p, .t-amber .plan .tiers li, .t-amber .plan ul.inc { color: #2a0709; }
   .t-amber .stats .k, .t-amber .facts .k, .t-amber .eyebrow, .t-amber .plan .n { color: rgba(42,7,9,0.8); }
   .t-garnet .eyebrow, .t-garnet-deep .eyebrow { color: rgba(244,237,230,0.78); }
   .faq details p { color: rgba(244,237,230,0.82); }
+  /* Section headings: main titles match the menu; sub-titles introduce each part */
+  :root { --card-title: clamp(18px, 1.5vw, 22px); }
+  .plan h3, .values button { font-size: var(--card-title); }
+  .statement { text-transform: uppercase; letter-spacing: -0.025em; }
+  .sub-title { margin: 0 0 clamp(28px, 3.4vw, 48px); max-width: 30ch; font-weight: 600; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+  .sec > .sub-title { margin-left: max(0px, calc((100% - 1480px) / 2)); }
+  #assurance .sub-title { margin-bottom: 0; }
+
+  /* Deployment options table */
+  .deploy { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .deploy th, .deploy td { text-align: left; vertical-align: top; padding: 18px 20px 20px 0; border-top: 1px solid var(--sec-rule); font-size: clamp(15.5px, 1.15vw, 18px); line-height: 1.45; }
+  .deploy thead td, .deploy thead th { border-top: 0; }
+  .deploy thead th { padding-bottom: 22px; font-weight: 600; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.1; letter-spacing: -0.015em; text-transform: uppercase; }
+  .deploy thead .product-icon { margin-bottom: 16px; }
+  .deploy tbody tr:last-child > * { border-bottom: 1px solid var(--sec-rule); }
+  .deploy tbody th { width: 22%; font: 500 13px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-text); padding-top: 21px; }
+  .deploy td + td, .deploy th + th { padding-left: 20px; border-left: 1px solid var(--sec-rule); }
+  .deploy thead th + th { border-left-color: transparent; }
+  .deploy-note { margin: clamp(24px, 3vw, 40px) auto 0; font-size: clamp(16px, 1.25vw, 20px); line-height: 1.45; color: rgba(34,24,26,0.86); }
+  .deploy-note a { color: var(--sec-ink); font-weight: 500; text-underline-offset: 3px; }
+  .deploy-note a:hover { color: var(--accent-text); }
+  @media (max-width: 640px) {
+    .deploy, .deploy tbody, .deploy tr { display: block; }
+    .deploy thead { display: none; }
+    .deploy tbody tr { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; padding: 16px 0 18px; border-top: 1px solid var(--sec-rule); }
+    .deploy tbody tr:last-child { border-bottom: 1px solid var(--sec-rule); }
+    .deploy tbody tr > * { border: 0 !important; padding: 0 !important; width: auto; }
+    .deploy tbody th { grid-column: 1 / -1; margin-bottom: 10px; }
+    .deploy tbody td::before { display: block; margin-bottom: 4px; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.02em; }
+    .deploy tbody td:nth-of-type(1)::before { content: "On-device"; }
+    .deploy tbody td:nth-of-type(2)::before { content: "On-premises"; }
+  }
+
+  /* Assurance Layer */
+  #assurance { scroll-margin-top: var(--nav-h); }
+  .assure-lead { margin: clamp(20px, 2.4vw, 32px) auto 0; max-width: 1480px; }
+  .assure-lead { font-size: clamp(18px, 1.6vw, 26px); line-height: 1.35; letter-spacing: -0.01em; color: rgba(244,237,230,0.82); }
+  .sec > .assure-lead { margin-left: max(0px, calc((100% - 1480px) / 2)); max-width: 48ch; }
+  .assure { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 48px); margin-top: clamp(40px, 5vw, 72px); }
+  .assure > div { border-top: 1px solid var(--sec-rule); padding-top: 22px; }
+  .assure .product-icon { width: 30px; height: 30px; margin-bottom: 18px; }
+  .assure h3 { margin: 0 0 10px; font-weight: 600; font-size: var(--card-title); line-height: 1.2; letter-spacing: -0.01em; }
+  .assure p { margin: 0; font-size: clamp(15.5px, 1.15vw, 18px); line-height: 1.5; color: rgba(244,237,230,0.82); max-width: 40ch; }
+  #assurance .cta-row { margin-top: clamp(40px, 5vw, 64px); }
+  .icon-list-check { --icon: url('/assets/icons/list-check.svg'); }
+  .icon-lifebuoy { --icon: url('/assets/icons/lifebuoy.svg'); }
+  .icon-target { --icon: url('/assets/icons/target.svg'); }
+  .icon-refresh { --icon: url('/assets/icons/refresh.svg'); }
+  .icon-adjustments { --icon: url('/assets/icons/adjustments.svg'); }
+  @media (max-width: 960px) { .assure { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .assure { grid-template-columns: 1fr; } }
+
+  /* Pricing cards */
+  .pricing { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 22px); }
+  .plan { display: flex; flex-direction: column; gap: 14px; padding: clamp(22px, 2.4vw, 34px); border: 1.5px solid rgba(42,7,9,0.28); border-radius: 2px; background: #eea747; }
+  .plan.featured { border: 2px solid #2a0709; background: #efb05b; }
+  #pricing .numbers { margin-top: clamp(72px, 9vw, 144px); }
+  .plan.wide { grid-column: 1 / -1; }
+  .plan .tiers { margin-top: 4px; }
+  .plan .tiers li:last-child { padding-bottom: 10px; border-bottom: 1px solid var(--sec-rule); }
+  .t-amber .plan a.btn { justify-content: center; justify-self: stretch; margin-top: auto; padding-top: 16px; }
+  .plan a.btn::after { content: none; }
+  .t-amber .plan .btn { background: #2a0709; color: #f4ede6; border-color: #2a0709; }
+  .t-amber .plan .btn:hover, .t-amber .plan .btn:focus-visible { background: transparent; color: #2a0709; }
+  .t-amber .plan .btn.ghost { background: transparent; color: #2a0709; }
+  .t-amber .plan .btn.ghost:hover, .t-amber .plan .btn.ghost:focus-visible { background: #2a0709; color: #f4ede6; }
+  @media (max-width: 760px) { .pricing { grid-template-columns: 1fr; } }
 </style>
 </head><body>
 
@@ -513,121 +526,85 @@
       </div>
     </section>
 
-  <section class="sec t-paper" id="product">
-    <h2 class="sec-title">Nobodywho products</h2>
-    <p class="sec-sub">Choose on-device or on-premises AI. The Assurance Layer supports either deployment.</p>
-    <div class="product-tabs" role="tablist" aria-label="Nobodywho products">
-      <button type="button" role="tab" id="tab-device" aria-controls="product-edge" aria-selected="true"><span class="product-icon icon-device" aria-hidden="true"></span><span class="product-tab-number">01</span><strong>On-device AI</strong><small>Embed Nobodywho with native SDKs. Run 10,000+ models offline on phones, laptops and machines.</small></button>
-      <button type="button" role="tab" id="tab-prem" aria-controls="product-on-prem" aria-selected="false" tabindex="-1"><span class="product-icon icon-server" aria-hidden="true"></span><span class="product-tab-number">02</span><strong>On-premises AI</strong><small>Shared AI on owned or leased GPU servers, without per-token fees.</small></button>
-      <button class="product-foundation" type="button" role="tab" id="tab-assurance" aria-controls="product-assurance" aria-selected="false" tabindex="-1"><span class="product-icon icon-shield" aria-hidden="true"></span><span class="product-tab-number">03 · Works with either</span><strong>Assurance Layer</strong><small>Monitor and improve model quality across devices and servers.</small></button>
-    </div>
-    <div class="rows">
-      <article class="prod" id="product-edge" role="tabpanel" aria-labelledby="tab-device">
-        <div class="feat">
-          <div><h3>Hardware aware</h3><p>Runs well on whatever it's deployed to, from phones to desktops to machines. The right model and settings are picked for each device and task.</p></div>
-          <div><h3>Access full feature set, locally</h3><p>Chat, image, audio, speech-to-text, text-to-speech, search and tool calling, all running locally. Products keep the experience users expect from Claude and other cloud AI, but running on the device itself.</p></div>
-          <div><h3>Fast and precise</h3><p>The model runs inside the app, so requests never travel to an external server and back. Long conversations keep their instructions intact.</p></div>
-          <div><h3>Works offline, stays private</h3><p>No connection, no API keys, no outages. Data never leaves the device, which makes compliance simpler from day one.</p></div>
-        </div>
-      </article>
-      <article class="prod" id="product-on-prem" role="tabpanel" aria-labelledby="tab-prem" hidden>
-        <div class="feat">
-          <div><h3>Configured for your hardware</h3><p>Benchmark models and serving setups for your workload.</p></div>
-          <div><h3>Connected to your tools</h3><p>Integrate Slack, email, CRM and internal systems.</p></div>
-          <div><h3>Governed agents</h3><p>Set permissions, approvals and audit trails.</p></div>
-          <div><h3>OpenAI-compatible API</h3><p>Connect existing systems through vLLM.</p></div>
-        </div>
-      </article>
-      <article class="prod" id="product-assurance" role="tabpanel" aria-labelledby="tab-assurance" hidden>
-        <div class="feat">
-          <div><h3>Evaluation and monitoring</h3><p>Measure quality and performance against real data.</p></div>
-          <div><h3>Model management</h3><p>Select, tune, fine-tune and retrain models as needs change.</p></div>
-          <div><h3>Hybrid routing</h3><p>Route work between devices, servers and the cloud when needed.</p></div>
-          <div><h3>Support and tooling</h3><p>Bespoke tools, 24/7 support and training for your team.</p></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-
-
-    <section class="sec dots t-amber" id="specs">
-      <div class="numbers">
-        <h2 class="lead">The numbers that matter when the model runs locally.</h2>
-        <ul class="stats mono">
-          <li><span class="k">Data leaving your infrastructure</span><span class="v">0<small>bytes</small></span><span class="c">With local deployment, prompts and outputs stay on your hardware.</span></li>
-          <li><span class="k">Cost per token</span><span class="v">&euro;0</span><span class="c">No per-token API fee. You still pay for hardware and any managed service you choose.</span></li>
-          <li><span class="k">Open models</span><span class="v">10,000<small>+</small></span><span class="c">Deployable on your hardware without vendor lock-in. Any GGUF from Hugging Face.</span></li>
-          <li><span class="k">Language SDKs</span><span class="v">7</span><span class="c">Rust, Kotlin, Swift, Python, Dart, TypeScript, GDScript. Same features in each.</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="sec alt t-garnet" id="properties">
-      <div class="props-head">
-        <h3>Key properties</h3>
-        <ul class="props mono">
-          <li>Open-source inference engine, EUPL 1.2 licensed</li>
-          <li>On-device SDK for apps, games and embedded systems</li>
-          <li>On-prem inference on hardware you control</li>
-          <li>Orchestration across devices and servers</li>
-          <li>Works without an internet connection</li>
-          <li>No per-token costs, no vendor lock-in</li>
-          <li>Built and maintained in Europe</li>
-        </ul>
-      </div>
-    </section>
-
     <section class="sec display t-paper" id="display" aria-label="Sovereign AI, distributed compute">
       <p class="w">Sovereign AI</p>
       <svg class="net" viewBox="0 0 1100 360" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-        <g class="e"><line x1="180" y1="285" x2="152" y2="240"/><line x1="180" y1="285" x2="222" y2="323"/><line x1="560" y1="180" x2="496" y2="173"/><line x1="560" y1="180" x2="589" y2="224"/><line x1="930" y1="70" x2="899" y2="113"/><line x1="930" y1="70" x2="914" y2="108"/><line x1="63" y1="307" x2="56" y2="281"/><line x1="63" y1="307" x2="86" y2="225"/><line x1="283" y1="253" x2="266" y2="320"/><line x1="283" y1="253" x2="327" y2="275"/><line x1="283" y1="253" x2="360" y2="240"/><line x1="56" y1="281" x2="86" y2="225"/><line x1="228" y1="346" x2="266" y2="320"/><line x1="228" y1="346" x2="222" y2="323"/><line x1="86" y1="225" x2="108" y2="222"/><line x1="266" y1="320" x2="297" y2="330"/><line x1="266" y1="320" x2="222" y2="323"/><line x1="297" y1="330" x2="327" y2="275"/><line x1="152" y1="240" x2="108" y2="222"/><line x1="327" y1="275" x2="360" y2="240"/><line x1="496" y1="173" x2="458" y2="173"/><line x1="496" y1="173" x2="482" y2="193"/><line x1="589" y1="224" x2="651" y2="190"/><line x1="651" y1="190" x2="720" y2="140"/><line x1="455" y1="205" x2="456" y2="180"/><line x1="455" y1="205" x2="430" y2="205"/><line x1="458" y1="173" x2="456" y2="180"/><line x1="458" y1="173" x2="482" y2="193"/><line x1="456" y1="180" x2="482" y2="193"/><line x1="456" y1="180" x2="430" y2="205"/><line x1="1050" y1="69" x2="987" y2="16"/><line x1="1050" y1="69" x2="980" y2="27"/><line x1="987" y1="16" x2="939" y2="17"/><line x1="987" y1="16" x2="980" y2="27"/><line x1="899" y1="113" x2="914" y2="108"/><line x1="899" y1="113" x2="800" y2="100"/><line x1="939" y1="17" x2="980" y2="27"/><line x1="720" y1="140" x2="800" y2="100"/></g>
-        <g class="spine"><line x1="180" y1="285" x2="560" y2="180"/><line x1="560" y1="180" x2="930" y2="70"/></g>
-        <g class="signals"><circle class="signal" r="9"/><circle class="signal" r="9"/></g>
-        <g class="nodes"><circle cx="63" cy="307" r="4" class="n"/><circle cx="283" cy="253" r="4" class="n"/><circle cx="56" cy="281" r="4" class="n"/><circle cx="228" cy="346" r="4" class="n"/><circle cx="86" cy="225" r="4" class="n"/><circle cx="266" cy="320" r="6" class="n"/><circle cx="297" cy="330" r="6" class="n"/><circle cx="152" cy="240" r="6" class="n"/><circle cx="327" cy="275" r="6" class="n"/><circle cx="108" cy="222" r="4" class="n"/><circle cx="222" cy="323" r="4" class="n"/><circle cx="496" cy="173" r="5" class="n"/><circle cx="589" cy="224" r="5" class="n"/><circle cx="651" cy="190" r="4" class="n"/><circle cx="455" cy="205" r="5" class="n"/><circle cx="458" cy="173" r="5" class="n"/><circle cx="456" cy="180" r="4" class="n"/><circle cx="482" cy="193" r="6" class="n"/><circle cx="1050" cy="69" r="4" class="n"/><circle cx="987" cy="16" r="4" class="n"/><circle cx="899" cy="113" r="4" class="n"/><circle cx="914" cy="108" r="4" class="n"/><circle cx="939" cy="17" r="4" class="n"/><circle cx="980" cy="27" r="4" class="n"/><circle cx="360" cy="240" r="6" class="n"/><circle cx="430" cy="205" r="6" class="n"/><circle cx="720" cy="140" r="4" class="n"/><circle cx="800" cy="100" r="4" class="n"/></g>
-        <g class="hub"><circle cx="180" cy="285" r="34" class="halo2"/><circle cx="180" cy="285" r="22" class="halo"/><circle cx="180" cy="285" r="9" class="core"/><text x="224" y="290">EDGE</text></g>
-        <g class="hub"><circle cx="560" cy="180" r="34" class="halo2"/><circle cx="560" cy="180" r="22" class="halo"/><circle cx="560" cy="180" r="9" class="core"/><text x="604" y="185">ON-PREM</text></g>
-        <g class="hub"><circle cx="930" cy="70" r="34" class="halo2"/><circle cx="930" cy="70" r="22" class="halo"/><circle cx="930" cy="70" r="9" class="core"/><text x="930" y="128" text-anchor="middle">ASSURANCE</text></g>
+        <g class="e"><line x1="200" y1="280" x2="150" y2="225"/><line x1="200" y1="280" x2="120" y2="250"/><line x1="200" y1="280" x2="140" y2="330"/><line x1="200" y1="280" x2="205" y2="345"/><line x1="200" y1="280" x2="265" y2="330"/><line x1="200" y1="280" x2="250" y2="235"/><line x1="60" y1="270" x2="95" y2="300"/><line x1="95" y1="300" x2="120" y2="250"/><line x1="95" y1="300" x2="140" y2="330"/><line x1="60" y1="270" x2="120" y2="250"/><line x1="140" y1="330" x2="205" y2="345"/><line x1="205" y1="345" x2="265" y2="330"/><line x1="250" y1="235" x2="290" y2="250"/><line x1="150" y1="225" x2="120" y2="250"/><line x1="900" y1="280" x2="840" y2="235"/><line x1="900" y1="280" x2="820" y2="300"/><line x1="900" y1="280" x2="860" y2="335"/><line x1="900" y1="280" x2="960" y2="330"/><line x1="900" y1="280" x2="980" y2="240"/><line x1="980" y1="240" x2="1050" y2="260"/><line x1="1050" y1="260" x2="1020" y2="315"/><line x1="1020" y1="315" x2="960" y2="330"/><line x1="790" y1="270" x2="820" y2="300"/><line x1="790" y1="270" x2="840" y2="235"/><line x1="820" y1="300" x2="860" y2="335"/></g>
+        <g class="spine"><line x1="560" y1="150" x2="200" y2="280"/><line x1="560" y1="150" x2="900" y2="280"/><path d="M 200 280 Q 550 360 900 280"/></g>
+        <g class="signals"><circle class="signal" r="9"/><circle class="signal" r="9"/><circle class="signal" r="9"/></g>
+        <g class="nodes"><circle cx="150" cy="225" r="4" class="n"/><circle cx="120" cy="250" r="4" class="n"/><circle cx="60" cy="270" r="4" class="n"/><circle cx="95" cy="300" r="4" class="n"/><circle cx="140" cy="330" r="4" class="n"/><circle cx="205" cy="345" r="4" class="n"/><circle cx="265" cy="330" r="4" class="n"/><circle cx="250" cy="235" r="4" class="n"/><circle cx="290" cy="250" r="4" class="n"/><circle cx="840" cy="235" r="6" class="n"/><circle cx="790" cy="270" r="6" class="n"/><circle cx="820" cy="300" r="6" class="n"/><circle cx="860" cy="335" r="6" class="n"/><circle cx="960" cy="330" r="6" class="n"/><circle cx="980" cy="240" r="6" class="n"/><circle cx="1050" cy="260" r="6" class="n"/><circle cx="1020" cy="315" r="6" class="n"/></g>
+        <g class="hub"><circle cx="200" cy="280" r="34" class="halo2"/><circle cx="200" cy="280" r="22" class="halo"/><circle cx="200" cy="280" r="9" class="core"/><text x="244" y="268">ON-DEVICE</text></g>
+        <g class="hub"><circle cx="900" cy="280" r="34" class="halo2"/><circle cx="900" cy="280" r="22" class="halo"/><circle cx="900" cy="280" r="9" class="core"/><text x="944" y="285">ON-PREM</text></g>
+        <g class="hub"><circle cx="560" cy="150" r="34" class="halo2"/><circle cx="560" cy="150" r="22" class="halo"/><circle cx="560" cy="150" r="9" class="core"/><text x="560" y="104" text-anchor="middle">ASSURANCE</text></g>
         </svg>
       <p class="w r">Distributed compute</p>
     </section>
 
     <section class="sec alt t-garnet-deep" id="resources">
-      <p class="eyebrow">Open Source</p>
       <div class="values">
         <ol role="tablist" aria-label="Why open source">
           <li role="presentation"><button role="tab" aria-selected="true" aria-controls="v1" id="t1"><span class="n">01</span> Auditable by design</button></li>
           <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v2" id="t2"><span class="n">02</span> No lock-in</button></li>
-          <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v3" id="t3"><span class="n">03</span> European licence</button></li>
+          <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v3" id="t3"><span class="n">03</span> Built in Europe</button></li>
           <li role="presentation"><button role="tab" aria-selected="false" aria-controls="v4" id="t4"><span class="n">04</span> Built in the open</button></li>
         </ol>
         <div>
           <p class="panel" id="v1" role="tabpanel" aria-labelledby="t1">You can read every line of the engine that runs your models. Your team can inspect the code before deploying it.</p>
-          <p class="panel" id="v2" role="tabpanel" aria-labelledby="t2" hidden>The engine is yours to run, fork and extend. Your deployment can keep running without our service.</p>
-          <p class="panel" id="v3" role="tabpanel" aria-labelledby="t3" hidden>Nobodywho is released under the EUPL 1.2, the European Union's own open-source licence, written for European law and compatible with the licences you already use.</p>
+          <p class="panel" id="v2" role="tabpanel" aria-labelledby="t2" hidden>The engine is yours to run, fork and extend, with no per-token costs. Your deployment keeps running without our service, and without an internet connection.</p>
+          <p class="panel" id="v3" role="tabpanel" aria-labelledby="t3" hidden>Nobodywho is built and maintained in Copenhagen and released under the EUPL 1.2, the European Union's own open-source licence, written for European law and compatible with the licences you already use.</p>
           <p class="panel" id="v4" role="tabpanel" aria-labelledby="t4" hidden>Development happens on GitHub, in public. Issues, roadmap and releases are visible to everyone who depends on them.</p>
         </div>
       </div>
     </section>
 
+  <section class="sec t-paper" id="product">
+    <p class="eyebrow">Product · Deployment model</p>
+    <h2 class="sub-title">Two deployment models to match client set ups</h2>
+    <table class="deploy">
+      <thead>
+        <tr><td></td><th scope="col"><span class="product-icon icon-device" aria-hidden="true"></span>On-device</th><th scope="col"><span class="product-icon icon-server" aria-hidden="true"></span>On-premises</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Best for</th><td>AI inside apps, games, products and machines</td><td>Organisation-wide AI shared across teams</td></tr>
+        <tr><th scope="row">Runs on</th><td>Phones, laptops and embedded hardware</td><td>Owned or leased GPU servers</td></tr>
+        <tr><th scope="row">Models</th><td>Compact open models matched to each device</td><td>Larger open models for heavier tasks</td></tr>
+        <tr><th scope="row">Scaling</th><td>Each new device is a download, with no extra cost per device</td><td>One server serves many teams, and costs follow hardware, not usage</td></tr>
+        <tr><th scope="row">Connectivity</th><td>Works fully offline</td><td>Runs inside the organisation's network</td></tr>
+      </tbody>
+    </table>
+    <p class="deploy-note">Not sure which fits? Run both: Nobodywho orchestrates work across devices and servers, and the Assurance Layer covers both. <a href="#contact">Talk to the team</a></p>
+  </section>
 
-  <section class="sec t-amber" id="pricing">
+  <section class="sec t-garnet-deep" id="assurance">
+    <p class="eyebrow">Product · The Assurance Layer</p>
+    <h2 class="sub-title">Local AI that keeps performing, without an in-house AI team</h2>
+    <p class="assure-lead">The Assurance Layer is how organisations run local AI. Nobodywho handles set-up, model choice, governance and daily operations, on devices, servers or both.</p>
+    <div class="assure">
+      <div><span class="product-icon icon-list-check" aria-hidden="true"></span><h3>Set up right from day one</h3><p>Nobodywho installs and configures the engine on the organisation's devices or servers, and onboards the teams who will use it.</p></div>
+      <div><span class="product-icon icon-lifebuoy" aria-hidden="true"></span><h3>Support when issues arise</h3><p>When something goes wrong, the Nobodywho team picks it up and resolves it, so problems don't land on internal IT.</p></div>
+      <div><span class="product-icon icon-target" aria-hidden="true"></span><h3>The right model for each job</h3><p>Each use case gets a model selected and tuned for it, balancing accuracy, speed and the hardware available.</p></div>
+      <div><span class="product-icon icon-refresh" aria-hidden="true"></span><h3>Always on the best model</h3><p>Open models improve fast. When a better one is released, Nobodywho assesses it and updates the deployment, so performance improves without a new project.</p></div>
+      <div><span class="product-icon icon-shield" aria-hidden="true"></span><h3>Governance built in</h3><p>Restrictions on which models can be used keep every deployment within the organisation's policies and risk appetite.</p></div>
+      <div><span class="product-icon icon-adjustments" aria-hidden="true"></span><h3>Tooling built for the organisation</h3><p>Bespoke tools shaped around existing workflows and systems, so local AI fits how teams already work.</p></div>
+    </div>
+    <div class="cta-row"><a class="btn" href="#pricing">See Assurance Layer plans</a></div>
+  </section>
+
+
+  <section class="sec dots t-amber" id="pricing">
     <h2 class="sec-title">Pricing</h2>
     <div class="pricing">
       <article class="plan">
-        <span class="n">01</span>
         <h3>Getting started</h3>
         <p class="price">Free</p>
         <p>We get the Nobodywho tech stack up and running on your servers or edge devices.</p>
-        <ul class="inc">
-          <li>Set-up on your infrastructure, free</li>
-          <li>Onboarding, free</li>
-          <li>Support for the first two months, free</li>
+        <ul class="tiers">
+          <li><span>Set-up on your infrastructure, free</span></li>
+          <li><span>Onboarding, free</span></li>
         </ul>
-        <a href="#contact" data-route="home">Get started</a>
+        <a class="btn ghost" href="#contact" data-route="home">Get started</a>
       </article>
-      <article class="plan">
-        <span class="n">02</span>
+      <article class="plan featured">
         <h3>Assurance Layer</h3>
         <p class="price">from 500<small>EUR / month</small></p>
         <ul class="tiers">
@@ -636,20 +613,28 @@
           <li><span>Large</span><span class="v">2,000 EUR / month</span></li>
           <li><span>Enterprise</span><span class="v">Contact us</span></li>
         </ul>
-        <a href="#contact" data-route="home">Talk to us about sizing</a>
+        <a class="btn" href="#contact" data-route="home">Talk to us about sizing</a>
       </article>
-      <article class="plan">
-        <span class="n">03</span>
+      <article class="plan wide">
         <h3>Leased hardware</h3>
         <p class="price">On request</p>
         <p>Lease GPU servers from us and run on-premises AI without buying hardware. Price depends on the type of GPUs.</p>
-        <a href="#contact" data-route="home">Request a quote</a>
+        <a class="btn ghost" href="#contact" data-route="home">Request a quote</a>
       </article>
     </div>
+      <div class="numbers" id="specs">
+        <h3 class="sub-title">The numbers that matter when the model runs locally</h3>
+        <ul class="stats mono">
+          <li><span class="k">Data leaving your infrastructure</span><span class="v">0<small>bytes</small></span><span class="c">With local deployment, prompts and outputs stay on your hardware.</span></li>
+          <li><span class="k">Cost per token</span><span class="v">&euro;0</span><span class="c">No per-token API fee. You still pay for hardware and any managed service you choose.</span></li>
+          <li><span class="k">Open models</span><span class="v">10,000<small>+</small></span><span class="c">Deployable on your hardware without vendor lock-in. Any GGUF from Hugging Face.</span></li>
+          <li><span class="k">Language SDKs</span><span class="v">7</span><span class="c">Rust, Kotlin, Swift, Python, Dart, TypeScript, GDScript. Same features in each.</span></li>
+        </ul>
+      </div>
   </section>
 
   <section class="sec sub-hero t-garnet" id="contact">
-    <h2 class="sec-title">Contact Nobodywho</h2>
+    <h2 class="sec-title">Contact</h2>
     <div class="cols" style="margin-top: clamp(28px, 4vw, 56px)">
       <p>Nobodywho is a Copenhagen-based company building open-source local AI. Our inference engine runs models on devices and on organisations' own servers, keeping data inside the infrastructure they control.</p>
       <p>For teams that need help deploying and operating Nobodywho, we offer onboarding, model selection, monitoring and support for on-device and on-premises deployments.</p>
@@ -797,13 +782,6 @@
       return selectTab;
     }
     initTabs('.values [role="tab"]');
-    const selectProduct = initTabs('.product-tabs [role="tab"]');
-    function selectProductFromHash() {
-      const tab = [...document.querySelectorAll('.product-tabs [role="tab"]')].find(item => item.getAttribute('aria-controls') === location.hash.slice(1));
-      if (tab) { selectProduct(tab); requestAnimationFrame(() => document.getElementById(tab.getAttribute('aria-controls')).scrollIntoView()); }
-    }
-    window.addEventListener('hashchange', selectProductFromHash);
-    selectProductFromHash();
   })();
 </script>
 
