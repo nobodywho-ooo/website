@@ -147,7 +147,7 @@ Here is the result, which you can reproduce in the Structured Output section of 
 
 ### Project health
 
-The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been [reported to scrape GitHub activity and send unsolicited marketing emails](https://news.ycombinator.com/item?id=47163885) to developers, an aggressive outreach that can inflate star counts.
+The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been reported for [several illegal marketing activities](https://news.ycombinator.com/item?id=47163885) that can inflate star counts.
 
 RunAnywhere's large backlog suggests its maintainers are struggling to keep up, while NobodyWho's small backlog reflects a project where bugs get fixed quickly rather than left to accumulate.
 
