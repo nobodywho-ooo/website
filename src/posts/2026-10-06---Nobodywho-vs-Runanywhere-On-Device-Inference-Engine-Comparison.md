@@ -164,9 +164,9 @@ RunAnywhere's large backlog suggests its maintainers are struggling to keep up, 
 | Schema-constrained structured output | NobodyWho |
 | Project health | NobodyWho |
 
-Unless your project requires a console for model management, NobodyWho is the best solution for on-device AI, thanks to its reliable and fast inference engine.
+Unless your project requires a console for model management, **NobodyWho is the best solution** for on-device AI, thanks to its reliable and fast inference engine.
 
-*Disclaimers*
+*Info*
 
 - This article was written on October 6, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
 - The `@runanywhere` dependencies in `package.json` are set to v0.20.19. [Updating them](https://github.com/pielouNW/runanywhere-react-native-starter-app/tree/feat/ra-v0.20.27) to the latest published version, v0.20.27, did not change the results.
