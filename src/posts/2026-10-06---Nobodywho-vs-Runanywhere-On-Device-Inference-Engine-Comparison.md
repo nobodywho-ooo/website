@@ -35,7 +35,7 @@ In practice, NobodyWho stays free no matter how much funding your company raises
 
 For this comparison, NobodyWho was added to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app). You can [check out the modified app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to verify every claim below. The focus is on significant performance and behaviour gaps that make a real difference in an app.
 
-Unfortunately, the RunAnywhere starter app does not build out of the box on macOS, so it had to be fixed to run on the latest macOS 27. Both the starter app and the latest RunAnywhere SDK library use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions).
+Unfortunately, the RunAnywhere starter app does not build out of the box on macOS, so it had to be fixed to run on the latest macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions).
 
 ### NobodyWho is faster
 
@@ -53,7 +53,7 @@ The real problem appears in a conversation, where **RunAnywhere's TTFT grows wit
 
 This happens because on every turn, RunAnywhere starts from an empty cache and re-processes the system prompt, the entire chat history and the new message. NobodyWho keeps the conversation in its KV cache and only processes the new message. With RunAnywhere, **the longer the conversation, the slower the response**.
 
-To be fair, NobodyWho currently shows the same growing TTFT with hybrid models like Qwen3.5, whose cache can't yet be reused between turns in the same way. A [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is in progress.
+NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. However, a [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is currently being implemented.
 
 ### Limited multimodal support
 
@@ -100,7 +100,7 @@ const response = await chat
 
 Tool calling lets your LLM call predefined functions when needed. For example, if you give the LLM a `get_weather` function, it will call it whenever the user asks about the weather.
 
-Both libraries handle properly a tool call, but RunAnywhere does not keep previous tool calls and their results in the conversation history, meaning that a follow-up questions get answered incorrectly.
+Both libraries handle tool calling properly, but RunAnywhere does not keep previous tool calls and their results in the conversation history, so follow-up questions get answered incorrectly.
 
 ![Tool-calling test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/tool-calling.png)
 
@@ -140,16 +140,16 @@ Here is the result, which you can reproduce in the Structured Output section of 
 {
   "age": 84, // automatic sorting: should not be first
   "name": "Ada Lovelace",
-  "nickname": "The Lady of the Lumberjack's Hat", // should not have been defined
+  "nickname": "The Lady of the Lumberjack's Hat", // optional key, should have been omitted
   "tags": ["computer scientist", "inventor", "mathematician"]
 }
 ```
 
 ### Project health
 
-The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been [reported to scrape GitHub activity to send unsolicited marketing emails](https://news.ycombinator.com/item?id=47163885) to developers, which makes star counts an unreliable signal.
+The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been [reported to scrape GitHub activity and send unsolicited marketing emails](https://news.ycombinator.com/item?id=47163885) to developers, an aggressive outreach that can inflate star counts.
 
-RunAnywhere's growing backlog suggests its maintainers are struggling to keep up, while NobodyWho's small backlog reflects a project where bugs get fixed quickly rather than left to accumulate.
+RunAnywhere's large backlog suggests its maintainers are struggling to keep up, while NobodyWho's small backlog reflects a project where bugs get fixed quickly rather than left to accumulate.
 
 ## Choosing between NobodyWho and RunAnywhere
 
