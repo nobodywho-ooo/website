@@ -7,13 +7,22 @@ description: "NobodyWho vs RunAnywhere compared on performance, features, platfo
 slug: "nobodywho-vs-runanywhere"
 ---
 
-NobodyWho and RunAnywhere are both inference engines that let you run LLMs locally, with bindings for many languages and frameworks. This comparison takes a close look at their features, performance, platform coverage and licensing.
+On paper, NobodyWho and RunAnywhere look almost identical. They run LLMs locally on the consumer device such as laptop or phone, are built on llama.cpp, and both list the same features across Kotlin, Swift, Python, Flutter and React Native. The differences only show up once you put them in the same app and start a real conversation. That's exactly what I did, side by side on an iPhone.
+
+Here is a brief summary of the technical findings:
+
+- **Speed:** single-prompt generation speed is almost the same, but RunAnywhere gets slower with every turn of a conversation while NobodyWho stays flat.
+- **Multimodal:** RunAnywhere accepts one image per request and no audio. NobodyWho lets you mix several images and audio files in one prompt.
+- **Tool calling:** RunAnywhere forgets previous tool results, so it can't answer follow-up questions about them.
+- **Structured output:** RunAnywhere doesn't constrain generation to your JSON schema properly.
+
+Every result can be reproduced with our [test app on GitHub](https://github.com/pielouNW/runanywhere-react-native-starter-app).
 
 ## Engine, model format and features
 
 [NobodyWho](https://github.com/nobodywho-ooo/nobodywho) runs any GGUF model through llama.cpp, loaded straight from Hugging Face, a URL or a local path, with no conversion step.
 
-[RunAnywhere](https://github.com/RunanywhereAI/runanywhere-sdks) also uses llama.cpp, and can additionally register MLX and QHexRT (Qualcomm Hexagon NPU) backends. Registering them did not change any of the results below.
+[RunAnywhere](https://github.com/RunanywhereAI/runanywhere-sdks) also uses llama.cpp, and can additionally register MLX and QHexRT (Qualcomm Hexagon NPU) backends. Registering them did not change any of my results below.
 
 Both libraries offer hardware acceleration and a similar feature set: text generation, multimodal input, embeddings, RAG, speech-to-text, text-to-speech, structured output, voice activity detection and tool calling.
 
@@ -33,11 +42,11 @@ In practice, NobodyWho stays free no matter how much funding your company raises
 
 ## Technical comparison
 
-For this comparison, NobodyWho was added to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app). You can [check out the modified app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to verify every claim below. These claims are highlighted thanks to the React Native SDK, but none of them are specific to this SDK: they are present in all the bindings. The focus is on significant performance and behaviour gaps that make a real difference in an app.
+To compare both engines under the same conditions, I added NobodyWho to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) and ran both side by side on an iPhone Air. The comparison covers **speed**, **multimodal input**, **tool calling** and **structured output**.
 
-Unfortunately, the RunAnywhere starter app does not build out of the box on macOS, so it had to be fixed to run on the latest macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions).
+I used the React Native SDKs, but none of these issues are specific to React Native. They come from RunAnywhere's inference engine and APIs, so they affect every platform and language it supports. You can [check out the test app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to reproduce every result. Note that the RunAnywhere starter app needed a few fixes before it would build with Xcode 27, which you can find listed in the appendix at the end of this article.
 
-### NobodyWho is faster
+### Speed
 
 The speed tests were done on an iPhone Air with the Qwen3 0.6B model and using the same configuration.
 
@@ -55,7 +64,7 @@ This happens because on every turn, RunAnywhere starts from an empty cache and r
 
 NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. However, a [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is currently being implemented.
 
-### Limited multimodal support
+### Multimodal input
 
 Multimodal LLMs like Gemma 4 can take images and/or audio files along with a prompt. Let's see how each library handles them.
 
@@ -96,7 +105,7 @@ const response = await chat
   .completed();
 ```
 
-### Tool calls are dropped from the history
+### Tool calling
 
 Tool calling lets your LLM call predefined functions when needed. For example, if you give the LLM a `get_weather` function, it will call it whenever the user asks about the weather.
 
@@ -145,12 +154,6 @@ Here is the result, which you can reproduce in the Structured Output section of 
 }
 ```
 
-### Project health
-
-The RunAnywhere SDK repository on GitHub has 83 open issues and 61 open pull requests, while NobodyWho has 6 open issues and 12 open pull requests. Both libraries have a similar total number of downloads across their bindings: 35k for NobodyWho and 39k for RunAnywhere (data gathered from [npm](https://www.npmjs.com), [pub.dev](https://pub.dev/) and other package registries). GitHub stars are left out of this comparison, as RunAnywhere has been reported for [several illegal marketing activities](https://news.ycombinator.com/item?id=47163885) that can inflate star counts.
-
-RunAnywhere's large backlog suggests its maintainers are struggling to keep up, while NobodyWho's small backlog reflects a project where bugs get fixed quickly rather than left to accumulate.
-
 ## Choosing between NobodyWho and RunAnywhere
 
 | Requirement | Engine |
@@ -167,6 +170,17 @@ RunAnywhere's large backlog suggests its maintainers are struggling to keep up, 
 <br>
 
 Unless your project requires a console for model management, **NobodyWho is the best solution** for on-device AI, thanks to its reliable and fast inference engine.
+
+## Appendix: building the RunAnywhere starter app with Xcode 27
+
+The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions), and they conflict with Xcode 27's stricter compiler. Four problems block the build:
+
+- The version of the fmt C++ library pinned by React Native fails to compile under Xcode 27's newer clang ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L44-L55)).
+- The RunAnywhere pods ask to be compiled in Swift 6 mode, but their code doesn't pass Swift 6's stricter concurrency checks ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L57-L64)).
+- The SDK's Swift code uses the Objective-C class `AudioCaptureLevel`, but its header isn't exposed to Swift ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L66-L79)), and it calls one of the class's methods by the wrong name ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/.yarn/patches/@runanywhere-core-npm-0.20.19-f4d947d688.patch)).
+- The SDK links `librac_commons.a` but CocoaPods never declares it as a build output, so Xcode 27 fails every clean build ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L81-L90)).
+
+Except for the method name, which is fixed with a Yarn patch, all workarounds live in the [Podfile's `post_install` hook](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L37), which runs on every `pod install`.
 
 <br>
 
