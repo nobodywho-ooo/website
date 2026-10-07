@@ -14,7 +14,7 @@ Here is a brief summary of the technical findings:
 - **Speed:** single-prompt generation speed is almost the same, but RunAnywhere gets slower with every turn of a conversation while NobodyWho stays flat.
 - **Multimodal:** RunAnywhere accepts one image per request and no audio. NobodyWho lets you mix several images and audio files in one prompt.
 - **Tool calling:** RunAnywhere forgets previous tool results, so it can't answer follow-up questions about them.
-- **Structured output:** RunAnywhere doesn't constrain generation to your JSON schema properly.
+- **Structured output:** RunAnywhere makes every field of your JSON schema mandatory and sorts the keys alphabetically. NobodyWho follows the schema as written.
 
 Every result can be reproduced with my [test app on GitHub](https://github.com/pielouNW/runanywhere-react-native-starter-app).
 
@@ -119,7 +119,9 @@ The screenshot above compares the official NobodyWho and RunAnywhere apps, both 
 
 ### Structured output
 
-Some use cases need the LLM to produce JSON that follows a given schema. NobodyWho turns the JSON schema into a grammar and constrains generation to it, so the output always matches the schema. RunAnywhere [generates freely and validates afterwards](https://github.com/RunanywhereAI/runanywhere-sdks/blob/main/bindings/react-native/packages/core/src/Public/Api/Llm.ts). In practice, RunAnywhere filled in an optional key and sorted the keys alphabetically.
+Some use cases need the LLM to produce JSON that follows a given schema. Both libraries turn the JSON schema into a grammar and constrain generation to it, but they don't read the schema the same way. With NobodyWho, optional fields can be left out and keys come in the order you declared them, where RunAnywhere's schema-to-grammar compiler [makes every field mandatory](https://github.com/RunanywhereAI/runanywhere-sdks/blob/ee96262e59bd754d573d53ae5d763a209a6e1219/core/src/features/llm/json_schema_to_gbnf.cpp#L125-L133), ignoring `required`, and [sorts the keys alphabetically](https://github.com/RunanywhereAI/runanywhere-sdks/blob/ee96262e59bd754d573d53ae5d763a209a6e1219/core/src/features/llm/json_schema_to_gbnf.cpp#L25).
+
+To show it, both libraries got the same schema, where `nickname` is optional, and a prompt that doesn't ask for a nickname:
 
 ```ts
 const SCHEMA = JSON.stringify({
@@ -137,28 +139,27 @@ const SCHEMA = JSON.stringify({
   required: ['name', 'age', 'tags'],
 });
 
+const PROMPT = 'Give me Ada Lovelace as JSON with name, age and tags fields.';
+
+// NobodyWho: the chat is created with SamplerPresets.constrainWithJsonSchema(SCHEMA)
+await chat.ask(PROMPT).completed();
+
+// RunAnywhere: same sampling settings
 const result = await RunAnywhere.llm.generateStructured(
-  'Give me a short JSON profile of Ada Lovelace. Only include a nickname if she had a well-known one.',
+  PROMPT,
   SCHEMA,
-  { temperature: 0.1 },
-  'validationOnly'
+  { ...SAMPLING, reasoning: { mode: 'off' } },
+  'validationOnly',
 );
 ```
 
-Here is the result, which you can reproduce in the Structured Output section of the app:
+NobodyWho returns `name`, `age` and `tags` in the declared order. RunAnywhere's grammar forces the model to invent a `nickname`, and returns the keys sorted alphabetically, with `age` first:
 
-```json
-{
-  "age": 84, // automatic sorting: should not be first
-  "name": "Ada Lovelace",
-  "nickname": "The Lady of the Lumberjack's Hat", // optional key, should have been omitted
-  "tags": ["computer scientist", "inventor", "mathematician"]
-}
-```
+![Structured output test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/structured-output.png)
 
 ## Choosing between NobodyWho and RunAnywhere
 
-The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and the JSON doesn't always match your schema.
+The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and the JSON ignores parts of your schema.
 
 | Requirement | Engine |
 | :---- | :---- |
@@ -167,7 +168,7 @@ The two libraries share the same feature list, but the differences become obviou
 | Fast multi-turn conversations | NobodyWho |
 | Multimodal support | NobodyWho |
 | Tool calling | NobodyWho |
-| Schema-constrained structured output | NobodyWho |
+| Structured output that follows your schema | NobodyWho |
 
 <br>
 
