@@ -7,7 +7,7 @@ description: "NobodyWho vs RunAnywhere compared on performance, features, platfo
 slug: "nobodywho-vs-runanywhere"
 ---
 
-On paper, NobodyWho and RunAnywhere look almost identical. They run LLMs locally on the consumer device such as laptop or phone, are built on llama.cpp, and both list the same features across Kotlin, Swift, Python, Flutter and React Native. The differences only show up once you put them in the same app and start a real conversation. That's exactly what I did, side by side on an iPhone.
+On paper, NobodyWho and RunAnywhere look almost identical. They run LLMs locally on consumer devices such as laptops and phones, are built on llama.cpp, and both list the same features across Kotlin, Swift, Python, Flutter and React Native. The differences only show up once you put them in the same app and start a real conversation. That's exactly what I did, side by side on an iPhone.
 
 Here is a brief summary of the technical findings:
 
@@ -16,7 +16,9 @@ Here is a brief summary of the technical findings:
 - **Tool calling:** RunAnywhere forgets previous tool results, so it can't answer follow-up questions about them.
 - **Structured output:** RunAnywhere doesn't constrain generation to your JSON schema properly.
 
-Every result can be reproduced with our [test app on GitHub](https://github.com/pielouNW/runanywhere-react-native-starter-app).
+Every result can be reproduced with my [test app on GitHub](https://github.com/pielouNW/runanywhere-react-native-starter-app).
+
+Before getting to the benchmarks, let's start with an overview of both libraries: engine, model format and features, platform support and licensing.
 
 ## Engine, model format and features
 
@@ -156,20 +158,20 @@ Here is the result, which you can reproduce in the Structured Output section of 
 
 ## Choosing between NobodyWho and RunAnywhere
 
+The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and the JSON doesn't always match your schema.
+
 | Requirement | Engine |
 | :---- | :---- |
 | OSI open-source licence with no revenue ceiling | NobodyWho |
-| Optional console for model management | RunAnywhere |
 | Wide platform and language support | Both |
 | Fast multi-turn conversations | NobodyWho |
 | Multimodal support | NobodyWho |
 | Tool calling | NobodyWho |
 | Schema-constrained structured output | NobodyWho |
-| Project health | NobodyWho |
 
 <br>
 
-Unless your project requires a console for model management, **NobodyWho is the best solution** for on-device AI, thanks to its reliable and fast inference engine.
+RunAnywhere is a good fit if you need Electron or WebAssembly support right now. For everything else, **NobodyWho is the better choice for on-device AI**: answers stay fast as conversations grow, tool results carry over to follow-up questions, and the licence stays free however big your company gets.
 
 ## Appendix: building the RunAnywhere starter app with Xcode 27
 
