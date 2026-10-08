@@ -1,6 +1,6 @@
 ---
 title:  "NobodyWho vs RunAnywhere: On-Device Inference Engine Comparison"
-date: 2026-10-06
+date: 2026-10-08
 author: Pierre Bresson
 categories: ["Technical","Comparison"]
 description: "NobodyWho vs RunAnywhere compared on performance, features, platform support and licensing."
@@ -57,7 +57,7 @@ On a single prompt, NobodyWho starts answering sooner on both phones, but RunAny
 
 ![Single-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn.png)
 
-The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3× slower), and from 333 ms to over 11 seconds on the S25 (33× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25. It means that after a few prompts, **NobodyWho is faster**, even on Android.
+The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3× slower), and from 333 ms to over 11 seconds on the S25 (33× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25. It means that after a few prompts, **NobodyWho is answering faster**, even on Android.
 
 ![Multi-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn.png)
 
@@ -140,5 +140,5 @@ The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 
 
 *Info*
 
-- This article was written on October 6, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
+- This article was written on October 8, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
 - The `@runanywhere` dependencies in `package.json` are set to v0.20.19. [Updating them](https://github.com/pielouNW/runanywhere-react-native-starter-app/tree/feat/ra-v0.20.27) to the latest published version, v0.20.27, did not change the results.
