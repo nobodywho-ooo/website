@@ -52,18 +52,18 @@ I used the React Native SDKs, but none of these issues are specific to React Nat
 The speed tests were done on both phones with the Qwen3 0.6B model and the same configuration.
 
 On a single prompt, NobodyWho starts answering sooner on both phones, but RunAnywhere generates faster on Android:
-- **iPhone Air:** RunAnywhere generates 71.2 tokens per second (tok/s), with a time to first token (TTFT) of 217 ms. NobodyWho generates 74.5 tok/s, with a TTFT of 46 ms.
-- **Samsung S25:** RunAnywhere generates 58.3 tok/s, with a TTFT of 327 ms. NobodyWho generates 34.9 tok/s, with a TTFT of 203 ms.
+- **iPhone Air:** RunAnywhere generates 70.5 tokens per second (tok/s), with a time to first token (TTFT) of 201 ms. NobodyWho generates 70.8 tok/s, with a TTFT of 46 ms.
+- **Samsung S25:** RunAnywhere generates 52.4 tok/s, with a TTFT of 1268 ms. NobodyWho generates 32.2 tok/s, with a TTFT of 230 ms.
 
 ![Single-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn.png)
 
-The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3.2× slower), and from 333 ms to over 11 seconds on the S25 (33.1× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25.
+The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3× slower), and from 333 ms to over 11 seconds on the S25 (33× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25. It means that after a few prompts, **NobodyWho is faster**, even on Android.
 
 ![Multi-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn.png)
 
 This happens because on every turn, RunAnywhere starts from an empty cache and re-processes the system prompt, the entire chat history and the new message. NobodyWho keeps the conversation in its KV cache and only processes the new message. With RunAnywhere, **the longer the conversation, the slower the response**.
 
-NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. A [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is in progress.
+NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. A [fix](https://github.com/nobodywho-ooo/nobodywho/pull/803) is in progress.
 
 ### Multimodal input
 
