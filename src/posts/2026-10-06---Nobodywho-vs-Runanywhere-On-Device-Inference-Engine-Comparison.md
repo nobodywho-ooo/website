@@ -7,11 +7,11 @@ description: "NobodyWho vs RunAnywhere compared on performance, features, platfo
 slug: "nobodywho-vs-runanywhere"
 ---
 
-On paper, NobodyWho and RunAnywhere look almost identical. They run LLMs locally on consumer devices such as laptops and phones, are built on llama.cpp, and both list the same features across Kotlin, Swift, Python, Flutter and React Native. The differences only show up once you put them in the same app and start a real conversation. That's exactly what I did, side by side on an iPhone.
+On paper, NobodyWho and RunAnywhere look almost identical. They run LLMs locally on consumer devices such as laptops and phones, are built on llama.cpp, and both list the same features across Kotlin, Swift, Python, Flutter and React Native. The differences only show up once you put them in the same app and start a real conversation. That's exactly what I did, side by side on iPhone and Android.
 
 Here is a brief summary of the technical findings:
 
-- **Speed:** single-prompt generation speed is almost the same, but RunAnywhere gets slower with every turn of a conversation while NobodyWho stays flat.
+- **Speed:** NobodyWho starts answering sooner on a single prompt, and RunAnywhere gets slower with every turn of a conversation, up to 33× slower after 20 turns on Android.
 - **Multimodal:** RunAnywhere accepts one image per request and no audio. NobodyWho lets you mix several images and audio files in one prompt.
 - **Tool calling:** RunAnywhere forgets previous tool results, so it can't answer follow-up questions about them.
 
@@ -43,13 +43,13 @@ In practice, NobodyWho stays free no matter how much funding your company raises
 
 ## Technical comparison
 
-To compare both engines under the same conditions, I added NobodyWho to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) and ran both side by side on an iPhone Air. The comparison covers **speed**, **multimodal input** and **tool calling**
+To compare both engines under the same conditions, I added NobodyWho to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) and ran both side by side on an iPhone Air and a Samsung S25. The comparison covers **speed**, **multimodal input** and **tool calling**.
 
 I used the React Native SDKs, but none of these issues are specific to React Native. They come from RunAnywhere's inference engine and APIs, so they affect every platform and language it supports. You can [check out the test app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to reproduce every result. Note that the RunAnywhere starter app needed a few fixes before it would build with Xcode 27, which you can find listed in the appendix at the end of this article.
 
 ### Speed
 
-The speed tests were done on an iPhone Air and S25 with the Qwen3 0.6B model and using the same configuration.
+The speed tests were done on both phones with the Qwen3 0.6B model and the same configuration.
 
 On a single prompt, NobodyWho starts answering sooner on both phones, but RunAnywhere generates faster on Android:
 - **iPhone Air:** RunAnywhere generates 71.2 tokens per second (tok/s), with a time to first token (TTFT) of 217 ms. NobodyWho generates 74.5 tok/s, with a TTFT of 46 ms.
@@ -57,13 +57,13 @@ On a single prompt, NobodyWho starts answering sooner on both phones, but RunAny
 
 ![Single-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn.png)
 
-The real problem appears in a conversation, where **RunAnywhere's TTFT grows significantly every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3.2× slower), and from 333 ms to over 11 seconds on the S25 (33.1× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25.
+The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3.2× slower), and from 333 ms to over 11 seconds on the S25 (33.1× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25.
 
 ![Multi-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn.png)
 
 This happens because on every turn, RunAnywhere starts from an empty cache and re-processes the system prompt, the entire chat history and the new message. NobodyWho keeps the conversation in its KV cache and only processes the new message. With RunAnywhere, **the longer the conversation, the slower the response**.
 
-NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. However, a [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is currently being implemented.
+NobodyWho currently shows the same growing TTFT issue with hybrid models like Qwen3.5, since the cache can't yet be reused between turns in the same way. A [fix](https://github.com/nobodywho-ooo/nobodywho/pull/637) is in progress.
 
 ### Multimodal input
 
@@ -118,7 +118,7 @@ The screenshot above compares the official NobodyWho and RunAnywhere apps, both 
 
 ## Choosing between NobodyWho and RunAnywhere
 
-The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and the JSON ignores parts of your schema.
+The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and you can only send one image at a time.
 
 | Requirement | Engine |
 | :---- | :---- |
@@ -134,7 +134,7 @@ RunAnywhere is a good fit if you need Electron or WebAssembly support right now.
 
 ## Appendix: building the RunAnywhere starter app with Xcode 27
 
-The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions), and they conflict with Xcode 27's stricter compiler. To get it running, I [had to fix four issues in the Podfile](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L44-L90), including an outdated fmt C++ library, Swift 6 concurrency errors, an Objective-C class hidden from Swift, an undeclared static library and a method called by the wrong name with a [Yarn patch](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/.yarn/patches/@runanywhere-core-npm-0.20.19-f4d947d688.patch).
+The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions), and they conflict with Xcode 27's stricter compiler. To get it running, I [fixed four issues in the Podfile](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L44-L90) (an outdated fmt C++ library, Swift 6 concurrency errors, an Objective-C class hidden from Swift and an undeclared static library), and a method called by the wrong name with a [Yarn patch](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/.yarn/patches/@runanywhere-core-npm-0.20.19-f4d947d688.patch).
 
 <br>
 
