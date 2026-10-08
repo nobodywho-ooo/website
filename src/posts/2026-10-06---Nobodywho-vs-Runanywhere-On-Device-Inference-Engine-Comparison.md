@@ -14,7 +14,6 @@ Here is a brief summary of the technical findings:
 - **Speed:** single-prompt generation speed is almost the same, but RunAnywhere gets slower with every turn of a conversation while NobodyWho stays flat.
 - **Multimodal:** RunAnywhere accepts one image per request and no audio. NobodyWho lets you mix several images and audio files in one prompt.
 - **Tool calling:** RunAnywhere forgets previous tool results, so it can't answer follow-up questions about them.
-- **Structured output:** RunAnywhere makes every field of your JSON schema mandatory and sorts the keys alphabetically. NobodyWho follows the schema as written.
 
 Every result can be reproduced with my [test app on GitHub](https://github.com/pielouNW/runanywhere-react-native-starter-app).
 
@@ -44,23 +43,23 @@ In practice, NobodyWho stays free no matter how much funding your company raises
 
 ## Technical comparison
 
-To compare both engines under the same conditions, I added NobodyWho to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) and ran both side by side on an iPhone Air. The comparison covers **speed**, **multimodal input**, **tool calling** and **structured output**.
+To compare both engines under the same conditions, I added NobodyWho to the [RunAnywhere React Native Starter App](https://github.com/RunanywhereAI/react-native-starter-app) and ran both side by side on an iPhone Air. The comparison covers **speed**, **multimodal input** and **tool calling**
 
 I used the React Native SDKs, but none of these issues are specific to React Native. They come from RunAnywhere's inference engine and APIs, so they affect every platform and language it supports. You can [check out the test app](https://github.com/pielouNW/runanywhere-react-native-starter-app) and run it on your own device to reproduce every result. Note that the RunAnywhere starter app needed a few fixes before it would build with Xcode 27, which you can find listed in the appendix at the end of this article.
 
 ### Speed
 
-The speed tests were done on an iPhone Air with the Qwen3 0.6B model and using the same configuration.
+The speed tests were done on an iPhone Air and S25 with the Qwen3 0.6B model and using the same configuration.
 
-On a single prompt, generation speed is almost identical, and both answers start in under a quarter of a second:
-- RunAnywhere generates 71.2 tokens per second (tok/s), with a time to first token (TTFT) of 217 ms.
-- NobodyWho generates 74.5 tok/s, with a TTFT of 46 ms.
+On a single prompt, NobodyWho starts answering sooner on both phones, but RunAnywhere generates faster on Android:
+- **iPhone Air:** RunAnywhere generates 71.2 tokens per second (tok/s), with a time to first token (TTFT) of 217 ms. NobodyWho generates 74.5 tok/s, with a TTFT of 46 ms.
+- **Samsung S25:** RunAnywhere generates 58.3 tok/s, with a TTFT of 327 ms. NobodyWho generates 34.9 tok/s, with a TTFT of 203 ms.
 
-![Single-turn speed test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn-speed.png)
+![Single-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn.png)
 
-The real problem appears in a conversation, where **RunAnywhere's TTFT grows with every turn**. Over a 20-turn conversation, it climbs from 147 ms to 471 ms (3.2× slower), while NobodyWho stays between 33 ms and 60 ms.
+The real problem appears in a conversation, where **RunAnywhere's TTFT grows significantly every turn**. Over 20 turns, it climbs from 147 ms to 471 ms on the iPhone Air (3.2× slower), and from 333 ms to over 11 seconds on the S25 (33.1× slower). NobodyWho stays between 33 ms and 60 ms on the iPhone Air, and between 218 ms and 896 ms on the S25.
 
-![Multi-turn speed test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn-ttft.png)
+![Multi-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/multi-turn.png)
 
 This happens because on every turn, RunAnywhere starts from an empty cache and re-processes the system prompt, the entire chat history and the new message. NobodyWho keeps the conversation in its KV cache and only processes the new message. With RunAnywhere, **the longer the conversation, the slower the response**.
 
@@ -117,46 +116,6 @@ Both libraries handle tool calling properly, but RunAnywhere does not keep previ
 
 The screenshot above compares the official NobodyWho and RunAnywhere apps, both running Qwen3 4B. After a `get_weather` call, NobodyWho answers "What is the humidity?" from the earlier result, while RunAnywhere has forgotten it and asks for the location again.
 
-### Structured output
-
-Some use cases need the LLM to produce JSON that follows a given schema. Both libraries turn the JSON schema into a grammar and constrain generation to it, but they don't read the schema the same way. With NobodyWho, optional fields can be left out and keys come in the order you declared them, where RunAnywhere's schema-to-grammar compiler [makes every field mandatory](https://github.com/RunanywhereAI/runanywhere-sdks/blob/ee96262e59bd754d573d53ae5d763a209a6e1219/core/src/features/llm/json_schema_to_gbnf.cpp#L125-L133), ignoring `required`, and [sorts the keys alphabetically](https://github.com/RunanywhereAI/runanywhere-sdks/blob/ee96262e59bd754d573d53ae5d763a209a6e1219/core/src/features/llm/json_schema_to_gbnf.cpp#L25).
-
-To show it, both libraries got the same schema, where `nickname` is optional, and a prompt that doesn't ask for a nickname:
-
-```ts
-const SCHEMA = JSON.stringify({
-  type: 'object',
-  properties: {
-    name: { type: 'string' },
-    age: { type: 'integer', minimum: 0, maximum: 130 },
-    nickname: { type: 'string' },
-    tags: {
-      type: 'array',
-      items: { type: 'string' },
-      minItems: 1
-    },
-  },
-  required: ['name', 'age', 'tags'],
-});
-
-const PROMPT = 'Give me Ada Lovelace as JSON with name, age and tags fields.';
-
-// NobodyWho: the chat is created with SamplerPresets.constrainWithJsonSchema(SCHEMA)
-await chat.ask(PROMPT).completed();
-
-// RunAnywhere: same sampling settings
-const result = await RunAnywhere.llm.generateStructured(
-  PROMPT,
-  SCHEMA,
-  { ...SAMPLING, reasoning: { mode: 'off' } },
-  'validationOnly',
-);
-```
-
-NobodyWho returns `name`, `age` and `tags` in the declared order. RunAnywhere's grammar forces the model to invent a `nickname`, and returns the keys sorted alphabetically, with `age` first:
-
-![Structured output test on iPhone Air](/assets/images/blog/2026/nobodywho-vs-runanywhere/structured-output.png)
-
 ## Choosing between NobodyWho and RunAnywhere
 
 The two libraries share the same feature list, but the differences become obvious once you use them. With RunAnywhere, the chat slows down with every message, the assistant forgets what its tools just returned, and the JSON ignores parts of your schema.
@@ -168,7 +127,6 @@ The two libraries share the same feature list, but the differences become obviou
 | Fast multi-turn conversations | NobodyWho |
 | Multimodal support | NobodyWho |
 | Tool calling | NobodyWho |
-| Structured output that follows your schema | NobodyWho |
 
 <br>
 
@@ -176,14 +134,7 @@ RunAnywhere is a good fit if you need Electron or WebAssembly support right now.
 
 ## Appendix: building the RunAnywhere starter app with Xcode 27
 
-The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions), and they conflict with Xcode 27's stricter compiler. Four problems block the build:
-
-- The version of the fmt C++ library pinned by React Native fails to compile under Xcode 27's newer clang ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L44-L55)).
-- The RunAnywhere pods ask to be compiled in Swift 6 mode, but their code doesn't pass Swift 6's stricter concurrency checks ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L57-L64)).
-- The SDK's Swift code uses the Objective-C class `AudioCaptureLevel`, but its header isn't exposed to Swift ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L66-L79)), and it calls one of the class's methods by the wrong name ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/.yarn/patches/@runanywhere-core-npm-0.20.19-f4d947d688.patch)).
-- The SDK links `librac_commons.a` but CocoaPods never declares it as a build output, so Xcode 27 fails every clean build ([fix](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L81-L90)).
-
-Except for the method name, which is fixed with a Yarn patch, all workarounds live in the [Podfile's `post_install` hook](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L37), which runs on every `pod install`.
+The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 27. Both the starter app and the latest RunAnywhere SDK use older versions of React Native ([0.83](https://github.com/RunanywhereAI/react-native-starter-app/blob/e1117fe0e506f1d5edbb148f0d179b75b7f6c7b7/package.json#L25) and [0.85](https://github.com/RunanywhereAI/runanywhere-sdks/blob/acc341c8eae9078a5ab99102bad0ca8bb0377fc7/bindings/react-native/package.json#L63)) instead of the current [0.87](https://reactnative.dev/versions), and they conflict with Xcode 27's stricter compiler. To get it running, I [had to fix four issues in the Podfile](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/ios/Podfile#L44-L90), including an outdated fmt C++ library, Swift 6 concurrency errors, an Objective-C class hidden from Swift, an undeclared static library and a method called by the wrong name with a [Yarn patch](https://github.com/pielouNW/runanywhere-react-native-starter-app/blob/f70c06dc344792f9320ee42dad6974dda5c69126/.yarn/patches/@runanywhere-core-npm-0.20.19-f4d947d688.patch).
 
 <br>
 
