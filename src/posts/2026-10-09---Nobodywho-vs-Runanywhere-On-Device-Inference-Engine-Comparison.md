@@ -1,6 +1,6 @@
 ---
 title:  "NobodyWho vs RunAnywhere: On-Device Inference Engine Comparison"
-date: 2026-10-08
+date: 2026-10-09
 author: Pierre Bresson
 categories: ["Technical","Comparison"]
 description: "NobodyWho vs RunAnywhere compared on performance, features, platform support and licensing."
@@ -140,5 +140,5 @@ The RunAnywhere starter app doesn't build out of the box with Xcode 27 on macOS 
 
 *Info*
 
-- This article was written on October 8, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
+- This article was written on October 9, 2026. Results may have changed since then, on both the NobodyWho and RunAnywhere sides.
 - The `@runanywhere` dependencies in `package.json` are set to v0.20.19. [Updating them](https://github.com/pielouNW/runanywhere-react-native-starter-app/tree/feat/ra-v0.20.27) to the latest published version, v0.20.27, did not change the results.
