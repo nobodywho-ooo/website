@@ -53,7 +53,7 @@ The speed tests were done on both phones with the Qwen3 0.6B model and the same 
 
 On a single prompt, NobodyWho starts answering sooner on both phones, but RunAnywhere generates faster on Android:
 - **iPhone Air:** RunAnywhere generates 70.5 tokens per second (tok/s), with a time to first token (TTFT) of 201 ms. NobodyWho generates 70.8 tok/s, with a TTFT of 46 ms.
-- **Samsung S25:** RunAnywhere generates 52.4 tok/s, with a TTFT of 1268 ms. NobodyWho generates 32.2 tok/s, with a TTFT of 230 ms.
+- **Samsung S25:** RunAnywhere generates 52.4 tok/s, with a TTFT of 1268 ms (fluctuate between 300 and 1300 ms in my tests). NobodyWho generates 32.2 tok/s, with a TTFT of 230 ms.
 
 ![Single-turn speed test on iPhone Air and S25](/assets/images/blog/2026/nobodywho-vs-runanywhere/single-turn.png)
 
