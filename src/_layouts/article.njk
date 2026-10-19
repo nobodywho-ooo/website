@@ -6,6 +6,6 @@ layout: base
     <a class="blog-back" href="/posts/">← Back to blog</a>
     <h1>{{ title }}</h1>
     <p class="blog-meta">Published {{ date | dateFormating }}{% if author %} · {{ author }}{% endif %}</p>
-    <div class="blog-prose">{{ content | replace('<pre', '<pre tabindex="0"') | safe }}</div>
+    <div class="blog-prose">{{ content | replace('<pre', '<pre tabindex="0"') | safe }}{% include "partials/_github-star-cta.njk" %}</div>
     <div class="blog-tags">{% for category in categories %}<span>{{ category }}</span>{% endfor %}</div>
 </article>
