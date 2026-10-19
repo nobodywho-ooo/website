@@ -13,11 +13,11 @@ I'm a big fan of pi-coding-agent. I'm also a big fan of thinking about programmi
 
 Since I first started using pi, I haven't been able to shake the hunch that it *feels* like something best written in lisp.
 
-Why? Its goals align with the goals of lisp programs: minimal, radically extensible, self-modifyable and dynamic.
+Why? Its goals align with the goals of lisp programs: minimal, radically extensible, self-modifiable and dynamic.
 
 If you squint a little, emacs stans start to sound like pi stans.
 
->Yeah you can do that in emacs. Emacs even includes the tools to change to emacs in that way! Just whip up the elisp repl and there you go!
+> Yeah you can do that in emacs. Emacs even includes the tools to change to emacs in that way! Just whip up the elisp repl and there you go!
 
 > Yeah you can do that in pi. Pi even includes the tools to change pi in that way! Just yeet a prompt like this and there you to!
 
