@@ -90,6 +90,7 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-prose pre .token.variable,.blog-prose pre .token.property,.blog-prose pre .token.parameter,.blog-prose pre .token.attr-name { color:#c5d9e3; }
 .blog-prose pre .token.punctuation { color:#d3c7c0; }
 .blog-prose blockquote { margin:1.5em 0; padding-left:20px; border-left:2px solid var(--blog-amber); color:var(--blog-muted); }
+.blog-prose .blog-star-divider { margin:72px 0 28px; border:0; border-top:1px solid var(--blog-rule); }
 .blog-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
 .blog-tags span { padding:7px 10px; border:1px solid var(--blog-rule); font-size:13px; }
 .blog-footer { padding:32px clamp(18px,4vw,64px); border-top:1px solid var(--blog-rule); display:flex; flex-direction:column; align-items:center; gap:20px; color:var(--blog-muted); font-size:14px; }
