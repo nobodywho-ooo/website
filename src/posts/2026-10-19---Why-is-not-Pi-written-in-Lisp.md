@@ -25,7 +25,7 @@ I did hit a concrete snag when messing around with pi at one point: I was toying
 
 ## Pi Durable feels BEAM-y
 
-I had this deja-vu feeling again when reading the [Pi Durable blogpost]([https://earendil.com/posts/pi-durable/](https://earendil.com/posts/pi-durable/)), but for a different technology this time.
+I had this deja-vu feeling again when reading the [Pi Durable blogpost](https://earendil.com/posts/pi-durable/), but for a different technology this time.
 
 It highlights a number of properties that come straight from the mouth of a Erlang/Elixir/Gleam/BEAM/OTP die-hard.
 
@@ -43,13 +43,13 @@ Earendil writes:
 
 > Aborting a task aborts what it owns, bottom-up, so every task cleans up its own effects first, and a task only finishes once the work it owns has finished.
 
-All of these sound like exactly features that are already implemented and battle-tested in BEAM/OTP. Is this an instance of [Greenspun's Tenth Rule]() for Erlang?
+All of these sound like exactly features that are already implemented and battle-tested in BEAM/OTP. Is this an instance of [Greenspun's Tenth Rule](https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule) for Erlang?
 
 ## Should LLMs write in mainstream languages?
 
 A common argument is that "LLMs are just better at writing typescript". Does the *agentic era* imply that we should double-down on the most mainstream tech stacks?
 
-I often think about [Richard Feldman coping]([https://youtu.be/ZsBHc-J9f8o](https://youtu.be/ZsBHc-J9f8o)) with having put years of his life into making Roc, a new programming language, just as LLMs were getting good.
+I often think about [Richard Feldman coping](https://youtu.be/ZsBHc-J9f8o) with having put years of his life into making Roc, a new programming language, just as LLMs were getting good.
 
 At first he was distraught: Roc code is not well-represented in the LLMs' training dataset, and since LLMs are better at writing stuff they'd seen before, Roc would never grow popular enough to be represented in the dataset. Thus all new languages are doomed.
 
@@ -57,9 +57,9 @@ But then he did a 180: LLMs are *better* at writing in new languages than humans
 
 The Roc project then released a text file to throw at your coding agent and kept trucking.
 
-It [does matter]([https://paulgraham.com/avg.html](https://paulgraham.com/avg.html)) which programming language your program is written in. A programming language carries with it some properties that transfer onto the program artifact. A program written in Rust simply is more likely to be memory safe than a program written in C, even if you tell your agent to make no mistakes.
+It [does matter](https://paulgraham.com/avg.html) which programming language your program is written in. A programming language carries with it some properties that transfer onto the program artifact. A program written in Rust simply is more likely to be memory safe than a program written in C, even if you tell your agent to make no mistakes.
 
-While it is possible to write your program in an arbitrary language, in such a way that it implements the properties you want, this is exactly how you end up with [Greenspun's Tenth Rule]([https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule](https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule))
+While it is possible to write your program in an arbitrary language, in such a way that it implements the properties you want, this is exactly how you end up with [Greenspun's Tenth Rule](https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule).
 
 The point being: yes, while LLMs are better at writing typescript than other languages, they're also very good at writing in a language they've never seen before. Because your technological foundation does have a significant impact on the result, I believe the advantage of the softened learning curve far outweighs the LLM-familiarty advantage.
 
