@@ -66,4 +66,4 @@ It also states:
 
 *If you distribute modified versions of the code in this repo, you must open source those changes.*
 
-The full licence section is in the [README on GitHub](https://github.com/nobodywho-ooo/nobodywho#license). Installation steps for each framework are in the [NobodyWho docs](https://docs.nobodywho.ooo/).
+The full licence section is in the [README on GitHub](https://github.com/nobodywho-ooo/nobodywho#license). Installation steps for each framework are in the [NobodyWho docs](https://docs.nobodywho.ai/).

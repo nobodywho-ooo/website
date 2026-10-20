@@ -20,7 +20,7 @@ Tokenizers from different families split some strings differently, and a couple 
 
 * **Special tokens.** Qwen2 treats `<|im_start|>` as a single token (ID 151644), while tokenizers that don’t have it split the string into 6 or 7 pieces.
 
-* **Digits.** Qwen2 gives every digit its own token, so 1234567890 comes out as 10 tokens. Llama 3 groups digits in threes, so the same number is only 4 tokens: 123, 456, 789 and 0\.
+* **Digits.** Qwen2 gives every digit its own token, so 1234567890 comes out as 10 tokens. Llama 3 groups digits in threes, so the same number is only 4 tokens: 123, 456, 789 and 0.
 
 Here’s how four tokenizers handle both probes, using the vocab files llama.cpp ships for its tests (built from Qwen1.5-7B, Meta-Llama-3-8B, deepseek-llm-7b-base and Phi-3-mini):
 
@@ -35,9 +35,9 @@ One probe isn’t always enough. DeepSeek LLM and Phi-3 also split digits one at
 
 You don’t need the tokenizer itself to run these probes. OpenAI-compatible APIs can return `usage.prompt_tokens` with each response ([OpenAI reference](https://developers.openai.com/api/reference/resources/chat)), so the count can be measured from outside. The script below sends a short message, sends it again with a probe added, and prints the difference.
 
-The chat template is identical in both requests, so its tokens are cancelled out in every test run for this post. Each probe goes after the letter x, which is also how the table above was counted.
+The chat template is the same in both requests, so its tokens cancel out in the difference. Each probe goes after the letter x, which is also how the table above was counted.
 
-```
+```python
 # token_probe.py: count how a chat API tokenizes a few probe strings.
 # Usage: python token_probe.py URL [API_KEY] [MODEL]
 import json, sys, urllib.request
@@ -62,7 +62,7 @@ for p in PROBES:
 
 Usage:
 
-```
+```bash
 python token_probe.py https://<host>/v1/chat/completions <api-key> <model>
 ```
 
@@ -96,9 +96,8 @@ The first two lines match the table. The third probe, `<|begin_of_text|>`, is Ll
 
 ---
 
-OpenCode does sometimes reveal a stealth model. On 19 October it [renamed Space Bunny Free](https://github.com/anomalyco/opencode/pull/57021), which it had listed as a stealth model, to MiniMax M3.1 Flash Free. If Beam Free gets a name too, the probes above can check whether that model’s tokenizer matches what the endpoint returns.
+OpenCode does sometimes reveal a stealth model. On 19 October 2026 it [renamed Space Bunny Free](https://github.com/anomalyco/opencode/pull/57021), which it had listed as a stealth model, to MiniMax M3.1 Flash Free. If Beam Free gets a name too, the probes above can check whether that model’s tokenizer matches what the endpoint returns.
 
 This post follows [When Chat Templates Go Wrong](https://www.nobodywho.ai/posts/when-chat-templates-go-wrong/), which covers what happens when a GGUF model’s chat template doesn’t match what the engine expects.
 
 Every token count in this post came from llama.cpp, which also powers [NobodyWho](https://github.com/nobodywho-ooo/nobodywho).
-

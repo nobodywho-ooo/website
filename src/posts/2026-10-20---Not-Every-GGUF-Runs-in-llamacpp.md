@@ -58,7 +58,7 @@ Option 1: open the file on Hugging Face. The [GGUF viewer](https://huggingface.c
 
 Option 2: run the script below. It uses HTTP range requests, which Hugging Face file URLs accept. It fetches 1 MB at a time until the metadata ends. It needs only the Python standard library.
 
-```
+```python
 # gguf_peek.py: print a GGUF file's metadata without downloading the weights.
 # Usage: python gguf_peek.py https://huggingface.co/<repo>/resolve/main/<file>.gguf
 import struct, sys, urllib.error, urllib.request
@@ -130,7 +130,7 @@ print(f"Fetched {len(buf):,} bytes.")
 
 Usage:
 
-```
+```bash
 python gguf_peek.py https://huggingface.co/<repo>/resolve/main/<file>.gguf
 ```
 
@@ -147,4 +147,4 @@ Search for the `general.architecture` value in `src/llama-arch.cpp`. If the valu
 
 For a model split across several files, run the script on the first file. Only the first file contains `general.architecture`.
 
-[NobodyWho](https://github.com/nobodywho-ooo/nobodywho) loads models through llama.cpp, so the same rule applies: if the architecture is not in src/llama-arch.cpp, NobodyWho cannot run the file either. It runs GGUF language models locally and offline, with bindings for Python, Flutter, React Native, Swift, Kotlin and Godot.
+[NobodyWho](https://github.com/nobodywho-ooo/nobodywho) loads models through llama.cpp, so the same rule applies: if the architecture is not in `src/llama-arch.cpp`, NobodyWho cannot run the file either. It runs GGUF language models locally and offline, with bindings for Python, Flutter, React Native, Swift, Kotlin and Godot.
