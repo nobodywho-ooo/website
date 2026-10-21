@@ -45,6 +45,7 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .icon-bluesky { --icon:url('/assets/icons/brand-bluesky.svg'); }
 .icon-huggingface { --icon:url('/assets/icons/brand-huggingface.svg'); }
 .icon-star { --icon:url('/assets/icons/star.svg'); }
+.icon-rss { --icon:url('/assets/icons/rss.svg'); }
 .github-stars { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; font:500 12px 'IBM Plex Mono',monospace; }
 .github-stars[hidden] { display:none!important; }
 .github-stars .social-icon { width:14px; height:14px; }
@@ -54,6 +55,7 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-wrap { width:min(100% - 40px, 1120px); margin:0 auto; padding:clamp(64px,9vw,128px) 0; }
 .blog-title { margin:0; max-width:18ch; font-size:clamp(42px,7vw,88px); line-height:.96; letter-spacing:-.045em; font-weight:600; }
 .blog-intro { margin:18px 0 0; color:var(--blog-muted); font-size:clamp(18px,2vw,24px); }
+.blog-intro a { color:var(--blog-amber); text-underline-offset:4px; }
 .blog-categories { display:flex; flex-wrap:wrap; gap:8px; margin:40px 0 52px; }
 .blog-categories a { border:1px solid var(--blog-rule); padding:9px 13px; text-decoration:none; font-size:13px; }
 .blog-categories a:hover, .blog-categories a[aria-current=page] { border-color:var(--blog-amber); color:var(--blog-amber); }
