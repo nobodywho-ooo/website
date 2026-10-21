@@ -1,7 +1,7 @@
 {# Shared listing for /posts/ and category pages. #}
 <section class="blog-wrap">
     <h1 class="blog-title">{% if selectedCategory == 'all' %}Blog{% else %}{{ selectedCategory }}{% endif %}</h1>
-    <p class="blog-intro">Updates and technical notes from the NobodyWho team.</p>
+    <p class="blog-intro">Updates and technical notes from the NobodyWho team. <a href="/feed.xml">Subscribe via RSS</a>.</p>
     <nav class="blog-categories" aria-label="Blog categories">
         <a href="/posts/"{% if selectedCategory == 'all' %} aria-current="page"{% endif %}>All categories</a>
         {% for category in blogCategories %}<a href="/posts/category/{{ category | blogSlug }}/"{% if selectedCategory == category %} aria-current="page"{% endif %}>{{ category }}</a>{% endfor %}
