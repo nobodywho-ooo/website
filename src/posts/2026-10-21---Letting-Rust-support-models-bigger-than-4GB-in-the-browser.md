@@ -21,5 +21,3 @@ The most straightforward way to fix this would be to create a custom target and 
 Next step is actually creating the target. We have a [PR](https://github.com/rust-lang/rust/pull/163808) for this active in the Rust repo, but it'll probably take some time for this to get merged, and even longer before it lands in stable.
 
 Of course all of this still requires us to get NobodyWho to run in WASM, which both requires large changes in our own library and more upstream work, which we are making [progress](https://github.com/pykeio/ort/pull/663) on. Even after that there's the exciting problem of figuring out how to make this *useful*. Figuring out problems like getting the models to the user's machine (even a small half GB model can be a lot to download while on a website), and how to make them run reasonably fast.
-
-**Want to run LLMs in the browser?** Star and watch [NobodyWho on GitHub](https://github.com/nobodywho-ooo/nobodywho) to get notified when WebAssembly support drops!
