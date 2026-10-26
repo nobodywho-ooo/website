@@ -88,7 +88,7 @@ The differences are minor, a "like" has been omitted by the Transcriber app, "I'
 
 This app has been vibe-coded and manually adjusted in half a day. It obviously needs more polishing, but it clearly shows potential for being a solid alternative to paid-per-token, cloud based solutions.
 
-Adding Voice Activity Detection ([VAD](https://docs.nobodywho.ooo/js/voice-activity-detection)) would be a nice way to visually separate chunks of text and using another more powerful whisper model (medium, large... with better quantization) would also improve results.
+Adding Voice Activity Detection ([VAD](https://docs.nobodywho.ooo/js/voice-activity-detection)) would be a nice way to visually separate chunks of text, and using another more powerful whisper model (medium, large... with less quantization) would also improve results.
 
 For more details, you can find the [app’s repo on GitHub](https://github.com/pielouNW/transcribe-app) where you can download the Android apk to test it on your phone.
 
