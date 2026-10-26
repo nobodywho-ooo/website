@@ -15,7 +15,7 @@ I decided to build a simple transcription app with React Native that you can use
 
 ## Recording and transcription
 
-The interface is straightforward: a button to start the recording and a timer, and the first sentences appearing as soon as they are processed. Let's have a look to what happens when the user presses the recording button:
+The interface is straightforward: a button to start the recording and a timer, with the first sentences appearing as soon as they are processed. Let's have a look at what happens when the user presses the recording button:
 
 ![Recording screen](/assets/images/blog/2026/transcriber-app/recording-screen.png)
 
