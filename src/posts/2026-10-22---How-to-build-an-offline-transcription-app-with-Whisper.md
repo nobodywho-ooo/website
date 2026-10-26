@@ -9,7 +9,7 @@ slug: "offline-transcription-app"
 
 ![Transcriber app](/assets/images/blog/2026/transcriber-app/transcriber-mobile-app.png)
 
-At NobodyWho, we've spent the last months shipping new features, like Speech-to-Text or Voice Activity Detection, to complete our local AI stack, and now feft like a good time to run a few experiments with our software.
+At NobodyWho, we've spent the last months shipping new features, like Speech-to-Text or Voice Activity Detection, to complete our local AI stack, and now felt like a good time to run a few experiments with our software.
 
 I decided to build a simple transcription app with React Native that you can use fully offline, once you have downloaded the whisper model (small, int8 quantization). With this app, you can easily record an English speech of 10+ minutes and download the transcription entirely, or just the parts you are interested in. Let's take a closer look at the implementation and see how it compares to a cloud transcription.
 
