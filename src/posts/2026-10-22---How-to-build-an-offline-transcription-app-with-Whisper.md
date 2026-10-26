@@ -68,7 +68,7 @@ const transcribeChunk = async (chunk: AudioChunk): Promise<string> => {
 }
 ```
 
-Once the job queue is empty, the user is redirected to the Transcript screen where they can see the full transcript, export or listen to each chunk individually or compacted them in one audio and text file:
+Once the job queue is empty, the user is redirected to the Transcript screen where they can see the full transcript, export or listen to each chunk individually or compact them into one audio and text file:
 
 ![Transcript screen](/assets/images/blog/2026/transcriber-app/transcribe-screen.png)
 
