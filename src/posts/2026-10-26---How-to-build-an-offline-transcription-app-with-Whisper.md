@@ -1,6 +1,6 @@
 ---
 title: How to build an offline transcription app with Whisper
-date: 2026-10-22
+date: 2026-10-26
 author: Pierre Bresson
 categories: ["Technical"]
 description: "A fully offline React Native transcription app built with NobodyWho and Whisper, compared against YouTube’s own subtitles."
