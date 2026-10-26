@@ -11,7 +11,7 @@ slug: "offline-transcription-app"
 
 At NobodyWho, we've spent the last months shipping new features, like Speech-to-Text or Voice Activity Detection, to complete our local AI stack, and now felt like a good time to run a few experiments with our software.
 
-I decided to build a simple transcription app with React Native that you can use fully offline, once you have downloaded the whisper model (small, int8 quantization). With this app, you can easily record an English speech of 10+ minutes and download the transcription entirely, or just the parts you are interested in. Let's take a closer look at the implementation and see how it compares to a cloud transcription.
+I decided to build a simple transcription app with React Native that you can use fully offline once you have downloaded the whisper model (small, int8 quantization). With this app, you can easily record 10+ minutes of English speech and save either the entire transcript or just the parts you are interested in. Let's take a closer look at the implementation and see how it compares to a cloud transcription service.
 
 ## Recording and transcription
 
@@ -21,10 +21,10 @@ The interface is straightforward: a button to start the recording and a timer, w
 
 1. First the OS asks permission for microphone access.
 2. Then the audio streaming starts and the stream of audio buffers arrives.
-3. Each buffer is processed by onChunk, which calls NobodyWho's `.transcribePcm` method and returns the corresponding text. Since Whisper by default, returns non-verbal human sounds like coughs, laughs, yawning and so on, we remove them from the transcription (see `cleanText`).
+3. Each buffer is processed by `transcribeChunk` (via `onChunk`), which calls NobodyWho's `.transcribePcm` method and returns the corresponding text. Since Whisper by default, returns non-verbal human sounds like coughs, laughs, yawning and so on, we remove them from the transcription (see `cleanText`).
 4. When the user presses the stop button, we stop the recording and wait for any queued chunks to be processed thanks to `pendingRef`.
 
-Here is what the simplified streaming process with buffers looks like:
+Here is what the simplified streaming process with buffers looks like in the app:
 
 ```ts
 const { stream } = useAudioStream({
@@ -84,7 +84,7 @@ Alright, but how does it compare to other transcription tools? Since I'm French 
 
 > First generation devices are always the most fun to review. And for the past like month everyone I've talked to has been asking me, "What do you think of the iPhone Duo? Should I get a foldable iPhone? Is that for me? Who is it even really for?" You've been testing it for the past week, right? Yeah. So most new pieces of tech are fundamentally like a solid idea at their core and then they can be a little bit rough around the edges but that'll get better over time. The iPhone Duo specifically as the first folding iPhone is very polished around the edges but kind of rough in the middle if that makes sense.
 
-The differences are minor, a "like" has been omitted by the Transcriber app, "I've talked" isn't correct in the Youtube transcript and punctuation is sometimes better in one version and sometimes in the other one, that's it!
+The differences are minor. A "like" has been omitted by the Transcriber app, "I've talked" isn't correct in the Youtube transcript and punctuation is sometimes better in one version and sometimes in the other one, that's it!
 
 This app has been vibe-coded and manually adjusted in half a day. It obviously needs more polishing, but it clearly shows potential for being a solid alternative to paid-per-token, cloud based solutions.
 
