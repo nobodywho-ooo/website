@@ -19,7 +19,7 @@ The interface is straightforward: a button to start the recording and a timer, w
 
 ![Recording screen](/assets/images/blog/2026/transcriber-app/recording-screen.png)
 
-1. First the OS asks permission for microphone access
+1. First the OS asks permission for microphone access.
 2. Then the audio streaming starts and the stream of audio buffers arrives
 3. Each buffer is processed by onChunk, which calls NobodyWho's `.transcribePcm` method and returns the corresponding text. Since Whisper by default, returns non-verbal human sounds like coughs, laughs, yawning and so on, we remove them from the transcription (see `cleanText`).
 4. When the user presses the stop button, we stop the recording and wait for any queued chunks to be processed thanks to `pendingRef`.
