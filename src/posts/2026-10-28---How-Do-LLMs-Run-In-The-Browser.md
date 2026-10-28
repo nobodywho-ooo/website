@@ -1,11 +1,10 @@
 ---
 title: "(How) Can LLMs run in the browser?"
-date: 2026-10-26
+date: 2026-10-28
 author: Albert Garde
 categories: ["Technical"]
 description: "WASM targets, GPU backends, extensions vs. websites, and browser support: what it actually takes to run an LLM in the browser."
 slug: "how-do-llms-run-in-the-browser"
-draft: true
 ---
 
 A big push here at NobodyWho is to get language models running in the browser using WebAssembly. 
