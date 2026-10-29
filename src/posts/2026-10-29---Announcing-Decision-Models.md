@@ -1,6 +1,6 @@
 ---
 title: Announcing decision models
-date: 2026-10-30
+date: 2026-10-29
 author: NobodyWho Team
 categories: ["Feature", "Release"]
 description: "Fast, private classification with typed answers. Now in every NobodyWho binding."
