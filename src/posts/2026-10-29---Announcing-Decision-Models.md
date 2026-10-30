@@ -80,11 +80,11 @@ Urgency score: 1.90 (0 = can wait, 3 = right now)
 
 To learn more, visit the docs for the language you prefer:
 
-- [Python](https://docs.nobodywho.ai/python/main/decision-models)
-- [Godot](https://docs.nobodywho.ai/godot/main/decision-models)
-- [Flutter](https://docs.nobodywho.ai/flutter/main/decision-models)
-- [Kotlin](https://docs.nobodywho.ai/kotlin/main/decision-models)
-- [Swift](https://docs.nobodywho.ai/swift/main/decision-models)
-- [React Native](https://docs.nobodywho.ai/js/main/decision-models)
+- [Python](https://docs.nobodywho.ai/python/decision-models)
+- [Godot](https://docs.nobodywho.ai/godot/decision-models)
+- [Flutter](https://docs.nobodywho.ai/flutter/decision-models)
+- [Kotlin](https://docs.nobodywho.ai/kotlin/decision-models)
+- [Swift](https://docs.nobodywho.ai/swift/decision-models)
+- [React Native/Expo](https://docs.nobodywho.ai/js/decision-models)
 
 <small>Music in the video: "Beauty Flow" by Kevin MacLeod (incompetech.com), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).</small>
