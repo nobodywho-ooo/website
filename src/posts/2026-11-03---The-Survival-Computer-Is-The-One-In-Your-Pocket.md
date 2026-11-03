@@ -1,6 +1,6 @@
 ---
 title: The survival computer is the one in your pocket
-date: 2026-10-29
+date: 2026-11-03
 author: Pierre Bresson
 categories: ["Technical"]
 description: "Survival LLM answers emergency questions offline from a bundled library, but it needs a laptop with 16 GB of memory. What a phone version would take."

@@ -1,6 +1,6 @@
 ---
 title: "Your 2-bit model agrees with the API 90% of the time. Is that good?"
-date: 2026-10-29
+date: 2026-11-03
 author: Pierre Bresson
 categories: ["Technical"]
 description: "Top-token agreement is a better way to judge a quant than file size. What 90% means next to llama.cpp's published numbers, and how to measure the quant you ship."

@@ -1,6 +1,6 @@
 ---
 title: "LFM3 fits in 1 GB. Read the licence before you ship it"
-date: 2026-10-29
+date: 2026-11-03
 author: Pierre Bresson
 categories: ["Technical"]
 description: "Liquid AI's LFM3-1.7B fits in about 1 GB. Before you ship it, check that your engine knows the lfm3 architecture and that the licence's revenue line doesn't apply to you."
