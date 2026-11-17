@@ -47,7 +47,7 @@ community:
 <div class="blog-main lab">
   <div class="blog-wrap">
     <h1 class="blog-title">Lab</h1>
-    <p class="blog-intro">Try AI locally in minutes, see our demos and what others are building.</p>
+    <p class="blog-intro">Try AI locally in minutes, see our experiments and what others are building.</p>
     <section class="lab-section" aria-labelledby="starters">
       <div class="lab-head">
         <h2 class="lab-title" id="starters">Starter examples</h2>
@@ -65,22 +65,39 @@ community:
         {%- endfor %}
       </ul>
     </section>
-    <section class="lab-section" aria-labelledby="community">
+    <section class="lab-section" aria-labelledby="experiments">
       <div class="lab-head">
-        <h2 class="lab-title" id="community">Community projects</h2>
-        <p class="lab-sub">See what others are building, get inspired.</p>
+        <h2 class="lab-title" id="experiments">Experiments</h2>
+        <p class="lab-sub">Small apps we built to show what on-device AI can do.</p>
       </div>
-      <ul class="lab-rows">
-        {%- for p in community %}
+      <ul class="lab-experiments">
+        {%- for e in collections.experiments %}
           <li>
-            <a href="{{ p.url }}" target="_blank" rel="noopener">
-              <h3>{{ p.title }}</h3>
-              <p>{{ p.text }}</p>
-              <span class="lab-host">{{ p.host }}</span>
+            <a href="{{ e.url | url }}">
+              <img src="{{ e.data.image | url }}" alt="Screenshot of {{ e.data.title }}" width="1000" height="595" loading="lazy" decoding="async">
+              <h3>{{ e.data.title }}</h3>
+              <p>{{ e.data.description }}</p>
             </a>
           </li>
         {%- endfor %}
       </ul>
     </section>
+    <section class="lab-section" aria-labelledby="community">
+        <div class="lab-head">
+          <h2 class="lab-title" id="community">Community projects</h2>
+          <p class="lab-sub">See what others are building, get inspired.</p>
+        </div>
+        <ul class="lab-rows">
+          {%- for p in community %}
+            <li>
+              <a href="{{ p.url }}" target="_blank" rel="noopener">
+                <h3>{{ p.title }}</h3>
+                <p>{{ p.text }}</p>
+                <span class="lab-host">{{ p.host }}</span>
+              </a>
+            </li>
+          {%- endfor %}
+        </ul>
+      </section>
+    </div>
   </div>
-</div>

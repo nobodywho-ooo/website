@@ -151,9 +151,25 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .lab-host { display:block; margin-top:10px; font:12px 'IBM Plex Mono',monospace; color:var(--blog-muted); overflow-wrap:anywhere; }
 .lab-rows a:hover h3 { color:var(--blog-amber); }
 .lab-rows a:hover h3::after { transform:translate(3px,-3px); }
+.lab-experiments { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,2.4vw,32px); }
+.lab-experiments a { display:block; text-decoration:none; }
+.lab-experiments img { display:block; width:100%; height:auto; aspect-ratio:1000/595; object-fit:cover; border:1px solid var(--blog-rule); background:var(--blog-panel); transition:border-color .2s ease; }
+.lab-experiments h3 { margin:16px 0 0; display:flex; justify-content:space-between; gap:16px; font-size:clamp(20px,1.8vw,26px); line-height:1.15; letter-spacing:-.015em; font-weight:600; }
+.lab-experiments h3::after { content:"\203A"; flex:none; font-weight:400; color:var(--blog-amber); transition:transform .2s ease; }
+.lab-experiments p { margin:8px 0 0; color:var(--blog-muted); font-size:16px; line-height:1.5; }
+.lab-experiments a:hover img { border-color:var(--blog-amber); }
+.lab-experiments a:hover h3 { color:var(--blog-amber); }
+.lab-experiments a:hover h3::after { transform:translateX(4px); }
+.lab-experiment .blog-intro { margin:0; }
+.lab-experiment-image { display:block; width:100%; height:auto; margin-top:40px; border:1px solid var(--blog-rule); }
+.lab-experiment-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:40px; }
+.lab-experiment-link { display:inline-flex; align-items:center; padding:14px 22px; border:1.5px solid var(--blog-amber); color:var(--blog-amber)!important; font-size:15px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; text-decoration:none; transition:background .2s ease,color .2s ease; }
+.lab-experiment-link .social-icon { width:18px; height:18px; margin-right:10px; }
+.icon-download { --icon:url('/assets/icons/download.svg'); }
+.lab-experiment-link:hover,.lab-experiment-link:focus-visible { background:var(--blog-amber); color:#f8f5f0!important; }
 @media(max-width:760px) {
  .lab-section { grid-template-columns:1fr; }
- .lab-boxes { grid-template-columns:1fr; }
+ .lab-boxes, .lab-experiments { grid-template-columns:1fr; }
 }
 .lab-boxes .lab-icon { display:block; width:auto; height:40px; margin-bottom:14px; }
 .lab-boxes .lab-icon title { display:none; }

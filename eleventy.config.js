@@ -109,6 +109,11 @@ export default async function(eleventyConfig) {
     return collection.getFilteredByGlob("./src/posts/*.md").filter(isListedInBlog);
   });
 
+  // Lab experiments: one markdown file per experiment in src/lab/, each with its own page.
+  eleventyConfig.addCollection("experiments", (collection) => {
+    return collection.getFilteredByGlob("./src/lab/*.md").sort((a, b) => b.date - a.date);
+  });
+
   // Every published post (drafts excluded) regardless of `hideInBlog`. Used by the JSON API (/api/posts.json) 
   eleventyConfig.addCollection("allPosts", (collection) => {
     return collection.getFilteredByGlob("./src/posts/*.md").filter((post) => !post.data.draft);
