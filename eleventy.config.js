@@ -29,6 +29,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
+  eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/brand-fonts.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/blog-refresh.css");

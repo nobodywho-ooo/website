@@ -6,7 +6,7 @@
             <li><a href="/#product">Product</a></li>
             <li><a href="/#pricing">Pricing</a></li>
             <li><a href="/#contact">Contact</a></li>
-            <li><a href="/posts/" aria-current="page">Blog</a></li>
+            <li><a href="/posts/"{% if page.url.startsWith("/posts/") %} aria-current="page"{% endif %}>Blog</a></li>
         </ul>
     </nav>
     <div class="blog-right">
@@ -23,7 +23,7 @@
             <li><a href="/#pricing">Pricing</a></li>
             <li><a href="https://docs.nobodywho.ai/">Docs</a></li>
             <li><a href="/#contact">Contact</a></li>
-            <li><a href="/posts/" aria-current="page">Blog</a></li>
+            <li><a href="/posts/"{% if page.url.startsWith("/posts/") %} aria-current="page"{% endif %}>Blog</a></li>
             <li><a href="{{ site.github_url }}" target="_blank" rel="noopener"><span class="social-icon icon-github" aria-hidden="true"></span>GitHub<span class="github-stars" data-github-stars hidden aria-hidden="true"><span class="social-icon icon-star"></span><span data-star-count></span></span></a></li>
             <li><a href="https://www.linkedin.com/company/nobodywho/" target="_blank" rel="noopener"><span class="social-icon icon-linkedin" aria-hidden="true"></span>LinkedIn</a></li>
         </ul>
