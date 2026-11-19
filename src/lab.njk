@@ -59,7 +59,6 @@ community:
             <a href="https://github.com/{{ s.repo }}" target="_blank" rel="noopener">
               {% svg s.icon, "lab-icon" %}
               <b>{{ s.name }}</b>
-              <span>{{ s.repo }}</span>
             </a>
           </li>
         {%- endfor %}
@@ -75,14 +74,14 @@ community:
           <li>
             <a href="{{ e.url | url }}">
               <img src="{{ e.data.image | url }}" alt="Screenshot of {{ e.data.title }}" width="1000" height="595" loading="lazy" decoding="async">
-              <h3>{{ e.data.title }}</h3>
-              <p>{{ e.data.description }}</p>
-            </a>
-          </li>
-        {%- endfor %}
-      </ul>
-    </section>
-    <section class="lab-section" aria-labelledby="community">
+                <h3>{{ e.data.title }}</h3>
+                <p>{{ e.data.description }}</p>
+              </a>
+            </li>
+          {%- endfor %}
+        </ul>
+      </section>
+      <section class="lab-section" aria-labelledby="community">
         <div class="lab-head">
           <h2 class="lab-title" id="community">Community projects</h2>
           <p class="lab-sub">See what others are building, get inspired.</p>
