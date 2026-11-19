@@ -2,7 +2,7 @@
 title: NobodyWho RSS Reader
 description: "Filter news with Laya decision model: hide ads or certain topics"
 url: https://github.com/nobodywho-ooo/NobodyWho-RSS-Reader
-image: /assets/images/lab/nobodywho-rss-reader/nobodywho-rss-reader.png
+image: /assets/images/lab/nobodywho-rss-reader.png
 downloadUrl: https://github.com/nobodywho-ooo/NobodyWho-RSS-Reader/releases/download/v1.0.0/NobodyWho.RSS.Reader.zip
 ---
 
