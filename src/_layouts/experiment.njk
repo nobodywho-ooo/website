@@ -1,0 +1,25 @@
+---
+layout: base
+---
+
+<article class="blog-article lab-experiment">
+    <a class="blog-back" href="/lab/">← Back to lab</a>
+    <h1>{{ title }}</h1>
+    {% if description %}
+        <p class="blog-intro">{{ description }}</p>
+    {% endif %}
+    {% if image %}
+        <img class="lab-experiment-image" src="{{ image | url }}" alt="Screenshot of {{ title }}" width="1000" height="595" fetchpriority="high" />
+    {% endif %}
+    <div class="blog-prose">{{ content | safe }}</div>
+    {% if url or downloadUrl %}
+        <div class="lab-experiment-actions">
+            {% if url %}
+                <a class="lab-experiment-link" href="{{ url }}" target="_blank" rel="noopener">View project</a>
+            {% endif %}
+            {% if downloadUrl %}
+                <a class="lab-experiment-link" href="{{ downloadUrl }}" target="_blank" rel="noopener"><span class="social-icon icon-download" aria-hidden="true"></span>Download</a>
+            {% endif %}
+        </div>
+    {% endif %}
+    </article>

@@ -29,6 +29,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy({ ".well-known": "/.well-known" });
   eleventyConfig.addPassthroughCopy("_headers");
+  eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("src/assets/css/tailwind-dist.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/brand-fonts.css");
   eleventyConfig.addPassthroughCopy("src/assets/css/blog-refresh.css");
@@ -106,6 +107,11 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addCollection("posts", (collection) => {
     return collection.getFilteredByGlob("./src/posts/*.md").filter(isListedInBlog);
+  });
+
+  // Lab experiments: one markdown file per experiment in src/lab/, each with its own page.
+  eleventyConfig.addCollection("experiments", (collection) => {
+    return collection.getFilteredByGlob("./src/lab/*.md").sort((a, b) => b.date - a.date);
   });
 
   // Every published post (drafts excluded) regardless of `hideInBlog`. Used by the JSON API (/api/posts.json) 

@@ -1,0 +1,6 @@
+{
+  "layout": "experiment",
+  "blogTheme": true,
+  "tags": "experiments",
+  "permalink": "lab/{{ page.fileSlug }}/"
+}
