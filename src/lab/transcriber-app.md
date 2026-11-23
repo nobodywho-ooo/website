@@ -1,4 +1,5 @@
 ---
+date: 2026-11-16
 title: Transcription app
 description: "Easily transcribe 10+ minutes of speech"
 url: https://github.com/pielouNW/transcribe-app

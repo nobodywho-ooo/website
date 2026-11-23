@@ -1,4 +1,5 @@
 ---
+date: 2026-11-17
 title: NobodyWho RSS Reader
 description: "Filter news with Laya decision model: hide ads or certain topics"
 url: https://github.com/nobodywho-ooo/NobodyWho-RSS-Reader
