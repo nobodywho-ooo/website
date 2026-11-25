@@ -1,32 +1,32 @@
 ---
 title: NobodyWho Chat
-date: 2026-07-02
+date: 2026-11-25
 ---
 
 <p>
     <strong>Effective:</strong>
-    2nd of July 2026 &middot;
+    25th of November 2026 &middot;
     <strong>Last updated:</strong>
-    2nd of July 2026 &middot;
+    25th of November 2026 &middot;
     <strong>Platform:</strong>
     iOS &amp; Android
 </p>
-<p>NobodyWho Chat collects no personal data. All AI processing happens on your device. Nothing you say or type ever
-    leaves your device. We have no servers, no accounts, and no analytics. The only information that ever leaves your device
-    is anonymous crash diagnostics, described in detail below.</p>
+<p>NobodyWho Chat collects no personal data. All AI processing happens on your device. We have no servers, no accounts,
+    and no analytics. Your conversations stay on your device. The only exceptions are the optional online features
+    you choose to use (web search and online tools), which send a short request to a third-party service, and
+    anonymous diagnostics, all described in detail below.</p>
 <h2>1. Who we are</h2>
 <p>NobodyWho Chat is developed and distributed by NobodyWho. NobodyWho is an inference engine that lets you run LLMs
     locally and efficiently on any device.</p>
 <p>This Privacy Policy applies solely to the NobodyWho Chat application available on the Apple App Store (iOS) and the
     Google Play Store (Android). It does not apply to any other products or services we may offer.</p>
 <h2>2. Information we collect</h2>
-<p>We collect no personal data. The only data that ever leaves your device is anonymous, non-personal crash diagnostics.
-    The table below documents every category of data and its handling:</p>
+<p>We collect no personal data. The table below documents every category of data and its handling:</p>
 <table>
     <thead>
         <tr>
             <th>Data type</th>
-            <th>Collected?</th>
+            <th>Collected by us?</th>
             <th>Where it lives</th>
         </tr>
     </thead>
@@ -34,17 +34,37 @@ date: 2026-07-02
         <tr>
             <td>Your prompts &amp; messages</td>
             <td>Never</td>
-            <td>On-device only, in RAM during session</td>
+            <td>On your device only</td>
         </tr>
         <tr>
             <td>AI model responses</td>
             <td>Never</td>
-            <td>On-device only, in RAM during session</td>
+            <td>On your device only</td>
         </tr>
         <tr>
             <td>Conversation history</td>
             <td>Never</td>
-            <td>On-device only, if you choose to save</td>
+            <td>Stored on your device until you delete it</td>
+        </tr>
+        <tr>
+            <td>Voice &amp; audio (dictation, Voice Assistant)</td>
+            <td>Never</td>
+            <td>Processed on your device only</td>
+        </tr>
+        <tr>
+            <td>Images &amp; audio files you attach</td>
+            <td>Never</td>
+            <td>Copied into app storage on your device</td>
+        </tr>
+        <tr>
+            <td>Web search queries (only if you turn on web search)</td>
+            <td>Never</td>
+            <td>Sent to a third-party search engine (see section 5)</td>
+        </tr>
+        <tr>
+            <td>Web search results &amp; sources</td>
+            <td>Never</td>
+            <td>Stored on your device with the conversation</td>
         </tr>
         <tr>
             <td>Location data</td>
@@ -67,44 +87,70 @@ date: 2026-07-02
             <td>No analytics framework used</td>
         </tr>
         <tr>
-            <td>Anonymous crash reports</td>
+            <td>Anonymous crash &amp; performance diagnostics</td>
             <td>Yes</td>
             <td>Processed by Sentry (see section 3)</td>
         </tr>
         <tr>
             <td>Downloaded AI model files</td>
-            <td>Local only</td>
+            <td>Never</td>
             <td>Stored on your device</td>
         </tr>
     </tbody>
 </table>
-<p>The AI model file is downloaded once over Wi-Fi from
-    <a href="https://huggingface.co/">Hugging Face</a>. This download is a one-way transfer of a static file — we do not log
-        your identity, IP address, or device identifiers in connection with this download beyond what the App Store and Google
-        Play infrastructure inherently processes (see Apple's and Google's privacy policies for details).</p>
-<h2>3. Crash reporting</h2>
+<p>AI model files are downloaded from
+    <a href="https://huggingface.co/">Hugging Face</a>, and the list of available models is fetched from GitHub. These
+        are one-way downloads of static files — we do not log your identity, IP address, or device identifiers in
+        connection with them. Hugging Face and GitHub receive the technical information inherent to any download (such as
+        your IP address) and handle it under their own privacy policies (see section 5).</p>
+<p>The app asks for microphone access only so you can dictate messages or talk to the Voice Assistant. Audio is
+    recorded only while you are speaking to the app, is transcribed on your device, and is never sent anywhere.</p>
+<h2>3. Crash &amp; performance diagnostics</h2>
 <p>NobodyWho Chat uses
-    <a href="https://sentry.io/">Sentry</a>, a third-party crash-reporting service, to collect anonymous crash diagnostics.
-        If the app crashes or encounters a fatal error, Sentry receives a technical report so we can find and fix bugs.</p>
-<p>These crash reports contain only non-personal technical information such as the type of error, the line of code where
-    it occurred, the app version, the operating system version, and the device model. They do
+    <a href="https://sentry.io/">Sentry</a>, a third-party diagnostics service. If the app crashes or encounters an error,
+        Sentry receives a technical report so we can find and fix bugs. For a small random sample of sessions, Sentry also
+        receives performance measurements (such as how long a screen takes to load) so we can find and fix slowdowns.</p>
+<p>These reports contain only non-personal technical information such as the type of error, the line of code where
+    it occurred, the screen being shown, timing measurements, the name of the AI model in use, the app version, the
+    operating system version, and the device model. They do
     <strong>not</strong>
-    contain your prompts, your messages, AI responses, your conversation history, your name, your email, or any other
-    information that could identify you personally.</p>
-<p>Crash data is processed by Sentry on our behalf and is used solely to diagnose and fix stability problems. Sentry's
-    handling of this data is governed by
+    contain your prompts, your messages, AI responses, your conversation history, your voice, your web searches, your
+    name, your email, or any other information that could identify you personally.</p>
+<p>Diagnostic data is processed by Sentry on our behalf and is used solely to diagnose and fix stability and
+    performance problems. Sentry's handling of this data is governed by
     <a href="https://sentry.io/privacy/">Sentry's Privacy Policy</a>. We do not use
-            crash data for advertising, profiling, or any purpose other than improving the app.</p>
+            diagnostic data for advertising, profiling, or any purpose other than improving the app.</p>
 <h2>4. How the app works</h2>
 <p>NobodyWho Chat runs a language model entirely on your device's processor. When you type or dictate a message, your
     input is processed on your device's chip, a response is generated on your device's chip, and the result is displayed on
     your device's screen.</p>
-<p>At no point in this chain does any of your conversation data travel over a network. There are no API calls to
-    external AI services, no relay servers, and no logging of your prompts or responses. Your messages are never used for
-    crash reporting.</p>
-<p>Once the AI model is downloaded, the app functions with no internet connection. You can use it on a plane in airplane
-    mode, in a remote wilderness, or anywhere without cellular or Wi-Fi coverage. (Crash reports, when they occur, are sent
-    the next time your device has a network connection.)</p>
+<p>There are no API calls to external AI services, no relay servers, and no logging of your prompts or responses. Your
+    conversation is never sent over a network. Your messages are never used for diagnostics.</p>
+<p>Once an AI model is downloaded, the app functions with no internet connection. You can use it on a plane in airplane
+    mode, in a remote wilderness, or anywhere without cellular or Wi-Fi coverage. (Diagnostic reports, when they occur, are
+    sent the next time your device has a network connection.)</p>
+<h3>Web search (optional)</h3>
+<p>Web search is off by default. When you turn it on, the AI model on your device writes one or a few short search
+    queries based on your message and the last few turns of the conversation. Only those queries are sent to a
+    third-party search engine (DuckDuckGo, Brave Search, or Mojeek), together with a region setting so results match
+    your language. Your full conversation is never sent.</p>
+<p>The search engine is queried through a private, in-app browser. The app then downloads the text of the top
+    results directly from those websites to read them, and loads the small website icons shown next to sources from
+    DuckDuckGo's icon service. The search engines and websites involved receive your queries or page requests along with
+    standard technical information such as your IP address, and handle them under their own privacy policies. We do not
+    operate any server in this process and never receive your searches.</p>
+<p>The in-app browser runs in private mode: cookies and site data set during a search are discarded afterwards. If a
+    search engine asks you to complete a verification check (CAPTCHA), it is shown in that browser and handled by the
+    search engine's verification provider (such as Cloudflare, hCaptcha, or Google reCAPTCHA); that interaction is between
+    you and those services. Search results and sources are stored on your device with the conversation and are deleted
+    when you delete it.</p>
+<h3>Online tools</h3>
+<p>Some AI models can use built-in tools to answer certain questions. Most tools (such as unit conversions) run
+    entirely on your device. A few look up live information: weather uses
+    <a href="https://open-meteo.com/">Open-Meteo</a>, encyclopedia lookups use
+    <a href="https://www.wikipedia.org/">Wikipedia</a>, stock quotes use Yahoo Finance, and currency rates use
+    <a href="https://frankfurter.dev/">Frankfurter</a>. When one of these is used, only the specific item being looked up
+        (for example a city name or a stock symbol) is sent to that service — never your conversation.</p>
 <h2>5. Data sharing &amp; third parties</h2>
 <p>We share no personal data with any third party, because we collect none. There are no advertising SDKs, no analytics
     platforms, and no data brokers involved in the operation of this app.</p>
@@ -119,30 +165,58 @@ date: 2026-07-02
         and
         <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
     <li>
-        <strong>Sentry</strong>, which processes anonymous crash diagnostics on our behalf, as described in section 3.</li>
+        <strong>Sentry</strong>, which processes anonymous crash and performance diagnostics on our behalf, as described in
+        section 3.</li>
+    <li>
+        <strong>Hugging Face</strong>
+        and
+        <strong>GitHub</strong>, from which AI model files and the model list are downloaded. See
+        <a href="https://huggingface.co/privacy">Hugging Face's Privacy Policy</a>
+        and
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's Privacy Statement</a>.</li>
+    <li>
+        <strong>DuckDuckGo</strong>,
+        <strong>Brave Search</strong>, and
+        <strong>Mojeek</strong>, which receive your search queries only when you use web search, and the websites that appear
+        in the results (plus, if a verification check is shown, the search engine's CAPTCHA provider). See
+        <a href="https://duckduckgo.com/privacy">DuckDuckGo's Privacy Policy</a>,
+        <a href="https://search.brave.com/help/privacy-policy">Brave Search's Privacy Policy</a>, and
+        <a href="https://www.mojeek.com/about/privacy">Mojeek's Privacy Policy</a>.</li>
+    <li>
+        <strong>Open-Meteo</strong>,
+        <strong>Wikipedia</strong>,
+        <strong>Yahoo Finance</strong>, and
+        <strong>Frankfurter</strong>, which receive the item being looked up only when an online tool is used, as described
+        in section 4.</li>
 </ul>
+<p>These services act independently, not on our behalf, and we receive nothing back from them other than the
+    requested content.</p>
 <p>We do not sell, rent, license, or trade any user data.</p>
 <h2>6. Children's privacy</h2>
 <p>NobodyWho Chat does not knowingly collect any personal information from anyone, including children under the age of
     13 (or the applicable age in your jurisdiction). Since we collect no personal data, no special handling is required —
     though parents should be aware that, like any general-purpose AI assistant, the app's outputs may occasionally be
-    unsuitable for young children.</p>
+    unsuitable for young children, and web search results come from the open web.</p>
 <h2>7. Security</h2>
 <p>Because your conversation data never leaves your device, traditional concerns about server-side data breaches,
-    unauthorized access, or data interception in transit do not apply to your prompts and messages.</p>
-<p>Data stored on your device (such as saved conversations, if you choose to retain them) is protected by your
-    platform's on-device encryption and is subject to your device's passcode and biometric protections. We encourage you to
-    keep your device updated with the latest software.</p>
+    unauthorized access, or data interception in transit do not apply to your prompts and messages. Web search queries and
+    online tool requests are sent over encrypted (HTTPS) connections. Pages from the websites in search results are
+    downloaded using the connection type the website provides.</p>
+<p>Data stored on your device (such as saved conversations) is protected by your platform's on-device encryption and is
+    subject to your device's passcode and biometric protections. We encourage you to keep your device updated with the
+    latest software.</p>
 <h2>8. Your rights</h2>
 <p>Depending on your jurisdiction, you may have rights including access, correction, deletion, or portability of
-    personal data. Because NobodyWho Chat holds no personal data about you on any server, and crash reports are anonymous
-    and cannot be tied to you, there is nothing personally identifying for us to provide, correct, or delete on our end.</p>
-<p>Any conversations or data stored locally on your device can be deleted by uninstalling the app from your device, or
-    by clearing app data through your device's settings. This is entirely within your control.</p>
+    personal data. Because NobodyWho Chat holds no personal data about you on any server, and diagnostic reports are
+    anonymous and cannot be tied to you, there is nothing personally identifying for us to provide, correct, or delete on
+    our end. For requests sent to a search engine, website, or online tool service, please refer to that service's privacy
+    policy.</p>
+<p>Any conversations or data stored locally on your device can be deleted from within the app, by uninstalling the app
+    from your device, or by clearing app data through your device's settings. This is entirely within your control.</p>
 <h2>9. Data retention</h2>
 <p>We retain no personal user data. Any conversations stored on-device persist only as long as you choose to keep them,
-    and uninstalling the app removes all app data from your device. Anonymous crash diagnostics are retained by Sentry
-    according to its standard retention schedule and are used only to diagnose stability issues.</p>
+    and uninstalling the app removes all app data from your device. Anonymous diagnostics are retained by Sentry
+    according to its standard retention schedule and are used only to diagnose stability and performance issues.</p>
 <h2>10. Changes to this policy</h2>
 <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of
     this page. If we ever make material changes — particularly any change that would result in us collecting data that we
