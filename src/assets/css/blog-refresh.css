@@ -80,6 +80,8 @@ body.blog-theme.blog-menu-open { overflow:hidden; }
 .blog-prose h3 { font-size:28px; }
 .blog-prose a { color:var(--blog-amber); text-underline-offset:3px; }
 .blog-prose img,.blog-prose video { max-width:100%; height:auto; }
+/* Pin the aspect ratio from the width/height attributes, so the lazy-load placeholder (which has a different ratio) can't shift the layout when the real image arrives. */
+.blog-prose img[width][height] { aspect-ratio: attr(width type(<number>)) / attr(height type(<number>)); }
 .blog-prose pre { overflow:auto; padding:20px 22px; background:#22181a; border:1px solid var(--blog-rule); color:#f4ede6; font:14px/1.65 'IBM Plex Mono',ui-monospace,monospace; tab-size:4; }
 .blog-prose pre:focus-visible { outline:2px solid var(--blog-amber); outline-offset:3px; }
 .blog-prose pre code { font:inherit; color:inherit; }
